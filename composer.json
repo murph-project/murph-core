@@ -1,7 +1,7 @@
 {
     "name": "murph/murph-core",
     "description": "A powerful CMS framework",
-    "type": "project",
+    "type": "library",
     "license": "MIT",
     "minimum-stability": "stable",
     "prefer-stable": true,
