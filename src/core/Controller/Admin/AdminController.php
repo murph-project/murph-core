@@ -2,6 +2,7 @@
 
 namespace App\Core\Controller\Admin;
 
+use App\Core\Murph;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,7 +30,7 @@ abstract class AdminController extends AbstractController
                 'section' => $this->getSection(),
                 'site_name' => $params['name'],
                 'site_logo' => $params['logo'],
-                'murph_version' => MURPH_VERSION,
+                'murph_version' => Murph::version(),
             ]
         );
 
