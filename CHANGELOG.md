@@ -4,6 +4,10 @@
 ### Fixed
 ### Changed
 
+## [1.9.2] - 2022-03-14
+### Fixed
+* fix issue with murph version constant and autoloader
+
 ## [1.9.1] - 2022-03-14
 ### Added
 * add murph version in autoload file
