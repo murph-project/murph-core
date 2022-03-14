@@ -157,12 +157,12 @@ class Node implements EntityInterface
     protected $analyticReferers;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="array", nullable=true)
      */
     private $securityRoles = [];
 
     /**
-     * @ORM\Column(type="string", length=3, options={"default"="or"})
+     * @ORM\Column(type="string", length=3, nullable=true)
      */
     private $securityOperator = 'or';
 
@@ -662,9 +662,9 @@ class Node implements EntityInterface
         return $this;
     }
 
-    public function getSecurityOperator(): ?string
+    public function getSecurityOperator(): string
     {
-        return $this->securityOperator;
+        return $this->securityOperator ?? 'or';
     }
 
     public function setSecurityOperator(string $securityOperator): self
