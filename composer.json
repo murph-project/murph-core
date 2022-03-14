@@ -64,6 +64,9 @@
     "autoload": {
         "psr-4": {
             "App\\Core\\": "src/core/"
-        }
+        },
+        "files": [
+            "src/core/autoload.php"
+        ]
     }
 }
