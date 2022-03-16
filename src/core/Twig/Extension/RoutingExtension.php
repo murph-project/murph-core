@@ -3,6 +3,8 @@
 namespace App\Core\Twig\Extension;
 
 use App\Core\Entity\Site\Node;
+use App\Core\Site\SiteRequest;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\Node\Expression\ArrayExpression;
@@ -12,11 +14,13 @@ use Twig\TwigFunction;
 
 class RoutingExtension extends AbstractExtension
 {
-    private UrlGeneratorInterface $generator;
+    protected UrlGeneratorInterface $generator;
+    protected SiteRequest $siteRequest;
 
-    public function __construct(UrlGeneratorInterface $generator)
+    public function __construct(UrlGeneratorInterface $generator, SiteRequest $siteRequest)
     {
         $this->generator = $generator;
+        $this->siteRequest = $siteRequest;
     }
 
     /**
@@ -31,6 +35,10 @@ class RoutingExtension extends AbstractExtension
             new TwigFunction('safe_node_path', [$this, 'getSafeNodePath'], ['is_safe_callback' => [$this, 'isUrlGenerationSafe']]),
             new TwigFunction('safe_url', [$this, 'getSafeUrl'], ['is_safe_callback' => [$this, 'isUrlGenerationSafe']]),
             new TwigFunction('safe_path', [$this, 'getSafePath'], ['is_safe_callback' => [$this, 'isUrlGenerationSafe']]),
+            new TwigFunction('code_url', [$this, 'getCodeUrl'], ['is_safe_callback' => [$this, 'isUrlGenerationSafe']]),
+            new TwigFunction('code_path', [$this, 'getCodePath'], ['is_safe_callback' => [$this, 'isUrlGenerationSafe']]),
+            new TwigFunction('safe_code_url', [$this, 'getSafeCodeUrl'], ['is_safe_callback' => [$this, 'isUrlGenerationSafe']]),
+            new TwigFunction('safe_code_path', [$this, 'getSafeCodePath'], ['is_safe_callback' => [$this, 'isUrlGenerationSafe']]),
         ];
     }
 
@@ -104,6 +112,48 @@ class RoutingExtension extends AbstractExtension
         }
     }
 
+    public function getCodePath(string $menuCode, string $nodeCode, array $parameters = [], bool $relative = false): string
+    {
+        $route = $this->generateRouteWithCode($menuCode, $nodeCode);
+        $path = $this->getSafePath($route, $parameters, $relative);
+
+        if ($path) {
+            return $path;
+        }
+
+        throw new RouteNotFoundException(sprintf('Unable to generate a URL for the named route "%s" as such route does not exist.', $route));
+    }
+
+    public function getCodeUrl(string $menuCode, string $nodeCode, array $parameters = [], bool $schemeRelative = false): string
+    {
+        $route = $this->generateRouteWithCode($menuCode, $nodeCode);
+        $url = $this->getSafeUrl($route, $parameters, $schemeRelative);
+
+        if ($url) {
+            return $url;
+        }
+
+        throw new RouteNotFoundException(sprintf('Unable to generate a URL for the named route "%s" as such route does not exist.', $url));
+    }
+
+    public function getSafeCodePath(string $menuCode, string $nodeCode, array $parameters = [], bool $relative = false): ?string
+    {
+        try {
+            return $this->getCodePath($menuCode, $nodeCode, $parameters, $relative);
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    public function getSafeCodeUrl(string $menuCode, string $nodeCode, array $parameters = [], bool $schemeRelative = false): ?string
+    {
+        try {
+            return $this->getCodeUrl($menuCode, $nodeCode, $parameters, $schemeRelative);
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
     /**
      * @see Symfony\Bridge\Twig\Extension\RoutingExtension::isUrlGenerationSafe
      */
@@ -121,5 +171,14 @@ class RoutingExtension extends AbstractExtension
         }
 
         return [];
+    }
+
+    protected function generateRouteWithCode(string $menuCode, string $nodeCode)
+    {
+        return implode('_', [
+            $this->siteRequest->getNavigation()->getCode(),
+            $menuCode,
+            $nodeCode,
+        ]);
     }
 }
