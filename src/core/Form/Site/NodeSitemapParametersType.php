@@ -58,13 +58,13 @@ class NodeSitemapParametersType extends AbstractType
                 'attr' => [
                 ],
                 'choices' => [
-                    'Toujours' => 'always',
-                    'Toutes les heures' => 'hourly',
-                    'Quotidienne' => 'daily',
-                    'Hebdomadaire' => 'weekly',
-                    'Mensuelle' => 'monthly',
-                    'Annuelle' => 'yearly',
-                    'Jamais' => 'never',
+                    'Always' => 'always',
+                    'Hourly' => 'hourly',
+                    'Daily' => 'daily',
+                    'Weekly' => 'weekly',
+                    'Monthly' => 'monthly',
+                    'Yearly' => 'yearly',
+                    'Never' => 'never',
                 ],
                 'constraints' => [
                     new NotBlank(),
