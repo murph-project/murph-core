@@ -1,8 +1,12 @@
 ## [Unreleased]
 
 ### Added
-* add url and path generators using code (twig)
 ### Fixed
+### Changed
+
+## [1.10.0] - 2022-03-17
+### Added
+* add url and path generators using code (twig)
 ### Changed
 * update node entity constraints
 
