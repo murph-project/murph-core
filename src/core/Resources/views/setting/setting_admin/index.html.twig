@@ -24,7 +24,7 @@
                 {% for item in pager %}
                     {% set edit = path('admin_setting_edit', {entity: item.id}) %}
 
-                    <tr data-dblclick="{{ edit }}">
+                    <tr>
                         <td class="col-5">
                             <a href="#" data-modal="{{ edit }}" class="font-weight-bold text-body d-block">
                                 {{ item.label|trans }}
