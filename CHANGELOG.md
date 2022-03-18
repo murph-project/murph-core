@@ -2,6 +2,7 @@
 
 ### Added
 * add data-modal-create attribute to force modal to be open in a new container
+* add blur when several modals are opened
 ### Fixed
 ### Changed
 * update file-manager with data-modal-create attribute
