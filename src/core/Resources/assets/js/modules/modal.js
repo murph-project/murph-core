@@ -1,13 +1,19 @@
 const $ = require('jquery')
 
-const openModal = function (url) {
-  let container = $('#modal-container')
+const openModal = function (url, createModal) {
+  if (createModal) {
+    var id = 'modal-container-' + parseInt(Math.floor(Math.random() * 1000))
+  } else {
+    var id = 'modal-container'
+  }
+
+  let container = $(`#${id}`)
   const body = $('body')
   let doTrigger = true
 
   if (!container.length) {
     let doTrigger = false
-    container = $('<div id="modal-container" class="modal">')
+    container = $(`<div id="${id}" class="modal">`)
 
     body.append(container)
   }
@@ -54,13 +60,11 @@ module.exports = function () {
 
       click = 0
 
-      let url = $(e.target).attr('data-modal')
+      let element = $(e.target).is('[data-modal]') ? $(e.target) : $(e.target).parents('*[data-modal]').first()
+      let url = element.attr('data-modal')
+      let createModal = element.is('[data-modal-create]')
 
-      if (!url) {
-        url = $(e.target).parents('*[data-modal]').first().attr('data-modal')
-      }
-
-      openModal(url)
+      openModal(url, createModal)
     }, 250)
   })
 
