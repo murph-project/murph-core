@@ -1,8 +1,10 @@
 ## [Unreleased]
 
 ### Added
+* add data-modal-create attribute to force modal to be open in a new container
 ### Fixed
 ### Changed
+* update file-manager with data-modal-create attribute
 
 ## [1.10.0] - 2022-03-17
 ### Added
