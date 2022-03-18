@@ -14,11 +14,11 @@
 
             <div class="d-flex">
                 <div class="breadcrumb mb-0 file-manager-actions">
-                    <span class="btn btn-sm btn-primary ml-1" v-bind:data-modal="generateUploadLink(directory)">
-                        <span class="fa fa-upload" v-bind:data-modal="generateUploadLink(directory)"></span>
+                    <span class="btn btn-sm btn-primary ml-1" v-bind:data-modal="generateUploadLink(directory)" data-modal-create>
+                        <span class="fa fa-upload" v-bind:data-modal="generateUploadLink(directory)" data-modal-create></span>
                     </span>
-                    <span class="btn btn-sm btn-primary ml-1" v-bind:data-modal="generateNewDirectoryLink(directory)">
-                        <span class="fa fa-folder-plus" v-bind:data-modal="generateNewDirectoryLink(directory)"></span>
+                    <span class="btn btn-sm btn-primary ml-1" v-bind:data-modal="generateNewDirectoryLink(directory)" data-modal-create>
+                        <span class="fa fa-folder-plus" v-bind:data-modal="generateNewDirectoryLink(directory)" data-modal-create></span>
                     </span>
                 </div>
 
@@ -58,7 +58,7 @@
 
             <div v-for="item in directories" class="card mt-3 ml-3 mb-3 border-0">
                 <div class="card-body p-2">
-                    <div class="card-text" v-on:dblclick="setDirectory(item.path)" v-bind:data-modal="generateInfoLink(item, true, context)">
+                    <div class="card-text" v-on:dblclick="setDirectory(item.path)" v-bind:data-modal="generateInfoLink(item, true, context)" data-modal-create>
                         <div class="text-center">
                             <div class="display-4 text-warning">
                                 <span class="fa fa-folder"></span>
@@ -77,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            <div v-for="item in files" class="card mt-3 ml-3 mb-3 border-0" v-on:click="modalUrl = generateInfoLink(item, null, context)" v-bind:data-modal="generateInfoLink(item, null, context)">
+            <div v-for="item in files" class="card mt-3 ml-3 mb-3 border-0" v-on:click="modalUrl = generateInfoLink(item, null, context)" v-bind:data-modal="generateInfoLink(item, null, context)" data-modal-create>
                 <div class="card-body p-2">
                     <div class="card-text">
                         <div class="text-center">
@@ -111,7 +111,7 @@
                     </td>
                 </tr>
 
-                <tr v-for="item in directories" v-on:dblclick="setDirectory(item.path)" v-bind:data-modal="generateInfoLink(item, true, context)">
+                <tr v-for="item in directories" v-on:dblclick="setDirectory(item.path)" v-bind:data-modal="generateInfoLink(item, true, context)" data-modal-create>
                     <td width="10">
                         <span class="fa fa-folder text-warning"></span>
                     </td>
@@ -129,7 +129,7 @@
                     <td width="10">
                         <FileIcon v-bind:mime="item.mime" v-bind:path="item.webPath" v-bind:thumb="false" />
                     </td>
-                    <td v-on:click="modalUrl = generateInfoLink(item, null, context)" v-bind:data-modal="generateInfoLink(item, null, context)">
+                    <td v-on:click="modalUrl = generateInfoLink(item, null, context)" v-bind:data-modal="generateInfoLink(item, null, context)" data-modal-create>
                         <div v-if="item.locked" class="float-right">
                             <span class="btn btn-sm btn-light">
                                 <span class="fa fa-lock"></span>
@@ -352,7 +352,7 @@ export default {
 
     $(events).each((k, event) => {
       body.on(event + '.success', () => {
-        $('#modal-container').modal('hide')
+        $('div[id^=modal-container]').modal('hide')
         that.refresh()
       })
     })
