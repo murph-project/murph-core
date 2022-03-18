@@ -540,6 +540,10 @@ form {
     margin-right: auto;
 }
 
+.modal.show.blur {
+    filter: blur(4px);
+}
+
 .output {
     &-console {
         background: #073642;

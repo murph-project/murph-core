@@ -9,10 +9,10 @@ const openModal = function (url, createModal) {
 
   let container = $(`#${id}`)
   const body = $('body')
-  let doTrigger = true
+  const doTrigger = true
 
   if (!container.length) {
-    let doTrigger = false
+    const doTrigger = false
     container = $(`<div id="${id}" class="modal">`)
 
     body.append(container)
@@ -30,8 +30,22 @@ const openModal = function (url, createModal) {
     loader.remove()
 
     if (doTrigger) {
-       container.trigger('shown.bs.modal')
+      container.trigger('shown.bs.modal')
     }
+  })
+}
+
+const onShownAndHide = () => {
+  $('.modal-backdrop.show').each((key, value) => {
+    if (key) {
+      $(value).remove()
+    }
+  })
+
+  const modals = $('.modal.show')
+
+  modals.each((key, value) => {
+    value.classList.toggle('blur', (key + 1) < modals.length)
   })
 }
 
@@ -39,10 +53,16 @@ module.exports = function () {
   let click = 0
   const body = $('body')
 
+  body.on('shown.bs.modal', '.modal', onShownAndHide)
+
   body.on('hidden.bs.modal', '.modal', (e) => {
+    $(e.target).remove()
+
     if ($('.modal.show').length) {
       $('body').addClass('modal-open')
     }
+
+    onShownAndHide()
   })
 
   body.on('click', '*[data-modal]', (e) => {
@@ -60,9 +80,9 @@ module.exports = function () {
 
       click = 0
 
-      let element = $(e.target).is('[data-modal]') ? $(e.target) : $(e.target).parents('*[data-modal]').first()
-      let url = element.attr('data-modal')
-      let createModal = element.is('[data-modal-create]')
+      const element = $(e.target).is('[data-modal]') ? $(e.target) : $(e.target).parents('*[data-modal]').first()
+      const url = element.attr('data-modal')
+      const createModal = element.is('[data-modal-create]')
 
       openModal(url, createModal)
     }, 250)

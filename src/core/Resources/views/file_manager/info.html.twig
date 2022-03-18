@@ -134,11 +134,11 @@
             {% if context == 'tinymce' %}
                 {% if not isLocked %}
                     {% if splInfo.isDir %}
-                        <button form="form-file-delete" class="btn btn-sm btn-primary" data-modal="{{ path('admin_file_manager_directory_rename', {file: splInfo.relativePathname, ajax: ajax}) }}">
+                        <button form="form-file-delete" class="btn btn-sm btn-primary" data-modal="{{ path('admin_file_manager_directory_rename', {file: splInfo.relativePathname, ajax: ajax}) }}" data-modal-create>
                             {{ 'Rename'|trans }}
                         </button>
                     {% else %}
-                        <button form="form-file-delete" class="btn btn-sm btn-primary" data-modal="{{ path('admin_file_manager_file_rename', {file: splInfo.relativePathname, ajax: ajax}) }}">
+                        <button form="form-file-delete" class="btn btn-sm btn-primary" data-modal="{{ path('admin_file_manager_file_rename', {file: splInfo.relativePathname, ajax: ajax}) }}" data-modal-create>
                             {{ 'Rename'|trans }}
                         </button>
                     {% endif %}
