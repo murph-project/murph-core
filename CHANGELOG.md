@@ -1,9 +1,14 @@
 ## [Unreleased]
 
 ### Added
+### Fixed
+### Changed
+
+## [1.11.0] - 2022-03-22
+### Added
 * add data-modal-create attribute to force modal to be open in a new container
 * add blur when several modals are opened
-### Fixed
+* add specific form types for Tinymce and EditorJS
 ### Changed
 * update file-manager with data-modal-create attribute
 
