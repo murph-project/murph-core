@@ -1,0 +1,13 @@
+{%- block render -%}
+    <ul {% block attributes %}{% endblock %}>
+        {%- for item in items -%}
+            {%- block item -%}
+                <li>
+                    <input type="checkbox" {% if item.checked %}checked{% endif %} disabled>
+
+                    {{- item.text -}}
+                </li>
+            {%- endblock -%}
+        {%- endfor -%}
+    </ul>
+{%- endblock -%}

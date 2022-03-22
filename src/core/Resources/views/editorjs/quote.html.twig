@@ -1,0 +1,11 @@
+{%- block render -%}
+    <figure {% block attributes %}{% endblock %}>
+        {{- text -}}
+
+        {% if caption %}
+            <figcaption>
+                {{- caption -}}
+            </figcaption>
+        {% endif %}
+    </figure>
+{%- endblock -%}
