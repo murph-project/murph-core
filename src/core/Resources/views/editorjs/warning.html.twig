@@ -1,0 +1,9 @@
+{%- block render -%}
+    <div {% block attributes %}{% endblock %}>
+        {%- block title -%}
+            <div>{{- title -}}</div>
+        {%- endblock -%}
+
+        {{- message -}}
+    </figure>
+{%- endblock -%}

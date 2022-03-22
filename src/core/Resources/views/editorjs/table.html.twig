@@ -1,0 +1,27 @@
+{% block render %}
+    <table {% block attributes %}{% endblock %}>
+        {% if withHeadings and content[0] is defined %}
+            <thead>
+                <tr>
+                    {% for column in content[0] %}
+                        <th>{{- column -}}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+        {% endif %}
+
+        {% if (not withHeadings and content[0] is defined) or (withHeadings and content[1] is defined) %}
+            <tbody>
+                {% for line in content %}
+                    {% if (withHeadings and not loop.first) or not withHeadings  %}
+                        <tr>
+                            {% for column in line %}
+                                <td>{{- column -}}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        {% endif %}
+    </table>
+{% endblock %}

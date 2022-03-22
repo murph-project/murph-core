@@ -1,0 +1,13 @@
+{%- block render -%}
+    {% if style == 'ordered' %}
+        {% set tag = 'ol' %}
+    {% else %}
+        {% set tag = 'ul' %}
+    {% endif %}
+
+    <{{ tag }} {% block attributes %}{% endblock %}>
+        {% for item in items %}
+            <li>{{ item|raw }}</li>
+        {% endfor %}
+    </{{ tag }}>
+{%- endblock -%}

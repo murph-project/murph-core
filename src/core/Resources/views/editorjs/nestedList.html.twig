@@ -1,0 +1,23 @@
+{% import _self as macros %}
+
+{% macro list(tag, items) %}
+    <{{ tag }} {% block attributes %}{% endblock %}>
+        {% for item in items %}
+            <li>
+                {{ item.content|raw }}
+
+                {{ macros.list(tag, item.items) }}
+            </li>
+        {% endfor %}
+    </{{ tag }}>
+{% endmacro %}
+
+{%- block render -%}
+    {% if style == 'ordered' %}
+        {% set tag = 'ol' %}
+    {% else %}
+        {% set tag = 'ul' %}
+    {% endif %}
+
+    {{ macros.list(tag, items) }}
+{%- endblock -%}
