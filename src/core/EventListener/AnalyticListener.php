@@ -58,7 +58,7 @@ class AnalyticListener
             return;
         }
 
-        $this->deviceDetector->setUserAgent($request->headers->get('user-agent'));
+        $this->deviceDetector->setUserAgent((string) $request->headers->get('user-agent'));
         $this->deviceDetector->parse();
 
         if ($this->deviceDetector->isBot()) {
