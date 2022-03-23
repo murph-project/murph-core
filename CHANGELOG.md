@@ -2,6 +2,7 @@
 
 ### Added
 ### Fixed
+* fix issue with empty user-agent in AnalyticListener
 ### Changed
 
 ## [1.11.0] - 2022-03-22
