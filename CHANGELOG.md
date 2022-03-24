@@ -1,6 +1,7 @@
 ## [Unreleased]
 
 ### Added
+* add page maker
 ### Fixed
 * fix issue with empty user-agent in AnalyticListener
 ### Changed
