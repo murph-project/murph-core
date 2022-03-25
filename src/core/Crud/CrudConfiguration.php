@@ -215,6 +215,11 @@ class CrudConfiguration
         return $this->viewDatas[$context] ?? [];
     }
 
+    public function getViewData(string $context, string $name, $defaultValue = null)
+    {
+        return $this->viewDatas[$context][$name] ?? $defaultValue;
+    }
+
     /* -- */
 
     public function setField(string $context, string $label, string $field, array $options): self
