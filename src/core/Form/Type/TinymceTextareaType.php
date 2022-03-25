@@ -2,11 +2,9 @@
 
 namespace App\Core\Form\Type;
 
-use Symfony\Component\Form\Extension\Core\Type\CollectionType as BaseCollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class TinymceTextareaType extends TextareaType
 {
