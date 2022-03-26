@@ -25,6 +25,7 @@ class EditorJsExtension extends AbstractExtension
         'code',
         'raw',
         'image',
+        'link',
     ];
 
     public function __construct(Environment $twig, ParameterBagInterface $params)

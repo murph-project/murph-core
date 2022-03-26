@@ -1,10 +1,14 @@
 const $ = require('jquery')
 const EditorJS = require('@editorjs/editorjs')
 const InlineTools = require('editorjs-inline-tool')
+const Routing  = require('../../../../../../../../friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js')
+const routes = require('../../../../../../../../../public/js/fos_js_routes.json')
 
 const UnderlineInlineTool = InlineTools.UnderlineInlineTool
 const StrongInlineTool = InlineTools.StrongInlineTool
 const ItalicInlineTool = InlineTools.ItalicInlineTool
+
+Routing.setRoutingData(routes)
 
 const tools = {
   header: {
@@ -41,7 +45,9 @@ const tools = {
   },
   link: {
     class: require('@editorjs/link'),
-    inlineToolbar: true
+    config: {
+      endpoint: Routing.generate('admin_editor_editorjs_fetch_url')
+    }
   },
   table: {
     class: require('@editorjs/table'),
@@ -65,10 +71,6 @@ const tools = {
   },
   underline: {
     class: require('@editorjs/underline'),
-    inlineToolbar: true
-  },
-  linkAutocomplete: {
-    class: require('@editorjs/link-autocomplete'),
     inlineToolbar: true
   },
   image: {
