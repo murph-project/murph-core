@@ -4,6 +4,9 @@ Upgrade dependencies:
 
 * `composer update`
 * `yarn upgrade`
+
+Build:
+
 * `make build`
 
 ## [Unreleased]
