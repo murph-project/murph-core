@@ -1,10 +1,13 @@
 ## [Unreleased]
 
 ### Added
-* add page maker
+* add page maker command (`make:page`)
+* add CrudConfiguration::getViewData in complement of CrudConfiguration::getViewDatas
+* add editorjs link block endpoint
 ### Fixed
 * fix issue with empty user-agent in AnalyticListener
 ### Changed
+* update editorjs image block view
 
 ## [1.11.0] - 2022-03-22
 ### Added
