@@ -1,6 +1,11 @@
 ## [Unreleased]
 
 ### Added
+### Fixed
+### Changed
+
+## [1.12.0] - 2022-03-26
+### Added
 * add page maker command (`make:page`)
 * add CrudConfiguration::getViewData in complement of CrudConfiguration::getViewDatas
 * add editorjs link block endpoint
