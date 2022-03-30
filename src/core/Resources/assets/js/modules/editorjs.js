@@ -43,6 +43,10 @@ const tools = {
     class: require('@editorjs/checklist'),
     inlineToolbar: true
   },
+  hyperLink: {
+    class: require('editorjs-hyperlink'),
+    inlineToolbar: true
+  },
   link: {
     class: require('@editorjs/link'),
     config: {
