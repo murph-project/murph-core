@@ -1,6 +1,7 @@
 ## [Unreleased]
 
 ### Added
+* add editorjs hyperlink block
 ### Fixed
 ### Changed
 

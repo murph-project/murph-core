@@ -7,6 +7,7 @@ const routes = require('../../../../../../../../../public/js/fos_js_routes.json'
 const UnderlineInlineTool = InlineTools.UnderlineInlineTool
 const StrongInlineTool = InlineTools.StrongInlineTool
 const ItalicInlineTool = InlineTools.ItalicInlineTool
+const createGenericInlineTool = require('editorjs-inline-tool/es/tool').default
 
 Routing.setRoutingData(routes)
 
@@ -79,7 +80,30 @@ const tools = {
   },
   image: {
     class: require('../components/editorjs/image-tool.js')
-  }
+  },
+  bold: {
+    class: createGenericInlineTool({
+      sanitize: {
+        strong: {},
+      },
+      shortcut: 'CMD+B',
+      tagName: 'STRONG',
+      toolboxIcon:
+        '<svg class="icon icon--bold" width="12px" height="14px"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#bold"></use></svg>',
+    }),
+  },
+  italic: {
+    class: createGenericInlineTool({
+      sanitize: {
+        em: {},
+      },
+      shortcut: 'CMD+I',
+      tagName: 'EM',
+      toolboxIcon:
+        '<svg class="icon icon--italic" width="12px" height="14px"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#italic"></use></svg>',
+    }),
+  },
+  underline: UnderlineInlineTool
 }
 
 const makeId = () => {
@@ -95,10 +119,7 @@ const makeId = () => {
 }
 
 const configurationBase = {
-  tools,
-  bold: StrongInlineTool,
-  italic: ItalicInlineTool,
-  underline: UnderlineInlineTool
+  tools
 }
 
 const buildConfiguration = (conf) => {
@@ -149,6 +170,7 @@ const doInitEditor = () => {
             const value = JSON.stringify(data)
             element.val(value)
           } catch (e) {
+            element.val('[]')
           }
         })
       }, 500)
