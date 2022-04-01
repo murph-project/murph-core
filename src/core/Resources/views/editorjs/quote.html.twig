@@ -1,6 +1,6 @@
 {%- block render -%}
     <figure {% block attributes %}{% endblock %}>
-        {{- text -}}
+        <blockquote><p>{{- text|nl2br -}}</p></blockquote>
 
         {% if caption %}
             <figcaption>
