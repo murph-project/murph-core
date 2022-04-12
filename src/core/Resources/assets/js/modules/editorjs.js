@@ -1,7 +1,7 @@
 const $ = require('jquery')
 const EditorJS = require('@editorjs/editorjs')
 const InlineTools = require('editorjs-inline-tool')
-const Routing  = require('../../../../../../../../friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js')
+const Routing = require('../../../../../../../../friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js')
 const routes = require('../../../../../../../../../public/js/fos_js_routes.json')
 
 const UnderlineInlineTool = InlineTools.UnderlineInlineTool
@@ -84,24 +84,24 @@ const tools = {
   bold: {
     class: createGenericInlineTool({
       sanitize: {
-        strong: {},
+        strong: {}
       },
       shortcut: 'CMD+B',
       tagName: 'STRONG',
       toolboxIcon:
-        '<svg class="icon icon--bold" width="12px" height="14px"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#bold"></use></svg>',
-    }),
+        '<svg class="icon icon--bold" width="12px" height="14px"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#bold"></use></svg>'
+    })
   },
   italic: {
     class: createGenericInlineTool({
       sanitize: {
-        em: {},
+        em: {}
       },
       shortcut: 'CMD+I',
       tagName: 'EM',
       toolboxIcon:
-        '<svg class="icon icon--italic" width="12px" height="14px"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#italic"></use></svg>',
-    }),
+        '<svg class="icon icon--italic" width="12px" height="14px"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#italic"></use></svg>'
+    })
   },
   underline: UnderlineInlineTool
 }

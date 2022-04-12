@@ -101,6 +101,7 @@ class PageAdminController extends CrudController
             ->setForm('edit', Type::class, [])
             ->setForm('filter', FilterType::class)
             ->setView('form', '@Core/site/page_admin/_form.html.twig')
+            ->setView('edit', '@Core/site/page_admin/edit.html.twig')
 
             ->setAction('index', 'new', false)
             ->setAction('index', 'show', false)
