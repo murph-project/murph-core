@@ -1,5 +1,12 @@
 {% extends 'bootstrap_4_layout.html.twig' %}
 
+{% block grapesjs_widget %}
+    <div class="gjs"></div>
+    <div class="d-none">
+        <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+    </div>
+{% endblock %}
+
 {% block file_widget -%}
     <div class="row">
         <div class="col-12">
