@@ -23,7 +23,9 @@ class GrapesJsExtension extends AbstractExtension
 
     public function getHtml(?string $value): ?string
     {
-        return $this->extractData($value, 'html');
+        $html = $this->extractData($value, 'html');
+
+        return preg_replace('#</?body[^>]*>#', '', $html);
     }
 
     public function getCss(?string $value): ?string
