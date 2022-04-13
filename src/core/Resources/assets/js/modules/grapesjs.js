@@ -89,8 +89,6 @@ const doInitEditor = () => {
       textarea.val(JSON.stringify(editor.storeData()))
     })
 
-    console.log(textarea.val())
-
     try {
       editor.loadData(JSON.parse(textarea.val()))
     } catch (e) {
