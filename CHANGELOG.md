@@ -4,10 +4,11 @@
 * add editorjs hyperlink block
 * add button to show and hide metas (admin)
 * add grapesjs editor
-* update editorjs quote block template
+* add editorjs type
 ### Fixed
 * fix editorjs inline tools (bold and italic)
 ### Changed
+* update editorjs quote block template
 
 ## [1.12.0] - 2022-03-26
 ### Added
