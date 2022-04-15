@@ -83,8 +83,9 @@
 {% endblock %}
 
 {% block murph_collection_widget %}
+    {% set attrs = attr|merge({class: 'mb-1 ' ~ (attr.class ?? '')}) %}
+
     <div data-collection="collection-{{ collection_name }}" {% for attr, value in row_attr %}{{ attr }}="{{ value }}"{% endfor %}>
-        {% set attrs = attr|merge({class: 'mb-1 ' ~ (attr.class ?? '')}) %}
         {% for item in form %}
             <div data-collection-item="{{ loop.index }}" {% for attr, value in attrs %}{{ attr }}="{{ value }}"{% endfor %}>
                 {% for child in item %}
@@ -109,7 +110,7 @@
     </div>
 
     <template type="text/template" id="collection-{{ collection_name }}">
-        <div data-collection-item="__name__">
+        <div data-collection-item="__name__" {% for attr, value in attrs %}{{ attr }}="{{ value }}"{% endfor %}>
             {{ form_rest(form.vars.prototype) }}
 
             <div class="text-right">
