@@ -83,7 +83,7 @@
 {% endblock %}
 
 {% block murph_collection_widget %}
-    <div data-collection="collection-{{ collection_name }}">
+    <div data-collection="collection-{{ collection_name }}" {{ block('widget_attributes') }}>
         {% for item in form %}
             <div data-collection-item="{{ loop.index }}" class="mb-1">
                 {% for child in item %}
