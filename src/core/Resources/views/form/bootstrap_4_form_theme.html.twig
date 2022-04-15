@@ -83,7 +83,6 @@
 {% endblock %}
 
 {% block murph_collection_widget %}
-    {{ dump(row_attr) }}
     <div data-collection="collection-{{ collection_name }}" {% for attr, value in row_attr %}{{ attr }}="{{ value }}"{% endfor %}>
         {% set attrs = attr|merge({class: 'mb-1 ' ~ (attr.class ?? '')}) %}
         {% for item in form %}
