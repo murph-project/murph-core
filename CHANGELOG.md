@@ -1,5 +1,6 @@
 ## [Unreleased]
 
+## [1.13.0] - 2022-04-17
 ### Added
 * add editorjs hyperlink block
 * add button to show and hide metas (admin)
