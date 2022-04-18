@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+### Added
+* add grapesjs modes
+### Fixed
+### Changed
+
 ## [1.13.0] - 2022-04-17
 ### Added
 * add editorjs hyperlink block
