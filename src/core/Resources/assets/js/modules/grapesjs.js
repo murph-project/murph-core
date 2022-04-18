@@ -1,6 +1,9 @@
 const $ = require('jquery')
 const GrapesJs = require('grapesjs')
-const bootstrap4 = require('grapesjs-blocks-bootstrap4').default
+
+require('grapesjs-blocks-bootstrap4').default
+require('grapesjs-preset-webpage').default
+require('grapesjs-preset-newsletter').default
 
 const makeId = () => {
   let result = ''
@@ -14,12 +17,58 @@ const makeId = () => {
   return 'grapesjs-' + result
 }
 
+const modes = {
+  bootstrap4: {
+    id: 'grapesjs-blocks-bootstrap4',
+    options: {
+      blocks: {},
+      blockCategories: {},
+      labels: {},
+      gridDevicesPanel: true,
+      formPredefinedActions: [
+      ]
+    },
+    canvas: {
+      styles: [
+        'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css'
+      ],
+      scripts: [
+        'https://code.jquery.com/jquery-3.5.1.slim.min.js',
+        'https://unpkg.com/@popperjs/core@2',
+        'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js'
+      ]
+    }
+  },
+  presetWebpage: {
+    id: 'gjs-preset-webpage',
+    options: {
+    },
+    canvas: {
+    }
+  },
+  presetNewsletter: {
+    id: 'gjs-preset-newsletter',
+    options: {
+    },
+    canvas: {
+    }
+  }
+}
+
 const doInitEditor = () => {
   $('textarea[data-grapesjs]').each((i, v) => {
     const textarea = $(v)
     const element = textarea.parent().prev()
     const id = element.attr('id') ? element.attr('id') : makeId()
 
+    let mode = textarea.attr('data-grapesjs')
+    const pluginsOpts = {}
+
+    if (!mode || typeof modes[mode] === 'undefined') {
+      mode = 'bootstrap4'
+    }
+
+    pluginsOpts[modes[mode].id] = modes[mode].options
     element.attr('id', id)
 
     const editor = GrapesJs.init({
@@ -33,7 +82,7 @@ const doInitEditor = () => {
       noticeOnUnload: 0,
       showOffsets: 1,
       showDevices: false,
-      plugins: ['grapesjs-blocks-bootstrap4'],
+      plugins: [modes[mode].id],
       colorPicker: {
         appendTo: 'parent',
         offset: {
@@ -41,26 +90,8 @@ const doInitEditor = () => {
           left: -166
         }
       },
-      pluginsOpts: {
-        'grapesjs-blocks-bootstrap4': {
-          blocks: {},
-          blockCategories: {},
-          labels: {},
-          gridDevicesPanel: true,
-          formPredefinedActions: [
-          ]
-        }
-      },
-      canvas: {
-        styles: [
-          'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css'
-        ],
-        scripts: [
-          'https://code.jquery.com/jquery-3.5.1.slim.min.js',
-          'https://unpkg.com/@popperjs/core@2',
-          'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js'
-        ]
-      }
+      pluginsOpts: pluginsOpts,
+      canvas: modes[mode].canvas
     })
 
     const deviceManager = editor.DeviceManager
