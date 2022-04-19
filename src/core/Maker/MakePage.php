@@ -13,6 +13,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Bundle\MakerBundle\Str;
+use Symfony\Component\Filesystem\Filesystem;
 
 class MakePage extends AbstractMaker
 {
@@ -75,17 +76,29 @@ class MakePage extends AbstractMaker
 
         $generator->writeChanges();
 
+        $templatePath = sprintf(
+            'templates/page/%s/default.html.twig',
+            Str::asSnakeCase(preg_replace('/Page$/', '', $pageClassNameDetails->getShortName()))
+        );
+
+        $filesystem = new Filesystem();
+
+        if (!$filesystem->exists($templatePath)) {
+            $filesystem->mkdir(dirname($templatePath));
+            $filesystem->dumpFile($templatePath, "{% extends 'base.html.twig' %}\n\n{% block body %}\n\n{% endblock %}\n");
+        }
+
         $this->writeSuccessMessage($io);
         $io->text('Register the page in <comment>config/packages/app.yaml</comment>: ');
         $io->text(<<< EOF
 
- core:
-     site:
-         pages:
-             {$pageClassNameDetails->getFullName()}:
-                 name: {$pageClassNameDetails->getShortName()}
-                 templates:
-                     - {name: "Default", file: "path/to/template.html.twig"}
+core:
+    site:
+        pages:
+            {$pageClassNameDetails->getFullName()}:
+                name: {$pageClassNameDetails->getShortName()}
+                templates:
+                    - {name: "Default", file: "${templatePath}"}
 
 EOF
 );
