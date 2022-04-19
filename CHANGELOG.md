@@ -2,6 +2,8 @@
 
 ### Added
 * add grapesjs modes
+* add tinymce block type
+* add editor types in page maker
 ### Fixed
 ### Changed
 
