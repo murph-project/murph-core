@@ -125,9 +125,12 @@ EOF
             'textarea' => null,
             'choice' => null,
             'collection' => 'BlockEntity\\CollectionBlock::class',
+            'editor_js_textarea' => null,
             'file' => 'BlockEntity\\FileBlock::class',
             'file_picker' => null,
+            'grapes_js' => null,
             'image' => 'BlockEntity\\FileBlock::class',
+            'tinymce_textarea' => null,
         ];
 
         while (null === $type) {
