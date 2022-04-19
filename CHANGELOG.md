@@ -4,6 +4,7 @@
 * add grapesjs modes
 * add tinymce block type
 * add editor types in page maker
+* add the page template when the page is generated with the maker
 ### Fixed
 ### Changed
 
