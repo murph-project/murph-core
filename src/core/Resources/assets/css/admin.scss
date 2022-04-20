@@ -13,8 +13,7 @@ $pagination-active-bg: #343a40 !default;
 @import "~choices.js/src/styles/choices.scss";
 @import "~bootstrap/scss/bootstrap.scss";
 @import "~@fortawesome/fontawesome-free/css/all.css";
-@import "~flag-icon-css/sass/flag-icon.scss";
-@import "~flag-icon-css/sass/flag-icon.scss";
+@import "~flag-icons/sass/flag-icons.scss";
 @import '~grapesjs/dist/css/grapes.min.css';
 
 @for $i from 1 through 100 {
@@ -23,8 +22,8 @@ $pagination-active-bg: #343a40 !default;
     }
 }
 
-.flag-icon-en {
-    background-image: url(~flag-icon-css/flags/4x3/gb.svg);
+.fi-en {
+    background-image: url(~flag-icons/flags/4x3/gb.svg);
 }
 
 body {
