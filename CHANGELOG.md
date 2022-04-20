@@ -7,6 +7,7 @@
 * add the page template when the page is generated with the maker
 ### Fixed
 ### Changed
+* replace flag-icon-css with flag-icons
 
 ## [1.13.0] - 2022-04-17
 ### Added
