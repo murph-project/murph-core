@@ -9,4 +9,4 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability within Murph, send an acknowledgment to the reporter at security [at] murph-project.org.
+If you discover a security vulnerability within Murph, send an email to security [at] murph-project.org.
