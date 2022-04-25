@@ -77,15 +77,17 @@ class MakePage extends AbstractMaker
         $generator->writeChanges();
 
         $templatePath = sprintf(
-            'templates/page/%s/default.html.twig',
+            'page/%s/default.html.twig',
             Str::asSnakeCase(preg_replace('/Page$/', '', $pageClassNameDetails->getShortName()))
         );
+
+        $realTemplatePath = 'templates/'.$templatePath;
 
         $filesystem = new Filesystem();
 
         if (!$filesystem->exists($templatePath)) {
-            $filesystem->mkdir(dirname($templatePath));
-            $filesystem->dumpFile($templatePath, "{% extends 'base.html.twig' %}\n\n{% block page %}\n\n{% endblock %}\n");
+            $filesystem->mkdir(dirname($realTemplatePath));
+            $filesystem->dumpFile($realTemplatePath, "{% extends 'base.html.twig' %}\n\n{% block page %}\n\n{% endblock %}\n");
         }
 
         $this->writeSuccessMessage($io);
