@@ -24,14 +24,14 @@ class BlockEventSubscriber extends EntityManagerEventSubscriber
         $this->fileUpload = $fileUpload;
     }
 
-    public function support(EntityInterface $entity)
+    public function supports(EntityInterface $entity): bool
     {
         return $entity instanceof Page;
     }
 
     public function onPreUpdate(EntityManagerEvent $event)
     {
-        if (!$this->support($event->getEntity())) {
+        if (!$this->supports($event->getEntity())) {
             return;
         }
 
