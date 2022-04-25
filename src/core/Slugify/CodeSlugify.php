@@ -11,18 +11,12 @@ use Cocur\Slugify\Slugify as BaseSlugify;
  */
 class CodeSlugify extends Slugify
 {
-    public function slugify($data): ?string
-    {
-        $slug = parent::slugify($data);
-
-        return preg_replace('/[^\w]+/', '', $slug);
-    }
-
     protected function create(): BaseSlugify
     {
         $slugify = new BaseSlugify([
             'separator' => '_',
             'lowercase' => true,
+            'regexp' => '/[^A-Za-z0-9_]+/',
         ]);
 
         $slugify->activateRuleSet('french');
