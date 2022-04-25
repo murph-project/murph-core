@@ -2,6 +2,7 @@
 
 ### Added
 * add allowed chars in RouteParameterSlugify and CodeSlugify
+* improve sidebar in mobile view
 ### Fixed
 * fix creation of new element when a menu is edited
 * fix editorjs error when the textarea is empty
