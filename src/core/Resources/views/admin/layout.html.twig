@@ -34,6 +34,12 @@
         {% block body_container %}
             <div class="container-fluid">
                 <nav class="bg-dark-blue sidebar">
+                    <div class="sidebar-toggler">
+                        <button class="btn">
+                            <span class="fa fa-bars"></span>
+                        </button>
+                    </div>
+
                     <div class="sidebar-sticky">
                         {{ include('@Core/admin/module/menu.html.twig') }}
                     </div>

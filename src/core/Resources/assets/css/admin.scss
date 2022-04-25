@@ -169,6 +169,16 @@ tr.table-primary-light {
     width: 260px;
     display: inline-block;
 
+    .sidebar-toggler {
+        display: none;
+        text-align: right;
+        padding-right: 5px;
+
+        .fa {
+            color: #fff;
+        }
+    }
+
     .nav-link {
         font-weight: 500;
         color: #333;
@@ -257,14 +267,20 @@ tr.table-primary-light {
         width: calc(100vw - 50px);
     }
 
-    .sidebar-sticky {
-        width: 50px;
-        max-width: 100% !important;
+    .sidebar {
+        .sidebar-toggler {
+            display: block;
+        }
     }
 
-    .sidebar {
+    .sidebar:not(.is-open) {
         width: 50px;
         max-width: 100% !important;
+
+        .sidebar-sticky {
+            width: 50px;
+            max-width: 100% !important;
+        }
 
         .nav {
             padding-left: 0;
