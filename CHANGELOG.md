@@ -4,6 +4,7 @@
 * add allowed chars in RouteParameterSlugify and CodeSlugify
 ### Fixed
 * fix creation of new element when a menu is edited
+* fix editorjs error when the textarea is empty
 ### Changed
 
 ## [1.14.0] - 2022-04-20

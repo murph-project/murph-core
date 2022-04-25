@@ -147,9 +147,24 @@ const doInitEditor = () => {
     editorContainer.attr('id', id)
     element.hide()
 
+    let data = []
+
+    try {
+      const value = JSON.parse(element.val())
+
+      if (Array.isArray(value)) {
+        data = value
+      }
+    } catch (e) {
+    }
+
+    if (!Array.isArray(data)) {
+      data = []
+    }
+
     const editor = new EditorJS(buildConfiguration({
       holder: id,
-      data: JSON.parse(element.val()),
+      data: data,
       onReady: () => {
         ready = true
       }
