@@ -66,7 +66,7 @@ class MenuEventSubscriber extends EntityManagerEventSubscriber
 
         $menu = $event->getEntity();
 
-        if (count($menu->getNodes()) > 2) {
+        if (count($menu->getNodes()) >= 2) {
             return;
         }
 
@@ -84,10 +84,10 @@ class MenuEventSubscriber extends EntityManagerEventSubscriber
 
         $menu->setRootNode($rootNode);
 
-        $this->entityManager->getEntityManager()->persist($rootNode);
-        $this->entityManager->getEntityManager()->persist($childNode);
+        foreach ([$rootNode, $childNode, $menu] as $entity) {
+            $this->entityManager->getEntityManager()->persist($entity);
+        }
 
-        $this->entityManager->getEntityManager()->persist($menu);
         $this->entityManager->flush();
 
         $this->nodeRepository->persistAsFirstChild($childNode, $rootNode);
