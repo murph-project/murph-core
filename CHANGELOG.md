@@ -1,7 +1,9 @@
 ## [Unreleased]
 
 ### Added
+* add allowed chars in RouteParameterSlugify and CodeSlugify
 ### Fixed
+* fix creation of new element when a menu is edited
 ### Changed
 
 ## [1.14.0] - 2022-04-20
