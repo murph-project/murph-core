@@ -24,7 +24,7 @@
                                 </a>
                             {% endif %}
 
-                            {% if configuration.action(context, 'show', true) %}
+                            {% if configuration.action(context, 'show', true, [entity]) %}
                                 <a href="{{ path(configuration.pageRoute('show'), {entity: entity.id}|merge(configuration.pageRouteParams('show'))) }}" class="btn btn-secondary">
                                     <span class="fa fa-eye pr-1"></span>
                                     {{ configuration.actionTitle(context, 'show', 'Show')|trans|build_string(entity) }}
@@ -42,7 +42,7 @@
                                 {% set header_actions_dropdown_menu = '' %}
                             {% endif %}
 
-                            {% if configuration.action(context, 'delete', true) %}
+                            {% if configuration.action(context, 'delete', true, [entity]) %}
                                 {% set item %}
                                     <button type="submit" form="form-delete" class="dropdown-item">
                                         {{ configuration.actionTitle(context, 'delete', 'Delete')|trans|build_string(entity) }}
@@ -86,7 +86,7 @@
         </form>
     {% endblock %}
 
-    {% if configuration.action(context, 'delete', true) %}
+    {% if configuration.action(context, 'delete', true, [entity]) %}
         <form method="post" action="{{ path(configuration.pageRoute('delete'), {entity: entity.id}|merge(configuration.pageRouteParams('delete'))) }}" id="form-delete" data-form-confirm>
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ entity.id) }}">

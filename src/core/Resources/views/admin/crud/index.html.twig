@@ -174,9 +174,9 @@
 
                             {% block list_item %}
                                 {%- set dbClick %}
-                                    {% if configuration.action(context, 'show', true) %}
+                                    {% if configuration.action(context, 'show', true, [item]) %}
                                         {{ path(configuration.pageRoute('show'), {entity: item.id}|merge(configuration.pageRouteParams('show'))) }}
-                                    {% elseif configuration.action(context, 'edit', true) %}
+                                    {% elseif configuration.action(context, 'edit', true, [item]) %}
                                         {{ path(configuration.pageRoute('edit'), {entity: item.id}|merge(configuration.pageRouteParams('show'))) }}
                                     {% endif %}
                                 {% endset -%}
@@ -211,19 +211,19 @@
                                         <td class="crud-action-column col-2 miw-200 text-right">
                                             {% block list_item_actions_before %}{% endblock %}
 
-                                            {% if configuration.action(context, 'show', true) %}
+                                            {% if configuration.action(context, 'show', true, [item]) %}
                                                 <a href="{{ path(configuration.pageRoute('show'), {entity: item.id}|merge(configuration.pageRouteParams('show'))) }}" class="btn btn-sm btn-secondary mr-1">
                                                     <span class="fa fa-eye"></span>
                                                 </a>
                                             {% endif %}
 
-                                            {% if configuration.action(context, 'edit', true) %}
+                                            {% if configuration.action(context, 'edit', true, [item]) %}
                                                 <a href="{{ path(configuration.pageRoute('edit'), {entity: item.id}|merge(configuration.pageRouteParams('edit'))) }}" class="btn btn-sm btn-primary mr-1">
                                                     <span class="fa fa-edit"></span>
                                                 </a>
                                             {% endif %}
 
-                                            {% if configuration.action(context, 'delete', true) %}
+                                            {% if configuration.action(context, 'delete', true, [item]) %}
                                                 <button type="submit" form="form-delete-{{ item.id }}" class="btn btn-sm btn-danger">
                                                     <span class="fa fa-trash"></span>
                                                 </button>

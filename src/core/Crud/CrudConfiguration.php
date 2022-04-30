@@ -2,8 +2,6 @@
 
 namespace App\Core\Crud;
 
-use App\Core\Crud\Exception\CrudConfigurationException;
-
 /**
  * class CrudConfiguration.
  *
@@ -109,7 +107,7 @@ class CrudConfiguration
 
     /* -- */
 
-    public function setAction(string $page, string $action, bool $enabled): self
+    public function setAction(string $page, string $action, bool|callable $enabled): self
     {
         if (!isset($this->actions[$page])) {
             $this->actions[$page] = [];
@@ -120,9 +118,20 @@ class CrudConfiguration
         return $this;
     }
 
-    public function getAction(string $page, string $action, bool $default = true)
+    public function getAction(string $page, string $action, bool $default = true, array $callableParamaters = [])
     {
-        return $this->actions[$page][$action] ?? $default;
+        if (!isset($this->actions[$page][$action])) {
+            return $default;
+        }
+
+        if (is_bool($this->actions[$page][$action])) {
+            return $this->actions[$page][$action];
+        }
+
+        return call_user_func_array(
+            $this->actions[$page][$action],
+            $callableParamaters
+        );
     }
 
     public function setBatchAction(string $page, string $action, string $label, callable $callback): self

@@ -24,7 +24,7 @@
                                 </a>
                             {% endif %}
 
-                            {% if configuration.action(context, 'edit', true) %}
+                            {% if configuration.action(context, 'edit', true, [entity]) %}
                                 <a href="{{ path(configuration.pageRoute('edit'), {entity: entity.id}) }}" class="btn btn-primary">
                                     <span class="fa fa-edit pr-1"></span>
 
