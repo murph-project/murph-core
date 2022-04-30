@@ -1,12 +1,16 @@
 ## [Unreleased]
 
 ### Added
+### Fixed
+### Changed
+
+## [1.14.1] - 2022-04-30
+### Added
 * add allowed chars in RouteParameterSlugify and CodeSlugify
 * improve sidebar in mobile view
 ### Fixed
 * fix creation of new element when a menu is edited
 * fix editorjs error when the textarea is empty
-### Changed
 
 ## [1.14.0] - 2022-04-20
 ### Added
