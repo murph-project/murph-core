@@ -1,6 +1,7 @@
 ## [Unreleased]
 
 ### Added
+* CrudConfiguration::setAction can receive a callable instead of a boolean in 'enabled' param
 ### Fixed
 ### Changed
 
