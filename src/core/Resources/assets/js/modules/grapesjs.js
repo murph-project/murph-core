@@ -4,6 +4,7 @@ const GrapesJs = require('grapesjs')
 require('grapesjs-blocks-bootstrap4').default
 require('grapesjs-preset-webpage').default
 require('grapesjs-preset-newsletter').default
+require('grapesjs-plugin-header').default
 
 const makeId = () => {
   let result = ''
@@ -82,7 +83,7 @@ const doInitEditor = () => {
       noticeOnUnload: 0,
       showOffsets: 1,
       showDevices: false,
-      plugins: [modes[mode].id],
+      plugins: [modes[mode].id, 'grapesjs-plugin-header'],
       colorPicker: {
         appendTo: 'parent',
         offset: {
