@@ -139,6 +139,14 @@ const doInitEditor = () => {
     } catch (e) {
       editor.loadData({ html: '' })
     }
+
+    $(element).parents('form').keypress((e) => {
+      if ($(e.target).parents('#' + id).length === 0) {
+        return true;
+      }
+
+      return (e.keyCode || e.which || e.charCode || 0) !== 13
+    })
   })
 }
 
