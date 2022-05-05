@@ -142,7 +142,7 @@ const doInitEditor = () => {
 
     $(element).parents('form').keypress((e) => {
       if ($(e.target).parents('#' + id).length === 0) {
-        return true;
+        return true
       }
 
       return (e.keyCode || e.which || e.charCode || 0) !== 13
