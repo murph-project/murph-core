@@ -15,6 +15,7 @@ $pagination-active-bg: #343a40 !default;
 @import "~@fortawesome/fontawesome-free/css/all.css";
 @import "~flag-icons/sass/flag-icons.scss";
 @import '~grapesjs/dist/css/grapes.min.css';
+@import '~grapesjs-component-code-editor/dist/grapesjs-component-code-editor.min.css';
 
 @for $i from 1 through 100 {
     .miw-#{$i*5} {

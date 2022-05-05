@@ -53,6 +53,8 @@
 
         {% block js %}
             <script src="{{ asset('vendor/tinymce/tinymce.min.js') }}"></script>
+            <script src="{{ asset('vendor/grapesjs-parser-postcss/dist/grapesjs-parser-postcss.min.js') }}"></script>
+            <script src="{{ asset('vendor/grapesjs-component-code-editor/dist/grapesjs-component-code-editor.min.js') }}"></script>
 
             {{ encore_entry_script_tags('admin') }}
         {% endblock %}

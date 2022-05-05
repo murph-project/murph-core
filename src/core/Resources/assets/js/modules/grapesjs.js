@@ -83,7 +83,12 @@ const doInitEditor = () => {
       noticeOnUnload: 0,
       showOffsets: 1,
       showDevices: false,
-      plugins: [modes[mode].id, 'grapesjs-plugin-header'],
+      plugins: [
+        modes[mode].id,
+        'grapesjs-plugin-header',
+        'grapesjs-component-code-editor',
+        'grapesjs-parser-postcss'
+      ],
       colorPicker: {
         appendTo: 'parent',
         offset: {
@@ -116,6 +121,14 @@ const doInitEditor = () => {
     deviceManager.add('All', '100%')
 
     editor.Panels.getPanels().remove('devices-buttons')
+    editor.Panels.addButton('views', {
+      id: 'open-code',
+      attributes: {
+        title: 'Open Code'
+      },
+      className: 'fa fa-edit',
+      command: 'open-code'
+    })
 
     editor.on('update', () => {
       textarea.val(JSON.stringify(editor.storeData()))
