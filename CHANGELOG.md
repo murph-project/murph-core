@@ -1,9 +1,13 @@
 ## [Unreleased]
 
 ### Added
-* CrudConfiguration::setAction can receive a callable instead of a boolean in 'enabled' param
 ### Fixed
 ### Changed
+
+## [1.15.0] - 2022-05-05
+### Added
+* CrudConfiguration::setAction can receive a callable instead of a boolean in 'enabled' param
+* add grapesjs-component-code-editor and grapesjs-parser-postcss
 
 ## [1.14.1] - 2022-04-30
 ### Added
