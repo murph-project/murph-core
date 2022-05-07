@@ -5,6 +5,7 @@ namespace App\Core\Notification;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Twig\Environment as TwigEnvironment;
+use App\Entity\User;
 
 /**
  * class MailNotifier.
@@ -139,19 +140,19 @@ class MailNotifier
         return $this;
     }
 
-    public function addRecipientByAccount(Account $account, bool $isBcc = false): self
+    public function addRecipientByUser(User $user, bool $isBcc = false): self
     {
-        return $this->addRecipient($account->getEmail(), $isBcc);
+        return $this->addRecipient($user->getEmail(), $isBcc);
     }
 
-    public function addRecipientsByAccounts($accounts, bool $isBcc = false)
+    public function addRecipientsByUsers($users, bool $isBcc = false)
     {
-        if (!is_array($accounts)) {
+        if (!is_array($users)) {
             throw new InvalidArgumentException('The "accounts" parameter must be an array or an instance of ObjectCollection');
         }
 
-        foreach ($accounts as $account) {
-            $this->addRecipientByAccount($account, $isBcc);
+        foreach ($users as $user) {
+            $this->addRecipientByUser($user, $isBcc);
         }
 
         return $this;
