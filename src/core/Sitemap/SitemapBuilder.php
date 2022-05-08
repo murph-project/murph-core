@@ -28,7 +28,7 @@ class SitemapBuilder
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function build(Navigation $navigation): array
+    public function build(Navigation $navigation, ?string $currentDomain): array
     {
         $items = [];
 
@@ -52,7 +52,7 @@ class SitemapBuilder
 
                 $nodeItems = [];
 
-                foreach ($this->getNodeUrls($node) as $url) {
+                foreach ($this->getNodeUrls($node, $currentDomain) as $url) {
                     $nodeItems[] = $this->createItem($parameters, $url);
                 }
 
@@ -66,7 +66,7 @@ class SitemapBuilder
         return $items;
     }
 
-    public function getNodeUrls(Node $node)
+    public function getNodeUrls(Node $node, ?string $currentDomain)
     {
         $urls = [];
 
@@ -90,9 +90,27 @@ class SitemapBuilder
                     }
                 }
             } elseif (!$node->getDisableUrl() && !$node->hasAppUrl()) {
+                $params = [];
+                $domain = $currentDomain;
+                $navigation = $node->getMenu()->getNavigation();
+
+                if (null === $currentDomain || $navigation->getForceDomain()) {
+                    $domain = $navigation->getDomain();
+                }
+
+                $params['_domain'] = $domain;
+
+                foreach ($node->getParameters() as $param) {
+                    if ('_locale' === $param['name']) {
+                        $params['_locale'] = !empty($param['defaultValue'])
+                            ? $param['defaultValue']
+                            : $node->getMenu()->getNavigation()->getLocale();
+                    }
+                }
+
                 $urls[] = $this->urlGenerator->generate(
                     $node->getRouteName(),
-                    [],
+                    $params,
                     UrlGeneratorInterface::ABSOLUTE_URL
                 );
             }
