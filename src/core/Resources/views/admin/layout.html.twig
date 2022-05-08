@@ -44,7 +44,7 @@
                         {{ include('@Core/admin/module/menu.html.twig') }}
                     </div>
                 </nav>
-                <div class="body">
+                <div class="body {% block body_class %}{% endblock %}">
                     {% block body %}
                     {% endblock %}
                 </div>

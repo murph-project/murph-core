@@ -31,6 +31,11 @@ body {
     overflow-x: hidden;
 }
 
+.body.has-form {
+    min-height: 100vh;
+    background: lighten(map-get($theme-colors, 'dark-blue'), 75%);
+}
+
 #logo {
     width: 30px;
 }
@@ -392,6 +397,19 @@ th {
 
 .form-error-icon {
     margin-right: 4px;
+}
+
+#form-main {
+    > .tab-content {
+        padding: 30px;
+        background: lighten(map-get($theme-colors, 'dark-blue'), 75%);
+
+        .tab-form {
+            padding: 30px;
+            background: #fff;
+            border: 1px solid #ccc;
+        }
+    }
 }
 
 .custom-file-label::after {
