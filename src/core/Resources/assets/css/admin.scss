@@ -412,6 +412,14 @@ th {
     }
 }
 
+legend.col-form-label, label {
+    font-weight: bold;
+}
+
+*[data-collection] label {
+    font-weight: normal;
+}
+
 .custom-file-label::after {
     content: "Parcourir";
 }
