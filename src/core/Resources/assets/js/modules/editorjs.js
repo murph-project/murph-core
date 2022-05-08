@@ -147,19 +147,15 @@ const doInitEditor = () => {
     editorContainer.attr('id', id)
     element.hide()
 
-    let data = []
+    let data = {time: null, blocks: []};
 
     try {
       const value = JSON.parse(element.val())
 
-      if (Array.isArray(value)) {
+      if (value.time && Array.isArray(value.blocks)) {
         data = value
       }
     } catch (e) {
-    }
-
-    if (!Array.isArray(data)) {
-      data = []
     }
 
     const editor = new EditorJS(buildConfiguration({

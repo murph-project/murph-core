@@ -12,6 +12,7 @@
 ### Fixed
 * fix the mail notifier
 * fix sitemap: navigation with several domains
+* fix regression with editorjs: content not loaded
 
 ## [1.14.1] - 2022-04-30
 ### Added
