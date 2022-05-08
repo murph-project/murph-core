@@ -2,6 +2,8 @@
 
 {% set context = context ?? 'edit' %}
 
+{% block body_class %}has-form{% endblock %}
+
 {% block title %}{{ configuration.pageTitle(context)|trans|build_string(entity) }} - {{ parent() }}{% endblock %}
 
 {% block body %}
