@@ -8,8 +8,10 @@
 ### Added
 * CrudConfiguration::setAction can receive a callable instead of a boolean in 'enabled' param
 * add grapesjs-component-code-editor and grapesjs-parser-postcss
+* hide the backoffice site name when small resolution
 ### Fixed
-* Fix the mail notifier
+* fix the mail notifier
+* fix sitemap: navigation with several domains
 
 ## [1.14.1] - 2022-04-30
 ### Added
