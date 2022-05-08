@@ -248,11 +248,11 @@ class Navigation implements EntityInterface
         }
 
         foreach ($this->getAdditionalDomains() as $additionalDomain) {
-            if ($additionalDomain['type'] === 'domain' && $additionalDomain['domain'] === $domain) {
+            if ('domain' === $additionalDomain['type'] && $additionalDomain['domain'] === $domain) {
                 return true;
             }
 
-            if ($additionalDomain['type'] === 'regexp' && preg_match('#'.$additionalDomain['domain'].'#', $domain) > 0) {
+            if ('regexp' === $additionalDomain['type'] && preg_match('#'.$additionalDomain['domain'].'#', $domain) > 0) {
                 return true;
             }
         }
