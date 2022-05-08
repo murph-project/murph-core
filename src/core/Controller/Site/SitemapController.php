@@ -14,19 +14,20 @@ class SitemapController extends AbstractController
     /**
      * @Route("/sitemap.xml", name="sitemap")
      */
-    public function sitemap(Request $request, NavigationRepositoryQuery $navigationRepositoryQuery, SitemapBuilder $builder): Response
+    public function sitemap(Request $request, NavigationRepositoryQuery $query, SitemapBuilder $builder): Response
     {
-        $navigations = $navigationRepositoryQuery
-            ->whereDomain($request->getHost())
-            ->find()
-        ;
+        $navigations = $query->create()->find();
 
         $items = [];
 
         foreach ($navigations as $navigation) {
+            if (!$navigation->matchDomain($request->getHost())) {
+                continue;
+            }
+
             $items = array_merge(
                 $items,
-                $builder->build($navigation)
+                $builder->build($navigation, $request->getHost())
             );
         }
 

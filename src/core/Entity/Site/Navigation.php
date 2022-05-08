@@ -240,4 +240,23 @@ class Navigation implements EntityInterface
 
         return $this;
     }
+
+    public function matchDomain(string $domain): bool
+    {
+        if ($domain === $this->getDomain()) {
+            return true;
+        }
+
+        foreach ($this->getAdditionalDomains() as $additionalDomain) {
+            if ($additionalDomain['type'] === 'domain' && $additionalDomain['domain'] === $domain) {
+                return true;
+            }
+
+            if ($additionalDomain['type'] === 'regexp' && preg_match('#'.$additionalDomain['domain'].'#', $domain) > 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
