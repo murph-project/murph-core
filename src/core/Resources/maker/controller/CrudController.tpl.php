@@ -120,8 +120,18 @@ class <?= $class_name; ?> extends CrudController
             // ->setAction('show', 'back', true)
             // ->setAction('show', 'edit', true)
 
-            // ->setField('index', 'Label', Field\TextField::class, [
-            //     'property' => 'label',
+            ->setField('index', 'Entity', Field\TextField::class, [
+                'property_builder' => function (EntityInterface $entity) {
+                    try {
+                        return (string) $entity;
+                    } catch (\Error $e) {
+                        return $entity->getId();
+                    }
+                },
+            ])
+
+            // ->setField('index', 'Foo', Field\TextField::class, [
+            //     'property' => 'foo',
             // ])
 
             // ->setBatchAction('index', 'delete', 'Delete', function(EntityInterface $entity, EntityManager $manager) {
