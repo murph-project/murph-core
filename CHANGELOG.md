@@ -9,10 +9,13 @@
 * CrudConfiguration::setAction can receive a callable instead of a boolean in 'enabled' param
 * add grapesjs-component-code-editor and grapesjs-parser-postcss
 * hide the backoffice site name when small resolution
+* add entity_to_array twig function
 ### Fixed
 * fix the mail notifier
 * fix sitemap: navigation with several domains
 * fix regression with editorjs: content not loaded
+### Changed
+* change default template to show an entity using `entity_to_array`
 
 ## [1.14.1] - 2022-04-30
 ### Added
