@@ -4,12 +4,13 @@
 ### Fixed
 ### Changed
 
-## [1.15.0] - 2022-05-05
+## [1.15.0] - 2022-05-09
 ### Added
 * CrudConfiguration::setAction can receive a callable instead of a boolean in 'enabled' param
 * add grapesjs-component-code-editor and grapesjs-parser-postcss
 * hide the backoffice site name when small resolution
 * add entity_to_array twig function
+* add default field to show in crud configuration
 ### Fixed
 * fix the mail notifier
 * fix sitemap: navigation with several domains
