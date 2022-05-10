@@ -18,7 +18,7 @@ const openModal = function (url, createModal) {
     body.append(container)
   }
 
-  const loader = $('<div style="position: absolute; top: 25vh; left: 50vw; z-index: 2000">')
+  const loader = $('<div style="position: absolute; top: 25vh; left: 50vw; z-index: 5000">')
   loader.html('<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>')
   body.append(loader)
 
@@ -56,7 +56,11 @@ module.exports = function () {
   body.on('shown.bs.modal', '.modal', onShownAndHide)
 
   body.on('hidden.bs.modal', '.modal', (e) => {
-    $(e.target).remove()
+    const modal = $(e.target)
+
+    if (!modal.hasClass('modal-static')) {
+      modal.remove()
+    }
 
     if ($('.modal.show').length) {
       $('body').addClass('modal-open')
