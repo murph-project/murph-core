@@ -69,6 +69,14 @@ class SitemapBuilder
     public function getNodeUrls(Node $node, ?string $currentDomain)
     {
         $urls = [];
+        $domain = $currentDomain;
+        $navigation = $node->getMenu()->getNavigation();
+
+        if (null === $currentDomain || $navigation->getForceDomain()) {
+            $domain = $navigation->getDomain();
+        }
+
+        $params = ['_domain' => $domain];
 
         try {
             if ($node->hasExternalUrl()) {
@@ -80,26 +88,21 @@ class SitemapBuilder
                     if (null === $annotation) {
                         $urls[] = $this->urlGenerator->generate(
                             $node->getRouteName(),
-                            [],
+                            $params,
                             UrlGeneratorInterface::ABSOLUTE_URL
                         );
                     } else {
+                        $annotation->options = array_merge(
+                            $params,
+                            $annotation->options
+                        );
+
                         $service = $this->container->get($annotation->service);
                         $method = $annotation->method;
                         $urls = $service->{$method}($node, $annotation->options);
                     }
                 }
             } elseif (!$node->getDisableUrl() && !$node->hasAppUrl()) {
-                $params = [];
-                $domain = $currentDomain;
-                $navigation = $node->getMenu()->getNavigation();
-
-                if (null === $currentDomain || $navigation->getForceDomain()) {
-                    $domain = $navigation->getDomain();
-                }
-
-                $params['_domain'] = $domain;
-
                 foreach ($node->getParameters() as $param) {
                     if ('_locale' === $param['name']) {
                         $params['_locale'] = !empty($param['defaultValue'])
