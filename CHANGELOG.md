@@ -3,6 +3,7 @@
 ### Added
 ### Fixed
 ### Changed
+* remove dashboard action from the core
 
 ## [1.15.0] - 2022-05-09
 ### Added
