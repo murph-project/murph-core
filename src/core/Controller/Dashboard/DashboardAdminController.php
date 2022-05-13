@@ -11,15 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DashboardAdminController extends AdminController
 {
-    /**
-     * @Route("/", name="admin_dashboard_index")
-     */
-    public function index(): Response
-    {
-        return $this->render('@Core/dashboard/index.html.twig', [
-        ]);
-    }
-
     protected function getSection(): string
     {
         return 'dashboard';
