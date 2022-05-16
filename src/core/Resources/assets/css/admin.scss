@@ -401,11 +401,17 @@ th {
 
 #form-main {
     > .tab-content {
-        padding: 30px;
+        @media screen and (min-width: 500px) {
+            padding: 30px;
+        }
+
         background: lighten(map-get($theme-colors, 'dark-blue'), 75%);
 
         .tab-form {
-            padding: 30px;
+            @media screen and (min-width: 500px) {
+                padding: 30px;
+            }
+
             background: #fff;
             border: 1px solid #ccc;
         }
