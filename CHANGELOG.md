@@ -2,6 +2,7 @@
 
 ### Added
 ### Fixed
+* fix file block type
 ### Changed
 * remove dashboard action from the core
 
