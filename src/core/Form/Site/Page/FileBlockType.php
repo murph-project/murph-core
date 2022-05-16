@@ -29,7 +29,7 @@ class FileBlockType extends TextBlockType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars = array_replace($view->vars, [
-            'is_image' => $options['is_image'],
+            'file_type' => $options['file_type'],
         ]);
     }
 
@@ -37,7 +37,7 @@ class FileBlockType extends TextBlockType
     {
         $resolver->setDefaults([
             'data_class' => FileBlock::class,
-            'is_image' => false,
+            'file_type' => 'auto',
             'options' => [],
         ]);
     }

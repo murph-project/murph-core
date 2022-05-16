@@ -11,10 +11,15 @@
     <div class="row">
         <div class="col-12">
             {% set value = form.vars.data %}
-            {% set isImage = form.parent.vars.is_image is defined and form.parent.vars.is_image %}
+
+            {% if form.parent.vars.file_type is defined %}
+                {% set fileType = form.parent.vars.file_type %}
+            {% else %}
+                {% set fileType = 'auto' %}
+            {% endif %}
 
             {% if value %}
-                {% if isImage and value and value.extension in ['jpeg', 'jpg', 'gif', 'png', 'svg'] %}
+                {% if fileType in ['auto', 'image'] and value.extension in ['jpeg', 'jpg', 'gif', 'png', 'svg'] %}
                     <div class="card">
                         <div class="card-img-top bg-tiles text-center">
                             <a href="{{ asset(value.pathname) }}" target="_blank">
