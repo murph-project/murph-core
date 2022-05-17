@@ -538,7 +538,7 @@ fieldset.form-group {
 }
 
 .crud-header {
-    padding: 30px;
+    padding: 20px;
 
     .btn-group:empty {
         display: none;
@@ -563,8 +563,8 @@ fieldset.form-group {
     }
 
     &-filter {
-        padding-right: 30px;
-        padding-bottom: 30px;
+        padding-right: 20px;
+        padding-bottom: 20px;
 
         @media screen and (max-width: 769px) {
             padding-right: 10px;
