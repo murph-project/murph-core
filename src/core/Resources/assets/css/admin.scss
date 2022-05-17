@@ -538,13 +538,42 @@ fieldset.form-group {
 }
 
 .crud-header {
+    padding: 30px;
+
+    .btn-group:empty {
+        display: none;
+    }
+
+    @media screen and (max-width: 769px) {
+        padding: 10px;
+
+        .btn {
+            @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
+        }
+    }
+
     &-title {
         font-size: 2em;
+
+        @media screen and (max-width: 769px) {
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    }
+
+    &-filter {
+        padding-right: 30px;
+        padding-bottom: 30px;
+
+        @media screen and (max-width: 769px) {
+            padding-right: 10px;
+            padding-bottom: 10px;
+        }
     }
 
     &-actions {
         text-align: right;
-        margin-bottom: 10px;
     }
 
     @media screen and (min-width: 770px) {
