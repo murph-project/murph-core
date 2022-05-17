@@ -3,7 +3,9 @@
 {% block header_actions_before %}
     <a href="{{ path(configuration.pageRoute('redirects'), configuration.pageRouteParams('redirects')) }}" class="btn btn-light">
         <span class="fa fa-map-signs pr-1"></span>
-        {{ configuration.actionTitle(context, 'redirects', 'Redirects')|trans }}
+        <span class="d-none d-md-inline">
+            {{ configuration.actionTitle(context, 'redirects', 'Redirects')|trans }}
+        </span>
     </a>
 {% endblock %}
 
