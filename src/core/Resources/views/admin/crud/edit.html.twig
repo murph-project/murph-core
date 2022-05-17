@@ -22,20 +22,26 @@
                             {% if configuration.action(context, 'back', true) %}
                                 <a href="{{ path(configuration.pageRoute('index'), configuration.pageRouteParams('index')) }}" class="btn btn-light">
                                     <span class="fa fa-list pr-1"></span>
-                                    {{ configuration.actionTitle(context, 'back', 'Back to the list')|trans }}
+                                    <span class="d-none d-md-inline">
+                                        {{ configuration.actionTitle(context, 'back', 'Back to the list')|trans }}
+                                    </span>
                                 </a>
                             {% endif %}
 
                             {% if configuration.action(context, 'show', true, [entity]) %}
                                 <a href="{{ path(configuration.pageRoute('show'), {entity: entity.id}|merge(configuration.pageRouteParams('show'))) }}" class="btn btn-secondary">
                                     <span class="fa fa-eye pr-1"></span>
-                                    {{ configuration.actionTitle(context, 'show', 'Show')|trans|build_string(entity) }}
+                                    <span class="d-none d-md-inline">
+                                        {{ configuration.actionTitle(context, 'show', 'Show')|trans|build_string(entity) }}
+                                    </span>
                                 </a>
                             {% endif %}
 
                             <button type="submit" form="form-main" class="btn btn-primary">
                                 <span class="fa fa-save pr-1"></span>
-                                {{ configuration.actionTitle(context, 'save', 'Save')|trans|build_string(entity) }}
+                                <span class="d-none d-md-inline">
+                                    {{ configuration.actionTitle(context, 'save', 'Save')|trans|build_string(entity) }}
+                                </span>
                             </button>
 
                             {% block header_actions_after %}{% endblock %}

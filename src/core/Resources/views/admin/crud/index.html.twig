@@ -32,7 +32,9 @@
                             {% if configuration.action(context, 'new', true) %}
                                 <a href="{{ path(configuration.pageRoute('new'), configuration.pageRouteParams('new')) }}" class="btn btn-primary">
                                     <span class="fa fa-plus pr-1"></span>
-                                    {{ configuration.actionTitle(context, 'new', 'New')|trans }}
+                                    <span class="d-none d-md-inline">
+                                        {{ configuration.actionTitle(context, 'new', 'New')|trans }}
+                                    </span>
                                 </a>
                             {% endif %}
 

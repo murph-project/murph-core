@@ -20,7 +20,9 @@
                             {% if configuration.action(context, 'back', true) %}
                                 <a href="{{ path(configuration.pageRoute('index')) }}" class="btn btn-light">
                                     <span class="fa fa-list pr-1"></span>
-                                    {{ configuration.actionTitle(context, 'back', 'Back to the list')|trans }}
+                                    <span class="d-none d-md-inline">
+                                        {{ configuration.actionTitle(context, 'back', 'Back to the list')|trans }}
+                                    </span>
                                 </a>
                             {% endif %}
 
@@ -28,7 +30,9 @@
                                 <a href="{{ path(configuration.pageRoute('edit'), {entity: entity.id}) }}" class="btn btn-primary">
                                     <span class="fa fa-edit pr-1"></span>
 
-                                    {{ configuration.actionTitle(context, 'edit', 'Edit')|trans|build_string(entity) }}
+                                    <span class="d-none d-md-inline">
+                                        {{ configuration.actionTitle(context, 'edit', 'Edit')|trans|build_string(entity) }}
+                                    </span>
                                 </a>
                             {% endif %}
 

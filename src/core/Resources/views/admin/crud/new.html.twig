@@ -22,13 +22,17 @@
                             {% if configuration.action(context, 'back', true) %}
                                 <a href="{{ path(configuration.pageRoute('index'), configuration.pageRouteParams('index')) }}" class="btn btn-light">
                                     <span class="fa fa-list pr-1"></span>
-                                    {{ configuration.actionTitle(context, 'back', 'Back to the list')|trans }}
+                                    <span class="d-none d-md-inline">
+                                        {{ configuration.actionTitle(context, 'back', 'Back to the list')|trans }}
+                                    </span>
                                 </a>
                             {% endif %}
 
                             <button type="submit" form="form-main" class="btn btn-primary">
                                 <span class="fa fa-save pr-1"></span>
-                                {{ configuration.actionTitle(context, 'save', 'Save')|trans|build_string(entity) }}
+                                <span class="d-none d-md-inline">
+                                    {{ configuration.actionTitle(context, 'save', 'Save')|trans|build_string(entity) }}
+                                </span>
                             </button>
 
                             {% if header_actions_dropdown_menu is not defined %}
