@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav aria-label="breadcrumb" class="d-flex justify-content-between">
+        <nav aria-label="breadcrumb" class="d-block d-md-flex justify-content-between">
             <ol class="breadcrumb mb-0">
                 <li class="breadcrumb-item" v-for="item in breadcrumb">
                     <a class="btn btn-sm" href="#" v-on:click="setDirectory(item.path)" v-html="item.label"></a>
@@ -12,7 +12,7 @@
                 </li>
             </ol>
 
-            <div class="d-flex">
+            <div class="d-block d-md-flex">
                 <div class="breadcrumb mb-0 file-manager-actions">
                     <span class="btn btn-sm btn-primary ml-1" v-bind:data-modal="generateUploadLink(directory)" data-modal-create>
                         <span class="fa fa-upload" v-bind:data-modal="generateUploadLink(directory)" data-modal-create></span>
@@ -171,6 +171,12 @@ tr {
 .breadcrumb, nav {
     border-radius: 0;
     background: #e9ecef;
+}
+
+@media screen and (max-width: 770px) {
+    .breadcrumb {
+        padding: 2px;
+    }
 }
 
 .file-manager-actions .fa {
