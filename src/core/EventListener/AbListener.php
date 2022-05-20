@@ -85,10 +85,6 @@ class AbListener
 
     protected function supports(Request $request): bool
     {
-        if (!$request->attributes->has('_node')) {
-            return false;
-        }
-
         if (!$this->node) {
             return false;
         }
