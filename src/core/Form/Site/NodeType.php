@@ -158,7 +158,7 @@ class NodeType extends AbstractType
             'hasAbTest',
             CheckboxType::class,
             [
-                'label' => 'Enable AB Testing',
+                'label' => 'Enable A/B Testing',
                 'required' => false,
             ]
         );
