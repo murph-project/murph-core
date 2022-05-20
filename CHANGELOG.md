@@ -1,6 +1,7 @@
 ## [Unreleased]
 
 ### Added
+* Add A/B testing feature
 ### Fixed
 * fix file block type
 ### Changed
