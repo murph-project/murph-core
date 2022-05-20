@@ -4,10 +4,13 @@ namespace App\Core\EventListener;
 
 use App\Core\Ab\AbContainer;
 use App\Core\Ab\AbTest;
+use App\Core\Entity\Site\Node;
 use App\Core\Event\Ab\AbTestEvent;
 use App\Core\Repository\Site\NodeRepository;
+use App\Core\Site\SiteRequest;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
@@ -21,45 +24,34 @@ class AbListener
     protected NodeRepository $nodeRepository;
     protected EventDispatcherInterface $eventDispatcher;
     protected AbContainer $container;
+    protected SiteRequest $siteRequest;
+    protected ?Node $node;
 
     public function __construct(
         NodeRepository $nodeRepository,
         AbContainer $container,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        SiteRequest $siteRequest
     ) {
         $this->nodeRepository = $nodeRepository;
         $this->eventDispatcher = $eventDispatcher;
         $this->container = $container;
+        $this->siteRequest = $siteRequest;
     }
 
     public function onKernelRequest(RequestEvent $event)
     {
+        $this->node = $this->siteRequest->getNode();
+
+        if (!$this->supports($event->getRequest())) {
+            return;
+        }
+
         $request = $event->getRequest();
+        $cookieName = md5($this->getCookieName());
+        $cookieValue = $event->getRequest()->cookies->get($cookieName);
 
-        if (!$request->attributes->has('_node')) {
-            return;
-        }
-
-        $node = $this->nodeRepository->findOneBy([
-            'id' => $request->attributes->get('_node'),
-        ]);
-
-        if (!$node) {
-            return;
-        }
-
-        if (!$node->getHasAbTest()) {
-            return;
-        }
-
-        if (!$node->getAbTestCode()) {
-            return;
-        }
-
-        $cookieName = md5('ab_test_'.$node->getAbTestCode());
-        $cookieValue = $request->cookies->get($cookieName);
-
-        $abTest = new AbTest($node->getAbTestCode());
+        $abTest = new AbTest($this->getAbTestCode());
         $event = new AbTestEvent($abTest);
         $this->container->add($abTest);
 
@@ -79,6 +71,37 @@ class AbListener
         } else {
             $abTest->setResult($cookieValue);
         }
+    }
+
+    protected function getCookieName(): string
+    {
+        return 'ab_test_'.$this->getAbTestCode();
+    }
+
+    protected function getAbTestCode(): string
+    {
+        return $this->node->getAbTestCode();
+    }
+
+    protected function supports(Request $request): bool
+    {
+        if (!$request->attributes->has('_node')) {
+            return false;
+        }
+
+        if (!$this->node) {
+            return false;
+        }
+
+        if (!$this->node->getHasAbTest()) {
+            return false;
+        }
+
+        if (!$this->node->getAbTestCode()) {
+            return false;
+        }
+
+        return true;
     }
 
     public function onKernelResponse(ResponseEvent $event)
