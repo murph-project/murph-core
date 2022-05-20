@@ -21,19 +21,16 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
  */
 class AbListener
 {
-    protected NodeRepository $nodeRepository;
     protected EventDispatcherInterface $eventDispatcher;
     protected AbContainer $container;
     protected SiteRequest $siteRequest;
     protected ?Node $node;
 
     public function __construct(
-        NodeRepository $nodeRepository,
         AbContainer $container,
         EventDispatcherInterface $eventDispatcher,
         SiteRequest $siteRequest
     ) {
-        $this->nodeRepository = $nodeRepository;
         $this->eventDispatcher = $eventDispatcher;
         $this->container = $container;
         $this->siteRequest = $siteRequest;
