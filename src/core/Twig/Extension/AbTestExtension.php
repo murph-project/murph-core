@@ -3,9 +3,9 @@
 namespace App\Core\Twig\Extension;
 
 use App\Core\Ab\AbContainer;
-use App\Core\Ab\AbTest;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use App\Core\Ab\AbTestInterface;
 
 class AbTestExtension extends AbstractExtension
 {
@@ -31,7 +31,7 @@ class AbTestExtension extends AbstractExtension
         return $this->container->has($name);
     }
 
-    public function get(string $name): AbTest
+    public function get(string $name): AbTestInterface
     {
         return $this->container->get($name);
     }

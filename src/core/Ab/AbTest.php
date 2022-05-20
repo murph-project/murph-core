@@ -7,7 +7,7 @@ namespace App\Core\Ab;
  *
  * @author Simon Vieille <simon@deblan.fr>
  */
-class AbTest
+class AbTest implements AbTestInterface
 {
     protected $results;
     protected string $name;
@@ -106,7 +106,7 @@ class AbTest
 
         krsort($this->probabilities);
 
-        $number = \rand(0, (int) \array_sum($this->probabilities) * 10);
+        $number = mt_rand(0, (int) array_sum($this->probabilities) * 10);
         $starter = 0;
         $return = '';
 

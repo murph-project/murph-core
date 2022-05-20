@@ -221,7 +221,7 @@
             <div class="col-md-12">
                 {{ form_row(form.hasAbTest) }}
             </div>
-            <div class="col-md-6 {% if not form.vars.data.abTestCode %}d-none{% endif %}">
+            <div class="col-md-6 {% if not form.vars.data.hasAbTest %}d-none{% endif %}">
                 {{ form_row(form.abTestCode) }}
             </div>
         </div>

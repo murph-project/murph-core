@@ -7,11 +7,11 @@ namespace App\Core\Ab;
  *
  * @author Simon Vieille <simon@deblan.fr>
  */
-class AbContainer
+class AbContainer implements AbContainerInterface
 {
     protected array $tests = [];
 
-    public function add(AbTest $test): self
+    public function add(AbTestInterface $test): self
     {
         $this->tests[$test->getName()] = $test;
 
@@ -23,7 +23,7 @@ class AbContainer
         return isset($this->tests[$name]);
     }
 
-    public function get(string $name): AbTest
+    public function get(string $name): AbTestInterface
     {
         return $this->tests[$name];
     }
