@@ -166,6 +166,16 @@ class Node implements EntityInterface
      */
     private $securityOperator = 'or';
 
+    /**
+     * @ORM\Column(type="boolean", options={"default"=0})
+     */
+    private $hasAbTest = false;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $abTestCode;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -670,6 +680,30 @@ class Node implements EntityInterface
     public function setSecurityOperator(string $securityOperator): self
     {
         $this->securityOperator = $securityOperator;
+
+        return $this;
+    }
+
+    public function getHasAbTest(): ?bool
+    {
+        return $this->hasAbTest;
+    }
+
+    public function setHasAbTest(bool $hasAbTest): self
+    {
+        $this->hasAbTest = $hasAbTest;
+
+        return $this;
+    }
+
+    public function getAbTestCode(): ?string
+    {
+        return $this->abTestCode;
+    }
+
+    public function setAbTestCode(?string $abTestCode): self
+    {
+        $this->abTestCode = $abTestCode;
 
         return $this;
     }

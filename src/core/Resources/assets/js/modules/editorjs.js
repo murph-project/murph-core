@@ -147,7 +147,7 @@ const doInitEditor = () => {
     editorContainer.attr('id', id)
     element.hide()
 
-    let data = {time: null, blocks: []};
+    let data = { time: null, blocks: [] }
 
     try {
       const value = JSON.parse(element.val())

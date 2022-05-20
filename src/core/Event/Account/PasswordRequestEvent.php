@@ -21,7 +21,7 @@ class PasswordRequestEvent extends Event
         $this->user = $user;
     }
 
-    public function getUser(): USer
+    public function getUser(): User
     {
         return $this->user;
     }

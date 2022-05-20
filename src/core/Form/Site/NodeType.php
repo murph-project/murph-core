@@ -154,6 +154,37 @@ class NodeType extends AbstractType
             );
         }
 
+        $builder->add(
+            'hasAbTest',
+            CheckboxType::class,
+            [
+                'label' => 'Enable AB Testing',
+                'required' => false,
+            ]
+        );
+
+        $builder->add(
+            'abTestCode',
+            TextType::class,
+            [
+                'label' => 'Code',
+                'required' => $builder->getData()->getHasAbTest(),
+            ]
+        );
+
+        $builder->add(
+            'securityOperator',
+            ChoiceType::class,
+            [
+                'label' => 'Condition',
+                'required' => true,
+                'choices' => [
+                    'At least one role' => 'or',
+                    'All roles' => 'and',
+                ],
+            ]
+        );
+
         $actions = [
             'New page' => 'new',
             'Use an existing page' => 'existing',
