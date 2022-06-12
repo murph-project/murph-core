@@ -25,6 +25,8 @@ class GrapesJsExtension extends AbstractExtension
     {
         $html = $this->extractData($value, 'html');
 
+        $html = str_replace($this->getHtmlStringsToRemove(), '', $html);
+
         return preg_replace('#</?body[^>]*>#', '', $html);
     }
 
@@ -38,5 +40,12 @@ class GrapesJsExtension extends AbstractExtension
         $data = json_decode($value, true);
 
         return $data[$key] ?? '';
+    }
+
+    protected function getHtmlStringsToRemove(): array
+    {
+        return [
+            'draggable="true"',
+        ];
     }
 }
