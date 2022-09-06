@@ -71,7 +71,7 @@ const FormCollection = () => {
     const item = collectionContainer.children('*[data-collection-item]:last-child')
     const deleteBtn = $('<span data-collection-delete="__name__" class="fa fa-trash"></span>')
 
-    item.find('*[data-collection-delete-container]').first().append(deleteBtn)
+    item.find('*[data-collection-delete-container]').first().prepend(deleteBtn)
     item.html(item.html().replace(/__name__/g, name))
     item.attr('data-collection-item', name)
 

@@ -1,7 +1,9 @@
 ## [Unreleased]
 
+## [1.16.0] - 2022-09-06
 ### Added
-* Add A/B testing feature
+* add A/B testing feature
+* add cleanup of html string extracted from grapesjs content
 ### Fixed
 * fix file block type
 ### Changed
