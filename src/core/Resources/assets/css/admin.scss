@@ -662,3 +662,7 @@ form {
 .gjs-one-bg {
     background: map-get($theme-colors, 'dark-blue');
 }
+
+.tox.tox-silver-sink.tox-tinymce-aux {
+    z-index: 3000 !important;
+}
