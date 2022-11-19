@@ -11,14 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/site/tree")
- */
+#[Route(path: '/admin/site/tree')]
 class TreeAdminController extends AdminController
 {
-    /**
-     * @Route("/", name="admin_site_tree_index")
-     */
+    #[Route(path: '/', name: 'admin_site_tree_index')]
     public function index(NavigationRepositoryQuery $navigationQuery, Session $session): Response
     {
         $navigation = null;
@@ -48,9 +44,7 @@ class TreeAdminController extends AdminController
         ]);
     }
 
-    /**
-     * @Route("/navigation/{navigation}", name="admin_site_tree_navigation")
-     */
+    #[Route(path: '/navigation/{navigation}', name: 'admin_site_tree_navigation')]
     public function navigation(
         Navigation $navigation,
         NavigationRepositoryQuery $navigationQuery,

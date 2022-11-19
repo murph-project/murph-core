@@ -14,14 +14,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use ZxcvbnPhp\Zxcvbn;
 
-/**
- * @Route("/admin/account")
- */
+#[Route(path: '/admin/account')]
 class AccountAdminController extends AdminController
 {
-    /**
-     * @Route("/", name="admin_account")
-     */
+    #[Route(path: '/', name: 'admin_account')]
     public function account(Request $request, TotpAuthenticatorInterface $totpAuthenticatorService): Response
     {
         $account = $this->getUser();
@@ -31,9 +27,7 @@ class AccountAdminController extends AdminController
         ]);
     }
 
-    /**
-     * @Route("/2fa", name="admin_account_2fa")
-     */
+    #[Route(path: '/2fa', name: 'admin_account_2fa')]
     public function twoFactorAuthentication(
         Request $request,
         GoogleAuthenticatorInterface $totpAuthenticatorService,
@@ -93,9 +87,7 @@ class AccountAdminController extends AdminController
         ]);
     }
 
-    /**
-     * @Route("/password", name="admin_account_password", methods={"POST"})
-     */
+    #[Route(path: '/password', name: 'admin_account_password', methods: ['POST'])]
     public function password(
         Request $request,
         UserRepository $repository,

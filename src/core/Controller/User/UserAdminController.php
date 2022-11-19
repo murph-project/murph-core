@@ -20,57 +20,43 @@ use App\Core\Security\TokenGenerator;
 
 class UserAdminController extends CrudController
 {
-    /**
-     * @Route("/admin/user/{page}", name="admin_user_index", methods={"GET"}, requirements={"page":"\d+"})
-     */
+    #[Route(path: '/admin/user/{page}', name: 'admin_user_index', methods: ['GET'], requirements: ['page' => '\d+'])]
     public function index(RepositoryQuery $query, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doIndex($page, $query, $request, $session);
     }
 
-    /**
-     * @Route("/admin/user/new", name="admin_user_new", methods={"GET", "POST"})
-     */
+    #[Route(path: '/admin/user/new', name: 'admin_user_new', methods: ['GET', 'POST'])]
     public function new(Factory $factory, EntityManager $entityManager, Request $request, TokenGenerator $tokenGenerator): Response
     {
         return $this->doNew($factory->create(null, $tokenGenerator->generateToken()), $entityManager, $request);
     }
 
-    /**
-     * @Route("/admin/user/show/{entity}", name="admin_user_show", methods={"GET"})
-     */
+    #[Route(path: '/admin/user/show/{entity}', name: 'admin_user_show', methods: ['GET'])]
     public function show(Entity $entity): Response
     {
         return $this->doShow($entity);
     }
 
-    /**
-     * @Route("/admin/user/filter", name="admin_user_filter", methods={"GET"})
-     */
+    #[Route(path: '/admin/user/filter', name: 'admin_user_filter', methods: ['GET'])]
     public function filter(Session $session): Response
     {
         return $this->doFilter($session);
     }
 
-    /**
-     * @Route("/admin/user/edit/{entity}", name="admin_user_edit", methods={"GET", "POST"})
-     */
+    #[Route(path: '/admin/user/edit/{entity}', name: 'admin_user_edit', methods: ['GET', 'POST'])]
     public function edit(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doEdit($entity, $entityManager, $request);
     }
 
-    /**
-     * @Route("/admin/user/delete/{entity}", name="admin_user_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/admin/user/delete/{entity}', name: 'admin_user_delete', methods: ['DELETE'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doDelete($entity, $entityManager, $request);
     }
 
-    /**
-     * @Route("/admin/user/resetting_request/{entity}", name="admin_user_resetting_request", methods={"POST"})
-     */
+    #[Route(path: '/admin/user/resetting_request/{entity}', name: 'admin_user_resetting_request', methods: ['POST'])]
     public function requestResetting(Entity $entity, EventDispatcherInterface $eventDispatcher, Request $request): Response
     {
         if ($this->isCsrfTokenValid('resetting_request'.$entity->getId(), $request->request->get('_token'))) {

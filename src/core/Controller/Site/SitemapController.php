@@ -11,9 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SitemapController extends AbstractController
 {
-    /**
-     * @Route("/sitemap.xml", name="sitemap")
-     */
+    #[Route(path: '/sitemap.xml', name: 'sitemap')]
     public function sitemap(Request $request, NavigationRepositoryQuery $query, SitemapBuilder $builder): Response
     {
         $navigations = $query->create()->find();

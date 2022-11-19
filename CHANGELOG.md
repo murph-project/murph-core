@@ -2,6 +2,8 @@
 
 ### Fixed
 * fix tinymce modal z-index in tox
+### Changed
+* replace annotation with attributes
 
 ## [1.16.0] - 2022-09-06
 ### Added

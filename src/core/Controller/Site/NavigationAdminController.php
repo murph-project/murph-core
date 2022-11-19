@@ -20,25 +20,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class NavigationAdminController extends CrudController
 {
-    /**
-     * @Route("/admin/site/navigation/{page}", name="admin_site_navigation_index", methods={"GET"}, requirements={"page":"\d+"})
-     */
+    #[Route(path: '/admin/site/navigation/{page}', name: 'admin_site_navigation_index', methods: ['GET'], requirements: ['page' => '\d+'])]
     public function index(RepositoryQuery $query, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doIndex($page, $query, $request, $session);
     }
 
-    /**
-     * @Route("/admin/site/navigation/new", name="admin_site_navigation_new", methods={"GET", "POST"})
-     */
+    #[Route(path: '/admin/site/navigation/new', name: 'admin_site_navigation_new', methods: ['GET', 'POST'])]
     public function new(Factory $factory, EntityManager $entityManager, Request $request): Response
     {
         return $this->doNew($factory->create(), $entityManager, $request);
     }
 
-    /**
-     * @Route("/admin/site/navigation/show/{entity}", name="admin_site_navigation_show", methods={"GET"})
-     */
+    #[Route(path: '/admin/site/navigation/show/{entity}', name: 'admin_site_navigation_show', methods: ['GET'])]
     public function show(
         Entity $entity,
         EventDispatcherInterface $eventDispatcher,
@@ -60,33 +54,25 @@ class NavigationAdminController extends CrudController
         return $this->doShow($entity);
     }
 
-    /**
-     * @Route("/admin/site/navigation/filter", name="admin_site_navigation_filter", methods={"GET"})
-     */
+    #[Route(path: '/admin/site/navigation/filter', name: 'admin_site_navigation_filter', methods: ['GET'])]
     public function filter(Session $session): Response
     {
         return $this->doFilter($session);
     }
 
-    /**
-     * @Route("/admin/site/navigation/edit/{entity}", name="admin_site_navigation_edit", methods={"GET", "POST"})
-     */
+    #[Route(path: '/admin/site/navigation/edit/{entity}', name: 'admin_site_navigation_edit', methods: ['GET', 'POST'])]
     public function edit(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doEdit($entity, $entityManager, $request);
     }
 
-    /**
-     * @Route("/admin/site/navigation/sort/{page}", name="admin_site_navigation_sort", methods={"POST"}, requirements={"page":"\d+"})
-     */
+    #[Route(path: '/admin/site/navigation/sort/{page}', name: 'admin_site_navigation_sort', methods: ['POST'], requirements: ['page' => '\d+'])]
     public function sort(RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session, int $page = 1, ): Response
     {
         return $this->doSort($page, $query, $entityManager, $request, $session);
     }
 
-    /**
-     * @Route("/admin/site/navigation/delete/{entity}", name="admin_site_navigation_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/admin/site/navigation/delete/{entity}', name: 'admin_site_navigation_delete', methods: ['DELETE'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doDelete($entity, $entityManager, $request);

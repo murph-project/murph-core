@@ -12,14 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/site/menu")
- */
+#[Route(path: '/admin/site/menu')]
 class MenuAdminController extends AdminController
 {
-    /**
-     * @Route("/new/{navigation}", name="admin_site_menu_new", methods={"POST"})
-     */
+    #[Route(path: '/new/{navigation}', name: 'admin_site_menu_new', methods: ['POST'])]
     public function new(Navigation $navigation, EntityFactory $factory, EntityManager $entityManager, Request $request): Response
     {
         $entity = $factory->create($navigation);
@@ -39,9 +35,7 @@ class MenuAdminController extends AdminController
         ]);
     }
 
-    /**
-     * @Route("/edit/{entity}", name="admin_site_menu_edit", methods={"POST"})
-     */
+    #[Route(path: '/edit/{entity}', name: 'admin_site_menu_edit', methods: ['POST'])]
     public function edit(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         $form = $this->createForm(EntityType::class, $entity);
@@ -59,9 +53,7 @@ class MenuAdminController extends AdminController
         ]);
     }
 
-    /**
-     * @Route("/delete/{entity}", name="admin_site_menu_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/delete/{entity}', name: 'admin_site_menu_delete', methods: ['DELETE'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete'.$entity->getId(), $request->request->get('_token'))) {

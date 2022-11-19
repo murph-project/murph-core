@@ -21,33 +21,25 @@ use App\Core\Entity\EntityInterface;
 
 class PageAdminController extends CrudController
 {
-    /**
-     * @Route("/admin/site/page/{page}", name="admin_site_page_index", methods={"GET"}, requirements={"page":"\d+"})
-     */
+    #[Route(path: '/admin/site/page/{page}', name: 'admin_site_page_index', methods: ['GET'], requirements: ['page' => '\d+'])]
     public function index(RepositoryQuery $query, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doIndex($page, $query, $request, $session);
     }
 
-    /**
-     * @Route("/admin/site/page/show/{entity}", name="admin_site_page_show", methods={"GET"})
-     */
+    #[Route(path: '/admin/site/page/show/{entity}', name: 'admin_site_page_show', methods: ['GET'])]
     public function show(Entity $entity): Response
     {
         return $this->doShow($entity);
     }
 
-    /**
-     * @Route("/admin/site/page/filter", name="admin_site_page_filter", methods={"GET"})
-     */
+    #[Route(path: '/admin/site/page/filter', name: 'admin_site_page_filter', methods: ['GET'])]
     public function filter(Session $session): Response
     {
         return $this->doFilter($session);
     }
 
-    /**
-     * @Route("/admin/site/page/edit/{entity}", name="admin_site_page_edit", methods={"GET", "POST"})
-     */
+    #[Route(path: '/admin/site/page/edit/{entity}', name: 'admin_site_page_edit', methods: ['GET', 'POST'])]
     public function edit(
         int $entity,
         EntityManager $entityManager,
@@ -69,17 +61,13 @@ class PageAdminController extends CrudController
         return $this->doEdit($entity, $entityManager, $request);
     }
 
-    /**
-     * @Route("/admin/site/page/delete/{entity}", name="admin_site_page_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/admin/site/page/delete/{entity}', name: 'admin_site_page_delete', methods: ['DELETE'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doDelete($entity, $entityManager, $request);
     }
 
-    /**
-     * @Route("/admin/site/page/batch/{page}", name="admin_site_page_batch", methods={"POST"}, requirements={"page":"\d+"})
-     */
+    #[Route(path: '/admin/site/page/batch/{page}', name: 'admin_site_page_batch', methods: ['POST'], requirements: ['page' => '\d+'])]
     public function batch(RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doBatch($page, $query, $entityManager, $request, $session);

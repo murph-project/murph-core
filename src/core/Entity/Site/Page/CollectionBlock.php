@@ -4,9 +4,7 @@ namespace App\Core\Entity\Site\Page;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class CollectionBlock extends Block
 {
     public function getValue()

@@ -24,14 +24,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-/**
- * @Route("/admin/site/node")
- */
+#[Route(path: '/admin/site/node')]
 class NodeAdminController extends AbstractController
 {
-    /**
-     * @Route("/new/{node}", name="admin_site_node_new")
-     */
+    #[Route(path: '/new/{node}', name: 'admin_site_node_new')]
     public function new(
         Node $node,
         EntityFactory $factory,
@@ -103,9 +99,7 @@ class NodeAdminController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/edit/{entity}/{tab}", name="admin_site_node_edit")
-     */
+    #[Route(path: '/edit/{entity}/{tab}', name: 'admin_site_node_edit')]
     public function edit(
         Entity $entity,
         EntityManager $entityManager,
@@ -166,9 +160,7 @@ class NodeAdminController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/urls/{entity}", name="admin_site_node_urls")
-     */
+    #[Route(path: '/urls/{entity}', name: 'admin_site_node_urls')]
     public function urls(Entity $entity, SitemapBuilder $builder): Response
     {
         return $this->render('@Core/site/node_admin/urls.html.twig', [
@@ -177,9 +169,7 @@ class NodeAdminController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/move/{entity}", name="admin_site_node_move")
-     */
+    #[Route(path: '/move/{entity}', name: 'admin_site_node_move')]
     public function move(
         Entity $entity,
         EntityManager $entityManager,
@@ -233,9 +223,7 @@ class NodeAdminController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/toggle/visibility/{entity}", name="admin_site_node_toggle_visibility", methods={"POST"})
-     */
+    #[Route(path: '/toggle/visibility/{entity}', name: 'admin_site_node_toggle_visibility', methods: ['POST'])]
     public function toggleVisibility(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         if ($this->isCsrfTokenValid('toggle_visibility'.$entity->getId(), $request->request->get('_token'))) {
@@ -251,9 +239,7 @@ class NodeAdminController extends AbstractController
         ]).sprintf('#node-%d', $entity->getId()));
     }
 
-    /**
-     * @Route("/delete/{entity}", name="admin_site_node_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/delete/{entity}', name: 'admin_site_node_delete', methods: ['DELETE'])]
     public function delete(
         Entity $entity,
         NodeRepository $nodeRepository,

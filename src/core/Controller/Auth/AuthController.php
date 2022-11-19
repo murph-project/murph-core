@@ -25,9 +25,7 @@ class AuthController extends AbstractController
         $this->coreParameters = $parameters->get('core');
     }
 
-    /**
-     * @Route("/login", name="auth_login")
-     */
+    #[Route(path: '/login', name: 'auth_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
@@ -45,9 +43,7 @@ class AuthController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/resetting/request", name="auth_resetting_request")
-     */
+    #[Route(path: '/resetting/request', name: 'auth_resetting_request')]
     public function requestResetting(Request $request, UserRepository $repository, EventDispatcherInterface $eventDispatcher): Response
     {
         if ($this->getUser()) {
@@ -85,9 +81,7 @@ class AuthController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/resetting/update/{token}", name="auth_resetting_update")
-     */
+    #[Route(path: '/resetting/update/{token}', name: 'auth_resetting_update')]
     public function requestUpdate(
         string $token,
         Request $request,
@@ -145,9 +139,7 @@ class AuthController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/logout", name="auth_logout")
-     */
+    #[Route(path: '/logout', name: 'auth_logout')]
     public function logout()
     {
         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');

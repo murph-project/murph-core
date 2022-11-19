@@ -13,66 +13,44 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use App\Core\File\FileAttribute;
 
-/**
- * @ORM\Entity(repositoryClass=PageRepository::class)
- * @ORM\DiscriminatorColumn(name="class_key", type="string")
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\HasLifecycleCallbacks
- */
+#[ORM\Entity(repositoryClass: PageRepository::class)]
+#[ORM\DiscriminatorColumn(name: 'class_key', type: 'string')]
+#[ORM\InheritanceType('SINGLE_TABLE')]
+#[ORM\HasLifecycleCallbacks]
 class Page implements EntityInterface
 {
     use Timestampable;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     protected $name;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected $template;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Block::class, mappedBy="page", cascade={"persist"})
-     */
+    #[ORM\OneToMany(targetEntity: Block::class, mappedBy: 'page', cascade: ['persist'])]
     protected $blocks;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected $metaTitle;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected $metaDescription;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected $ogTitle;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected $ogDescription;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected $ogImage;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Node::class, mappedBy="page")
-     */
+    #[ORM\OneToMany(targetEntity: Node::class, mappedBy: 'page')]
     protected $nodes;
 
     public function __construct()

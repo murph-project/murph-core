@@ -9,46 +9,32 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=MenuRepository::class)
- * @ORM\HasLifecycleCallbacks
- */
+#[ORM\Entity(repositoryClass: MenuRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Menu implements EntityInterface
 {
     use Timestampable;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     protected $label;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     protected $code;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Navigation::class, inversedBy="menus")
-     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
-     */
+    #[ORM\ManyToOne(targetEntity: Navigation::class, inversedBy: 'menus')]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     protected $navigation;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Node::class, mappedBy="menu", orphanRemoval=true, cascade={"remove", "persist"})
-     */
+    #[ORM\OneToMany(targetEntity: Node::class, mappedBy: 'menu', orphanRemoval: true, cascade: ['remove', 'persist'])]
     protected $nodes;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Node::class, cascade={"persist"})
-     * @ORM\JoinColumn(onDelete="CASCADE")
-     */
+    #[ORM\OneToOne(targetEntity: Node::class, cascade: ['persist'])]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     protected $rootNode;
 
     public function __construct()

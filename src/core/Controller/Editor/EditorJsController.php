@@ -9,14 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-/**
- * @Route("/admin/editor/editorjs")
- */
+#[Route(path: '/admin/editor/editorjs')]
 class EditorJsController extends AbstractController
 {
-    /**
-     * @Route("/fetch_url", name="admin_editor_editorjs_fetch_url", options={"expose"=true})
-     */
+    #[Route(path: '/fetch_url', name: 'admin_editor_editorjs_fetch_url', options: ['expose' => true])]
     public function fetchUrl(Request $request, HttpClientInterface $client): JsonResponse
     {
         $url = filter_var($request->query->get('url'), FILTER_VALIDATE_URL);

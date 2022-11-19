@@ -6,42 +6,28 @@ use App\Core\Entity\Site\Navigation;
 use App\Core\Repository\NavigationSettingRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=NavigationSettingRepository::class)
- */
+#[ORM\Entity(repositoryClass: NavigationSettingRepository::class)]
 class NavigationSetting implements EntityInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     protected $section;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     protected $label;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     protected $code;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected $value;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Navigation::class, inversedBy="navigationSettings")
-     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
-     */
+    #[ORM\ManyToOne(targetEntity: Navigation::class, inversedBy: 'navigationSettings')]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     protected $navigation;
 
     public function getId(): ?int

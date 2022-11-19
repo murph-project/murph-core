@@ -7,48 +7,32 @@ use App\Repository\Entity\Analytic\NodeViewRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Core\Entity\EntityInterface;
 
-/**
- * @ORM\Entity(repositoryClass=ViewRepository::class)
- * @ORM\Table(name="analytic_view")
- */
+#[ORM\Table(name: 'analytic_view')]
+#[ORM\Entity(repositoryClass: ViewRepository::class)]
 class View implements EntityInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Node::class, inversedBy="analyticViews")
-     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
-     */
+    #[ORM\ManyToOne(targetEntity: Node::class, inversedBy: 'analyticViews')]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     protected $node;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     protected $path;
 
-    /**
-     * @ORM\Column(type="integer", options={"default"=0})
-     */
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
     protected $views = 0;
 
-    /**
-     * @ORM\Column(type="integer", options={"default"=0})
-     */
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
     protected $desktopViews = 0;
 
-    /**
-     * @ORM\Column(type="integer", options={"default"=0})
-     */
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
     protected $mobileViews = 0;
 
-    /**
-     * @ORM\Column(type="date")
-     */
+    #[ORM\Column(type: 'date')]
     protected $date;
 
     public function getId(): ?int
