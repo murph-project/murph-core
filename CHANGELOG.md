@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+### Fixed
+* fix tinymce modal z-index in tox
+
 ## [1.16.0] - 2022-09-06
 ### Added
 * add A/B testing feature
