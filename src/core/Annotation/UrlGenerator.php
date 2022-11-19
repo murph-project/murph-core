@@ -15,4 +15,11 @@ class UrlGenerator
     public string $method;
 
     public array $options = [];
+
+    public function __construct(string $service, string $method, array $options)
+    {
+        $this->service = $service;
+        $this->method = $method;
+        $this->options = $options;
+    }
 }
