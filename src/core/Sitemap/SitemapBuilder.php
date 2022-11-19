@@ -137,13 +137,12 @@ class SitemapBuilder
     protected function getAnnotation(Node $node)
     {
         try {
-            $annotation = $this->annotationReader->getMethodAnnotation(
-                new \ReflectionMethod($node->getController()),
-                UrlGenerator::class
-            );
+            $reflection = new \ReflectionMethod($node->getController());
 
-            if ($annotation) {
-                return $annotation;
+            foreach ($reflection->getAttributes() as $attribute) {
+                if (UrlGenerator::class === $attribute->getName()) {
+                    return $attribute->newInstance();
+                }
             }
         } catch (\ReflectionException $e) {
             return false;
