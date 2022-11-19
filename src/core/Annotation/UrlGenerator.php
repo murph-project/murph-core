@@ -2,14 +2,12 @@
 
 namespace App\Core\Annotation;
 
-use Doctrine\Common\Annotations\Annotation;
-
 /**
  * class UrlGenerator.
  *
  * @author Simon Vieille <simon@deblan.fr>
- * @Annotation
  */
+#[\Attribute]
 class UrlGenerator
 {
     public string $service;
