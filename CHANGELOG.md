@@ -1,5 +1,6 @@
 ## [Unreleased]
 
+## [1.17.0] - 2022-11-19
 ### Fixed
 * fix tinymce modal z-index in tox
 ### Changed
