@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [1.17.1] - 2022-12-03
+### Fixed
+* add mising attribute on timestampable (doctrine)
+
 ## [1.17.0] - 2022-11-19
 ### Fixed
 * fix tinymce modal z-index in tox
