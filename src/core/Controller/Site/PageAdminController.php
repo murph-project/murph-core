@@ -61,7 +61,7 @@ class PageAdminController extends CrudController
         return $this->doEdit($entity, $entityManager, $request);
     }
 
-    #[Route(path: '/admin/site/page/delete/{entity}', name: 'admin_site_page_delete', methods: ['DELETE'])]
+    #[Route(path: '/admin/site/page/delete/{entity}', name: 'admin_site_page_delete', methods: ['DELETE', 'POST'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doDelete($entity, $entityManager, $request);

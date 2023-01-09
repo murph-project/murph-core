@@ -239,7 +239,7 @@ class NodeAdminController extends AbstractController
         ]).sprintf('#node-%d', $entity->getId()));
     }
 
-    #[Route(path: '/delete/{entity}', name: 'admin_site_node_delete', methods: ['DELETE'])]
+    #[Route(path: '/delete/{entity}', name: 'admin_site_node_delete', methods: ['DELETE', 'POST'])]
     public function delete(
         Entity $entity,
         NodeRepository $nodeRepository,

@@ -390,7 +390,7 @@ class FileManagerAdminController extends AdminController
         ]);
     }
 
-    #[Route(path: '/delete', name: 'admin_file_manager_delete', methods: ['DELETE'])]
+    #[Route(path: '/delete', name: 'admin_file_manager_delete', methods: ['DELETE', 'POST'])]
     public function delete(FsFileManager $manager, Request $request): Response
     {
         $path = $request->request->get('file');

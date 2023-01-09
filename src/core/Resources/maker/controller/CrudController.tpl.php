@@ -62,7 +62,7 @@ class <?= $class_name; ?> extends CrudController
         return $this->doBatch($page, $query, $entityManager, $request, $session);
     }
 
-    #[Route(path: "/admin/<?= $route; ?>/delete/{entity}", name: "admin_<?= $route; ?>_delete", methods: ['DELETE'])]
+    #[Route(path: "/admin/<?= $route; ?>/delete/{entity}", name: "admin_<?= $route; ?>_delete", methods: ['DELETE', 'POST'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doDelete($entity, $entityManager, $request);

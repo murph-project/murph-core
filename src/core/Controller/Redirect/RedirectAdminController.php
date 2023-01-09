@@ -61,7 +61,7 @@ class RedirectAdminController extends CrudController
         return $this->doBatch($page, $query, $entityManager, $request, $session);
     }
 
-    #[Route(path: '/admin/redirect/delete/{entity}', name: 'admin_redirect_delete', methods: ['DELETE'])]
+    #[Route(path: '/admin/redirect/delete/{entity}', name: 'admin_redirect_delete', methods: ['DELETE', 'POST'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doDelete($entity, $entityManager, $request);

@@ -54,7 +54,7 @@ class NavigationSettingAdminController extends AdminController
         ]);
     }
 
-    #[Route(path: '/delete/{entity}', name: 'admin_navigation_setting_delete', methods: ['DELETE'])]
+    #[Route(path: '/delete/{entity}', name: 'admin_navigation_setting_delete', methods: ['DELETE', 'POST'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete'.$entity->getId(), $request->request->get('_token'))) {

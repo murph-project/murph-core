@@ -72,7 +72,7 @@ class NavigationAdminController extends CrudController
         return $this->doSort($page, $query, $entityManager, $request, $session);
     }
 
-    #[Route(path: '/admin/site/navigation/delete/{entity}', name: 'admin_site_navigation_delete', methods: ['DELETE'])]
+    #[Route(path: '/admin/site/navigation/delete/{entity}', name: 'admin_site_navigation_delete', methods: ['DELETE', 'POST'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doDelete($entity, $entityManager, $request);

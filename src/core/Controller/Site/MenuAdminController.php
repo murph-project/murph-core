@@ -53,7 +53,7 @@ class MenuAdminController extends AdminController
         ]);
     }
 
-    #[Route(path: '/delete/{entity}', name: 'admin_site_menu_delete', methods: ['DELETE'])]
+    #[Route(path: '/delete/{entity}', name: 'admin_site_menu_delete', methods: ['DELETE', 'POST'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete'.$entity->getId(), $request->request->get('_token'))) {
