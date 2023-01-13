@@ -1,5 +1,15 @@
 ## [Unreleased]
 
+## [1.18.0] - 2023-01-13
+### Added
+* feat(dep): add symfony/runtime
+* feat(dep): add symfony/flex
+### Fixed
+* fix(crud): allow POST in delete actions
+* fix(crud): remove default page value in abstract crud controller
+* fix(admin): test site_logo before using it
+* fix(ui): update z-index of choices__list--dropdown
+
 ## [1.17.1] - 2022-12-03
 ### Fixed
 * add mising attribute on timestampable (doctrine)
