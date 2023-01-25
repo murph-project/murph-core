@@ -34,7 +34,7 @@ class CollectionType extends BaseCollectionType
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'murph_collection';
     }
