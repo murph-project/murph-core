@@ -23,7 +23,7 @@ class GrapesJsType extends TextareaType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'grapesjs';
     }
