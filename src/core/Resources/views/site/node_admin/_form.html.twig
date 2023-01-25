@@ -217,6 +217,15 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_row(form.hasAbTest) }}
+            </div>
+            <div class="col-md-6 {% if not form.vars.data.hasAbTest %}d-none{% endif %}">
+                {{ form_row(form.abTestCode) }}
+            </div>
+        </div>
+
         {% if form.securityRoles is defined %}
             <div class="pb-3">
                 <details>

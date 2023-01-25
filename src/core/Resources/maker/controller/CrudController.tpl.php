@@ -18,65 +18,51 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class <?= $class_name; ?> extends CrudController
 {
-    /**
-     * @Route("/admin/<?= $route; ?>/{page}", name="admin_<?= $route; ?>_index", methods={"GET"}, requirements={"page":"\d+"})
-     */
+#[Route(path: '/admin/user/edit/{entity}', name: 'admin_user_edit', methods: ['GET', 'POST'])]
+
+    #[Route(path: "/admin/<?= $route; ?>/{page}", name: "admin_<?= $route; ?>_index", methods: ['GET'], requirements: ['page' => '\d+'])]
     public function index(RepositoryQuery $query, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doIndex($page, $query, $request, $session);
     }
 
-    /**
-     * @Route("/admin/<?= $route; ?>/new", name="admin_<?= $route; ?>_new", methods={"GET", "POST"})
-     */
+    #[Route(path: "/admin/<?= $route; ?>/new", name: "admin_<?= $route; ?>_new", methods: ['GET', 'POST'])]
     public function new(Factory $factory, EntityManager $entityManager, Request $request): Response
     {
         return $this->doNew($factory->create(), $entityManager, $request);
     }
 
-    /**
-     * @Route("/admin/<?= $route; ?>/show/{entity}", name="admin_<?= $route; ?>_show", methods={"GET"})
-     */
+    #[Route(path: "/admin/<?= $route; ?>/show/{entity}", name: "admin_<?= $route; ?>_show", methods: ['GET'])]
     public function show(Entity $entity): Response
     {
         return $this->doShow($entity);
     }
 
-    /**
-     * @Route("/admin/<?= $route; ?>/filter", name="admin_<?= $route; ?>_filter", methods={"GET"})
-     */
+    #[Route(path: "/admin/<?= $route; ?>/filter", name: "admin_<?= $route; ?>_filter", methods: ['GET'])]
     public function filter(Session $session): Response
     {
         return $this->doFilter($session);
     }
 
-    /**
-     * @Route("/admin/<?= $route; ?>/edit/{entity}", name="admin_<?= $route; ?>_edit", methods={"GET", "POST"})
-     */
+    #[Route(path: "/admin/<?= $route; ?>/edit/{entity}", name: "admin_<?= $route; ?>_edit", methods: ['GET', 'POST'])]
     public function edit(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doEdit($entity, $entityManager, $request);
     }
 
-    /**
-     * @Route("/admin/<?= $route; ?>/sort/{page}", name="admin_<?= $route; ?>_sort", methods={"POST"}, requirements={"page":"\d+"})
-     */
+    #[Route(path: "/admin/<?= $route; ?>/sort/{page}", name: "admin_<?= $route; ?>_sort", methods: ['POST'], requirements: ['page' => '\d+'])]
     public function sort(RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doSort($page, $query, $entityManager, $request, $session);
     }
 
-    /**
-     * @Route("/admin/<?= $route; ?>/batch/{page}", name="admin_<?= $route; ?>_batch", methods={"POST"}, requirements={"page":"\d+"})
-     */
+    #[Route(path: "/admin/<?= $route; ?>/batch/{page}", name: "admin_<?= $route; ?>_batch", methods: ['POST'], requirements: ['page' => '\d+'])]
     public function batch(RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doBatch($page, $query, $entityManager, $request, $session);
     }
 
-    /**
-     * @Route("/admin/<?= $route; ?>/delete/{entity}", name="admin_<?= $route; ?>_delete", methods={"DELETE"})
-     */
+    #[Route(path: "/admin/<?= $route; ?>/delete/{entity}", name: "admin_<?= $route; ?>_delete", methods: ['DELETE', 'POST'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doDelete($entity, $entityManager, $request);
@@ -120,8 +106,18 @@ class <?= $class_name; ?> extends CrudController
             // ->setAction('show', 'back', true)
             // ->setAction('show', 'edit', true)
 
-            // ->setField('index', 'Label', Field\TextField::class, [
-            //     'property' => 'label',
+            ->setField('index', 'Entity', Field\TextField::class, [
+                'property_builder' => function (EntityInterface $entity) {
+                    try {
+                        return (string) $entity;
+                    } catch (\Error $e) {
+                        return $entity->getId();
+                    }
+                },
+            ])
+
+            // ->setField('index', 'Foo', Field\TextField::class, [
+            //     'property' => 'foo',
             // ])
 
             // ->setBatchAction('index', 'delete', 'Delete', function(EntityInterface $entity, EntityManager $manager) {

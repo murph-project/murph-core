@@ -9,9 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 abstract class AdminController extends AbstractController
 {
-    /**
-     * @Route("/_ping", name="_ping")
-     */
+    #[Route(path: '/_ping', name: '_ping')]
     public function ping()
     {
         return $this->json(true);

@@ -28,7 +28,7 @@ class SitemapBuilder
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function build(Navigation $navigation): array
+    public function build(Navigation $navigation, ?string $currentDomain): array
     {
         $items = [];
 
@@ -52,7 +52,7 @@ class SitemapBuilder
 
                 $nodeItems = [];
 
-                foreach ($this->getNodeUrls($node) as $url) {
+                foreach ($this->getNodeUrls($node, $currentDomain) as $url) {
                     $nodeItems[] = $this->createItem($parameters, $url);
                 }
 
@@ -66,9 +66,17 @@ class SitemapBuilder
         return $items;
     }
 
-    public function getNodeUrls(Node $node)
+    public function getNodeUrls(Node $node, ?string $currentDomain)
     {
         $urls = [];
+        $domain = $currentDomain;
+        $navigation = $node->getMenu()->getNavigation();
+
+        if (null === $currentDomain || $navigation->getForceDomain()) {
+            $domain = $navigation->getDomain();
+        }
+
+        $params = ['_domain' => $domain];
 
         try {
             if ($node->hasExternalUrl()) {
@@ -80,19 +88,32 @@ class SitemapBuilder
                     if (null === $annotation) {
                         $urls[] = $this->urlGenerator->generate(
                             $node->getRouteName(),
-                            [],
+                            $params,
                             UrlGeneratorInterface::ABSOLUTE_URL
                         );
                     } else {
+                        $annotation->options = array_merge(
+                            $params,
+                            $annotation->options
+                        );
+
                         $service = $this->container->get($annotation->service);
                         $method = $annotation->method;
                         $urls = $service->{$method}($node, $annotation->options);
                     }
                 }
             } elseif (!$node->getDisableUrl() && !$node->hasAppUrl()) {
+                foreach ($node->getParameters() as $param) {
+                    if ('_locale' === $param['name']) {
+                        $params['_locale'] = !empty($param['defaultValue'])
+                            ? $param['defaultValue']
+                            : $node->getMenu()->getNavigation()->getLocale();
+                    }
+                }
+
                 $urls[] = $this->urlGenerator->generate(
                     $node->getRouteName(),
-                    [],
+                    $params,
                     UrlGeneratorInterface::ABSOLUTE_URL
                 );
             }
@@ -116,13 +137,12 @@ class SitemapBuilder
     protected function getAnnotation(Node $node)
     {
         try {
-            $annotation = $this->annotationReader->getMethodAnnotation(
-                new \ReflectionMethod($node->getController()),
-                UrlGenerator::class
-            );
+            $reflection = new \ReflectionMethod($node->getController());
 
-            if ($annotation) {
-                return $annotation;
+            foreach ($reflection->getAttributes() as $attribute) {
+                if (UrlGenerator::class === $attribute->getName()) {
+                    return $attribute->newInstance();
+                }
             }
         } catch (\ReflectionException $e) {
             return false;

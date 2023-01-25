@@ -45,7 +45,7 @@ class NodeEventSubscriber extends EntityManagerEventSubscriber
         $this->routeParameterSlugify = $routeParameterSlugify;
     }
 
-    public function support(EntityInterface $entity)
+    public function supports(EntityInterface $entity): bool
     {
         return $entity instanceof Node;
     }
@@ -57,7 +57,7 @@ class NodeEventSubscriber extends EntityManagerEventSubscriber
 
     public function onPreUpdate(EntityManagerEvent $event)
     {
-        if (!$this->support($event->getEntity())) {
+        if (!$this->supports($event->getEntity())) {
             return;
         }
 
@@ -159,7 +159,7 @@ class NodeEventSubscriber extends EntityManagerEventSubscriber
 
     public function onDelete(EntityManagerEvent $event)
     {
-        if (!$this->support($event->getEntity())) {
+        if (!$this->supports($event->getEntity())) {
             return;
         }
 

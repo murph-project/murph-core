@@ -17,7 +17,7 @@
             <a class="navbar-brand" href="{{ path('admin_dashboard_index') }}">
                 <img id="logo" src="{{ asset(site_logo) }}" alt="{{ site_name }}" title="{{ site_name }}">
 
-                {{ site_name }}
+                <span class="ml-2 d-none d-md-inline">{{ site_name }}</span>
             </a>
 
             <div class="ml-auto">
@@ -34,11 +34,17 @@
         {% block body_container %}
             <div class="container-fluid">
                 <nav class="bg-dark-blue sidebar">
+                    <div class="sidebar-toggler">
+                        <button class="btn">
+                            <span class="fa fa-bars"></span>
+                        </button>
+                    </div>
+
                     <div class="sidebar-sticky">
                         {{ include('@Core/admin/module/menu.html.twig') }}
                     </div>
                 </nav>
-                <div class="body">
+                <div class="body {% block body_class %}{% endblock %}">
                     {% block body %}
                     {% endblock %}
                 </div>
@@ -47,6 +53,8 @@
 
         {% block js %}
             <script src="{{ asset('vendor/tinymce/tinymce.min.js') }}"></script>
+            <script src="{{ asset('vendor/grapesjs-parser-postcss/dist/grapesjs-parser-postcss.min.js') }}"></script>
+            <script src="{{ asset('vendor/grapesjs-component-code-editor/dist/grapesjs-component-code-editor.min.js') }}"></script>
 
             {{ encore_entry_script_tags('admin') }}
         {% endblock %}

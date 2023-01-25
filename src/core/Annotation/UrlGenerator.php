@@ -2,14 +2,12 @@
 
 namespace App\Core\Annotation;
 
-use Doctrine\Common\Annotations\Annotation;
-
 /**
  * class UrlGenerator.
  *
  * @author Simon Vieille <simon@deblan.fr>
- * @Annotation
  */
+#[\Attribute]
 class UrlGenerator
 {
     public string $service;
@@ -17,4 +15,11 @@ class UrlGenerator
     public string $method;
 
     public array $options = [];
+
+    public function __construct(string $service, string $method, array $options = [])
+    {
+        $this->service = $service;
+        $this->method = $method;
+        $this->options = $options;
+    }
 }

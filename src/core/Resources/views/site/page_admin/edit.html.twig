@@ -1,0 +1,13 @@
+{% extends '@Core/admin/crud/edit.html.twig' %}
+
+{% block header %}
+    {{ parent() }}
+
+    {% if form.children|length > 8 %}
+        <div class="float-right">
+            <button class="btn btn-sm btn-light mr-2 mt-2" id="page-form-expand">
+                <span class="fa fa-expand-arrows-alt"></span>
+            </button>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -13,14 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/task")
- */
+#[Route(path: '/admin/task')]
 class TaskAdminController extends AdminController
 {
-    /**
-     * @Route("/", name="admin_task_index")
-     */
+    #[Route(path: '/', name: 'admin_task_index')]
     public function index(EventDispatcherInterface $eventDispatcher): Response
     {
         $event = new TaskInitEvent();
@@ -31,9 +27,7 @@ class TaskAdminController extends AdminController
         ]);
     }
 
-    /**
-     * @Route("/run/{task}", name="admin_task_run", methods={"GET"})
-     */
+    #[Route(path: '/run/{task}', name: 'admin_task_run', methods: ['GET'])]
     public function run(
         string $task,
         Request $request,

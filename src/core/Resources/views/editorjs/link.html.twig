@@ -1,0 +1,7 @@
+{%- block render -%}
+    <p><a href="{{ link }}">{{- meta.title -}}</a></p>
+
+    {%- if meta.description -%}
+        <p>{{- meta.description -}}</p>
+    {%- endif -%}
+{%- endblock -%}

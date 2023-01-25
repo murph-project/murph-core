@@ -2,11 +2,13 @@
 
 {% set context = context ?? 'new' %}
 
+{% block body_class %}has-form{% endblock %}
+
 {% block title %}{{ configuration.pageTitle(context)|trans|build_string(entity) }} - {{ parent() }}{% endblock %}
 
 {% block body %}
     {% block header %}
-        <div class="bg-light pl-5 pr-4 pt-5 pb-5">
+        <div class="bg-light">
             <div class="crud-header">
                 {% block header_title %}
                     <h1 class="crud-header-title">{{ configuration.pageTitle(context)|trans|build_string(entity) }}</h1>
@@ -20,13 +22,17 @@
                             {% if configuration.action(context, 'back', true) %}
                                 <a href="{{ path(configuration.pageRoute('index'), configuration.pageRouteParams('index')) }}" class="btn btn-light">
                                     <span class="fa fa-list pr-1"></span>
-                                    {{ configuration.actionTitle(context, 'back', 'Back to the list')|trans }}
+                                    <span class="d-none d-md-inline">
+                                        {{ configuration.actionTitle(context, 'back', 'Back to the list')|trans }}
+                                    </span>
                                 </a>
                             {% endif %}
 
                             <button type="submit" form="form-main" class="btn btn-primary">
                                 <span class="fa fa-save pr-1"></span>
-                                {{ configuration.actionTitle(context, 'save', 'Save')|trans|build_string(entity) }}
+                                <span class="d-none d-md-inline">
+                                    {{ configuration.actionTitle(context, 'save', 'Save')|trans|build_string(entity) }}
+                                </span>
                             </button>
 
                             {% if header_actions_dropdown_menu is not defined %}

@@ -5,21 +5,15 @@ namespace App\Core\Entity;
 use App\Repository\Entity\FileInformationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=FileInformationRepository::class)
- */
+#[ORM\Entity(repositoryClass: FileInformationRepository::class)]
 class FileInformation implements EntityInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(type="string", length=96, unique=true)
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
+    #[ORM\Column(type: 'string', length: 96, unique: true)]
     protected $id;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected $attributes;
 
     public function getId(): ?string

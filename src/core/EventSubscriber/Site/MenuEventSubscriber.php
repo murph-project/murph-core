@@ -43,14 +43,14 @@ class MenuEventSubscriber extends EntityManagerEventSubscriber
         $this->translator = $translator;
     }
 
-    public function support(EntityInterface $entity)
+    public function supports(EntityInterface $entity): bool
     {
         return $entity instanceof Menu;
     }
 
     public function onPreUpdate(EntityManagerEvent $event)
     {
-        if (!$this->support($event->getEntity())) {
+        if (!$this->supports($event->getEntity())) {
             return;
         }
 
@@ -60,13 +60,13 @@ class MenuEventSubscriber extends EntityManagerEventSubscriber
 
     public function onCreate(EntityManagerEvent $event)
     {
-        if (!$this->support($event->getEntity())) {
+        if (!$this->supports($event->getEntity())) {
             return;
         }
 
         $menu = $event->getEntity();
 
-        if (count($menu->getNodes()) > 2) {
+        if (count($menu->getNodes()) >= 2) {
             return;
         }
 
@@ -84,10 +84,10 @@ class MenuEventSubscriber extends EntityManagerEventSubscriber
 
         $menu->setRootNode($rootNode);
 
-        $this->entityManager->getEntityManager()->persist($rootNode);
-        $this->entityManager->getEntityManager()->persist($childNode);
+        foreach ([$rootNode, $childNode, $menu] as $entity) {
+            $this->entityManager->getEntityManager()->persist($entity);
+        }
 
-        $this->entityManager->getEntityManager()->persist($menu);
         $this->entityManager->flush();
 
         $this->nodeRepository->persistAsFirstChild($childNode, $rootNode);

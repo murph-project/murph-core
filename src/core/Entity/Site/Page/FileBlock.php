@@ -6,9 +6,7 @@ use App\Core\File\FileAttribute;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class FileBlock extends Block
 {
     public function getValue()

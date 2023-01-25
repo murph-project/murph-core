@@ -4,6 +4,7 @@ namespace App\Core\Form\Site\Page;
 
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Image;
 
 class ImageBlockType extends FileBlockType
@@ -21,5 +22,12 @@ class ImageBlockType extends FileBlockType
                 ],
             ], $options['options']),
         );
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefault('is_image', true);
     }
 }

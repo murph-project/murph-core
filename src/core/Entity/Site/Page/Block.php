@@ -6,37 +6,27 @@ use App\Core\Doctrine\Timestampable;
 use App\Core\Repository\Site\Page\BlockRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=BlockRepository::class)
- * @ORM\DiscriminatorColumn(name="class_key", type="string")
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\HasLifecycleCallbacks
- */
+#[ORM\Entity(repositoryClass: BlockRepository::class)]
+#[ORM\DiscriminatorColumn(name: 'class_key', type: 'string')]
+#[ORM\InheritanceType('SINGLE_TABLE')]
+#[ORM\HasLifecycleCallbacks]
 class Block
 {
     use Timestampable;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     protected $name;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected $value;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Page::class, inversedBy="blocks")
-     * @ORM\JoinColumn(onDelete="CASCADE")
-     */
+    #[ORM\ManyToOne(targetEntity: Page::class, inversedBy: 'blocks')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     protected $page;
 
     public function getId(): ?int

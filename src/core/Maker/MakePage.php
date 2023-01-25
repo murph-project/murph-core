@@ -13,6 +13,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Bundle\MakerBundle\Str;
+use Symfony\Component\Filesystem\Filesystem;
 
 class MakePage extends AbstractMaker
 {
@@ -75,17 +76,31 @@ class MakePage extends AbstractMaker
 
         $generator->writeChanges();
 
+        $templatePath = sprintf(
+            'page/%s/default.html.twig',
+            Str::asSnakeCase(preg_replace('/Page$/', '', $pageClassNameDetails->getShortName()))
+        );
+
+        $realTemplatePath = 'templates/'.$templatePath;
+
+        $filesystem = new Filesystem();
+
+        if (!$filesystem->exists($templatePath)) {
+            $filesystem->mkdir(dirname($realTemplatePath));
+            $filesystem->dumpFile($realTemplatePath, "{% extends 'base.html.twig' %}\n\n{% block page %}\n\n{% endblock %}\n");
+        }
+
         $this->writeSuccessMessage($io);
         $io->text('Register the page in <comment>config/packages/app.yaml</comment>: ');
         $io->text(<<< EOF
 
- core:
-     site:
-         pages:
-             {$pageClassNameDetails->getFullName()}:
-                 name: {$pageClassNameDetails->getShortName()}
-                 templates:
-                     - {name: "Default", file: "path/to/template.html.twig"}
+core:
+    site:
+        pages:
+            {$pageClassNameDetails->getFullName()}:
+                name: {$pageClassNameDetails->getShortName()}
+                templates:
+                    - {name: "Default", file: "${templatePath}"}
 
 EOF
 );
@@ -125,9 +140,12 @@ EOF
             'textarea' => null,
             'choice' => null,
             'collection' => 'BlockEntity\\CollectionBlock::class',
+            'editor_js_textarea' => null,
             'file' => 'BlockEntity\\FileBlock::class',
             'file_picker' => null,
+            'grapes_js' => null,
             'image' => 'BlockEntity\\FileBlock::class',
+            'tinymce_textarea' => null,
         ];
 
         while (null === $type) {

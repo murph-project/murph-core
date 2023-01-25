@@ -5,6 +5,8 @@ namespace App\Core\Form\Site\Page;
 use App\Core\Entity\Site\Page\FileBlock;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FileBlockType extends TextBlockType
@@ -21,11 +23,21 @@ class FileBlockType extends TextBlockType
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars = array_replace($view->vars, [
+            'file_type' => $options['file_type'],
+        ]);
+    }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => FileBlock::class,
-            'block_prefix' => 'file_block',
+            'file_type' => 'auto',
             'options' => [],
         ]);
     }

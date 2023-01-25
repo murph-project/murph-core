@@ -11,14 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/navigation_setting")
- */
+#[Route(path: '/admin/navigation_setting')]
 class NavigationSettingAdminController extends AdminController
 {
-    /**
-     * @Route("/edit/{entity}", name="admin_navigation_setting_edit")
-     */
+    #[Route(path: '/edit/{entity}', name: 'admin_navigation_setting_edit')]
     public function edit(
         Entity $entity,
         EntityManager $entityManager,
@@ -58,9 +54,7 @@ class NavigationSettingAdminController extends AdminController
         ]);
     }
 
-    /**
-     * @Route("/delete/{entity}", name="admin_navigation_setting_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/delete/{entity}', name: 'admin_navigation_setting_delete', methods: ['DELETE', 'POST'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete'.$entity->getId(), $request->request->get('_token'))) {

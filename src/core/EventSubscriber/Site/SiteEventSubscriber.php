@@ -27,14 +27,14 @@ class SiteEventSubscriber extends EntityManagerEventSubscriber
         $this->cacheManager = $cacheManager;
     }
 
-    public function support(EntityInterface $entity)
+    public function supports(EntityInterface $entity): bool
     {
         return $entity instanceof Node || $entity instanceof Menu || $entity instanceof Navigation;
     }
 
     public function onUpdate(EntityManagerEvent $event)
     {
-        if (!$this->support($event->getEntity())) {
+        if (!$this->supports($event->getEntity())) {
             return;
         }
 

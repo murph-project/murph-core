@@ -1,10 +1,15 @@
 const $ = require('jquery')
 const EditorJS = require('@editorjs/editorjs')
 const InlineTools = require('editorjs-inline-tool')
+const Routing = require('../../../../../../../../friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js')
+const routes = require('../../../../../../../../../public/js/fos_js_routes.json')
 
 const UnderlineInlineTool = InlineTools.UnderlineInlineTool
 const StrongInlineTool = InlineTools.StrongInlineTool
 const ItalicInlineTool = InlineTools.ItalicInlineTool
+const createGenericInlineTool = require('editorjs-inline-tool/es/tool').default
+
+Routing.setRoutingData(routes)
 
 const tools = {
   header: {
@@ -39,9 +44,15 @@ const tools = {
     class: require('@editorjs/checklist'),
     inlineToolbar: true
   },
+  hyperLink: {
+    class: require('editorjs-hyperlink'),
+    inlineToolbar: true
+  },
   link: {
     class: require('@editorjs/link'),
-    inlineToolbar: true
+    config: {
+      endpoint: Routing.generate('admin_editor_editorjs_fetch_url')
+    }
   },
   table: {
     class: require('@editorjs/table'),
@@ -67,13 +78,32 @@ const tools = {
     class: require('@editorjs/underline'),
     inlineToolbar: true
   },
-  linkAutocomplete: {
-    class: require('@editorjs/link-autocomplete'),
-    inlineToolbar: true
-  },
   image: {
     class: require('../components/editorjs/image-tool.js')
-  }
+  },
+  bold: {
+    class: createGenericInlineTool({
+      sanitize: {
+        strong: {}
+      },
+      shortcut: 'CMD+B',
+      tagName: 'STRONG',
+      toolboxIcon:
+        '<svg class="icon icon--bold" width="12px" height="14px"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#bold"></use></svg>'
+    })
+  },
+  italic: {
+    class: createGenericInlineTool({
+      sanitize: {
+        em: {}
+      },
+      shortcut: 'CMD+I',
+      tagName: 'EM',
+      toolboxIcon:
+        '<svg class="icon icon--italic" width="12px" height="14px"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#italic"></use></svg>'
+    })
+  },
+  underline: UnderlineInlineTool
 }
 
 const makeId = () => {
@@ -89,10 +119,7 @@ const makeId = () => {
 }
 
 const configurationBase = {
-  tools,
-  bold: StrongInlineTool,
-  italic: ItalicInlineTool,
-  underline: UnderlineInlineTool
+  tools
 }
 
 const buildConfiguration = (conf) => {
@@ -120,9 +147,20 @@ const doInitEditor = () => {
     editorContainer.attr('id', id)
     element.hide()
 
+    let data = { time: null, blocks: [] }
+
+    try {
+      const value = JSON.parse(element.val())
+
+      if (value.time && Array.isArray(value.blocks)) {
+        data = value
+      }
+    } catch (e) {
+    }
+
     const editor = new EditorJS(buildConfiguration({
       holder: id,
-      data: JSON.parse(element.val()),
+      data: data,
       onReady: () => {
         ready = true
       }
@@ -143,6 +181,7 @@ const doInitEditor = () => {
             const value = JSON.stringify(data)
             element.val(value)
           } catch (e) {
+            element.val('[]')
           }
         })
       }, 500)

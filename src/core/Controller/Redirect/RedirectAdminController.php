@@ -19,65 +19,49 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RedirectAdminController extends CrudController
 {
-    /**
-     * @Route("/admin/redirect/{page}", name="admin_redirect_index", methods={"GET"}, requirements={"page":"\d+"})
-     */
+    #[Route(path: '/admin/redirect/{page}', name: 'admin_redirect_index', methods: ['GET'], requirements: ['page' => '\d+'])]
     public function index(RepositoryQuery $query, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doIndex($page, $query, $request, $session);
     }
 
-    /**
-     * @Route("/admin/redirect/new", name="admin_redirect_new", methods={"GET", "POST"})
-     */
+    #[Route(path: '/admin/redirect/new', name: 'admin_redirect_new', methods: ['GET', 'POST'])]
     public function new(Factory $factory, EntityManager $entityManager, Request $request): Response
     {
         return $this->doNew($factory->create(), $entityManager, $request);
     }
 
-    /**
-     * @Route("/admin/redirect/show/{entity}", name="admin_redirect_show", methods={"GET"})
-     */
+    #[Route(path: '/admin/redirect/show/{entity}', name: 'admin_redirect_show', methods: ['GET'])]
     public function show(Entity $entity): Response
     {
         return $this->doShow($entity);
     }
 
-    /**
-     * @Route("/admin/redirect/filter", name="admin_redirect_filter", methods={"GET"})
-     */
+    #[Route(path: '/admin/redirect/filter', name: 'admin_redirect_filter', methods: ['GET'])]
     public function filter(Session $session): Response
     {
         return $this->doFilter($session);
     }
 
-    /**
-     * @Route("/admin/redirect/edit/{entity}", name="admin_redirect_edit", methods={"GET", "POST"})
-     */
+    #[Route(path: '/admin/redirect/edit/{entity}', name: 'admin_redirect_edit', methods: ['GET', 'POST'])]
     public function edit(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doEdit($entity, $entityManager, $request);
     }
 
-    /**
-     * @Route("/admin/redirect/sort/{page}", name="admin_redirect_sort", methods={"POST"}, requirements={"page":"\d+"})
-     */
+    #[Route(path: '/admin/redirect/sort/{page}', name: 'admin_redirect_sort', methods: ['POST'], requirements: ['page' => '\d+'])]
     public function sort(RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doSort($page, $query, $entityManager, $request, $session);
     }
 
-    /**
-     * @Route("/admin/redirect/batch/{page}", name="admin_redirect_batch", methods={"POST"}, requirements={"page":"\d+"})
-     */
+    #[Route(path: '/admin/redirect/batch/{page}', name: 'admin_redirect_batch', methods: ['POST'], requirements: ['page' => '\d+'])]
     public function batch(RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doBatch($page, $query, $entityManager, $request, $session);
     }
 
-    /**
-     * @Route("/admin/redirect/delete/{entity}", name="admin_redirect_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/admin/redirect/delete/{entity}', name: 'admin_redirect_delete', methods: ['DELETE', 'POST'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doDelete($entity, $entityManager, $request);

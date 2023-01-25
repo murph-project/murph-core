@@ -1,10 +1,85 @@
 ## [Unreleased]
 
+## [1.18.0] - 2023-01-13
 ### Added
-* add page maker
+* feat(dep): add symfony/runtime
+* feat(dep): add symfony/flex
+### Fixed
+* fix(crud): allow POST in delete actions
+* fix(crud): remove default page value in abstract crud controller
+* fix(admin): test site_logo before using it
+* fix(ui): update z-index of choices__list--dropdown
+
+## [1.17.1] - 2022-12-03
+### Fixed
+* add mising attribute on timestampable (doctrine)
+
+## [1.17.0] - 2022-11-19
+### Fixed
+* fix tinymce modal z-index in tox
+### Changed
+* replace annotation with attributes
+
+## [1.16.0] - 2022-09-06
+### Added
+* add A/B testing feature
+* add cleanup of html string extracted from grapesjs content
+### Fixed
+* fix file block type
+### Changed
+* remove dashboard action from the core
+
+## [1.15.0] - 2022-05-09
+### Added
+* CrudConfiguration::setAction can receive a callable instead of a boolean in 'enabled' param
+* add grapesjs-component-code-editor and grapesjs-parser-postcss
+* hide the backoffice site name when small resolution
+* add entity_to_array twig function
+* add default field to show in crud configuration
+### Fixed
+* fix the mail notifier
+* fix sitemap: navigation with several domains
+* fix regression with editorjs: content not loaded
+### Changed
+* change default template to show an entity using `entity_to_array`
+
+## [1.14.1] - 2022-04-30
+### Added
+* add allowed chars in RouteParameterSlugify and CodeSlugify
+* improve sidebar in mobile view
+### Fixed
+* fix creation of new element when a menu is edited
+* fix editorjs error when the textarea is empty
+
+## [1.14.0] - 2022-04-20
+### Added
+* add grapesjs modes
+* add tinymce block type
+* add editor types in page maker
+* add the page template when the page is generated with the maker
+### Changed
+* replace flag-icon-css with flag-icons
+
+## [1.13.0] - 2022-04-17
+### Added
+* add editorjs hyperlink block
+* add button to show and hide metas (admin)
+* add grapesjs editor
+* add editorjs type
+### Fixed
+* fix editorjs inline tools (bold and italic)
+### Changed
+* update editorjs quote block template
+
+## [1.12.0] - 2022-03-26
+### Added
+* add page maker command (`make:page`)
+* add CrudConfiguration::getViewData in complement of CrudConfiguration::getViewDatas
+* add editorjs link block endpoint
 ### Fixed
 * fix issue with empty user-agent in AnalyticListener
 ### Changed
+* update editorjs image block view
 
 ## [1.11.0] - 2022-03-22
 ### Added

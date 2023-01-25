@@ -1,1 +1,8 @@
-<p>{{ '{__toString}'|build_string(entity) }}</p>
+<div class="row">
+    <div class="col-md-12 p-3">
+        {% for item in entity_to_array(entity) %}
+            <div class="font-weight-bold">{{ item.name|trans }}</div>
+            <div class="mb-3">{{ item.value }}</div>
+        {% endfor %}
+    </div>
+</div>

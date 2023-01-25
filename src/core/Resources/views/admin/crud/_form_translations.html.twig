@@ -5,7 +5,7 @@
         {% for locale in configuration.locales %}
             <li class="nav-item">
                 <a class="nav-link {% if loop.first %}active{% endif %}" data-toggle="tab" href="#form-locale-{{ loop.index }}">
-                    <span class="flag-icon flag-icon-{{ locale }}"></span>
+                    <span class="fi fi-{{ locale }}"></span>
 
                     {{ locale|upper|trans }}
                 </a>

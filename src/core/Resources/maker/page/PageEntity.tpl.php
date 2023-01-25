@@ -8,9 +8,7 @@ use App\Core\Form\Site\Page as Block;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class <?= $class_name; ?> extends Page
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

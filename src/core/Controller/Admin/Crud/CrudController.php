@@ -26,7 +26,7 @@ abstract class CrudController extends AdminController
 
     abstract protected function getConfiguration(): CrudConfiguration;
 
-    protected function doIndex(int $page = 1, RepositoryQuery $query, Request $request, Session $session): Response
+    protected function doIndex(int $page, RepositoryQuery $query, Request $request, Session $session): Response
     {
         $configuration = $this->getConfiguration();
 
@@ -127,7 +127,7 @@ abstract class CrudController extends AdminController
         ]);
     }
 
-    protected function doSort(int $page = 1, RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session): Response
+    protected function doSort(int $page, RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session): Response
     {
         $configuration = $this->getConfiguration();
         $context = $request->query->get('context', 'index');
@@ -165,7 +165,7 @@ abstract class CrudController extends AdminController
         return $this->json([]);
     }
 
-    protected function doBatch(int $page = 1, RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session): Response
+    protected function doBatch(int $page, RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session): Response
     {
         $configuration = $this->getConfiguration();
         $datas = $request->request->get('batch', []);

@@ -17,7 +17,7 @@ abstract class RepositoryQuery
     protected QueryBuilder $query;
     protected PaginatorInterface $paginator;
     protected string $id;
-    protected array $forcedFilterHandlers;
+    protected array $forcedFilterHandlers = [];
 
     public function __construct(ServiceEntityRepository $repository, string $id, PaginatorInterface $paginator = null)
     {
@@ -25,7 +25,6 @@ abstract class RepositoryQuery
         $this->query = $repository->createQueryBuilder($id);
         $this->paginator = $paginator;
         $this->id = $id;
-        $this->forcedFilterHandlers = [];
     }
 
     public function __call(string $name, $params): self

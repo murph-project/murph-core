@@ -1,12 +1,25 @@
 {% extends 'bootstrap_4_layout.html.twig' %}
 
+{% block grapesjs_widget %}
+    <div class="gjs"></div>
+    <div class="d-none">
+        <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+    </div>
+{% endblock %}
+
 {% block file_widget -%}
     <div class="row">
         <div class="col-12">
             {% set value = form.vars.data %}
 
+            {% if form.parent.vars.file_type is defined %}
+                {% set fileType = form.parent.vars.file_type %}
+            {% else %}
+                {% set fileType = 'auto' %}
+            {% endif %}
+
             {% if value %}
-                {% if value and value.extension in ['jpeg', 'jpg', 'gif', 'png', 'svg'] %}
+                {% if fileType in ['auto', 'image'] and value.extension in ['jpeg', 'jpg', 'gif', 'png', 'svg'] %}
                     <div class="card">
                         <div class="card-img-top bg-tiles text-center">
                             <a href="{{ asset(value.pathname) }}" target="_blank">
@@ -48,6 +61,7 @@
                 <div class="text-right">
                     <span data-collection-delete-container class="btn btn-sm btn-danger">
                         <span data-collection-delete="{{ loop.index }}">
+                            <span data-collection-delete="{{ loop.index }}" class="fa fa-trash"></span>
                             {{ label_delete|trans }}
                         </span>
                     </span>
@@ -58,6 +72,7 @@
 
     <div data-collection-add="collection-{{ collection_name }}" class="collection-add">
         <span class="btn btn-sm btn-primary" data-collection-add="collection-{{ collection_name }}">
+            <span data-collection-add="collection-{{ collection_name }}" class="fa fa-plus"></span>
             {{ label_add|trans }}
         </span>
     </div>
@@ -76,9 +91,11 @@
 {% endblock %}
 
 {% block murph_collection_widget %}
-    <div data-collection="collection-{{ collection_name }}">
+    {% set attrs = attr|merge({class: 'mb-1 ' ~ (attr.class ?? '')}) %}
+
+    <div data-collection="collection-{{ collection_name }}" {% for attr, value in row_attr %}{{ attr }}="{{ value }}"{% endfor %}>
         {% for item in form %}
-            <div data-collection-item="{{ loop.index }}" class="mb-1">
+            <div data-collection-item="{{ loop.index }}" {% for attr, value in attrs %}{{ attr }}="{{ value }}"{% endfor %}>
                 {% for child in item %}
                     {{ form_row(child) }}
                 {% endfor %}
@@ -86,6 +103,7 @@
                 <div class="text-right">
                     <span data-collection-delete-container class="btn btn-sm btn-danger">
                         <span data-collection-delete="{{ loop.index }}">
+                            <span data-collection-delete="{{ loop.index }}" class="fa fa-trash"></span>
                             {{ label_delete|trans }}
                         </span>
                     </span>
@@ -96,12 +114,13 @@
 
     <div data-collection-add="collection-{{ collection_name }}" class="collection-add">
         <span class="btn btn-sm btn-primary" data-collection-add="collection-{{ collection_name }}">
+            <span data-collection-add="collection-{{ collection_name }}" class="fa fa-plus"></span>
             {{ label_add|trans }}
         </span>
     </div>
 
     <template type="text/template" id="collection-{{ collection_name }}">
-        <div data-collection-item="__name__">
+        <div data-collection-item="__name__" {% for attr, value in attrs %}{{ attr }}="{{ value }}"{% endfor %}>
             {{ form_rest(form.vars.prototype) }}
 
             <div class="text-right">

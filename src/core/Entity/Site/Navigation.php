@@ -10,64 +10,42 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=NavigationRepository::class)
- * @ORM\HasLifecycleCallbacks
- */
+#[ORM\Entity(repositoryClass: NavigationRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Navigation implements EntityInterface
 {
     use Timestampable;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     protected $label;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     protected $code;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     protected $domain;
 
-    /**
-     * @ORM\Column(type="boolean", options={"default"=0})
-     */
+    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
     protected $forceDomain = false;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected $additionalDomains = '[]';
 
-    /**
-     * @ORM\OneToMany(targetEntity=Menu::class, mappedBy="navigation")
-     */
+    #[ORM\OneToMany(targetEntity: Menu::class, mappedBy: 'navigation')]
     protected $menus;
 
-    /**
-     * @ORM\Column(type="string", length=10)
-     */
+    #[ORM\Column(type: 'string', length: 10)]
     protected $locale = 'en';
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
     protected $sortOrder;
 
-    /**
-     * @ORM\OneToMany(targetEntity=NavigationSetting::class, mappedBy="navigation", orphanRemoval=true)
-     */
+    #[ORM\OneToMany(targetEntity: NavigationSetting::class, mappedBy: 'navigation', orphanRemoval: true)]
     protected $navigationSettings;
 
     public function __construct()
@@ -239,5 +217,24 @@ class Navigation implements EntityInterface
         }
 
         return $this;
+    }
+
+    public function matchDomain(string $domain): bool
+    {
+        if ($domain === $this->getDomain()) {
+            return true;
+        }
+
+        foreach ($this->getAdditionalDomains() as $additionalDomain) {
+            if ('domain' === $additionalDomain['type'] && $additionalDomain['domain'] === $domain) {
+                return true;
+            }
+
+            if ('regexp' === $additionalDomain['type'] && preg_match('#'.$additionalDomain['domain'].'#', $domain) > 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

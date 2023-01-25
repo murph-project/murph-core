@@ -2,11 +2,13 @@
 
 {% set context = context ?? 'edit' %}
 
+{% block body_class %}has-form{% endblock %}
+
 {% block title %}{{ configuration.pageTitle(context)|trans|build_string(entity) }} - {{ parent() }}{% endblock %}
 
 {% block body %}
     {% block header %}
-        <div class="bg-light pl-5 pr-4 pt-5 pb-5">
+        <div class="bg-light">
             <div class="crud-header">
                 {% block header_title %}
                     <h1 class="crud-header-title">{{ configuration.pageTitle(context)|trans|build_string(entity) }}</h1>
@@ -20,20 +22,26 @@
                             {% if configuration.action(context, 'back', true) %}
                                 <a href="{{ path(configuration.pageRoute('index'), configuration.pageRouteParams('index')) }}" class="btn btn-light">
                                     <span class="fa fa-list pr-1"></span>
-                                    {{ configuration.actionTitle(context, 'back', 'Back to the list')|trans }}
+                                    <span class="d-none d-md-inline">
+                                        {{ configuration.actionTitle(context, 'back', 'Back to the list')|trans }}
+                                    </span>
                                 </a>
                             {% endif %}
 
-                            {% if configuration.action(context, 'show', true) %}
+                            {% if configuration.action(context, 'show', true, [entity]) %}
                                 <a href="{{ path(configuration.pageRoute('show'), {entity: entity.id}|merge(configuration.pageRouteParams('show'))) }}" class="btn btn-secondary">
                                     <span class="fa fa-eye pr-1"></span>
-                                    {{ configuration.actionTitle(context, 'show', 'Show')|trans|build_string(entity) }}
+                                    <span class="d-none d-md-inline">
+                                        {{ configuration.actionTitle(context, 'show', 'Show')|trans|build_string(entity) }}
+                                    </span>
                                 </a>
                             {% endif %}
 
                             <button type="submit" form="form-main" class="btn btn-primary">
                                 <span class="fa fa-save pr-1"></span>
-                                {{ configuration.actionTitle(context, 'save', 'Save')|trans|build_string(entity) }}
+                                <span class="d-none d-md-inline">
+                                    {{ configuration.actionTitle(context, 'save', 'Save')|trans|build_string(entity) }}
+                                </span>
                             </button>
 
                             {% block header_actions_after %}{% endblock %}
@@ -42,7 +50,7 @@
                                 {% set header_actions_dropdown_menu = '' %}
                             {% endif %}
 
-                            {% if configuration.action(context, 'delete', true) %}
+                            {% if configuration.action(context, 'delete', true, [entity]) %}
                                 {% set item %}
                                     <button type="submit" form="form-delete" class="dropdown-item">
                                         {{ configuration.actionTitle(context, 'delete', 'Delete')|trans|build_string(entity) }}
@@ -86,7 +94,7 @@
         </form>
     {% endblock %}
 
-    {% if configuration.action(context, 'delete', true) %}
+    {% if configuration.action(context, 'delete', true, [entity]) %}
         <form method="post" action="{{ path(configuration.pageRoute('delete'), {entity: entity.id}|merge(configuration.pageRouteParams('delete'))) }}" id="form-delete" data-form-confirm>
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ entity.id) }}">

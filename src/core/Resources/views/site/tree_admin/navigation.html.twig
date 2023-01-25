@@ -3,7 +3,7 @@
 {% block title %}{{ 'Tree'|trans }} - {{ parent() }}{% endblock %}
 
 {% block body %}
-    <div class="bg-light pl-5 pr-4 pt-5 pb-5">
+    <div class="bg-light">
         <div class="crud-header">
             <div class="crud-header-title">
                 <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -237,7 +237,7 @@
         {% endfor %}
     </div>
 
-    <div class="modal" id="modal-menu-new">
+    <div class="modal modal-static" id="modal-menu-new">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -260,7 +260,7 @@
     </div>
 
     {% for menuId, form in forms.menus %}
-        <div class="modal" id="modal-menu-edit-{{ menuId }}">
+        <div class="modal modal-static" id="modal-menu-edit-{{ menuId }}">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">

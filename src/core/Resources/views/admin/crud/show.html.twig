@@ -6,7 +6,7 @@
 
 {% block body %}
     {% block header %}
-        <div class="bg-light pl-5 pr-4 pt-5 pb-5">
+        <div class="bg-light">
             <div class="crud-header">
                 {% block header_title %}
                     <h1 class="crud-header-title">{{ configuration.pageTitle(context)|trans|build_string(entity) }}</h1>
@@ -20,15 +20,19 @@
                             {% if configuration.action(context, 'back', true) %}
                                 <a href="{{ path(configuration.pageRoute('index')) }}" class="btn btn-light">
                                     <span class="fa fa-list pr-1"></span>
-                                    {{ configuration.actionTitle(context, 'back', 'Back to the list')|trans }}
+                                    <span class="d-none d-md-inline">
+                                        {{ configuration.actionTitle(context, 'back', 'Back to the list')|trans }}
+                                    </span>
                                 </a>
                             {% endif %}
 
-                            {% if configuration.action(context, 'edit', true) %}
+                            {% if configuration.action(context, 'edit', true, [entity]) %}
                                 <a href="{{ path(configuration.pageRoute('edit'), {entity: entity.id}) }}" class="btn btn-primary">
                                     <span class="fa fa-edit pr-1"></span>
 
-                                    {{ configuration.actionTitle(context, 'edit', 'Edit')|trans|build_string(entity) }}
+                                    <span class="d-none d-md-inline">
+                                        {{ configuration.actionTitle(context, 'edit', 'Edit')|trans|build_string(entity) }}
+                                    </span>
                                 </a>
                             {% endif %}
 

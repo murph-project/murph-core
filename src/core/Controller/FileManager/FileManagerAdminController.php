@@ -15,22 +15,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * @Route("/admin/file_manager")
- */
+#[Route(path: '/admin/file_manager')]
 class FileManagerAdminController extends AdminController
 {
-    /**
-     * @Route("/", name="admin_file_manager_index")
-     */
+    #[Route(path: '/', name: 'admin_file_manager_index')]
     public function index(): Response
     {
         return $this->render('@Core/file_manager/index.html.twig');
     }
 
-    /**
-     * @Route("/api/directory", name="admin_file_manager_api_directory", options={"expose"=true})
-     */
+    #[Route(path: '/api/directory', name: 'admin_file_manager_api_directory', options: ['expose' => true])]
     public function directory(FsFileManager $manager, Request $request): Response
     {
         $options = [
@@ -43,9 +37,7 @@ class FileManagerAdminController extends AdminController
         return $this->json($files);
     }
 
-    /**
-     * @Route("/info/{tab}/{context}/{ajax}", name="admin_file_manager_info", options={"expose"=true})
-     */
+    #[Route(path: '/info/{tab}/{context}/{ajax}', name: 'admin_file_manager_info', options: ['expose' => true])]
     public function info(
         FsFileManager $manager,
         Request $request,
@@ -115,9 +107,7 @@ class FileManagerAdminController extends AdminController
         ]);
     }
 
-    /**
-     * @Route("/directory/new/{ajax}", name="admin_file_manager_directory_new", options={"expose"=true}, methods={"GET", "POST"})
-     */
+    #[Route(path: '/directory/new/{ajax}', name: 'admin_file_manager_directory_new', options: ['expose' => true], methods: ['GET', 'POST'])]
     public function directoryNew(FsFileManager $manager, Request $request, TranslatorInterface $translator, bool $ajax = false): Response
     {
         $splInfo = $manager->getSplInfo($request->query->get('file'));
@@ -184,9 +174,7 @@ class FileManagerAdminController extends AdminController
         ]);
     }
 
-    /**
-     * @Route("/directory/rename/{ajax}", name="admin_file_manager_directory_rename", methods={"GET", "POST"})
-     */
+    #[Route(path: '/directory/rename/{ajax}', name: 'admin_file_manager_directory_rename', methods: ['GET', 'POST'])]
     public function directoryRename(FsFileManager $manager, Request $request, TranslatorInterface $translator, bool $ajax = false): Response
     {
         $splInfo = $manager->getSplInfo($request->query->get('file'));
@@ -255,9 +243,7 @@ class FileManagerAdminController extends AdminController
         ]);
     }
 
-    /**
-     * @Route("/file/rename/{ajax}", name="admin_file_manager_file_rename", methods={"GET", "POST"})
-     */
+    #[Route(path: '/file/rename/{ajax}', name: 'admin_file_manager_file_rename', methods: ['GET', 'POST'])]
     public function fileRename(FsFileManager $manager, Request $request, TranslatorInterface $translator, bool $ajax = false): Response
     {
         $splInfo = $manager->getSplInfo($request->query->get('file'));
@@ -327,9 +313,7 @@ class FileManagerAdminController extends AdminController
         ]);
     }
 
-    /**
-     * @Route("/upload/{ajax}", name="admin_file_manager_upload", options={"expose"=true}, methods={"GET", "POST"})
-     */
+    #[Route(path: '/upload/{ajax}', name: 'admin_file_manager_upload', options: ['expose' => true], methods: ['GET', 'POST'])]
     public function upload(FsFileManager $manager, Request $request, TranslatorInterface $translator, bool $ajax = false): Response
     {
         $splInfo = $manager->getSplInfo($request->query->get('file'));
@@ -406,9 +390,7 @@ class FileManagerAdminController extends AdminController
         ]);
     }
 
-    /**
-     * @Route("/delete", name="admin_file_manager_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/delete', name: 'admin_file_manager_delete', methods: ['DELETE', 'POST'])]
     public function delete(FsFileManager $manager, Request $request): Response
     {
         $path = $request->request->get('file');
