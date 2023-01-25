@@ -80,7 +80,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): RedirectResponse
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
@@ -89,7 +89,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         return new RedirectResponse($this->urlGenerator->generate('admin_dashboard_index'));
     }
 
-    protected function getLoginUrl(): string
+    protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate('auth_login');
     }
