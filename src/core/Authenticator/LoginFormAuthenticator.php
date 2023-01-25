@@ -18,6 +18,10 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
 
 class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -42,6 +46,21 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     public function supports(Request $request): bool
     {
         return 'auth_login' === $request->attributes->get('_route') && $request->isMethod('POST');
+    }
+
+    public function authenticate(Request $request): Passport
+    {
+        $id = $request->request->get('id', '');
+
+        $request->getSession()->set(Security::LAST_USERNAME, $id);
+
+        return new Passport(
+            new UserBadge($id),
+            new PasswordCredentials($request->request->get('password', '')),
+            [
+                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
+            ]
+        );
     }
 
     public function getCredentials(Request $request)
