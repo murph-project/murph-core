@@ -4,22 +4,17 @@
     <div class="col-12 p-3">
         <ul class="list-group">
             <li class="list-group-item">
-                <div class="row">
-                    <div class="col-md-4">
-                        <span class="font-weight-bold pb-2 d-block">{{ 'Label'|trans }}</span>
-                        {{ entity.label }}
-                    </div>
-                    <div class="col-md-4">
-                        <span class="font-weight-bold pb-2 d-block">{{ 'Locale'|trans }}</span>
-                        {{ entity.locale }}
-                    </div>
-                    <div class="col-md-4">
-                        <span class="font-weight-bold pb-2 d-block">{{ 'Code'|trans }}</span>
-                        {{ entity.code }}
-                    </div>
-                </div>
+                <span class="font-weight-bold pb-2 d-block">{{ 'Label'|trans }}</span>
+                {{ entity.label }}
             </li>
-
+            <li class="list-group-item">
+                <span class="font-weight-bold pb-2 d-block">{{ 'Locale'|trans }}</span>
+                {{ entity.locale }}
+            </li>
+            <li class="list-group-item">
+                <span class="font-weight-bold pb-2 d-block">{{ 'Code'|trans }}</span>
+                {{ entity.code }}
+            </li>
             <li class="list-group-item">
                 <div class="mb-3">
                     <span class="font-weight-bold pb-2 d-block">{{ 'Domain'|trans }}</span>
