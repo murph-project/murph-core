@@ -15,6 +15,7 @@ class Configuration implements ConfigurationInterface
             'image/jpeg',
             'image/gif',
             'image/svg+xml',
+            'image/webp',
             'video/mp4',
             'audio/mpeg3',
             'audio/x-mpeg-3',

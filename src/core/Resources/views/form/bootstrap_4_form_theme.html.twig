@@ -19,7 +19,7 @@
             {% endif %}
 
             {% if value %}
-                {% if fileType in ['auto', 'image'] and value.extension in ['jpeg', 'jpg', 'gif', 'png', 'svg'] %}
+                {% if fileType in ['auto', 'image'] and value.extension in ['jpeg', 'jpg', 'gif', 'png', 'svg', 'webp'] %}
                     <div class="card">
                         <div class="card-img-top bg-tiles text-center">
                             <a href="{{ asset(value.pathname) }}" target="_blank">
@@ -138,14 +138,14 @@
 
         <div class="card">
             {% if value %}
-                {% if value.extension is defined and value.extension in ['jpeg', 'jpg', 'gif', 'png', 'svg'] %}
+                {% if value.extension is defined and value.extension in ['jpeg', 'jpg', 'gif', 'png', 'svg', 'webp'] %}
                     <div class="card-img-top bg-tiles text-center">
                         <a href="{{ asset(value.pathname) }}" target="_blank">
                             <img src="{{ asset(value.pathname) }}" class="img-fluid">
                         </a>
                     </div>
                 {% else %}
-                    {% for extension in ['.jpeg', '.jpg', '.gif', '.png', '.svg'] %}
+                    {% for extension in ['.jpeg', '.jpg', '.gif', '.png', '.svg', '.webp'] %}
                         {% if value ends with extension %}
                             <div class="card-img-top bg-tiles text-center">
                                 <a href="{{ asset(value) }}" target="_blank">

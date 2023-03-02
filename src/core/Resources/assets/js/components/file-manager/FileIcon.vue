@@ -19,7 +19,7 @@ Routing.setRoutingData(routes)
 
 const map = {
   'fa fa-file-pdf': ['application/pdf'],
-  'fa fa-file-image': ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
+  'fa fa-file-image': ['image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/webp'],
   'fa fa-file-audio': ['application/ogg', 'audio/mp3', 'audio/mpeg', 'audio/wav'],
   'fa fa-file-archive': ['application/zip', 'multipart/x-zip', 'application/rar', 'application/x-rar-compressed', 'application/x-zip-compressed', 'application/tar', 'application/x-tar'],
   'fa fa-file-alt': ['application/rtf'],
@@ -53,7 +53,7 @@ export default {
         return
       }
 
-      if (['image/png', 'image/jpg', 'image/jpeg', 'image/gif'].indexOf(this.mime) === -1) {
+      if (['image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/webp'].indexOf(this.mime) === -1) {
         this.thumbnail = null
         return
       }
