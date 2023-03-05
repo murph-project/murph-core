@@ -91,12 +91,16 @@ class FsFileManager
         $this->applySort($finder, $options['sort'] ?? 'name', $options['sort_direction'] ?? 'asc');
 
         foreach ($finder as $file) {
+            $splInfo = $this->getSplInfo($directory.'/'.$file->getBasename());
+
             $data['files'][] = [
                 'basename' => $file->getBasename(),
                 'path' => $directory,
                 'webPath' => $this->pathUri.'/'.$directory.'/'.$file->getBasename(),
                 'locked' => $this->isLocked($directory.'/'.$file->getBasename()),
                 'mime' => mime_content_type($file->getRealPath()),
+                'size' => $splInfo ? $splInfo->getSize() : null,
+                'updated_at' => $splInfo ? date('Y-m-d H:i', $splInfo->getMTime()) : null,
             ];
         }
 

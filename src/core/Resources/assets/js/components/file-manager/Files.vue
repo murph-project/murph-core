@@ -106,7 +106,7 @@
                     <td width="10">
                         <span class="fa fa-folder text-warning"></span>
                     </td>
-                    <td>
+                    <td colspan="2">
                         ..
                     </td>
                 </tr>
@@ -115,7 +115,7 @@
                     <td width="10">
                         <span class="fa fa-folder text-warning"></span>
                     </td>
-                    <td>
+                    <td colspan="2">
                         <div v-if="item.locked" class="float-right">
                             <span class="btn btn-sm btn-light">
                                 <span class="fa fa-lock"></span>
@@ -137,6 +137,10 @@
                         </div>
 
                         <span v-html="item.basename"></span>
+                    </td>
+                    <td class="text-right">
+                      <span class="btn btn-sm btn-light border-light mr-1 mb-1" v-text="readableFilesize(item.size)"></span>
+                      <span class="btn btn-sm btn-light border-light mr-1 mb-1" v-text="item.updated_at"></span>
                     </td>
                 </tr>
             </table>
@@ -323,6 +327,26 @@ export default {
         .catch((e) => {
           alert('An error occured')
         })
+    },
+    readableFilesize (size) {
+      if (size <= 0) {
+          return '0 KB'
+      }
+
+      if (size === 1) {
+          return '1 byte'
+      }
+
+      const mod = 1024
+      const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB']
+      let i = 0
+
+      while (size > mod && i < units.length - 1) {
+          size /= mod
+          ++i
+      }
+
+      return `${size.toFixed(2)} ${units[i]}`
     }
   },
   mounted () {
