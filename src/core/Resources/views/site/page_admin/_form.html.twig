@@ -1,71 +1,95 @@
-{% set formMetas %}
-    {% for item in ['metaTitle', 'metaDescription'] %}
-        {{ form_row(form[item]) }}
-    {% endfor %}
-{% endset %}
+{% set metaFormItemsCount = 0 %}
 
-{% set formOpenGraph %}
-    {% for item in ['ogTitle', 'ogDescription', 'ogImage'] %}
-        {{ form_row(form[item]) }}
-    {% endfor %}
-{% endset %}
+{%- set formMetas -%}
+    {%- for item in ['metaTitle', 'metaDescription'] -%}
+        {%- if form[item] is defined -%}
+            {%- set metaFormItemsCount = metaFormItemsCount + 1 -%}
+            {{- form_row(form[item]) -}}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endset -%}
 
-{% set formOthers %}
-    {% for item in ['name', 'template'] %}
-        {{ form_row(form[item]) }}
-    {% endfor %}
-{% endset %}
+{%- set formOpenGraph -%}
+    {%- for item in ['ogTitle', 'ogDescription', 'ogImage'] -%}
+        {%- if form[item] is defined -%}
+            {%- set metaFormItemsCount = metaFormItemsCount + 1 -%}
+            {{- form_row(form[item]) -}}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endset -%}
 
-{% set formSitemap %}
-{% endset %}
+{%- set formOthers -%}
+    {%- for item in ['name', 'template'] -%}
+        {%- if form[item] is defined -%}
+            {%- set metaFormItemsCount = metaFormItemsCount + 1 -%}
+            {{- form_row(form[item]) -}}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endset -%}
+
+{% set hasMetaForm = (formMetas ~ formOpenGraph ~ formOthers)|length > 0 %}
+{% set hasBlockFrom = form.children|length > (metaFormItemsCount + 1) %}
+{% set activeMetaForm = formMetas|length ? 'metas' : (formOpenGraph|length ? 'openGraph' : 'others') %}
 
 <div class="row">
-    {% set hasBockFrom = form.children|length > 8 %}
-
-    {% if hasBockFrom %}
-        <div class="col-md-8 p-2" id="page-main-form">
+    {% if hasBlockFrom %}
+        <div class="{% if hasMetaForm %}col-md-8{% else %}col-md-12{% endif %} p-2" id="page-main-form">
             {{ form_widget(form, {attr: {class: 'row'}}) }}
         </div>
     {% endif %}
 
-    <div class="{% if hasBockFrom %}col-md-4{% else %}col-md-12{% endif %} p-md-3" id="page-metas-form">
-        <ul class="nav nav-pills">
-            <li class="nav-item mb-1">
-                <a class="nav-link active" data-toggle="tab" href="#form-page-metas">
-                    <span class="fa fa-code"></span>
-                    <span class="d-none d-md-inline">
-                        {{ 'Meta datas'|trans }}
-                    </span>
-                </a>
-            </li>
-            <li class="nav-item mb-1">
-                <a class="nav-link" data-toggle="tab" href="#form-page-og">
-                    <span class="fa fa-share"></span>
-                    <span class="d-none d-md-inline">
-                        {{ 'OpenGraph'|trans }}
-                    </span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#form-page-others">
-                    <span class="fa fa-cog"></span>
-                    <span class="d-none d-md-inline">
-                        {{ 'Others'|trans }}
-                    </span>
-                </a>
-            </li>
-        </ul>
+    {% if hasMetaForm %}
+        <div class="{% if hasBlockFrom %}col-md-4{% else %}col-md-12{% endif %} p-md-3" id="page-metas-form">
+            <ul class="nav nav-pills">
+                {% if formMetas|length > 0 %}
+                    <li class="nav-item mb-1">
+                        <a class="nav-link {% if activeMetaForm == 'metas' %}active{% endif %}" data-toggle="tab" href="#form-page-metas">
+                            <span class="fa fa-code"></span>
+                            <span class="d-none d-md-inline">
+                                {{ 'Meta datas'|trans }}
+                            </span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if formOpenGraph|length > 0 %}
+                    <li class="nav-item mb-1">
+                        <a class="nav-link {% if activeMetaForm == 'openGraph' %}active{% endif %}" data-toggle="tab" href="#form-page-og">
+                            <span class="fa fa-share"></span>
+                            <span class="d-none d-md-inline">
+                                {{ 'OpenGraph'|trans }}
+                            </span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if formOthers|length > 0 %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if activeMetaForm == 'others' %}active{% endif %}" data-toggle="tab" href="#form-page-others">
+                            <span class="fa fa-cog"></span>
+                            <span class="d-none d-md-inline">
+                                {{ 'Others'|trans }}
+                            </span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
 
-        <div class="tab-content">
-            <div class="tab-pane show active p-3" id="form-page-metas">
-                {{ formMetas|raw }}
-            </div>
-            <div class="tab-pane p-3" id="form-page-og">
-                {{ formOpenGraph|raw }}
-            </div>
-            <div class="tab-pane p-3" id="form-page-others">
-                {{ formOthers|raw }}
+            <div class="tab-content">
+                {% if formMetas|length > 0 %}
+                    <div class="tab-pane {% if activeMetaForm == 'metas' %}show active{% endif %} p-3" id="form-page-metas">
+                        {{ formMetas|raw }}
+                    </div>
+                {% endif %}
+                {% if formOpenGraph|length > 0 %}
+                    <div class="tab-pane {% if activeMetaForm == 'openGraph' %}show active{% endif %} p-3" id="form-page-og">
+                        {{ formOpenGraph|raw }}
+                    </div>
+                {% endif %}
+                {% if formOthers|length > 0 %}
+                    <div class="tab-pane {% if activeMetaForm == 'others' %}show active{% endif %} p-3" id="form-page-others">
+                        {{ formOthers|raw }}
+                    </div>
+                {% endif %}
             </div>
         </div>
-    </div>
+    {% endif %}
 </div>
