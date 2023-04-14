@@ -127,6 +127,51 @@ abstract class CrudController extends AdminController
         ]);
     }
 
+    protected function doInlineEdit(string $context, string $label, EntityInterface $entity, EntityManager $entityManager, Request $request, callable $beforeUpdate = null): Response
+    {
+        $configuration = $this->getConfiguration();
+
+        $this->prepareEntity($entity);
+
+        $builder = $this->createFormBuilder($entity);
+        $callback = $configuration->getFields($context)[$label]['options']['inline_form'] ?? null;
+
+        if (null === $callback) {
+            throw $this->createNotFoundException();
+        }
+
+        call_user_func_array($callback, [$builder, $entity]);
+
+        $form = $builder->getForm();
+        $redirectTo = $request->query->get('redirectTo');
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                if (null !== $beforeUpdate) {
+                    call_user_func_array($beforeUpdate, [$entity, $form, $request]);
+                }
+
+                $entityManager->update($entity);
+                $this->addFlash('success', 'The data has been saved.');
+            } else {
+                $this->addFlash('warning', 'The form is not valid.');
+            }
+
+            return $this->redirect($redirectTo);
+        }
+
+        return $this->render('@Core/admin/crud/inline_edit.html.twig', [
+            'form' => $form->createView(),
+            'configuration' => $configuration,
+            'entity' => $entity,
+            'context' => $context,
+            'label' => $label,
+            'redirectTo' => $redirectTo,
+        ]);
+    }
+
     protected function doSort(int $page, RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session): Response
     {
         $configuration = $this->getConfiguration();

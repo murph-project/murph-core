@@ -17,6 +17,7 @@ class CrudConfiguration
     protected array $actionTitles = [];
     protected array $forms = [];
     protected array $formOptions = [];
+    protected array $inlineForms = [];
     protected array $views = [];
     protected array $viewDatas = [];
     protected array $fields = [];
@@ -252,7 +253,7 @@ class CrudConfiguration
 
     /* -- */
 
-    public function setMaxPerPage(string $page, int $max)
+    public function setMaxPerPage(string $page, int $max): self
     {
         $this->maxPerPage[$page] = $max;
 
@@ -262,6 +263,20 @@ class CrudConfiguration
     public function getMaxPerPage(string $page, int $default = 20)
     {
         return $this->maxPerPage[$page] ?? $default;
+    }
+
+    /* -- */
+
+    public function setDoubleClick(string $page, bool $enabled): bool
+    {
+        $this->doubleClick[$page] = $enabled;
+
+        return $this;
+    }
+
+    public function getDoubleClick(string $page): bool
+    {
+        return $this->doubleClick[$page] ?? false;
     }
 
     /* -- */

@@ -185,25 +185,36 @@
                                     {% endif %}
                                 {% endset -%}
 
-                                <tr {{ dataSortableItem|raw }} data-dblclick="{{ dbClick }}" class="{{ loop.index is odd ? 'is-odd' : 'is-even' }}">
+                                <tr {{ dataSortableItem|raw }} {% if configuration.doubleClick(context) %}data-dblclick="{{ dbClick }}"{% endif %} class="{{ loop.index is odd ? 'is-odd' : 'is-even' }}">
                                     {% if configuration.hasBatchAction(context) %}
                                         <td class="crud-batch-column">
                                             <input type="checkbox" class="batch_form" name="batch[items][{{ loop.index }}]" form="form-batch" value="{{ loop.index }}">
                                         </td>
                                     {% endif %}
 
-                                    {% for config in configuration.fields(context) %}
-                                        {% set attr = config.options.attr is defined ? config.options.attr : [] %}
-                                        {% set action = config.options.action is defined ? config.options.action : null %}
+                                    {% for label, config in configuration.fields(context) %}
+                                        {% set attr = config.options.attr ?? [] %}
+                                        {% set action = config.options.action ?? null %}
+                                        {% set inlineForm = config.options.inline_form ?? null %}
 
                                         <td {% for key, value in attr %}{{ key }}="{{ value }}"{% endfor %}>
-                                            {% if action == 'show' %}
-                                                <a href="{{ path(configuration.pageRoute('show'), {entity: item.id}) }}">
+                                            {% if inlineForm and configuration.action(context, 'edit', true, [item]) %}
+                                                <a href="#" data-modal="{{ path(
+                                                    configuration.pageroute('inline_edit'), {
+                                                        entity: item.id,
+                                                        context: context,
+                                                        label: label,
+                                                        redirectTo: app.request.uri,
+                                                    }|merge(configuration.pagerouteparams('inline_edit'))) }}" data-modal-create>
+                                                    {{ render_field(item, config, configuration.defaultlocale) }}
+                                                </a>
+                                            {% elseif action == 'show' and configuration.action(context, 'show', true, [item]) %}
+                                                <a href="{{ path(configuration.pageRoute('show'), {entity: item.id}|merge(configuration.pageRouteParams('show'))) }}">
                                                     {{ render_field(item, config, configuration.defaultLocale) }}
                                                 </a>
-                                            {% elseif action == 'edit' %}
-                                                <a href="{{ path(configuration.pageRoute('edit'), {entity: item.id}) }}">
-                                                    {{ render_field(item, config, configuration.defaultLocale) }}
+                                            {% elseif action == 'edit' and configuration.action(context, 'edit', true, [item]) %}
+                                                <a href="{{ path(configuration.pageroute('edit'), {entity: item.id}|merge(configuration.pagerouteparams('edit'))) }}">
+                                                    {{ render_field(item, config, configuration.defaultlocale) }}
                                                 </a>
                                             {% else %}
                                                 {{ render_field(item, config, configuration.defaultLocale) }}

@@ -29,18 +29,22 @@ abstract class Field
             'property' => null,
             'property_builder' => null,
             'view' => null,
+            'action' => null,
             'raw' => false,
             'sort' => null,
             'href' => null,
             'href_attr' => [],
             'attr' => [],
+            'inline_form' => null,
         ]);
 
         $resolver->setRequired('view');
         $resolver->setAllowedTypes('property', ['null', 'string']);
         $resolver->setAllowedTypes('view', 'string');
+        $resolver->setAllowedTypes('action', ['null', 'string']);
         $resolver->setAllowedTypes('attr', 'array');
         $resolver->setAllowedTypes('href', ['null', 'string', 'callable']);
+        $resolver->setAllowedTypes('inline_form', ['null', 'callable']);
         $resolver->setAllowedTypes('href_attr', 'array', 'callable');
         $resolver->setAllowedTypes('raw', 'boolean');
         $resolver->setAllowedTypes('property_builder', ['null', 'callable']);

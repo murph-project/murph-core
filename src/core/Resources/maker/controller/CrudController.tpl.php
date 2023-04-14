@@ -50,6 +50,12 @@ class <?= $class_name; ?> extends CrudController
         return $this->doEdit($entity, $entityManager, $request);
     }
 
+    #[Route(path: "/admin/<?= $route; ?>/inline_edit/{entity}/{context}/{label}", name: 'admin_<?= $route; ?>_inline_edit', methods: ['GET', 'POST'])]
+    public function inlineEdit(string $context, string $label, Entity $entity, EntityManager $entityManager, Request $request): Response
+    {
+        return $this->doInlineEdit($context, $label, $entity, $entityManager, $request);
+    }
+
     #[Route(path: "/admin/<?= $route; ?>/sort/{page}", name: "admin_<?= $route; ?>_sort", methods: ['POST'], requirements: ['page' => '\d+'])]
     public function sort(RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session, int $page = 1): Response
     {
@@ -79,6 +85,7 @@ class <?= $class_name; ?> extends CrudController
             ->setPageRoute('index', 'admin_<?= $route; ?>_index')
             ->setPageRoute('new', 'admin_<?= $route; ?>_new')
             ->setPageRoute('edit', 'admin_<?= $route; ?>_edit')
+            ->setPageRoute('inline_edit', 'admin_<?= $route; ?>_inline_edit')
             ->setPageRoute('show', 'admin_<?= $route; ?>_show')
             ->setPageRoute('sort', 'admin_<?= $route; ?>_sort')
             ->setPageRoute('batch', 'admin_<?= $route; ?>_batch')
@@ -98,6 +105,7 @@ class <?= $class_name; ?> extends CrudController
             // ->setAction('index', 'show', true)
             // ->setAction('index', 'edit', true)
             // ->setAction('index', 'delete', true)
+            // ->setDoubleClick('index', false)
 
             // ->setAction('edit', 'back', true)
             // ->setAction('edit', 'show', true)
