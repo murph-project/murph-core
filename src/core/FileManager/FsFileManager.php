@@ -303,7 +303,7 @@ class FsFileManager
     {
         if ('name' === $sort) {
             $finder->sortByName();
-        } elseif ('modification_date' === $sort) {
+        } elseif ('updated_date' === $sort) {
             $finder->sortByModifiedTime();
         }
 

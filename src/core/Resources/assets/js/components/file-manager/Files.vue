@@ -25,7 +25,7 @@
                 <div class="breadcrumb mb-0 file-manager-views">
                     <select v-model="sort" class="form-control form-control-sm d-inline w-auto ml-1">
                         <option value="name">Name</option>
-                        <option value="modification_date">Date</option>
+                        <option value="updated_at">Date</option>
                     </select>
                     <select v-model="sortDirection" class="form-control form-control-sm d-inline w-auto ml-1">
                         <option value="asc">ASC</option>
@@ -139,8 +139,10 @@
                         <span v-html="item.basename"></span>
                     </td>
                     <td class="text-right">
-                      <span class="btn btn-sm btn-light border-light mr-1 mb-1" v-text="readableFilesize(item.size)"></span>
-                      <span class="btn btn-sm btn-light border-light mr-1 mb-1" v-text="item.updated_at"></span>
+                      <span class="d-none d-sm-block">
+                        <span class="btn btn-sm btn-light border-light mr-1 mb-1" v-text="readableFilesize(item.size)"></span>
+                        <span class="btn btn-sm btn-light border-light mr-1 mb-1" v-text="item.updated_at"></span>
+                      </span>
                     </td>
                 </tr>
             </table>
