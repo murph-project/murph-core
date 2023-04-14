@@ -267,7 +267,7 @@ class CrudConfiguration
 
     /* -- */
 
-    public function setDoubleClick(string $page, bool $enabled): bool
+    public function setDoubleClick(string $page, bool $enabled): self
     {
         $this->doubleClick[$page] = $enabled;
 
