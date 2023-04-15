@@ -1,5 +1,15 @@
 ## [Unreleased]
 
+## [1.19.0] - 2023-04-15
+### Added
+* feat(page): forms for metas, opengraph and extra informations can be removed
+* feat(navigation): user interface is improved
+* feat(file): webp is allowed and shown in form widgets and in file manager details
+* feat(file): the file manager now show the size and the modification date of a file
+* feat(crud): add option `action` in field to add a link to the view page or to the edition page
+* feat(crud): add option `inline_form` in field to configure to edit the data
+* feat(crud): add `setDoubleClick` in the crud configuration
+
 ## [1.18.0] - 2023-01-13
 ### Added
 * feat(dep): add symfony/runtime
