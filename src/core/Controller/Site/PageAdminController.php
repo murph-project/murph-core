@@ -95,6 +95,8 @@ class PageAdminController extends CrudController
             ->setAction('index', 'show', false)
             ->setAction('edit', 'show', false)
 
+            ->setDoubleClick('index', true)
+
             ->setField('index', 'Name', Field\TextField::class, [
                 'property' => 'name',
                 'sort' => ['name', '.name'],

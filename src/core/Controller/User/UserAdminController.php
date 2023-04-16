@@ -8,15 +8,16 @@ use App\Core\Crud\Field;
 use App\Core\Event\Account\PasswordRequestEvent;
 use App\Core\Factory\UserFactory as Factory;
 use App\Core\Manager\EntityManager;
+use App\Core\Security\TokenGenerator;
 use App\Entity\User as Entity;
 use App\Form\UserType as Type;
 use App\Repository\UserRepositoryQuery as RepositoryQuery;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Core\Security\TokenGenerator;
 
 class UserAdminController extends CrudController
 {
@@ -50,6 +51,12 @@ class UserAdminController extends CrudController
         return $this->doEdit($entity, $entityManager, $request);
     }
 
+    #[Route(path: '/admin/user/inline_edit/{entity}/{context}/{label}', name: 'admin_user_inline_edit', methods: ['GET', 'POST'])]
+    public function inlineEdit(string $context, string $label, Entity $entity, EntityManager $entityManager, Request $request): Response
+    {
+        return $this->doInlineEdit($context, $label, $entity, $entityManager, $request);
+    }
+
     #[Route(path: '/admin/user/delete/{entity}', name: 'admin_user_delete', methods: ['DELETE', 'POST'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
@@ -81,6 +88,7 @@ class UserAdminController extends CrudController
             ->setPageRoute('index', 'admin_user_index')
             ->setPageRoute('new', 'admin_user_new')
             ->setPageRoute('edit', 'admin_user_edit')
+            ->setPageRoute('inline_edit', 'admin_user_inline_edit')
             ->setPageRoute('show', 'admin_user_show')
             ->setPageRoute('delete', 'admin_user_delete')
             ->setPageRoute('filter', 'admin_user_filter')
@@ -96,6 +104,7 @@ class UserAdminController extends CrudController
             ->setView('edit', '@Core/user/user_admin/edit.html.twig')
 
             ->setDefaultSort('index', 'username')
+            ->setDoubleClick('index', true)
 
             ->setField('index', 'E-mail', Field\TextField::class, [
                 'property' => 'email',
@@ -106,6 +115,9 @@ class UserAdminController extends CrudController
                 'property' => 'displayName',
                 'sort' => ['displayName', '.displayName'],
                 'attr' => ['class' => 'miw-200'],
+                'inline_form' => function (FormBuilderInterface $builder) {
+                    $builder->add('displayName', null);
+                },
             ])
         ;
     }

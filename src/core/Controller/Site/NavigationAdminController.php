@@ -104,6 +104,7 @@ class NavigationAdminController extends CrudController
             ->setView('form', '@Core/site/navigation_admin/_form.html.twig')
 
             ->setIsSortableCollection('index', true)
+            ->setDoubleClick('index', true)
 
             ->setField('index', 'Label', Field\TextField::class, [
                 'property' => 'label',
