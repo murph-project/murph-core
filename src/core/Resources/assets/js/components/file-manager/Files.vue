@@ -26,6 +26,7 @@
                     <select v-model="sort" class="form-control form-control-sm d-inline w-auto ml-1">
                         <option value="name">Name</option>
                         <option value="updated_at">Date</option>
+                        <option value="type">Type</option>
                     </select>
                     <select v-model="sortDirection" class="form-control form-control-sm d-inline w-auto ml-1">
                         <option value="asc">ASC</option>

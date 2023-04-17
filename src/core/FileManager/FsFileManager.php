@@ -301,14 +301,16 @@ class FsFileManager
 
     protected function applySort(Finder $finder, string $sort, string $direction)
     {
-        if ('name' === $sort) {
-            $finder->sortByName();
-        } elseif ('updated_date' === $sort) {
-            $finder->sortByModifiedTime();
-        }
+        $sorts = [
+            'name' => 'sortByName',
+            'type' => 'sortByType',
+            'updated_at' => 'sortByModifiedTime',
+        ];
 
         if ('desc' === $direction) {
-            $finder->reverseSorting();
+            $finder->{$sorts[$sort]}()->reverseSorting();
+        } else {
+            $finder->{$sorts[$sort]}();
         }
     }
 
