@@ -393,6 +393,10 @@ export default {
     body.on('file_manager.info.update.success', () => {
       $('*[data-modal="' + that.modalUrl + '"]').click()
     })
+
+    body.on('file_manager.info.directory.request_open', () => {
+      $('*[data-modal="' + that.modalUrl + '"]').click()
+    })
   },
   watch: {
     directory (directory) {
