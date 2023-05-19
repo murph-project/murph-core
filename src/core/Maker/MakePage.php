@@ -138,7 +138,7 @@ EOF
         $types = [
             'text' => null,
             'textarea' => null,
-            'choice' => null,
+            'choice' => 'BlockEntity\\ChoiceBlock::class',
             'collection' => 'BlockEntity\\CollectionBlock::class',
             'editor_js_textarea' => null,
             'file' => 'BlockEntity\\FileBlock::class',
