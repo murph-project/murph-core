@@ -18,8 +18,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class <?= $class_name; ?> extends CrudController
 {
-#[Route(path: '/admin/user/edit/{entity}', name: 'admin_user_edit', methods: ['GET', 'POST'])]
-
     #[Route(path: "/admin/<?= $route; ?>/{page}", name: "admin_<?= $route; ?>_index", methods: ['GET'], requirements: ['page' => '\d+'])]
     public function index(RepositoryQuery $query, Request $request, Session $session, int $page = 1): Response
     {
