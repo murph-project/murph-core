@@ -302,7 +302,7 @@ abstract class CrudController extends AdminController
             return;
         }
 
-        $form = $this->createForm($type);
+        $form = $this->createForm($type, null, $configuration->getFormOptions('filter'));
 
         if ($request->query->has($form->getName())) {
             $filters = $request->query->get($form->getName());
