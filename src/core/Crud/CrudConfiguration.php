@@ -251,6 +251,13 @@ class CrudConfiguration
         return $this->fields[$context] ?? [];
     }
 
+    public function setFields(string $context, array $fields): self
+    {
+        $this->fields[$context] = $fields;
+
+        return $this;
+    }
+
     /* -- */
 
     public function setMaxPerPage(string $page, int $max): self
