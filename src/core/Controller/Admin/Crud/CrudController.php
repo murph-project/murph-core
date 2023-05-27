@@ -284,7 +284,7 @@ abstract class CrudController extends AdminController
             throw $this->createNotFoundException();
         }
 
-        $form = $this->createForm($type);
+        $form = $this->createForm($type, null, $configuration->getFormOptions('filter'));
         $form->submit($session->get($form->getName(), []));
 
         return $this->render($configuration->getView('filter'), [
