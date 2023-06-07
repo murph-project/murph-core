@@ -10,6 +10,8 @@ $pagination-bg: #ffffff !default;
 $pagination-active-color: #ffffff !default;
 $pagination-active-bg: #343a40 !default;
 
+$sidebar-width: 260px !default;
+
 @import "~choices.js/src/styles/choices.scss";
 @import "~bootstrap/scss/bootstrap.scss";
 @import "~@fortawesome/fontawesome-free/css/all.css";
@@ -173,7 +175,7 @@ tr.table-primary-light {
 
 
 .sidebar {
-  width: 260px;
+  width: $sidebar-width;
   display: inline-block;
 
   .sidebar-toggler {
@@ -253,8 +255,8 @@ tr.table-primary-light {
 
 .body {
   padding-top: 60px;
-  width: calc(100% - 260px);
-  margin-left: 260px;
+  width: calc(100% - $sidebar-width);
+  margin-left: $sidebar-width;
   display: inline-block;
 
   .nav {
