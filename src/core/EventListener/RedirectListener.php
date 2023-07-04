@@ -37,7 +37,7 @@ class RedirectListener
 
         $redirects = $this->repository
             ->orderBy('.sortOrder')
-            ->where('.isEnabled=1')
+            ->where('.isEnabled=true')
             ->find()
         ;
 
