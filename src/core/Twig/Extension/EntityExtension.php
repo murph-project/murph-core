@@ -33,7 +33,7 @@ class EntityExtension extends AbstractExtension
         ];
     }
 
-    public function toArray(EntityInterface $entity): array
+    public function toArray(EntityInterface $entity, bool $keepIterable = true, array $except = []): array
     {
         $metaData = $this->entityManager->getClassMetadata(get_class($entity));
         $array = [];
@@ -41,6 +41,14 @@ class EntityExtension extends AbstractExtension
         foreach ($metaData->fieldNames as $field) {
             try {
                 $value = $this->propertyAccessor->getValue($entity, $field);
+
+                if (in_array($field, $except)) {
+                    continue;
+                }
+
+                if (is_iterable($value) && !$keepIterable) {
+                    continue;
+                }
 
                 if (is_object($value)) {
                     $value = (string) $value;
