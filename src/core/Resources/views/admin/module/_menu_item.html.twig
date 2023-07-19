@@ -1,15 +1,28 @@
-{% block item %}
-    <li class="nav-item">
-        <a class="nav-link {% if id == section %}active{% endif %}" href="{{ route }}">
-            {%- block icon -%}
-                <span class="{{ icon }}"></span>
-            {%- endblock -%}
+{% set is_disabled = is_disabled|default(false) %}
+{% set disabled_class = is_disabled ? 'text-muted' : '' %}
 
-            {%- block label -%}
-                <span class="nav-item-label">
-                    {{- label|trans -}}
-                </span>
-            {%- endblock -%}
-        </a>
-    </li>
+{% set icon %}
+    <span class="{{ icon }} {{ disabled_class }}"></span>
+{% endset %}
+
+{% set label %}
+    <span class="nav-item-label {{ disabled_class }}">
+        {{- label|trans -}}
+    </span>
+{% endset %}
+
+{% block item %}
+    {% if is_disabled|default(false) %}
+        <li class="nav-item">
+            <span class="nav-link {% if id == section %}active{% endif %}">
+                {{- (icon ~ label)|raw -}}
+            </span>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link {% if id == section %}active{% endif %}" href="{{ route }}">
+                {{- (icon ~ label)|raw -}}
+            </a>
+        </li>
+    {% endif %}
 {% endblock %}
