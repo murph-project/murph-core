@@ -21,49 +21,43 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserAdminController extends CrudController
 {
-    #[Route(path: '/admin/user/{page}', name: 'admin_user_index', methods: ['GET'], requirements: ['page' => '\d+'])]
+    protected ?CrudConfiguration $configuration = null;
+
     public function index(RepositoryQuery $query, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doIndex($page, $query, $request, $session);
     }
 
-    #[Route(path: '/admin/user/new', name: 'admin_user_new', methods: ['GET', 'POST'])]
     public function new(Factory $factory, EntityManager $entityManager, Request $request, TokenGenerator $tokenGenerator): Response
     {
         return $this->doNew($factory->create(null, $tokenGenerator->generateToken()), $entityManager, $request);
     }
 
-    #[Route(path: '/admin/user/show/{entity}', name: 'admin_user_show', methods: ['GET'])]
     public function show(Entity $entity): Response
     {
         return $this->doShow($entity);
     }
 
-    #[Route(path: '/admin/user/filter', name: 'admin_user_filter', methods: ['GET'])]
     public function filter(Session $session): Response
     {
         return $this->doFilter($session);
     }
 
-    #[Route(path: '/admin/user/edit/{entity}', name: 'admin_user_edit', methods: ['GET', 'POST'])]
     public function edit(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doEdit($entity, $entityManager, $request);
     }
 
-    #[Route(path: '/admin/user/inline_edit/{entity}/{context}/{label}', name: 'admin_user_inline_edit', methods: ['GET', 'POST'])]
     public function inlineEdit(string $context, string $label, Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doInlineEdit($context, $label, $entity, $entityManager, $request);
     }
 
-    #[Route(path: '/admin/user/delete/{entity}', name: 'admin_user_delete', methods: ['DELETE', 'POST'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         return $this->doDelete($entity, $entityManager, $request);
     }
 
-    #[Route(path: '/admin/user/resetting_request/{entity}', name: 'admin_user_resetting_request', methods: ['POST'])]
     public function requestResetting(Entity $entity, EventDispatcherInterface $eventDispatcher, Request $request): Response
     {
         if ($this->isCsrfTokenValid('resetting_request'.$entity->getId(), $request->request->get('_token'))) {
