@@ -15,7 +15,9 @@
 
         <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light border-bottom">
             <a class="navbar-brand" href="{{ path('admin_dashboard_index') }}">
-                <img id="logo" src="{{ asset(site_logo) }}" alt="{{ site_name }}" title="{{ site_name }}">
+                {% if site_logo %}
+                    <img id="logo" src="{{ asset(site_logo) }}" alt="{{ site_name }}" title="{{ site_name }}">
+                {% endif %}
 
                 <span class="ml-2 d-none d-md-inline">{{ site_name }}</span>
             </a>

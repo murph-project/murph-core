@@ -2,7 +2,7 @@
 
 {% set context = context ?? 'show' %}
 
-{% block title %}{{ configuration.pageTitle(context)|trans|build_string(entity) }} - {{ parent() }}{% endblock %}
+{% block title %}{{ configuration.pageTitle(context)|trans|build_string(entity) }} {{ parent() ? ('- ' ~ parent()) : '' }}{% endblock %}
 
 {% block body %}
     {% block header %}

@@ -2,7 +2,7 @@
 
 {% set context = context ?? 'index' %}
 
-{% block title %}{{ configuration.pageTitle(context)|trans }} - {{ parent() }}{% endblock %}
+{% block title %}{{ configuration.pageTitle(context)|trans }} {{ parent() ? ('- ' ~ parent()) : '' }}{% endblock %}
 
 {% block body %}
     {% block header %}

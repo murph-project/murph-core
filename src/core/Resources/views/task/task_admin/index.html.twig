@@ -1,6 +1,6 @@
 {% extends '@Core/admin/layout.html.twig' %}
 
-{% block title %}{{ 'Tasks'|trans }} - {{ parent() }}{% endblock %}
+{% block title %}{{ 'Tasks'|trans }} {{ parent() ? ('- ' ~ parent()) : '' }}{% endblock %}
 
 {% block body %}
     <div class="bg-light">
