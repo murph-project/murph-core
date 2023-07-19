@@ -103,6 +103,10 @@ class <?= $class_name; ?> extends CrudController
 
             ->setForm('edit', Type::class, [])
             ->setForm('new', Type::class)
+
+            ->setView('form', 'admin/<?= $route; ?>_admin/_form.html.twig')
+            ->setView('show_entity', 'admin/<?= $route; ?>_admin/_show.html.twig')
+
             // ->setForm('filter', Type::class)
 
             // ->setMaxPerPage('index', 20)

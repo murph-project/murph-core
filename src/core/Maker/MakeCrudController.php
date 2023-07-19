@@ -12,6 +12,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use function Symfony\Component\String\u;
+use Symfony\Component\Filesystem\Filesystem;
 
 class MakeCrudController extends AbstractMaker
 {
@@ -102,6 +103,17 @@ class MakeCrudController extends AbstractMaker
             __DIR__.'/../Resources/maker/controller/CrudController.tpl.php',
             $options
         );
+
+        $views = ['_form.html.twig', '_show.html.twig'];
+        $directory = sprintf('templates/admin/%s_admin/', $options['route']);
+        $filesystem = new Filesystem();
+        $filesystem->mkdir($directory);
+        foreach ($views as $view) {
+            $filesystem->dumpFile(
+                $directory.$view,
+                sprintf("{{ include('@Core/admin/crud/%s') }}\n", $view)
+            );
+        }
 
         $generator->writeChanges();
 
