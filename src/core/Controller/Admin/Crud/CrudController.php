@@ -26,7 +26,7 @@ abstract class CrudController extends AdminController
 
     abstract protected function getConfiguration(): CrudConfiguration;
 
-    protected function doIndex(int $page, RepositoryQuery $query, Request $request, Session $session): Response
+    protected function doIndex(int $page, RepositoryQuery $query, Request $request, Session $session, string $context = 'index'): Response
     {
         $configuration = $this->getConfiguration();
 
@@ -35,10 +35,10 @@ abstract class CrudController extends AdminController
 
         $pager = $query
             ->usefilters($this->filters)
-            ->paginate($page, $configuration->getmaxperpage('index'))
+            ->paginate($page, $configuration->getMaxPerPage($context))
         ;
 
-        return $this->render($this->getConfiguration()->getView('index'), [
+        return $this->render($this->getConfiguration()->getView($context), [
             'configuration' => $configuration,
             'pager' => $pager,
             'sort' => $this->sort,
@@ -49,13 +49,13 @@ abstract class CrudController extends AdminController
         ]);
     }
 
-    protected function doNew(EntityInterface $entity, EntityManager $entityManager, Request $request, callable $beforeCreate = null): Response
+    protected function doNew(EntityInterface $entity, EntityManager $entityManager, Request $request, callable $beforeCreate = null, string $context = 'new'): Response
     {
         $configuration = $this->getConfiguration();
 
         $this->prepareEntity($entity);
 
-        $form = $this->createForm($configuration->getForm('new'), $entity, $configuration->getFormOptions('new'));
+        $form = $this->createForm($configuration->getForm('new'), $entity, $configuration->getFormOptions($context));
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -76,30 +76,30 @@ abstract class CrudController extends AdminController
             $this->addFlash('warning', 'The form is not valid.');
         }
 
-        return $this->render($configuration->getView('new'), [
+        return $this->render($configuration->getView($context), [
             'form' => $form->createView(),
             'configuration' => $configuration,
             'entity' => $entity,
         ]);
     }
 
-    protected function doShow(EntityInterface $entity): Response
+    protected function doShow(EntityInterface $entity, string $context = 'show'): Response
     {
         $configuration = $this->getConfiguration();
 
-        return $this->render($configuration->getView('show'), [
+        return $this->render($configuration->getView($context), [
             'entity' => $entity,
             'configuration' => $configuration,
         ]);
     }
 
-    protected function doEdit(EntityInterface $entity, EntityManager $entityManager, Request $request, callable $beforeUpdate = null): Response
+    protected function doEdit(EntityInterface $entity, EntityManager $entityManager, Request $request, callable $beforeUpdate = null, string $context = 'edit'): Response
     {
         $configuration = $this->getConfiguration();
 
         $this->prepareEntity($entity);
 
-        $form = $this->createForm($configuration->getForm('edit'), $entity, $configuration->getFormOptions('edit'));
+        $form = $this->createForm($configuration->getForm('edit'), $entity, $configuration->getFormOptions($context));
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -112,15 +112,15 @@ abstract class CrudController extends AdminController
                 $entityManager->update($entity);
                 $this->addFlash('success', 'The data has been saved.');
 
-                return $this->redirectToRoute($configuration->getPageRoute('edit'), array_merge(
+                return $this->redirectToRoute($configuration->getPageRoute($context), array_merge(
                     ['entity' => $entity->getId()],
-                    $configuration->getPageRouteParams('edit')
+                    $configuration->getPageRouteParams($context)
                 ));
             }
             $this->addFlash('warning', 'The form is not valid.');
         }
 
-        return $this->render($configuration->getView('edit'), [
+        return $this->render($configuration->getView($context), [
             'form' => $form->createView(),
             'configuration' => $configuration,
             'entity' => $entity,
@@ -162,7 +162,7 @@ abstract class CrudController extends AdminController
             return $this->redirect($redirectTo);
         }
 
-        return $this->render('@Core/admin/crud/inline_edit.html.twig', [
+        return $this->render($configuration->getView('inline_edit'), [
             'form' => $form->createView(),
             'configuration' => $configuration,
             'entity' => $entity,
@@ -258,7 +258,7 @@ abstract class CrudController extends AdminController
         return $this->json([]);
     }
 
-    protected function doDelete(EntityInterface $entity, EntityManager $entityManager, Request $request, callable $beforeDelete = null): Response
+    protected function doDelete(EntityInterface $entity, EntityManager $entityManager, Request $request, callable $beforeDelete = null, string $route): Response
     {
         $configuration = $this->getConfiguration();
 
@@ -272,10 +272,10 @@ abstract class CrudController extends AdminController
             $this->addFlash('success', 'The data has been removed.');
         }
 
-        return $this->redirectToRoute($configuration->getPageRoute('index'));
+        return $this->redirectToRoute($configuration->getPageRoute($route));
     }
 
-    protected function doFilter(Session $session): Response
+    protected function doFilter(Session $session, string $context = 'filter'): Response
     {
         $configuration = $this->getConfiguration();
         $type = $configuration->getForm('filter');
@@ -287,7 +287,7 @@ abstract class CrudController extends AdminController
         $form = $this->createForm($type, null, $configuration->getFormOptions('filter'));
         $form->submit($session->get($form->getName(), []));
 
-        return $this->render($configuration->getView('filter'), [
+        return $this->render($configuration->getView($context), [
             'form' => $form->createView(),
             'configuration' => $configuration,
         ]);
