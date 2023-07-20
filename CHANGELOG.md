@@ -1,5 +1,29 @@
 ## [Unreleased]
 
+### Added
+* enable double click on cruds
+* add block class name for the choice type in the page maker
+* update file details view on the file manager
+* add form options in the crud filter action
+* add trans filter in inline form modal title
+* add setter to define all fields in a defined context
+* add filename generator setter in FileUploadHandler
+* add variable for the sidebar size
+* add twig block to override defaults actions in crud index template
+* add option to remove iterable values and/or specifics keys in the twig toArray function
+* add boolean field for CRUD
+* add context variable in each controllers to simplify overrides
+* core.site.name and core.site.logo are not longer required
+* add default templates when a crud is generated
+* add boolean 'is_disabled' in the menu item template options
+### Fixed
+* fix filemanager date ordering
+* fix maker CrudController template: remove bad pasted code
+* fix redirect listener: use boolean instead of integer
+* fix responsive of account edit template
+### Changed
+* user admin routes are defined in core, custom controller is not required
+
 ## [1.19.0] - 2023-04-15
 ### Added
 * feat(page): forms for metas, opengraph and extra informations can be removed
