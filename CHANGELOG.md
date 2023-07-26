@@ -1,5 +1,6 @@
 ## [Unreleased]
 
+## [1.20.0] - 2023-07-20
 ### Added
 * enable double click on cruds
 * add block class name for the choice type in the page maker
