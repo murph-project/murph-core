@@ -20,6 +20,8 @@ class CollectionType extends BaseCollectionType
             'collection_name' => $options['collection_name'],
             'label_add' => $options['label_add'],
             'label_delete' => $options['label_delete'],
+            'allow_add' => $options['allow_add'],
+            'allow_delete' => $options['allow_delete'],
         ]);
     }
 
