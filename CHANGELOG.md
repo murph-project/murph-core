@@ -1,6 +1,5 @@
 ## [Unreleased]
 
-## [1.20.0] - 2023-07-20
 ### Added
 * enable double click on cruds
 * add block class name for the choice type in the page maker
@@ -22,6 +21,7 @@
 * fix maker CrudController template: remove bad pasted code
 * fix redirect listener: use boolean instead of integer
 * fix responsive of account edit template
+* fix collection widget: allow_add/allow_delete and prototype
 ### Changed
 * user admin routes are defined in core, custom controller is not required
 
