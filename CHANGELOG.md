@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+### Fixed
+* fix routes in the global settings controller
+
 ## [1.20.0] - 2023-07-27
 ### Added
 * enable double click on cruds

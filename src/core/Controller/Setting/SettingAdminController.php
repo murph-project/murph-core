@@ -12,14 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/setting")
- */
+#[Route(path: '/admin/setting')]
 class SettingAdminController extends AdminController
 {
-    /**
-     * @Route("/{page}", name="admin_setting_index", requirements={"page": "\d+"})
-     */
+    #[Route(path: '/{page}', name: 'admin_setting_index', requirements: ['page' => '\d+'])]
     public function index(
         RepositoryQuery $query,
         EventDispatcherInterface $eventDispatcher,
@@ -38,9 +34,7 @@ class SettingAdminController extends AdminController
         ]);
     }
 
-    /**
-     * @Route("/edit/{entity}", name="admin_setting_edit")
-     */
+    #[Route(path: '/edit/{entity}', name: 'admin_setting_edit')]
     public function edit(
         Entity $entity,
         EntityManager $entityManager,
@@ -78,9 +72,7 @@ class SettingAdminController extends AdminController
         ]);
     }
 
-    /**
-     * @Route("/delete/{entity}", name="admin_setting_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/delete/{entity}', name: 'admin_setting_delete', methods: ['DELETE', 'POST'])]
     public function delete(Entity $entity, EntityManager $entityManager, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete'.$entity->getId(), $request->request->get('_token'))) {
