@@ -258,7 +258,7 @@ abstract class CrudController extends AdminController
         return $this->json([]);
     }
 
-    protected function doDelete(EntityInterface $entity, EntityManager $entityManager, Request $request, callable $beforeDelete = null, string $route): Response
+    protected function doDelete(EntityInterface $entity, EntityManager $entityManager, Request $request, callable $beforeDelete = null, string $route = 'index'): Response
     {
         $configuration = $this->getConfiguration();
 
