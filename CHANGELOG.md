@@ -1,6 +1,8 @@
 ## [Unreleased]
 
 ### Added
+* add color property in Navigation"
+* add badge with navigation color in admin views
 * add `default_value` option in crud fields
 ### Fixed
 * fix routes in the global settings controller
