@@ -28,18 +28,33 @@
 {%- endset -%}
 
 {% set hasMetaForm = (formMetas ~ formOpenGraph ~ formOthers)|length > 0 %}
-{% set hasBlockFrom = form.children|length > (metaFormItemsCount + 1) %}
+{% set hasBlockForm = form.children|length > (metaFormItemsCount + 1) %}
 {% set activeMetaForm = formMetas|length ? 'metas' : (formOpenGraph|length ? 'openGraph' : 'others') %}
 
 <div class="row">
-    {% if hasBlockFrom %}
+    {% set nodes = entity.nodes %}
+
+    {% if nodes|length %}
+        <div class="col-12">
+            {% for node in nodes %}
+                <a href="{{ path('admin_site_tree_navigation', {
+                    navigation: node.menu.navigation.id,
+                    'data-modal': path('admin_site_node_edit', {entity: node.id}),
+                }) }}" class="btn btn-sm btn-light mr-1" target="_blank">
+                    {{ node.label }} ({{ node.menu.navigation.label }})
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if hasBlockForm %}
         <div class="{% if hasMetaForm %}col-md-8{% else %}col-md-12{% endif %} p-2" id="page-main-form">
             {{ form_widget(form, {attr: {class: 'row'}}) }}
         </div>
     {% endif %}
 
     {% if hasMetaForm %}
-        <div class="{% if hasBlockFrom %}col-md-4{% else %}col-md-12{% endif %} p-md-3" id="page-metas-form">
+        <div class="{% if hasBlockForm %}col-md-4{% else %}col-md-12{% endif %} p-md-3" id="page-metas-form">
             <ul class="nav nav-pills">
                 {% if formMetas|length > 0 %}
                     <li class="nav-item mb-1">
