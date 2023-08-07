@@ -108,6 +108,7 @@ class NavigationAdminController extends CrudController
 
             ->setField('index', 'Label', Field\TextField::class, [
                 'property' => 'label',
+                'view' => '@Core/site/navigation_admin/field/label.html.twig',
                 'attr' => ['class' => 'miw-200'],
             ])
             ->setField('index', 'Domain', Field\ButtonField::class, [

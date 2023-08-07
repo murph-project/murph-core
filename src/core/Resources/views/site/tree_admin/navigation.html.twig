@@ -8,12 +8,14 @@
             <div class="crud-header-title">
                 <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="font-weight-bold">
+                        {{ navigation_color_badge(navigation) }}
                         {{ navigation.label }}
                     </span>
                 </button>
                 <div class="dropdown-menu">
                     {% for item in navigations %}
                         <a href="{{ path('admin_site_tree_navigation', {navigation: item.id}) }}" class="dropdown-item">
+                            {{ navigation_color_badge(item) }}
                             {{ item.label }}
                         </a>
                     {% endfor %}

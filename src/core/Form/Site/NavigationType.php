@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 
 class NavigationType extends AbstractType
 {
@@ -35,6 +36,20 @@ class NavigationType extends AbstractType
             TextType::class,
             [
                 'label' => 'Code',
+                'required' => true,
+                'attr' => [
+                ],
+                'constraints' => [
+                    new NotBlank(),
+                ],
+            ]
+        );
+
+        $builder->add(
+            'color',
+            ColorType::class,
+            [
+                'label' => 'Color',
                 'required' => true,
                 'attr' => [
                 ],

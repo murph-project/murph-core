@@ -402,6 +402,31 @@ th {
   margin-right: 4px;
 }
 
+.form-color {
+  display: inline-block;
+  line-height: 0;
+  border-radius: 25%;
+
+  input {
+    padding: 0;
+    border: 0;
+    height: auto;
+    width: 30px;
+    aspect-ratio: 1/1;
+    display: inline-block;
+  }
+}
+
+.badge-square {
+  aspect-ratio: 1/1;
+  min-width: 14px;
+  min-height: 14px;
+  vertical-align: middle;
+  padding: 0;
+  aspect-ratio: 1/1;
+  display: inline-block;
+}
+
 #form-main {
   > .tab-content {
     @media screen and (min-width: 500px) {

@@ -42,6 +42,9 @@ class Navigation implements EntityInterface
     #[ORM\Column(type: 'string', length: 10)]
     protected $locale = 'en';
 
+    #[ORM\Column(type: 'string', length: 7, nullable: true)]
+    protected $color = null;
+
     #[ORM\Column(type: 'integer', nullable: true)]
     protected $sortOrder;
 
@@ -236,5 +239,17 @@ class Navigation implements EntityInterface
         }
 
         return false;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    public function getColor(): string
+    {
+        return $this->color;
     }
 }

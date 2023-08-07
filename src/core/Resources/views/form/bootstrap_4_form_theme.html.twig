@@ -7,6 +7,15 @@
     </div>
 {% endblock %}
 
+{% block color_widget %}
+    <div class="form-color-container">
+        <div class="form-color">
+            {%- set type = type|default('color') -%}
+            {{ block('form_widget_simple') }}
+        </div>
+    </div>
+{% endblock %}
+
 {% block file_widget -%}
     <div class="row">
         <div class="col-12">

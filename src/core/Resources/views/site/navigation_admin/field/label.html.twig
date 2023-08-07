@@ -1,0 +1,6 @@
+{% extends '@Core/admin/crud/field/text.html.twig' %}
+
+{% block value %}
+    {{ navigation_color_badge(entity) }}
+    {{ parent() }}
+{% endblock %}
