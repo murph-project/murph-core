@@ -28,6 +28,7 @@ abstract class Field
         $resolver->setDefaults([
             'property' => null,
             'property_builder' => null,
+            'default_value' => null,
             'view' => null,
             'action' => null,
             'raw' => false,

@@ -17,6 +17,7 @@ class BooleanField extends Field
 
         $resolver->setDefaults([
             'view' => '@Core/admin/crud/field/boolean.html.twig',
+            'default_value' => false,
         ]);
 
         return $resolver;

@@ -1,3 +1,7 @@
 {%- block value -%}
-    <img {% for k, v in options.image_attr %}{{ k }}="{{ v }}" {% endfor %} src="{{ asset(value) }}">
+    {% set value = value|default(options.default_value) %}
+
+    {% if value %}
+        <img {% for k, v in options.image_attr %}{{ k }}="{{ v }}" {% endfor %} src="{{ asset(value) }}">
+    {% endif %}
 {%- endblock -%}

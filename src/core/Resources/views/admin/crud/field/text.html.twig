@@ -1,7 +1,7 @@
 {%- block value -%}
     {%- if options.raw -%}
-        {{- value|raw -}}
+        {{- value|default(options.default_value)|raw -}}
     {%- else -%}
-        {{- value|trans -}}
+        {{- value|default(options.default_value)|trans -}}
     {%- endif -%}
 {%- endblock -%}

@@ -51,6 +51,9 @@
 {% endblock %}
 
 {% block collection_block_widget %}
+    {% set allow_delete = allow_delete|default(false) %}
+    {% set allow_add = allow_add|default(false) %}
+
     <div data-collection="collection-{{ collection_name }}">
         {% for item in form.value %}
             <div data-collection-item="{{ loop.index }}">
@@ -98,6 +101,8 @@
 
 {% block murph_collection_widget %}
     {% set attrs = attr|merge({class: 'mb-1 ' ~ (attr.class ?? '')}) %}
+    {% set allow_delete = allow_delete|default(false) %}
+    {% set allow_add = allow_add|default(false) %}
 
     <div data-collection="collection-{{ collection_name }}" {% for attr, value in row_attr %}{{ attr }}="{{ value }}"{% endfor %}>
         {% for item in form %}

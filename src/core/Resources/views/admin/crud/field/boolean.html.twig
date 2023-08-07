@@ -1,5 +1,5 @@
 {%- block value -%}
-    {% if value %}
+    {% if value|default(options.default_value) %}
         <span class="rounded-pill pl-3 pr-1 bg-secondary text-white">
             <span class="fa fa-circle"></span>
         </span>
