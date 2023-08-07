@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+### Added
+* add `default_value` option in crud fields
 ### Fixed
 * fix routes in the global settings controller
 
