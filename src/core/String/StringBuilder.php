@@ -34,7 +34,7 @@ class StringBuilder
             return $format;
         }
 
-        preg_match_all('/\{([a-zA-Z0-9\._]+)\}/i', $format, $matches, PREG_SET_ORDER);
+        preg_match_all('/\{([a-zA-Z0-9\._\[\]]+)\}/i', $format, $matches, PREG_SET_ORDER);
 
         foreach ($matches as $match) {
             $propertyValue = $this->propertyAccessor->getValue($object, $match[1]);
