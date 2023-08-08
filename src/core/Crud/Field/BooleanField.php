@@ -17,8 +17,11 @@ class BooleanField extends Field
 
         $resolver->setDefaults([
             'view' => '@Core/admin/crud/field/boolean.html.twig',
+            'display' => 'toggle',
             'default_value' => false,
         ]);
+
+        $resolver->setAllowedTypes('display', 'string');
 
         return $resolver;
     }
