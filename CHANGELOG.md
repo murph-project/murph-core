@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+### Added
+* add form error handle in inline edit action and refill the form using the previous request content
+
 ## [1.21.0] - 2023-08-11
 ### Added
 * allow to use array syntax in string builder filter
