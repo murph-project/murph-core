@@ -1,9 +1,13 @@
 ## [Unreleased]
 
+## [1.21.0] - 2023-08-11
 ### Added
-* add color property in Navigation"
+* allow to use array syntax in string builder filter
+* add color property in Navigation
 * add badge with navigation color in admin views
 * add `default_value` option in crud fields
+* add `display` option in BooleanField
+* add associated nodes in page form
 ### Fixed
 * fix routes in the global settings controller
 
