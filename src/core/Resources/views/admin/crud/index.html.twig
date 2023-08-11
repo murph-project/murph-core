@@ -204,7 +204,7 @@
                                                         entity: item.id,
                                                         context: context,
                                                         label: label,
-                                                        redirectTo: app.request.uri,
+                                                        redirectTo: app.request.pathInfo,
                                                     }|merge(configuration.pagerouteparams('inline_edit'))) }}" data-modal-create>
                                                     {{ render_field(item, config, configuration.defaultlocale) }}
                                                 </a>

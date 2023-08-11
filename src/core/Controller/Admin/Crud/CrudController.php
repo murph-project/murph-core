@@ -142,8 +142,22 @@ abstract class CrudController extends AdminController
 
         call_user_func_array($callback, [$builder, $entity]);
 
-        $form = $builder->getForm();
         $redirectTo = $request->query->get('redirectTo');
+
+        $form = $builder->getForm();
+        $session = $request->getSession();
+
+        $lastRequestId = sprintf('inline_request_%s_%s', get_class($entity), $entity->getId());
+        $lastRequest = $session->get($lastRequestId);
+
+        if ($lastRequest !== null && !$request->isMethod('POST')) {
+            $fakeRequest = Request::create(
+                uri: $request->getUri(),
+                method: 'POST',
+                parameters: [$form->getName() => $lastRequest]
+            );
+            $form->handleRequest($fakeRequest);
+        }
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -153,13 +167,21 @@ abstract class CrudController extends AdminController
                     call_user_func_array($beforeUpdate, [$entity, $form, $request]);
                 }
 
+                $session->remove($lastRequestId);
                 $entityManager->update($entity);
                 $this->addFlash('success', 'The data has been saved.');
-            } else {
-                $this->addFlash('warning', 'The form is not valid.');
+
+                return $this->redirect($redirectTo);
             }
 
-            return $this->redirect($redirectTo);
+            $session->set($lastRequestId, $request->request->get('form'));
+            $this->addFlash('warning', 'The form is not valid.');
+
+            return $this->redirect(sprintf(
+                '%s?data-modal=%s',
+                $redirectTo,
+                urlencode($request->getUri())
+            ));
         }
 
         return $this->render($configuration->getView('inline_edit'), [
