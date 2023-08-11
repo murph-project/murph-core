@@ -156,7 +156,9 @@ abstract class CrudController extends AdminController
                 method: 'POST',
                 parameters: [$form->getName() => $lastRequest]
             );
+
             $form->handleRequest($fakeRequest);
+            $session->remove($lastRequestId);
         }
 
         if ($request->isMethod('POST')) {
