@@ -622,5 +622,11 @@ module.exports = function () {
 
   $(() => {
     doInitEditor()
+
+    $('body').on('hidden.bs.modal', '.modal', (e) => {
+      $(e.target).find('.tox-tinymce').each(() => {
+        window.tinymce.remove($(this).prev().attr('id'))
+      })
+    })
   })
 }
