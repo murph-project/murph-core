@@ -4,6 +4,7 @@
 * add form error handle in inline edit action and refill the form using the previous request content
 ### Fixed
 * fix tinymce reload when modal is closed and reopened
+* fix modal hiding when a file is successfuly uploaded in the file manager
 
 ## [1.21.0] - 2023-08-11
 ### Added
