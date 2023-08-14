@@ -385,7 +385,7 @@ export default {
 
     $(events).each((k, event) => {
       body.on(event + '.success', () => {
-        $('div[id^=modal-container]').not('#modal-container').modal('hide')
+        $('div[id^=modal-container-]').modal('hide')
         that.refresh()
       })
     })
