@@ -417,16 +417,6 @@ th {
   }
 }
 
-.badge-square {
-  aspect-ratio: 1/1;
-  min-width: 14px;
-  min-height: 14px;
-  vertical-align: middle;
-  padding: 0;
-  aspect-ratio: 1/1;
-  display: inline-block;
-}
-
 #form-main {
   > .tab-content {
     @media screen and (min-width: 500px) {

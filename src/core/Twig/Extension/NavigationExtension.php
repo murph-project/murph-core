@@ -25,7 +25,7 @@ class NavigationExtension extends AbstractExtension
         }
 
         return sprintf(
-            '<span class="badge badge-square" style="background: %s">&nbsp;</span>',
+            '<span class="fa fa-square" style="color: %s"></span>',
             $entity->getColor()
         );
     }
