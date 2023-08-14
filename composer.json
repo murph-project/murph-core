@@ -26,6 +26,7 @@
         "phpdocumentor/reflection-docblock": "^5.3",
         "scheb/2fa-google-authenticator": "^5.13",
         "scheb/2fa-qr-code": "^5.13",
+        "sensio/framework-extra-bundle": "^6.2",
         "sensiolabs/ansi-to-html": "^1.2",
         "spe/filesize-extension-bundle": "~2.0.0",
         "stof/doctrine-extensions-bundle": "^1.7",
