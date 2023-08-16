@@ -36,7 +36,7 @@ const fileManagerBrowser = function (callback) {
 
   const clickCallback = (e) => {
     callback($(e.target).attr('data-value'), {})
-    $('div[id^="modal-container"]').modal('hide')
+    $('div[id^="modal-container-"]').modal('hide')
     container.modal('hide')
 
     $('body').off('click', '#file-manager-insert', clickCallback)
@@ -624,9 +624,11 @@ module.exports = function () {
     doInitEditor()
 
     $('body').on('hidden.bs.modal', '.modal', (e) => {
-      $(e.target).find('.tox-tinymce').each(() => {
-        window.tinymce.remove($(this).prev().attr('id'))
-      })
+      if (!$('.tox-dialog').length) {
+        $(e.target).find('.tox-tinymce').each(() => {
+          window.tinymce.remove($(this).prev().attr('id'))
+        })
+      }
     })
   })
 }
