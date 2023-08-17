@@ -7,7 +7,7 @@
             </button>
         </div>
         <div class="modal-body">
-            <form action="{{ path(configuration.pageRoute('inline_edit'), {entity: entity.id, context: context, label: label, redirectTo, redirectTo}|merge(configuration.pageRouteParams('inline_edit'))) }}" id="form-entity-edit" method="POST">
+            <form action="{{ path(configuration.pageRoute('inline_edit'), {entity: entity.id, context: context, label: label, redirectTo: redirectTo}|merge(configuration.pageRouteParams('inline_edit'))) }}" id="form-entity-edit" method="POST">
                 {{ include('@Core/setting/setting_admin/_form.html.twig') }}
             </form>
         </div>

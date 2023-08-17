@@ -7,7 +7,7 @@
             </button>
         </div>
         <div class="modal-body">
-            <form action="{{ path('admin_navigation_setting_edit', {entity: entity.id}) }}" id="form-entity-edit" method="POST">
+            <form action="{{ path('admin_navigation_setting_edit', {entity: entity.id, redirectTo: redirectTo}) }}" id="form-entity-edit" method="POST">
                 {{ include('@Core/setting/navigation_setting_admin/_form.html.twig') }}
             </form>
         </div>

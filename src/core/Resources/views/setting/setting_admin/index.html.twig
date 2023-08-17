@@ -22,11 +22,11 @@
             </thead>
             <tbody>
                 {% for item in pager %}
-                    {% set edit = path('admin_setting_edit', {entity: item.id}) %}
+                    {% set edit = path('admin_setting_edit', {entity: item.id, redirectTo: app.request.pathInfo}) %}
 
                     <tr>
                         <td class="col-5">
-                            <a href="#" data-modal="{{ edit }}" class="font-weight-bold text-body d-block">
+                            <a href="#" data-modal="{{ edit }}" data-modal-create class="font-weight-bold text-body d-block">
                                 {{ item.label|trans }}
                             </a>
                         </td>
@@ -34,7 +34,7 @@
                             <span class="btn btn-light">{{ item.section|trans }}</span>
                         </td>
                         <td class="col-2 miw-100 text-right">
-                            <span data-modal="{{ edit }}" class="btn btn-sm btn-primary mr-1">
+                            <span data-modal="{{ edit }}" data-modal-create class="btn btn-sm btn-primary mr-1">
                                 <span data-modal="{{ edit }}" class="fa fa-edit"></span>
                             </span>
                             <button type="submit" form="form-delete-{{ item.id }}" class="btn btn-sm btn-danger">

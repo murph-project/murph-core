@@ -54,7 +54,7 @@
             </thead>
             <tbody>
                 {% for item in datas.settings %}
-                    {% set edit = path('admin_navigation_setting_edit', {entity: item.id}) %}
+                    {% set edit = path('admin_navigation_setting_edit', {entity: item.id, redirectTo: app.request.pathInfo}) %}
 
                     <tr data-dblclick="{{ edit }}">
                         <td class="col-5">

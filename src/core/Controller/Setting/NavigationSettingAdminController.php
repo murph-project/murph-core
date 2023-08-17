@@ -31,11 +31,28 @@ class NavigationSettingAdminController extends AdminController
         $eventDispatcher->dispatch($event, NavigationSettingEvent::FORM_INIT_EVENT);
 
         $form = $builder->getForm();
+        $redirectTo = $request->query->get('redirectTo');
+        $session = $request->getSession();
+        $lastRequestId = sprintf('setting_request_%s_%s', get_class($entity), $entity->getId());
+        $lastRequest = $session->get($lastRequestId);
+
+        if ($lastRequest !== null && !$request->isMethod('POST')) {
+            $fakeRequest = Request::create(
+                uri: $request->getUri(),
+                method: 'POST',
+                parameters: [$form->getName() => $lastRequest]
+            );
+
+            $form->handleRequest($fakeRequest);
+            $session->remove($lastRequestId);
+        }
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+                $entityManager->update($entity);
+                $session->remove($lastRequestId);
                 $entityManager->update($entity);
                 $this->addFlash('success', 'The data has been saved.');
 
@@ -44,13 +61,21 @@ class NavigationSettingAdminController extends AdminController
                 ]);
             }
 
+            $session->set($lastRequestId, $request->request->get('form'));
             $this->addFlash('warning', 'The form is not valid.');
+
+            return $this->redirect(sprintf(
+                '%s?data-modal=%s',
+                $redirectTo,
+                urlencode($request->getUri())
+            ));
         }
 
         return $this->render('@Core/setting/navigation_setting_admin/edit.html.twig', [
             'form' => $form->createView(),
             'entity' => $entity,
             'options' => $event->getData()['options'],
+            'redirectTo' => $redirectTo,
         ]);
     }
 
