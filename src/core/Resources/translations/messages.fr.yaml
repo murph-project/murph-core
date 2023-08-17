@@ -64,7 +64,7 @@
 "Display name": "Nom d'affichage"
 "Administrator": "Administrateur⋅trice"
 "Writer": "Rédacteur⋅trice"
-"Reference": "Élement de référence"
+"Reference": "Référence"
 "My account": "Mon compte"
 "Logout": "Déconnexion"
 "Dashboard": "Tableau de bord"
@@ -223,3 +223,4 @@
 "At least one role": "Au moins un rôle"
 "All roles": "Tous les rôles"
 "Enable A/B Testing": "Activer le test A/B"
+"Color": "Couleur"
