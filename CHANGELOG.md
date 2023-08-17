@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+
+## [1.21.1] - 2023-08-17
 ### Added
 * add form error handle in inline edit action and refill the form using the previous request content
 * add form error handle in ssettings actions and refill the form using the previous request content
