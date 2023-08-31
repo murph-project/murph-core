@@ -20,8 +20,8 @@ class BooleanField extends Field
             'display' => 'toggle',
             'checkbox_class_when_true' => 'fa-check-square',
             'checkbox_class_when_false' => 'fa-square',
-            'toggle_class_when_true' => 'bg-secondary text-white',
-            'toggle_class_when_false' => 'bg-secondary text-white',
+            'toggle_class_when_true' => 'bg-success',
+            'toggle_class_when_false' => 'bg-secondary',
             'default_value' => false,
         ]);
 
