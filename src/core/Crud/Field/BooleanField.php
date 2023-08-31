@@ -18,6 +18,10 @@ class BooleanField extends Field
         $resolver->setDefaults([
             'view' => '@Core/admin/crud/field/boolean.html.twig',
             'display' => 'toggle',
+            'checkbox_class_when_true' => 'fa-check-square',
+            'checkbox_class_when_false' => 'fa-square',
+            'toggle_class_when_true' => 'bg-secondary text-white',
+            'toggle_class_when_false' => 'bg-secondary text-white',
             'default_value' => false,
         ]);
 

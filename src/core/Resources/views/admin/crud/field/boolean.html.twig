@@ -3,20 +3,16 @@
     <span class="field-boolean">
         {% if options.display == 'checkbox' %}
             {% block checkbox %}
-                {% if value %}
-                    <span class="fa fa-check-square"></span>
-                {% else %}
-                    <span class="fa fa-square"></span>
-                {% endif %}
+                <span class="fa {{ value ? options.checkbox_class_when_true : options.checkbox_class_when_false }}"></span>
             {% endblock %}
         {% elseif options.display == 'toggle' %}
             {% block toggle %}
                 {% if value %}
-                    <span class="rounded-pill pl-3 pr-1 bg-secondary text-white">
+                    <span class="rounded-pill pl-3 pr-1 text-white {{ options.toggle_class_when_true }}">
                         <span class="fa fa-circle"></span>
                     </span>
                 {% else %}
-                    <span class="rounded-pill pr-3 pl-1 bg-secondary text-white">
+                    <span class="rounded-pill pr-3 pl-1 text-white {{ options.toggle_class_when_false }}">
                         <span class="fa fa-circle"></span>
                     </span>
                 {% endif %}
