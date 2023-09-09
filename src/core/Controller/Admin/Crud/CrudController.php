@@ -42,6 +42,7 @@ abstract class CrudController extends AdminController
             'configuration' => $configuration,
             'pager' => $pager,
             'sort' => $this->sort,
+            'context' => $context,
             'filters' => [
                 'show' => null !== $configuration->getForm('filter'),
                 'isEmpty' => empty($this->filters),
@@ -79,6 +80,7 @@ abstract class CrudController extends AdminController
         return $this->render($configuration->getView($context), [
             'form' => $form->createView(),
             'configuration' => $configuration,
+            'context' => $context,
             'entity' => $entity,
         ]);
     }
@@ -89,6 +91,7 @@ abstract class CrudController extends AdminController
 
         return $this->render($configuration->getView($context), [
             'entity' => $entity,
+            'context' => $context,
             'configuration' => $configuration,
         ]);
     }
@@ -122,6 +125,7 @@ abstract class CrudController extends AdminController
 
         return $this->render($configuration->getView($context), [
             'form' => $form->createView(),
+            'context' => $context,
             'configuration' => $configuration,
             'entity' => $entity,
         ]);
@@ -313,6 +317,7 @@ abstract class CrudController extends AdminController
 
         return $this->render($configuration->getView($context), [
             'form' => $form->createView(),
+            'context' => $context,
             'configuration' => $configuration,
         ]);
     }
