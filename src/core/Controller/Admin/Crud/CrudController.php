@@ -151,7 +151,14 @@ abstract class CrudController extends AdminController
         $form = $builder->getForm();
         $session = $request->getSession();
 
-        $lastRequestId = sprintf('inline_request_%s_%s', get_class($entity), $entity->getId());
+        $lastRequestId = sprintf(
+            'inline_request_%s_%s_%s_%s',
+            get_class($entity),
+            $entity->getId(),
+            $context,
+            $label
+        );
+
         $lastRequest = $session->get($lastRequestId);
 
         if ($lastRequest !== null && !$request->isMethod('POST')) {
