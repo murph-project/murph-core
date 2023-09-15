@@ -46,7 +46,7 @@ abstract class Field
         $resolver->setAllowedTypes('attr', 'array');
         $resolver->setAllowedTypes('href', ['null', 'string', 'callable']);
         $resolver->setAllowedTypes('inline_form', ['null', 'callable']);
-        $resolver->setAllowedTypes('href_attr', 'array', 'callable');
+        $resolver->setAllowedTypes('href_attr', ['array', 'callable']);
         $resolver->setAllowedTypes('raw', 'boolean');
         $resolver->setAllowedTypes('property_builder', ['null', 'callable']);
         $resolver->setAllowedValues('sort', function($value) {
