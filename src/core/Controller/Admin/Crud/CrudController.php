@@ -139,6 +139,7 @@ abstract class CrudController extends AdminController
 
         $builder = $this->createFormBuilder($entity);
         $callback = $configuration->getFields($context)[$label]['options']['inline_form'] ?? null;
+        $validationCallback = $configuration->getFields($context)[$label]['options']['inline_form_validation'] ?? null;
 
         if (null === $callback) {
             throw $this->createNotFoundException();
@@ -169,11 +170,20 @@ abstract class CrudController extends AdminController
             );
 
             $form->handleRequest($fakeRequest);
+
+            if (null !== $validationCallback) {
+                call_user_func_array($validationCallback, [$entity, $form, $request]);
+            }
+
             $session->remove($lastRequestId);
         }
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
+
+            if (null !== $validationCallback) {
+                call_user_func_array($validationCallback, [$entity, $form, $request]);
+            }
 
             if ($form->isValid()) {
                 if (null !== $beforeUpdate) {

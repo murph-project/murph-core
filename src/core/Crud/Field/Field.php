@@ -37,6 +37,7 @@ abstract class Field
             'href_attr' => [],
             'attr' => [],
             'inline_form' => null,
+            'inline_form_validation' => null,
         ]);
 
         $resolver->setRequired('view');
@@ -46,6 +47,7 @@ abstract class Field
         $resolver->setAllowedTypes('attr', 'array');
         $resolver->setAllowedTypes('href', ['null', 'string', 'callable']);
         $resolver->setAllowedTypes('inline_form', ['null', 'callable']);
+        $resolver->setAllowedTypes('inline_form_validation', ['null', 'callable']);
         $resolver->setAllowedTypes('href_attr', ['array', 'callable']);
         $resolver->setAllowedTypes('raw', 'boolean');
         $resolver->setAllowedTypes('property_builder', ['null', 'callable']);
