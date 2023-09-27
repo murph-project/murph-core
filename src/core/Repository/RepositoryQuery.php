@@ -98,6 +98,15 @@ abstract class RepositoryQuery
         return $this;
     }
 
+    protected function addForcedFilterHandler(string $name): self
+    {
+        if (in_array($name, $this->forcedFilterHandlers)) {
+            $this->forcedFilterHandlers[] = $name;
+        }
+
+        return $this;
+    }
+
     protected function populateDqlId(&$data)
     {
         if (is_string($data)) {
@@ -121,5 +130,16 @@ abstract class RepositoryQuery
 
     protected function filterHandler(string $name, $value)
     {
+    }
+
+    public function count()
+    {
+        return $this
+            ->select(sprintf('COUNT(%s.id) as total', $this->id))
+            ->query
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult()['total']
+        ;
     }
 }
