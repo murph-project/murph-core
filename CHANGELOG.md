@@ -1,11 +1,12 @@
 ## [Unreleased]
 
+## [v1.22.0] 2023-09-28
 ### Added
 * add new options in BooleanField: `toggle|checkbox_class_when_true` and `toggle|checkbox_class_when_false`
 * add `count` method in repository query
 * add `addForcedFilterHandler` method in repository query
 * add `inline_form_validation` option to validate inline forms with custom algo
-* add crud sorting in the session
+* add crud sorting parameters in the session
 * add flush option in the entity manager on create, update, remove, and persist methods
 
 ## [1.21.1] - 2023-08-17
