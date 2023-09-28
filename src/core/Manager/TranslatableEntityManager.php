@@ -11,10 +11,13 @@ use App\Core\Entity\EntityInterface;
  */
 class TranslatableEntityManager extends EntityManager
 {
-    protected function persist(EntityInterface $entity)
+    protected function persist(EntityInterface $entity, bool $flush = true)
     {
-        $this->entityManager->persist($entity);
+        $this->entityManager->persist($entity, $flush);
         $entity->mergeNewTranslations();
-        $this->flush();
+
+        if ($flush) {
+            $this->flush();
+        }
     }
 }
