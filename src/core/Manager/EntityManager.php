@@ -25,13 +25,13 @@ class EntityManager
         $this->entityManager = $entityManager;
     }
 
-    public function create(EntityInterface $entity, bool $dispatchEvent = true): self
+    public function create(EntityInterface $entity, bool $dispatchEvent = true, bool $flush = true): self
     {
         if ($dispatchEvent) {
             $this->eventDispatcher->dispatch(new EntityManagerEvent($entity), EntityManagerEvent::PRE_CREATE_EVENT);
         }
 
-        $this->persist($entity);
+        $this->persist($entity, $flush);
 
         if ($dispatchEvent) {
             $this->eventDispatcher->dispatch(new EntityManagerEvent($entity), EntityManagerEvent::CREATE_EVENT);
@@ -40,13 +40,13 @@ class EntityManager
         return $this;
     }
 
-    public function update(EntityInterface $entity, bool $dispatchEvent = true): self
+    public function update(EntityInterface $entity, bool $dispatchEvent = true, bool $flush = true): self
     {
         if ($dispatchEvent) {
             $this->eventDispatcher->dispatch(new EntityManagerEvent($entity), EntityManagerEvent::PRE_UPDATE_EVENT);
         }
 
-        $this->persist($entity);
+        $this->persist($entity, $flush);
 
         if ($dispatchEvent) {
             $this->eventDispatcher->dispatch(new EntityManagerEvent($entity), EntityManagerEvent::UPDATE_EVENT);
@@ -55,14 +55,17 @@ class EntityManager
         return $this;
     }
 
-    public function delete(EntityInterface $entity, bool $dispatchEvent = true): self
+    public function delete(EntityInterface $entity, bool $dispatchEvent = true, bool $flush = true): self
     {
         if ($dispatchEvent) {
             $this->eventDispatcher->dispatch(new EntityManagerEvent($entity), EntityManagerEvent::PRE_DELETE_EVENT);
         }
 
         $this->entityManager->remove($entity);
-        $this->flush();
+
+        if ($flush) {
+            $this->flush();
+        }
 
         if ($dispatchEvent) {
             $this->eventDispatcher->dispatch(new EntityManagerEvent($entity), EntityManagerEvent::DELETE_EVENT);
@@ -90,9 +93,12 @@ class EntityManager
         return $this->entityManager;
     }
 
-    protected function persist(EntityInterface $entity)
+    protected function persist(EntityInterface $entity, bool $flush = true)
     {
         $this->entityManager->persist($entity);
-        $this->flush();
+
+        if ($flush) {
+            $this->flush();
+        }
     }
 }

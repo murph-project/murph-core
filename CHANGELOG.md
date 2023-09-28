@@ -6,6 +6,7 @@
 * add `addForcedFilterHandler` method in repository query
 * add `inline_form_validation` option to validate inline forms with custom algo
 * add crud sorting in the session
+* add flush option in the entity manager on create, update, remove, and persist methods
 
 ## [1.21.1] - 2023-08-17
 ### Added
