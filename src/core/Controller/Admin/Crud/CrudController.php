@@ -401,10 +401,10 @@ abstract class CrudController extends AdminController
         $sessionSortName = sprintf('%s_label', $sessionId);
         $sessionSortDirection = sprintf('%s_direction', $sessionId);
 
-        $name = strtolower($request->query->get(
+        $name = $request->query->get(
             '_sort',
-            $session->get($sessionSortName, $defaultSort['label'] ?? 'asc')
-        ));
+            $session->get($sessionSortName, $defaultSort['label'] ?? null)
+        );
 
         $direction = strtolower($request->query->get(
             '_sort_direction',
@@ -413,6 +413,10 @@ abstract class CrudController extends AdminController
 
         $session->set($sessionSortName, $name);
         $session->set($sessionSortDirection, $direction);
+
+        if (empty($name)) {
+            return;
+        }
 
         if (!in_array($direction, ['asc', 'desc'])) {
             $direction = 'asc';

@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+### Fixed
+* fix regression on crud sorting
+
 ## [v1.22.0] 2023-09-28
 ### Added
 * add new options in BooleanField: `toggle|checkbox_class_when_true` and `toggle|checkbox_class_when_false`
