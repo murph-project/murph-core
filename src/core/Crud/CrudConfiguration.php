@@ -82,7 +82,7 @@ class CrudConfiguration
 
     /* -- */
 
-    public function setForm(string $context, string $form, array $options = []): self
+    public function setForm(string $context, string $form): self
     {
         $this->forms[$context] = $form;
 

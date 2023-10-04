@@ -101,7 +101,7 @@ class <?= $class_name; ?> extends CrudController
             ->setPageRoute('delete', 'admin_<?= $route; ?>_delete')
             ->setPageRoute('filter', 'admin_<?= $route; ?>_filter')
 
-            ->setForm('edit', Type::class, [])
+            ->setForm('edit', Type::class)
             ->setForm('new', Type::class)
 
             ->setView('form', 'admin/<?= $route; ?>_admin/_form.html.twig')
