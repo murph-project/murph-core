@@ -2,6 +2,7 @@
 
 ### Fixed
 * fix regression on crud sorting
+* remove parameter $option on CrudConfiguration::setForm and fix CrudController make template
 
 ## [v1.22.0] 2023-09-28
 ### Added
