@@ -22,6 +22,8 @@ class CollectionType extends BaseCollectionType
             'label_delete' => $options['label_delete'],
             'allow_add' => $options['allow_add'],
             'allow_delete' => $options['allow_delete'],
+            'template_before_item' => $options['template_before_item'],
+            'template_after_item' => $options['template_after_item'],
         ]);
     }
 
@@ -33,6 +35,8 @@ class CollectionType extends BaseCollectionType
             'collection_name' => '',
             'label_add' => 'Add',
             'label_delete' => 'Delete',
+            'template_before_item' => null,
+            'template_after_item' => null,
         ]);
     }
 

@@ -116,9 +116,17 @@
     <div data-collection="collection-{{ collection_name }}" {% for attr, value in row_attr %}{{ attr }}="{{ value }}"{% endfor %}>
         {% for item in form %}
             <div data-collection-item="{{ loop.index }}" {% for attr, value in attrs %}{{ attr }}="{{ value }}"{% endfor %}>
+                {% if template_before_item %}
+                    {{ include(template_before_item) }}
+                {% endif %}
+
                 {% for child in item %}
                     {{ form_row(child) }}
                 {% endfor %}
+
+                {% if template_after_item %}
+                    {{ include(template_after_item) }}
+                {% endif %}
 
                 {% if allow_delete %}
                     <div class="text-right">

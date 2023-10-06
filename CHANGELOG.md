@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+### Added
+* allow to define templates show before and after a murph collection item
+
 ### Fixed
 * fix regression on crud sorting
 * remove parameter $option on CrudConfiguration::setForm and fix CrudController make template
