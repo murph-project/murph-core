@@ -5,6 +5,7 @@
 
 ### Fixed
 * fix regression on crud sorting
+* fix test in RepositoryQuery::addForcedFilterHandler
 * remove parameter $option on CrudConfiguration::setForm and fix CrudController make template
 
 ## [v1.22.0] 2023-09-28

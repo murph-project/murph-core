@@ -100,7 +100,7 @@ abstract class RepositoryQuery
 
     protected function addForcedFilterHandler(string $name): self
     {
-        if (in_array($name, $this->forcedFilterHandlers)) {
+        if (!in_array($name, $this->forcedFilterHandlers)) {
             $this->forcedFilterHandlers[] = $name;
         }
 
