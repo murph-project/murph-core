@@ -162,7 +162,7 @@ abstract class CrudController extends AdminController
 
         $lastRequest = $session->get($lastRequestId);
 
-        if ($lastRequest !== null && !$request->isMethod('POST')) {
+        if (null !== $lastRequest && !$request->isMethod('POST')) {
             $fakeRequest = Request::create(
                 uri: $request->getUri(),
                 method: 'POST',
@@ -284,16 +284,25 @@ abstract class CrudController extends AdminController
 
         $query->useFilters($this->filters);
 
+        $useSelection = 'selection' === $target;
+
+        if ($batchAction['isGlobal']) {
+            $result = $callback($query, $useSelection, $entityManager);
+
+            if ($result instanceof Response) {
+                return $result;
+            }
+
+            return $this->redirect($request->query->get('redirectTo'));
+        }
         if ('selection' === $target) {
-            $isSelection = true;
             $pager = $query->paginate($page, $configuration->getMaxPerPage($context));
         } else {
-            $isSelection = false;
             $pager = $query->find();
         }
 
         foreach ($pager as $key => $entity) {
-            if (($isSelection && isset($items[$key + 1])) || !$isSelection) {
+            if (($useSelection && isset($items[$key + 1])) || !$useSelection) {
                 $callback($entity, $entityManager);
             }
         }
