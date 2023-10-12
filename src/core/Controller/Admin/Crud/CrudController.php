@@ -287,7 +287,21 @@ abstract class CrudController extends AdminController
         $useSelection = 'selection' === $target;
 
         if ($batchAction['isGlobal']) {
-            $result = $callback($query, $useSelection, $entityManager);
+            $selection = null;
+
+            if ($useSelection) {
+                $queryClone = clone $query;
+                $pager = $queryClone->paginate($page, $configuration->getMaxPerPage($context));
+                $selection = [];
+
+                foreach ($pager as $key => $entity) {
+                    if (isset($items[$key + 1])) {
+                        $selection[] = $entity;
+                    }
+                }
+            }
+
+            $result = $callback($query, $entityManager, $selection);
 
             if ($result instanceof Response) {
                 return $result;
@@ -295,11 +309,11 @@ abstract class CrudController extends AdminController
 
             return $this->redirect($request->query->get('redirectTo'));
         }
-        if ('selection' === $target) {
-            $pager = $query->paginate($page, $configuration->getMaxPerPage($context));
-        } else {
-            $pager = $query->find();
-        }
+
+        $pager = $useSelection
+            ? $query->paginate($page, $configuration->getMaxPerPage($context))
+            : $query->find()
+        ;
 
         foreach ($pager as $key => $entity) {
             if (($useSelection && isset($items[$key + 1])) || !$useSelection) {
