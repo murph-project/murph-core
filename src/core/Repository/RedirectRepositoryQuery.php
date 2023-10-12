@@ -2,9 +2,8 @@
 
 namespace App\Core\Repository;
 
-use App\Core\Repository\RepositoryQuery;
-use Knp\Component\Pager\PaginatorInterface;
 use App\Core\Repository\RedirectRepository as Repository;
+use Knp\Component\Pager\PaginatorInterface;
 
 class RedirectRepositoryQuery extends RepositoryQuery
 {

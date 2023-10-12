@@ -2,11 +2,10 @@
 
 namespace App\Core\Twig\Extension;
 
-use App\Core\String\StringBuilder;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use Twig\Environment;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class EditorJsExtension extends AbstractExtension
 {
@@ -68,23 +67,23 @@ class EditorJsExtension extends AbstractExtension
             $data = json_decode(json_encode($data), true);
         }
 
-        if ($data === null) {
+        if (null === $data) {
             return '';
         }
 
-        if ($allowedBlocks === null) {
+        if (null === $allowedBlocks) {
             $allowedBlocks = $this->defaultAllowedBlocks;
         }
 
         $blocks = $data['blocks'] ?? [];
         $renders = '';
 
-        $blocks = array_filter($data['blocks'] ?? [], function($block) use ($allowedBlocks) {
+        $blocks = array_filter($data['blocks'] ?? [], function ($block) use ($allowedBlocks) {
             return isset($block['type']) && in_array($block['type'], $allowedBlocks);
         });
 
         foreach ($blocks as $block) {
-            $renders.= $this->twig->render($this->views[$block['type']], $block['data'] ?? []);
+            $renders .= $this->twig->render($this->views[$block['type']], $block['data'] ?? []);
         }
 
         return $renders;

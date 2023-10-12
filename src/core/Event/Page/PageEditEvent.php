@@ -2,8 +2,8 @@
 
 namespace App\Core\Event\Page;
 
-use Symfony\Contracts\EventDispatcher\Event;
 use App\Core\Entity\Site\Page\Page;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * class PageEditEvent.
@@ -12,7 +12,7 @@ use App\Core\Entity\Site\Page\Page;
  */
 class PageEditEvent extends Event
 {
-    const FORM_INIT_EVENT = 'page_edit_event.form_init';
+    public const FORM_INIT_EVENT = 'page_edit_event.form_init';
 
     protected Page $page;
     protected array $pageBuilderOptions = [];

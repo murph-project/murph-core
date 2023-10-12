@@ -4,10 +4,10 @@ namespace App\Core\Twig\Extension;
 
 use App\Core\FileManager\FsFileManager;
 use App\Core\Repository\FileInformationRepositoryQuery;
+use App\Core\String\FileInformationBuilder;
 use function Symfony\Component\String\u;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use App\Core\String\FileInformationBuilder;
 
 class FileInformationExtension extends AbstractExtension
 {
@@ -17,8 +17,7 @@ class FileInformationExtension extends AbstractExtension
         FileInformationBuilder $fileInfoBuilder,
         FsFileManager $fsManager,
         FileInformationRepositoryQuery $query
-    )
-    {
+    ) {
         $this->fileInfoBuilder = $fileInfoBuilder;
         $this->fsManager = $fsManager;
         $this->query = $query;

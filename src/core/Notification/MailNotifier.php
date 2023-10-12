@@ -2,10 +2,10 @@
 
 namespace App\Core\Notification;
 
+use App\Entity\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Twig\Environment as TwigEnvironment;
-use App\Entity\User;
 
 /**
  * class MailNotifier.

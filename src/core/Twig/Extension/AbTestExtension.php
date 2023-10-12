@@ -3,9 +3,9 @@
 namespace App\Core\Twig\Extension;
 
 use App\Core\Ab\AbContainer;
+use App\Core\Ab\AbTestInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
-use App\Core\Ab\AbTestInterface;
 
 class AbTestExtension extends AbstractExtension
 {

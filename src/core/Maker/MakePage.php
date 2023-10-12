@@ -8,11 +8,11 @@ use Symfony\Bundle\MakerBundle\DependencyBuilder;
 use Symfony\Bundle\MakerBundle\Generator;
 use Symfony\Bundle\MakerBundle\InputConfiguration;
 use Symfony\Bundle\MakerBundle\Maker\AbstractMaker;
+use Symfony\Bundle\MakerBundle\Str;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Bundle\MakerBundle\Str;
 use Symfony\Component\Filesystem\Filesystem;
 
 class MakePage extends AbstractMaker
@@ -92,7 +92,8 @@ class MakePage extends AbstractMaker
 
         $this->writeSuccessMessage($io);
         $io->text('Register the page in <comment>config/packages/app.yaml</comment>: ');
-        $io->text(<<< EOF
+        $io->text(
+            <<< EOF
 
 core:
     site:
@@ -100,10 +101,18 @@ core:
             {$pageClassNameDetails->getFullName()}:
                 name: {$pageClassNameDetails->getShortName()}
                 templates:
-                    - {name: "Default", file: "${templatePath}"}
+                    - {name: "Default", file: "{$templatePath}"}
 
 EOF
-);
+        );
+    }
+
+    public function configureDependencies(DependencyBuilder $dependencies)
+    {
+        $dependencies->addClassDependency(
+            Annotation::class,
+            'doctrine/annotations'
+        );
     }
 
     private function askForNextBlock(ConsoleStyle $io, array $blocks, bool $isFirstField)
@@ -182,13 +191,5 @@ EOF
         foreach ($types as $type) {
             $io->writeln(sprintf('  * <comment>%s</comment>', $type));
         }
-    }
-
-    public function configureDependencies(DependencyBuilder $dependencies)
-    {
-        $dependencies->addClassDependency(
-            Annotation::class,
-            'doctrine/annotations'
-        );
     }
 }

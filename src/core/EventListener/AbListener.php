@@ -6,7 +6,6 @@ use App\Core\Ab\AbContainer;
 use App\Core\Ab\AbTest;
 use App\Core\Entity\Site\Node;
 use App\Core\Event\Ab\AbTestEvent;
-use App\Core\Repository\Site\NodeRepository;
 use App\Core\Site\SiteRequest;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -70,6 +69,16 @@ class AbListener
         }
     }
 
+    public function onKernelResponse(ResponseEvent $event)
+    {
+        $cookies = $event->getRequest()->attributes->get('ab_test_cookies', []);
+
+        foreach ($cookies as $name => $value) {
+            $cookie = Cookie::create($name, $value['value'], time() + $value['duration']);
+            $event->getResponse()->headers->setCookie($cookie);
+        }
+    }
+
     protected function getCookieName(): string
     {
         return 'ab_test_'.$this->getAbTestCode();
@@ -95,15 +104,5 @@ class AbListener
         }
 
         return true;
-    }
-
-    public function onKernelResponse(ResponseEvent $event)
-    {
-        $cookies = $event->getRequest()->attributes->get('ab_test_cookies', []);
-
-        foreach ($cookies as $name => $value) {
-            $cookie = Cookie::create($name, $value['value'], time() + $value['duration']);
-            $event->getResponse()->headers->setCookie($cookie);
-        }
     }
 }

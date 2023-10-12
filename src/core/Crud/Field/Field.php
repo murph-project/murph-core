@@ -51,8 +51,8 @@ abstract class Field
         $resolver->setAllowedTypes('href_attr', ['array', 'callable']);
         $resolver->setAllowedTypes('raw', 'boolean');
         $resolver->setAllowedTypes('property_builder', ['null', 'callable']);
-        $resolver->setAllowedValues('sort', function($value) {
-            if ($value === null) {
+        $resolver->setAllowedValues('sort', function ($value) {
+            if (null === $value) {
                 return true;
             }
 

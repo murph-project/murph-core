@@ -5,19 +5,19 @@ namespace App\Core\Controller\Site;
 use App\Core\Controller\Admin\Crud\CrudController;
 use App\Core\Crud\CrudConfiguration;
 use App\Core\Crud\Field;
+use App\Core\Entity\EntityInterface;
 use App\Core\Entity\Site\Page\Page as Entity;
+use App\Core\Event\Page\PageEditEvent;
 use App\Core\Form\Site\Page\Filter\PageFilterType as FilterType;
 use App\Core\Form\Site\Page\PageType as Type;
 use App\Core\Manager\EntityManager;
 use App\Core\Repository\Site\Page\PageRepositoryQuery as RepositoryQuery;
 use App\Core\Site\PageLocator;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Core\Event\Page\PageEditEvent;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use App\Core\Entity\EntityInterface;
 
 class PageAdminController extends CrudController
 {
@@ -114,7 +114,7 @@ class PageAdminController extends CrudController
                 }],
                 'attr' => ['class' => 'col-6'],
             ])
-            ->setBatchAction('index', 'delete', 'Delete', function(EntityInterface $entity, EntityManager $manager) {
+            ->setBatchAction('index', 'delete', 'Delete', function (EntityInterface $entity, EntityManager $manager) {
                 $manager->delete($entity);
             })
         ;

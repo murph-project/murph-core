@@ -32,9 +32,9 @@ class NodeRepository extends NestedTreeRepository
             ;
         }
 
-        return $query->getQuery()
+        return null !== $query->getQuery()
             ->setMaxResults(1)
-            ->getOneOrNullResult() !== null
+            ->getOneOrNullResult()
         ;
     }
 }

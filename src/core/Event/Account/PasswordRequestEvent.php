@@ -12,7 +12,7 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class PasswordRequestEvent extends Event
 {
-    const EVENT = 'account_event.password_request';
+    public const EVENT = 'account_event.password_request';
 
     protected User $user;
 

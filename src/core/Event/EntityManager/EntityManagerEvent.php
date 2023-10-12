@@ -12,12 +12,12 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class EntityManagerEvent extends Event
 {
-    const CREATE_EVENT = 'entity_manager_event.create';
-    const UPDATE_EVENT = 'entity_manager_event.update';
-    const DELETE_EVENT = 'entity_manager_event.delete';
-    const PRE_CREATE_EVENT = 'entity_manager_event.pre_create';
-    const PRE_UPDATE_EVENT = 'entity_manager_event.pre_update';
-    const PRE_DELETE_EVENT = 'entity_manager_event.pre_delete';
+    public const CREATE_EVENT = 'entity_manager_event.create';
+    public const UPDATE_EVENT = 'entity_manager_event.update';
+    public const DELETE_EVENT = 'entity_manager_event.delete';
+    public const PRE_CREATE_EVENT = 'entity_manager_event.pre_create';
+    public const PRE_UPDATE_EVENT = 'entity_manager_event.pre_update';
+    public const PRE_DELETE_EVENT = 'entity_manager_event.pre_delete';
 
     protected EntityInterface $entity;
 

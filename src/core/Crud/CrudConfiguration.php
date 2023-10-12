@@ -40,7 +40,7 @@ class CrudConfiguration
         return self::$self;
     }
 
-    /* -- */
+    // --
 
     public function setPageTitle(string $page, string $title): self
     {
@@ -54,7 +54,7 @@ class CrudConfiguration
         return $this->pageTitles[$page] ?? $default;
     }
 
-    /* -- */
+    // --
 
     public function setPageRoute(string $page, string $route): self
     {
@@ -80,7 +80,7 @@ class CrudConfiguration
         return $this->pageRouteParams[$page] ?? [];
     }
 
-    /* -- */
+    // --
 
     public function setForm(string $context, string $form): self
     {
@@ -106,7 +106,7 @@ class CrudConfiguration
         return $this->formOptions[$context] ?? [];
     }
 
-    /* -- */
+    // --
 
     public function setAction(string $page, string $action, bool|callable $enabled): self
     {
@@ -140,8 +140,7 @@ class CrudConfiguration
         string $action,
         string $label,
         callable $callback
-    ): self
-    {
+    ): self {
         $this->setBatchAction($page, $action, $label, $callback);
         $this->batchActions[$page][$action]['isGlobal'] = true;
 
@@ -153,8 +152,7 @@ class CrudConfiguration
         string $action,
         string $label,
         callable $callback
-    ): self
-    {
+    ): self {
         if (!isset($this->batchActions[$page])) {
             $this->batchActions[$page] = [];
         }
@@ -162,7 +160,7 @@ class CrudConfiguration
         $this->batchActions[$page][$action] = [
             'label' => $label,
             'callback' => $callback,
-            'isGlobal' => false
+            'isGlobal' => false,
         ];
 
         return $this;
@@ -183,7 +181,7 @@ class CrudConfiguration
         return !empty($this->batchActions[$page]);
     }
 
-    /* -- */
+    // --
 
     public function setActionTitle(string $page, string $action, string $title): self
     {
@@ -201,7 +199,7 @@ class CrudConfiguration
         return $this->actionTitles[$page][$action] ?? $default;
     }
 
-    /* -- */
+    // --
 
     public function setView(string $context, string $view): self
     {
@@ -249,7 +247,7 @@ class CrudConfiguration
         return $this->viewDatas[$context][$name] ?? $defaultValue;
     }
 
-    /* -- */
+    // --
 
     public function setField(string $context, string $label, string $field, array $options): self
     {
@@ -277,7 +275,7 @@ class CrudConfiguration
         return $this;
     }
 
-    /* -- */
+    // --
 
     public function setMaxPerPage(string $page, int $max): self
     {
@@ -291,7 +289,7 @@ class CrudConfiguration
         return $this->maxPerPage[$page] ?? $default;
     }
 
-    /* -- */
+    // --
 
     public function setDoubleClick(string $page, bool $enabled): self
     {
@@ -305,7 +303,7 @@ class CrudConfiguration
         return $this->doubleClick[$page] ?? false;
     }
 
-    /* -- */
+    // --
 
     public function setI18n(array $locales, string $defaultLocale): self
     {
@@ -330,7 +328,7 @@ class CrudConfiguration
         return !empty($this->locales);
     }
 
-    /* -- */
+    // --
 
     public function setDefaultSort(string $context, string $label, string $direction = 'asc'): self
     {

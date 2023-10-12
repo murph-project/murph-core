@@ -67,7 +67,7 @@ class NavigationAdminController extends CrudController
     }
 
     #[Route(path: '/admin/site/navigation/sort/{page}', name: 'admin_site_navigation_sort', methods: ['POST'], requirements: ['page' => '\d+'])]
-    public function sort(RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session, int $page = 1, ): Response
+    public function sort(RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doSort($page, $query, $entityManager, $request, $session);
     }

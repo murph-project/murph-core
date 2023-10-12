@@ -1,6 +1,6 @@
-<?= "<?php\n" ?>
+<?php echo "<?php\n"; ?>
 
-namespace <?= $namespace; ?>;
+namespace <?php echo $namespace; ?>;
 
 use App\Core\Entity\Site\Page\Page;
 use App\Core\Entity\Site\Page as BlockEntity;
@@ -9,28 +9,28 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Form\FormBuilderInterface;
 
 #[ORM\Entity]
-class <?= $class_name; ?> extends Page
+class <?php echo $class_name; ?> extends Page
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-<?php if (count($blocks)): ?>        $builder
-<?php foreach ($blocks as $block): ?>
-            ->add('<?= $block['name'] ?>', <?= $block['type'] ?>)
-<?php endforeach; ?>
+<?php if (count($blocks)) { ?>        $builder
+<?php foreach ($blocks as $block) { ?>
+            ->add('<?php echo $block['name']; ?>', <?php echo $block['type']; ?>)
+<?php } ?>
         ;
-<?php endif; ?>
+<?php } ?>
     }
 
-<?php foreach ($blocks as $block): ?>
-    public function set<?= $block['camelCase'] ?>(BlockEntity\Block $block)
+<?php foreach ($blocks as $block) { ?>
+    public function set<?php echo $block['camelCase']; ?>(BlockEntity\Block $block)
     {
         return $this->setBlock($block);
     }
 
-    public function get<?= $block['camelCase'] ?>()
+    public function get<?php echo $block['camelCase']; ?>()
     {
-        return $this->getBlock('<?= $block['name'] ?>'<?php if ($block['class']): ?>, <?= $block['class'] ?><?php endif; ?>);
+        return $this->getBlock('<?php echo $block['name']; ?>'<?php if ($block['class']) { ?>, <?php echo $block['class']; ?><?php } ?>);
     }
 
-<?php endforeach; ?>
+<?php } ?>
 }

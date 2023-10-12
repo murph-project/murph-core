@@ -2,7 +2,6 @@
 
 namespace App\Core\Controller\Site;
 
-use App\Core\Controller\Admin\AdminController;
 use App\Core\Entity\Site\Node;
 use App\Core\Entity\Site\Node as Entity;
 use App\Core\Entity\Site\Page\Page;
@@ -14,15 +13,15 @@ use App\Core\Form\Site\NodeType as EntityType;
 use App\Core\Manager\EntityManager;
 use App\Core\Repository\Site\NodeRepository;
 use App\Core\Site\ControllerLocator;
-use App\Core\Site\RoleLocator;
 use App\Core\Site\PageLocator;
+use App\Core\Site\RoleLocator;
 use App\Core\Sitemap\SitemapBuilder;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route(path: '/admin/site/node')]
 class NodeAdminController extends AbstractController
@@ -145,7 +144,7 @@ class NodeAdminController extends AbstractController
 
         $page = $entity->getPage();
 
-        if ($page !== null) {
+        if (null !== $page) {
             $pageConfiguration = $pageLocator->getPages()[get_class($page)] ?? null;
         } else {
             $pageConfiguration = null;

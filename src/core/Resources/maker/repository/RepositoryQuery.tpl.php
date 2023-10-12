@@ -1,15 +1,15 @@
-<?= "<?php\n" ?>
+<?php echo "<?php\n"; ?>
 
-namespace <?= $namespace; ?>;
+namespace <?php echo $namespace; ?>;
 
 use App\Core\Repository\RepositoryQuery;
 use Knp\Component\Pager\PaginatorInterface;
-use <?= $repository; ?> as Repository;
+use <?php echo $repository; ?> as Repository;
 
-class <?= $class_name; ?> extends RepositoryQuery
+class <?php echo $class_name; ?> extends RepositoryQuery
 {
     public function __construct(Repository $repository, PaginatorInterface $paginator)
     {
-        parent::__construct($repository, '<?= $id; ?>', $paginator);
+        parent::__construct($repository, '<?php echo $id; ?>', $paginator);
     }
 }

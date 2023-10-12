@@ -36,7 +36,7 @@ class NavigationSettingAdminController extends AdminController
         $lastRequestId = sprintf('setting_request_%s_%s', get_class($entity), $entity->getId());
         $lastRequest = $session->get($lastRequestId);
 
-        if ($lastRequest !== null && !$request->isMethod('POST')) {
+        if (null !== $lastRequest && !$request->isMethod('POST')) {
             $fakeRequest = Request::create(
                 uri: $request->getUri(),
                 method: 'POST',

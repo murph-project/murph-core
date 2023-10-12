@@ -2,11 +2,11 @@
 
 namespace App\Core\Form\Site\Page;
 
+use App\Core\Entity\Site\Page\Block;
 use App\Core\Form\FileManager\FilePickerType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\AbstractType;
-use App\Core\Entity\Site\Page\Block;
 
 class FilePickerBlockType extends AbstractType
 {

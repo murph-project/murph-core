@@ -2,10 +2,9 @@
 
 namespace App\Core\Entity\Analytic;
 
-use App\Core\Entity\Site\Node;
-use App\Repository\Entity\Analytic\NodeViewRepository;
-use Doctrine\ORM\Mapping as ORM;
 use App\Core\Entity\EntityInterface;
+use App\Core\Entity\Site\Node;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'analytic_view')]
 #[ORM\Entity(repositoryClass: ViewRepository::class)]

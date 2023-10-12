@@ -11,7 +11,7 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class TaskInitEvent extends Event
 {
-    const INIT_EVENT = 'task_event.init';
+    public const INIT_EVENT = 'task_event.init';
 
     protected array $tasks = [];
 

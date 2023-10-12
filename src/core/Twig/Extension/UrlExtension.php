@@ -2,11 +2,9 @@
 
 namespace App\Core\Twig\Extension;
 
-use App\Core\Site\SiteRequest;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use App\Core\String\UrlBuilder;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use App\Core\String\UrlBuilder;
 
 class UrlExtension extends AbstractExtension
 {

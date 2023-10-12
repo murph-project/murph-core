@@ -3,9 +3,9 @@
 namespace App\Core\Repository\Analytic;
 
 use App\Core\Repository\Analytic\RefererRepository as Repository;
+use App\Core\Repository\RepositoryQuery;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
-use App\Core\Repository\RepositoryQuery;
 
 class RefererRepositoryQuery extends RepositoryQuery
 {

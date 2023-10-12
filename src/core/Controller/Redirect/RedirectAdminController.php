@@ -102,11 +102,11 @@ class RedirectAdminController extends CrudController
                 'attr' => ['class' => 'col-6'],
             ])
             ->setField('index', 'Enabled', Field\ButtonField::class, [
-                'property_builder' => function(EntityInterface $entity) {
+                'property_builder' => function (EntityInterface $entity) {
                     return $entity->getIsEnabled() ? 'Yes' : 'No';
                 },
                 'attr' => ['class' => 'col-1'],
-                'button_attr_builder' => function(EntityInterface $entity) {
+                'button_attr_builder' => function (EntityInterface $entity) {
                     return ['class' => 'btn btn-sm btn-'.($entity->getIsEnabled() ? 'success' : 'primary')];
                 },
             ])

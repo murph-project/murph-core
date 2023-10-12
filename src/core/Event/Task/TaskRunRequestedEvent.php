@@ -14,7 +14,7 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class TaskRunRequestedEvent extends Event
 {
-    const RUN_REQUEST_EVENT = 'task_event.run_request';
+    public const RUN_REQUEST_EVENT = 'task_event.run_request';
 
     protected string $task;
     protected InputBag $parameters;

@@ -43,7 +43,7 @@ class Navigation implements EntityInterface
     protected $locale = 'en';
 
     #[ORM\Column(type: 'string', length: 7, nullable: true)]
-    protected $color = null;
+    protected $color;
 
     #[ORM\Column(type: 'integer', nullable: true)]
     protected $sortOrder;

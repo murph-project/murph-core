@@ -2,8 +2,8 @@
 
 namespace App\Core\Twig\Extension;
 
-use App\Core\Setting\SettingManager;
 use App\Core\Setting\NavigationSettingManager;
+use App\Core\Setting\SettingManager;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

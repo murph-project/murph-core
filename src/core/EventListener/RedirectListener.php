@@ -3,11 +3,10 @@
 namespace App\Core\EventListener;
 
 use App\Core\Repository\RedirectRepositoryQuery;
+use App\Core\Router\RedirectBuilder;
 use App\Core\Router\RedirectMatcher;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Core\Router\RedirectBuilder;
 
 /**
  * class RedirectListener.

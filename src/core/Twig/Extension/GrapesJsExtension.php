@@ -2,11 +2,8 @@
 
 namespace App\Core\Twig\Extension;
 
-use App\Core\String\StringBuilder;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use Twig\Environment;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class GrapesJsExtension extends AbstractExtension
 {

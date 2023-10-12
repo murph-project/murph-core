@@ -1,11 +1,11 @@
-<?= "<?php\n" ?>
+<?php echo "<?php\n"; ?>
 
-namespace <?= $namespace; ?>;
+namespace <?php echo $namespace; ?>;
 
 use App\Core\Factory\FactoryInterface;
-use <?= $entity ?> as Entity;
+use <?php echo $entity; ?> as Entity;
 
-class <?= $class_name; ?> implements FactoryInterface
+class <?php echo $class_name; ?> implements FactoryInterface
 {
     public function create(): Entity
     {

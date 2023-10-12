@@ -12,8 +12,8 @@
 namespace App\Core\Bundle;
 
 use App\Core\DependencyInjection\CoreExtension;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class CoreBundle extends Bundle
 {

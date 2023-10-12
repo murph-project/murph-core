@@ -83,7 +83,7 @@ class DateRangeAnalytic
             $datas[$index]['mobileViews'] += $entity->getMobileViews();
         }
 
-        uasort($datas, function($a, $b) {
+        uasort($datas, function ($a, $b) {
             if ($a['views'] > $b['views']) {
                 return -1;
             }
@@ -130,7 +130,7 @@ class DateRangeAnalytic
             $datas[$index]['uris'][$path] += $entity->getViews();
         }
 
-        uasort($datas, function($a, $b) {
+        uasort($datas, function ($a, $b) {
             if ($a['views'] > $b['views']) {
                 return -1;
             }

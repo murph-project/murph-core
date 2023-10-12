@@ -11,8 +11,8 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class NavigationSettingEvent extends Event
 {
-    const INIT_EVENT = 'navigation_setting_event.init';
-    const FORM_INIT_EVENT = 'navigation_setting_event.form_init';
+    public const INIT_EVENT = 'navigation_setting_event.init';
+    public const FORM_INIT_EVENT = 'navigation_setting_event.form_init';
 
     protected $data;
 
