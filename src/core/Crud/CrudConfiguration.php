@@ -142,7 +142,7 @@ class CrudConfiguration
         callable $callback
     ): self
     {
-        $this->setBatchAction($page, $action, $name);
+        $this->setBatchAction($page, $action, $label, $callback);
         $this->batchActions[$page][$action]['isGlobal'] = true;
 
         return $this;
