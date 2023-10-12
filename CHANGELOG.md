@@ -2,6 +2,7 @@
 
 ### Added
 * allow to define templates show before and after a murph collection item
+* add global batch actions
 
 ### Fixed
 * fix regression on crud sorting
