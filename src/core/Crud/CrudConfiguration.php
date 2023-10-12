@@ -135,7 +135,25 @@ class CrudConfiguration
         );
     }
 
-    public function setBatchAction(string $page, string $action, string $label, callable $callback): self
+    public function setGlobalBatchAction(
+        string $page,
+        string $action,
+        string $label,
+        callable $callback
+    ): self
+    {
+        $this->setBatchAction($page, $action, $name);
+        $this->batchActions[$page][$action]['isGlobal'] = true;
+
+        return $this;
+    }
+
+    public function setBatchAction(
+        string $page,
+        string $action,
+        string $label,
+        callable $callback
+    ): self
     {
         if (!isset($this->batchActions[$page])) {
             $this->batchActions[$page] = [];
@@ -144,6 +162,7 @@ class CrudConfiguration
         $this->batchActions[$page][$action] = [
             'label' => $label,
             'callback' => $callback,
+            'isGlobal' => false
         ];
 
         return $this;

@@ -8,16 +8,28 @@ module.exports = () => {
   const form = $('#form-batch')
 
   form.submit((e) => {
-    e.preventDefault()
+    const select = document.querySelector('#form-batch-action')
+    const options = select.querySelectorAll('#form-batch-action option')
+    let doPrevent = true
 
-    const route = form.attr('action')
-    const datas = form.serialize()
+    options.forEach((option) => {
+      if (option.value === select.value && option.getAttribute('data-isglobal') === 'true') {
+        doPrevent = false
+      }
+    })
 
-    form.addClass('is-loading')
+    if (doPrevent) {
+      e.preventDefault()
 
-    $.post(route, datas)
-      .always(() => {
-        document.location.reload()
-      })
+      const route = form.attr('action')
+      const datas = form.serialize()
+
+      form.addClass('is-loading')
+
+      $.post(route, datas)
+        .always(() => {
+          document.location.reload()
+        })
+    }
   })
 }
