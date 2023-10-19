@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PageType extends AbstractType
@@ -26,6 +27,7 @@ class PageType extends AbstractType
                 ],
                 'constraints' => [
                     new NotBlank(),
+                    new Length(max: 255),
                 ],
             ]
         );
@@ -39,6 +41,7 @@ class PageType extends AbstractType
                 'attr' => [
                 ],
                 'constraints' => [
+                    new Length(max: 255),
                 ],
             ]
         );
@@ -52,6 +55,7 @@ class PageType extends AbstractType
                 'attr' => [
                 ],
                 'constraints' => [
+                    new Length(max: 255),
                 ],
             ]
         );
@@ -65,6 +69,7 @@ class PageType extends AbstractType
                 'attr' => [
                 ],
                 'constraints' => [
+                    new Length(max: 255),
                 ],
             ]
         );
@@ -78,6 +83,7 @@ class PageType extends AbstractType
                 'attr' => [
                 ],
                 'constraints' => [
+                    new Length(max: 255),
                 ],
             ]
         );

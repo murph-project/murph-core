@@ -27,6 +27,7 @@ class NavigationType extends AbstractType
                 ],
                 'constraints' => [
                     new NotBlank(),
+                    new Length(max: 255),
                 ],
             ]
         );
@@ -41,6 +42,7 @@ class NavigationType extends AbstractType
                 ],
                 'constraints' => [
                     new NotBlank(),
+                    new Length(max: 255),
                 ],
             ]
         );
@@ -69,6 +71,7 @@ class NavigationType extends AbstractType
                 ],
                 'constraints' => [
                     new NotBlank(),
+                    new Length(max: 255),
                 ],
             ]
         );
@@ -109,7 +112,7 @@ class NavigationType extends AbstractType
                 ],
                 'constraints' => [
                     new NotBlank(),
-                    new Length(['min' => 2, 'max' => 10]),
+                    new Length(min: 2, max: 10),
                 ],
             ]
         );
