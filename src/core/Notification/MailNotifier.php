@@ -21,7 +21,7 @@ class MailNotifier
     protected ?string $from = null;
     protected ?string $replyTo = null;
 
-    public function __construct(protected TwigEnvironment $twig, protected MailerInterface $mailer)
+    public function __construct(protected MailerInterface $mailer)
     {
     }
 
