@@ -9,7 +9,6 @@ use Twig\TwigFilter;
 
 class EditorJsExtension extends AbstractExtension
 {
-    protected Environment $twig;
     protected array $views = [];
     protected array $defaultAllowedBlocks = [
         'paragraph',
@@ -27,9 +26,8 @@ class EditorJsExtension extends AbstractExtension
         'link',
     ];
 
-    public function __construct(Environment $twig, ParameterBagInterface $params)
+    public function __construct(protected Environment $twig, ParameterBagInterface $params)
     {
-        $this->twig = $twig;
         $blocks = $params->get('core')['editor_js']['blocks'] ?? [];
 
         foreach ($blocks as $block => $view) {

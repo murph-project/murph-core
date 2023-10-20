@@ -2,7 +2,6 @@
 
 namespace App\Core\String;
 
-use App\Core\FileManager\FsFileManager;
 use App\Core\Repository\FileInformationRepositoryQuery;
 
 /**
@@ -12,13 +11,9 @@ use App\Core\Repository\FileInformationRepositoryQuery;
  */
 class FileInformationBuilder
 {
-    protected FsFileManager $fsManager;
-    protected FileInformationRepositoryQuery $query;
-
-    public function __construct(FsFileManager $fsManager, FileInformationRepositoryQuery $query)
-    {
-        $this->fsManager = $fsManager;
-        $this->query = $query;
+    public function __construct(
+        protected FileInformationRepositoryQuery $query
+    ) {
     }
 
     public function replaceTags(string $value)

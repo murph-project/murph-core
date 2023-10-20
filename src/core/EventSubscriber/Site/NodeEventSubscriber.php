@@ -12,7 +12,6 @@ use App\Core\Repository\Site\NodeRepository;
 use App\Core\Slugify\CodeSlugify;
 use App\Core\Slugify\RouteParameterSlugify;
 use App\Core\Slugify\Slugify;
-use Symfony\Component\HttpKernel\KernelInterface;
 use function Symfony\Component\String\u;
 
 /**
@@ -22,27 +21,14 @@ use function Symfony\Component\String\u;
  */
 class NodeEventSubscriber extends EntityManagerEventSubscriber
 {
-    protected NodeFactory $nodeFactory;
-    protected EntityManager $entityManager;
-    protected KernelInterface $kernel;
-    protected Slugify $slugify;
-    protected CodeSlugify $codeSlugify;
-    protected RouteParameterSlugify $routeParameterSlugify;
-
     public function __construct(
-        NodeFactory $nodeFactory,
-        NodeRepository $nodeRepository,
-        EntityManager $entityManager,
-        Slugify $slugify,
-        CodeSlugify $codeSlugify,
-        RouteParameterSlugify $routeParameterSlugify
+        protected NodeFactory $nodeFactory,
+        protected NodeRepository $nodeRepository,
+        protected EntityManager $entityManager,
+        protected Slugify $slugify,
+        protected CodeSlugify $codeSlugify,
+        protected RouteParameterSlugify $routeParameterSlugify
     ) {
-        $this->nodeFactory = $nodeFactory;
-        $this->nodeRepository = $nodeRepository;
-        $this->entityManager = $entityManager;
-        $this->slugify = $slugify;
-        $this->codeSlugify = $codeSlugify;
-        $this->routeParameterSlugify = $routeParameterSlugify;
     }
 
     public function supports(EntityInterface $entity): bool

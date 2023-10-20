@@ -11,16 +11,11 @@ use Twig\TwigFilter;
 
 class FileInformationExtension extends AbstractExtension
 {
-    protected FileInformationBuilder $fileInfoBuilder;
-
     public function __construct(
-        FileInformationBuilder $fileInfoBuilder,
-        FsFileManager $fsManager,
-        FileInformationRepositoryQuery $query
+        protected FileInformationBuilder $fileInfoBuilder,
+        protected FsFileManager $fsManager,
+        protected FileInformationRepositoryQuery $query
     ) {
-        $this->fileInfoBuilder = $fileInfoBuilder;
-        $this->fsManager = $fsManager;
-        $this->query = $query;
     }
 
     /**

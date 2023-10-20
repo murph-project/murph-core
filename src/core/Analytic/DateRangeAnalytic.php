@@ -13,18 +13,16 @@ use App\Core\Repository\Analytic\ViewRepositoryQuery;
  */
 class DateRangeAnalytic
 {
-    protected ViewRepositoryQuery $viewQuery;
-    protected RefererRepositoryQuery $refererQuery;
     protected ?Node $node;
     protected ?\DateTime $from;
     protected ?\DateTime $to;
     protected bool $reload = true;
     protected array $cache = [];
 
-    public function __construct(ViewRepositoryQuery $viewQuery, RefererRepositoryQuery $refererQuery)
-    {
-        $this->viewQuery = $viewQuery;
-        $this->refererQuery = $refererQuery;
+    public function __construct(
+        protected ViewRepositoryQuery $viewQuery,
+        protected RefererRepositoryQuery $refererQuery
+    ) {
     }
 
     public function getViews(): array

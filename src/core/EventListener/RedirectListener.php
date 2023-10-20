@@ -15,15 +15,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class RedirectListener
 {
-    protected RedirectMatcher $matcher;
-    protected RedirectBuilder $builder;
-    protected RedirectRepositoryQuery $repository;
-
-    public function __construct(RedirectMatcher $matcher, RedirectBuilder $builder, RedirectRepositoryQuery $repository)
-    {
-        $this->matcher = $matcher;
-        $this->builder = $builder;
-        $this->repository = $repository;
+    public function __construct(
+        protected RedirectMatcher $matcher,
+        protected RedirectBuilder $builder,
+        protected RedirectRepositoryQuery $repository
+    ) {
     }
 
     public function onKernelException(ExceptionEvent $event)

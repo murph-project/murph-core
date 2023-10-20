@@ -6,9 +6,7 @@ use App\Core\Entity\Site\Menu;
 use App\Core\Entity\Site\Navigation;
 use App\Core\Entity\Site\Node;
 use App\Core\Entity\Site\Page\Page;
-use App\Core\Repository\Site\NavigationRepositoryQuery;
 use App\Core\Repository\Site\NodeRepository;
-use App\Core\Repository\Site\Page\PageRepositoryQuery;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -18,15 +16,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class SiteRequest
 {
-    protected RequestStack $requestStack;
-    protected NodeRepository $nodeRepository;
-    protected NavigationRepositoryQuery $navigationRepositoryQuery;
-    protected PageRepositoryQuery $pageRepositoryQuery;
-
-    public function __construct(RequestStack $requestStack, NodeRepository $nodeRepository)
-    {
-        $this->requestStack = $requestStack;
-        $this->nodeRepository = $nodeRepository;
+    public function __construct(
+        protected RequestStack $requestStack,
+        protected NodeRepository $nodeRepository
+    ) {
     }
 
     public function getNode(): ?Node

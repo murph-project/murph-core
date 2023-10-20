@@ -17,11 +17,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class BlockEventSubscriber extends EntityManagerEventSubscriber
 {
-    protected FileUploadHandler $fileUpload;
-
-    public function __construct(FileUploadHandler $fileUpload)
+    public function __construct(protected FileUploadHandler $fileUpload)
     {
-        $this->fileUpload = $fileUpload;
     }
 
     public function supports(EntityInterface $entity): bool

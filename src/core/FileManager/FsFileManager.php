@@ -23,21 +23,14 @@ class FsFileManager
     protected string $path;
     protected string $pathUri;
     protected array $pathLocked;
-    protected FileUploadHandler $uploadHandler;
-    protected FileInformationFactory $fileInformationFactory;
-    protected FileInformationRepositoryQuery $fileInformationRepositoryQuery;
 
     public function __construct(
         ParameterBagInterface $params,
-        FileUploadHandler $uploadHandler,
-        FileInformationFactory $fileInformationFactory,
-        FileInformationRepositoryQuery $fileInformationRepositoryQuery
+        protected FileUploadHandler $uploadHandler,
+        protected FileInformationFactory $fileInformationFactory,
+        protected FileInformationRepositoryQuery $fileInformationRepositoryQuery
     ) {
         $config = $params->get('core')['file_manager'];
-
-        $this->uploadHandler = $uploadHandler;
-        $this->fileInformationFactory = $fileInformationFactory;
-        $this->fileInformationRepositoryQuery = $fileInformationRepositoryQuery;
 
         $this->mimes = $config['mimes'];
         $this->path = $config['path'];

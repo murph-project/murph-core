@@ -14,11 +14,8 @@ class PasswordRequestEvent extends Event
 {
     public const EVENT = 'account_event.password_request';
 
-    protected User $user;
-
-    public function __construct(User $user)
+    public function __construct(protected User $user)
     {
-        $this->user = $user;
     }
 
     public function getUser(): User

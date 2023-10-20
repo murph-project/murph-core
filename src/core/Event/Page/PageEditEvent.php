@@ -14,12 +14,10 @@ class PageEditEvent extends Event
 {
     public const FORM_INIT_EVENT = 'page_edit_event.form_init';
 
-    protected Page $page;
     protected array $pageBuilderOptions = [];
 
-    public function __construct(Page $page)
+    public function __construct(protected Page $page)
     {
-        $this->page = $page;
     }
 
     public function getPage()

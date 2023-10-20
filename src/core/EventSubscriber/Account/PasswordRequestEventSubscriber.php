@@ -17,24 +17,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class PasswordRequestEventSubscriber implements EventSubscriberInterface
 {
-    protected MailNotifier $notifier;
-    protected UrlGeneratorInterface $urlGenerator;
-    protected EntityManager $entityManager;
-    protected TokenGeneratorInterface $tokenGenerator;
-    protected TranslatorInterface $translator;
-
     public function __construct(
-        MailNotifier $notifier,
-        UrlGeneratorInterface $urlGenerator,
-        EntityManager $entityManager,
-        TokenGeneratorInterface $tokenGenerator,
-        TranslatorInterface $translator
+        protected MailNotifier $notifier,
+        protected UrlGeneratorInterface $urlGenerator,
+        protected EntityManager $entityManager,
+        protected TokenGeneratorInterface $tokenGenerator,
+        protected TranslatorInterface $translator
     ) {
-        $this->notifier = $notifier;
-        $this->urlGenerator = $urlGenerator;
-        $this->entityManager = $entityManager;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->translator = $translator;
     }
 
     public static function getSubscribedEvents()

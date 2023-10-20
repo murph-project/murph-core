@@ -14,15 +14,11 @@ use App\Core\Repository\SettingRepositoryQuery;
  */
 class SettingManager
 {
-    protected EntityManager $entityManager;
-    protected SettingRepositoryQuery $query;
-    protected SettingFactory $factory;
-
-    public function __construct(EntityManager $entityManager, SettingRepositoryQuery $query, SettingFactory $factory)
-    {
-        $this->entityManager = $entityManager;
-        $this->query = $query;
-        $this->factory = $factory;
+    public function __construct(
+        protected EntityManager $entityManager,
+        protected SettingRepositoryQuery $query,
+        protected SettingFactory $factory
+    ) {
     }
 
     public function init(string $code, string $section, string $label, $value = null)

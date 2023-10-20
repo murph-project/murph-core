@@ -16,15 +16,11 @@ class TaskRunRequestedEvent extends Event
 {
     public const RUN_REQUEST_EVENT = 'task_event.run_request';
 
-    protected string $task;
-    protected InputBag $parameters;
-    protected BufferedOutput $output;
-
-    public function __construct(string $task, InputBag $parameters, BufferedOutput $output)
-    {
-        $this->task = $task;
-        $this->parameters = $parameters;
-        $this->output = $output;
+    public function __construct(
+        protected string $task,
+        protected InputBag $parameters,
+        protected BufferedOutput $output
+    ) {
     }
 
     public function getTask(): string

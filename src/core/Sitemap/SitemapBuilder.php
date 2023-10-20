@@ -17,15 +17,11 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class SitemapBuilder
 {
-    protected Reader $annotationReader;
-    protected ContainerInterface $container;
-    protected UrlGeneratorInterface $urlGenerator;
-
-    public function __construct(Reader $annotationReader, ContainerInterface $container, UrlGeneratorInterface $urlGenerator)
-    {
-        $this->annotationReader = $annotationReader;
-        $this->container = $container;
-        $this->urlGenerator = $urlGenerator;
+    public function __construct(
+        protected Reader $annotationReader,
+        protected ContainerInterface $container,
+        protected UrlGeneratorInterface $urlGenerator
+    ) {
     }
 
     public function build(Navigation $navigation, ?string $currentDomain): array

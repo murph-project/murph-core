@@ -17,11 +17,9 @@ use App\Core\Slugify\CodeSlugify;
 class NavigationEventSubscriber extends EntityManagerEventSubscriber
 {
     public function __construct(
-        EntityManager $entityManager,
-        CodeSlugify $slugify
+        protected EntityManager $entityManager,
+        protected CodeSlugify $slugify
     ) {
-        $this->entityManager = $entityManager;
-        $this->slugify = $slugify;
     }
 
     public function supports(EntityInterface $entity): bool

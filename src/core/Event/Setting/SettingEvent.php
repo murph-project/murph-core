@@ -14,11 +14,8 @@ class SettingEvent extends Event
     public const INIT_EVENT = 'setting_event.init';
     public const FORM_INIT_EVENT = 'setting_event.form_init';
 
-    protected $data;
-
-    public function __construct($data = null)
+    public function __construct(protected $data = null)
     {
-        $this->data = $data;
     }
 
     public function getData()

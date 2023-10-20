@@ -13,11 +13,8 @@ use App\Core\Event\Task\TaskRunRequestedEvent;
  */
 class CacheCleanTaskEventSubscriber extends TaskEventSubscriber
 {
-    protected SymfonyCacheManager $cacheManager;
-
-    public function __construct(SymfonyCacheManager $cacheManager)
+    public function __construct(protected SymfonyCacheManager $cacheManager)
     {
-        $this->cacheManager = $cacheManager;
     }
 
     public function onInit(TaskInitEvent $event)

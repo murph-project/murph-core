@@ -12,13 +12,10 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class UrlBuilder
 {
-    protected UrlGeneratorInterface $urlGenerator;
-    protected SiteRequest $siteRequest;
-
-    public function __construct(UrlGeneratorInterface $urlGenerator, SiteRequest $siteRequest)
-    {
-        $this->urlGenerator = $urlGenerator;
-        $this->siteRequest = $siteRequest;
+    public function __construct(
+        protected UrlGeneratorInterface $urlGenerator,
+        protected SiteRequest $siteRequest
+    ) {
     }
 
     public function replaceTags(string $value): string

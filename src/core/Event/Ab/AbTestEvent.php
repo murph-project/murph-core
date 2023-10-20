@@ -15,11 +15,8 @@ class AbTestEvent extends Event
     public const INIT_EVENT = 'ab_test.init';
     public const RUN_EVENT = 'ab_test.run';
 
-    protected AbTest $test;
-
-    public function __construct(AbTest $test)
+    public function __construct(protected AbTest $test)
     {
-        $this->test = $test;
     }
 
     public function getTest(): AbTest

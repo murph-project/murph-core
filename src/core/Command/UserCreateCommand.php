@@ -18,19 +18,12 @@ class UserCreateCommand extends Command
 {
     protected static $defaultName = 'murph:user:create';
     protected static $defaultDescription = 'Creates a user';
-    protected UserFactory $userFactory;
-    protected EntityManager $entityManager;
-    protected TokenGeneratorInterface $tokenGenerator;
 
     public function __construct(
-        UserFactory $userFactory,
-        EntityManager $entityManager,
-        TokenGeneratorInterface $tokenGenerator
+        protected UserFactory $userFactory,
+        protected EntityManager $entityManager,
+        protected TokenGeneratorInterface $tokenGenerator
     ) {
-        $this->userFactory = $userFactory;
-        $this->entityManager = $entityManager;
-        $this->tokenGenerator = $tokenGenerator;
-
         parent::__construct();
     }
 

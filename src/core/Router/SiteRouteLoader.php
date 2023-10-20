@@ -15,10 +15,9 @@ use Symfony\Component\Routing\RouteCollection;
  */
 class SiteRouteLoader extends Loader
 {
-    protected NavigationRepositoryQuery $navigationQuery;
     protected $isLoaded = false;
 
-    public function __construct(NavigationRepositoryQuery $navigationQuery)
+    public function __construct(protected NavigationRepositoryQuery $navigationQuery)
     {
         $this->navigationQuery = $navigationQuery;
     }

@@ -11,11 +11,8 @@ use function Symfony\Component\String\u;
 
 class ForcedDomainEventSubscriber implements EventSubscriberInterface
 {
-    protected SiteRequest $siteRequest;
-
-    public function __construct(SiteRequest $siteRequest)
+    public function __construct(protected SiteRequest $siteRequest)
     {
-        $this->siteRequest = $siteRequest;
     }
 
     public function onKernelResponse(ResponseEvent $event)

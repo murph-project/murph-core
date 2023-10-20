@@ -16,12 +16,12 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class RequestSecurityEventSubscriber implements EventSubscriberInterface
 {
-    protected NodeRepository $nodeRepository;
     protected AuthorizationChecker $authorizationChecker;
 
-    public function __construct(NodeRepository $nodeRepository, ContainerInterface $container)
-    {
-        $this->nodeRepository = $nodeRepository;
+    public function __construct(
+        protected NodeRepository $nodeRepository,
+        ContainerInterface $container
+    ) {
         $this->authorizationChecker = $container->get('security.authorization_checker');
     }
 

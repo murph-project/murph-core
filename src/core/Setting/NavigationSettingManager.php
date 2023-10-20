@@ -16,21 +16,12 @@ use App\Core\Repository\Site\NavigationRepositoryQuery;
  */
 class NavigationSettingManager
 {
-    protected EntityManager $entityManager;
-    protected NavigationSettingRepositoryQuery $query;
-    protected NavigationRepositoryQuery $navigationQuery;
-    protected NavigationSettingFactory $factory;
-
     public function __construct(
-        EntityManager $entityManager,
-        NavigationSettingRepositoryQuery $query,
-        NavigationRepositoryQuery $navigationQuery,
-        NavigationSettingFactory $factory
+        protected EntityManager $entityManager,
+        protected NavigationSettingRepositoryQuery $query,
+        protected NavigationRepositoryQuery $navigationQuery,
+        protected NavigationSettingFactory $factory
     ) {
-        $this->entityManager = $entityManager;
-        $this->query = $query;
-        $this->navigationQuery = $navigationQuery;
-        $this->factory = $factory;
     }
 
     public function init($navigation, string $code, string $section, string $label, $value = null)

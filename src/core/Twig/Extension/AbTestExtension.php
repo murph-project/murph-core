@@ -9,11 +9,8 @@ use Twig\TwigFunction;
 
 class AbTestExtension extends AbstractExtension
 {
-    protected AbContainer $container;
-
-    public function __construct(AbContainer $container)
+    public function __construct(protected AbContainer $container)
     {
-        $this->container = $container;
     }
 
     public function getFunctions(): array

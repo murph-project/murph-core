@@ -14,7 +14,6 @@ use Twig\Environment as TwigEnvironment;
  */
 class MailNotifier
 {
-    protected MailerInterface $mailer;
     protected array $attachments = [];
     protected array $recipients = [];
     protected array $bccRecipients = [];
@@ -22,10 +21,8 @@ class MailNotifier
     protected ?string $from = null;
     protected ?string $replyTo = null;
 
-    public function __construct(TwigEnvironment $twig, MailerInterface $mailer)
+    public function __construct(protected TwigEnvironment $twig, protected MailerInterface $mailer)
     {
-        $this->mailer = $mailer;
-        $this->twig = $twig;
     }
 
     public function setMailer(Swift_Mailer $mailer): self

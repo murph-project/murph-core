@@ -8,11 +8,8 @@ use Twig\TwigFilter;
 
 class StringExtension extends AbstractExtension
 {
-    protected StringBuilder $stringBuilder;
-
-    public function __construct(StringBuilder $stringBuilder)
+    public function __construct(protected StringBuilder $stringBuilder)
     {
-        $this->stringBuilder = $stringBuilder;
     }
 
     /**

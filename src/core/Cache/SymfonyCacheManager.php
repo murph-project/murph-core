@@ -20,15 +20,11 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
  */
 class SymfonyCacheManager
 {
-    protected KernelInterface $kernel;
-    protected HttpClientInterface $httpClient;
-    protected UrlGeneratorInterface $urlGenerator;
-
-    public function __construct(KernelInterface $kernel, HttpClientInterface $httpClient, UrlGeneratorInterface $urlGenerator)
-    {
-        $this->kernel = $kernel;
-        $this->httpClient = $httpClient;
-        $this->urlGenerator = $urlGenerator;
+    public function __construct(
+        protected KernelInterface $kernel,
+        protected HttpClientInterface $httpClient,
+        protected UrlGeneratorInterface $urlGenerator
+    ) {
     }
 
     public function cleanRouting()

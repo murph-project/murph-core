@@ -23,30 +23,18 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
  */
 class AnalyticListener
 {
-    protected NodeRepository $nodeRepository;
-    protected ViewRepositoryQuery $viewRepositoryQuery;
-    protected ViewFactory $viewFactory;
-    protected RefererRepositoryQuery $refererRepositoryQuery;
-    protected RefererFactory $refererFactory;
-    protected EntityManager $manager;
     protected DeviceDetector $deviceDetector;
     protected Request $request;
     protected Node $node;
 
     public function __construct(
-        NodeRepository $nodeRepository,
-        ViewRepositoryQuery $viewRepositoryQuery,
-        ViewFactory $viewFactory,
-        RefererRepositoryQuery $refererRepositoryQuery,
-        RefererFactory $refererFactory,
-        EntityManager $manager
+        protected NodeRepository $nodeRepository,
+        protected ViewRepositoryQuery $viewRepositoryQuery,
+        protected ViewFactory $viewFactory,
+        protected RefererRepositoryQuery $refererRepositoryQuery,
+        protected RefererFactory $refererFactory,
+        protected EntityManager $manager
     ) {
-        $this->nodeRepository = $nodeRepository;
-        $this->viewRepositoryQuery = $viewRepositoryQuery;
-        $this->viewFactory = $viewFactory;
-        $this->refererRepositoryQuery = $refererRepositoryQuery;
-        $this->refererFactory = $refererFactory;
-        $this->manager = $manager;
         $this->createDeviceDetector();
     }
 

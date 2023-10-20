@@ -8,11 +8,8 @@ use Twig\TwigFilter;
 
 class UrlExtension extends AbstractExtension
 {
-    protected UrlBuilder $urlBuilder;
-
-    public function __construct(UrlBuilder $urlBuilder)
+    public function __construct(protected UrlBuilder $urlBuilder)
     {
-        $this->urlBuilder = $urlBuilder;
     }
 
     /**

@@ -14,13 +14,10 @@ use Twig\TwigFunction;
 
 class RoutingExtension extends AbstractExtension
 {
-    protected UrlGeneratorInterface $generator;
-    protected SiteRequest $siteRequest;
-
-    public function __construct(UrlGeneratorInterface $generator, SiteRequest $siteRequest)
-    {
-        $this->generator = $generator;
-        $this->siteRequest = $siteRequest;
+    public function __construct(
+        protected UrlGeneratorInterface $generator,
+        protected SiteRequest $siteRequest
+    ) {
     }
 
     /**

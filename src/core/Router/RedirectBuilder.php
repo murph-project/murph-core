@@ -14,11 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class RedirectBuilder
 {
-    protected UrlBuilder $urlBuilder;
-
-    public function __construct(UrlBuilder $urlBuilder)
+    public function __construct(protected UrlBuilder $urlBuilder)
     {
-        $this->urlBuilder = $urlBuilder;
     }
 
     public function buildResponse(Redirect $redirect, Request $request): RedirectResponse

@@ -4,7 +4,6 @@ namespace App\Core\Manager;
 
 use App\Core\Entity\EntityInterface;
 use App\Core\Event\EntityManager\EntityManagerEvent;
-use Doctrine\ORM\EntityManager as DoctrineEntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -15,14 +14,10 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class EntityManager
 {
-    protected EventDispatcherInterface $eventDispatcher;
-
-    protected DoctrineEntityManager $entityManager;
-
-    public function __construct(EventDispatcherInterface $eventDispatcher, EntityManagerInterface $entityManager)
-    {
-        $this->eventDispatcher = $eventDispatcher;
-        $this->entityManager = $entityManager;
+    public function __construct(
+        protected EventDispatcherInterface $eventDispatcher,
+        protected EntityManagerInterface $entityManager
+    ) {
     }
 
     public function create(EntityInterface $entity, bool $dispatchEvent = true, bool $flush = true): self

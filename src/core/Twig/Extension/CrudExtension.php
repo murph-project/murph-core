@@ -12,15 +12,12 @@ use Twig\TwigFunction;
 class CrudExtension extends AbstractExtension
 {
     protected PropertyAccessor $propertyAccessor;
-    protected Environment $twig;
 
-    public function __construct(Environment $twig)
+    public function __construct(protected Environment $twig)
     {
         $this->propertyAccessor = PropertyAccess::createPropertyAccessorBuilder()
             ->getPropertyAccessor()
         ;
-
-        $this->twig = $twig;
     }
 
     /**

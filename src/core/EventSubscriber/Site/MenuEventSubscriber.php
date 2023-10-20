@@ -20,27 +20,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class MenuEventSubscriber extends EntityManagerEventSubscriber
 {
-    protected NodeFactory $nodeFactory;
-    protected NodeRepository $nodeRepository;
-    protected EntityManager $entityManager;
-    protected CodeSlugify $slugify;
-    protected SymfonyCacheManager $cacheManager;
-    protected TranslatorInterface $translation;
-
     public function __construct(
-        NodeFactory $nodeFactory,
-        NodeRepository $nodeRepository,
-        EntityManager $entityManager,
-        CodeSlugify $slugify,
-        SymfonyCacheManager $cacheManager,
-        TranslatorInterface $translator
+        protected NodeFactory $nodeFactory,
+        protected NodeRepository $nodeRepository,
+        protected EntityManager $entityManager,
+        protected CodeSlugify $slugify,
+        protected SymfonyCacheManager $cacheManager,
+        protected TranslatorInterface $translator
     ) {
-        $this->nodeFactory = $nodeFactory;
-        $this->nodeRepository = $nodeRepository;
-        $this->entityManager = $entityManager;
-        $this->slugify = $slugify;
-        $this->cacheManager = $cacheManager;
-        $this->translator = $translator;
     }
 
     public function supports(EntityInterface $entity): bool

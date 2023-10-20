@@ -18,13 +18,10 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class SiteEventSubscriber extends EntityManagerEventSubscriber
 {
-    protected KernelInterface $kernel;
-    protected SymfonyCacheManager $cacheManager;
-
-    public function __construct(KernelInterface $kernel, SymfonyCacheManager $cacheManager)
-    {
-        $this->kernel = $kernel;
-        $this->cacheManager = $cacheManager;
+    public function __construct(
+        protected KernelInterface $kernel,
+        protected SymfonyCacheManager $cacheManager
+    ) {
     }
 
     public function supports(EntityInterface $entity): bool

@@ -19,11 +19,8 @@ class EntityManagerEvent extends Event
     public const PRE_UPDATE_EVENT = 'entity_manager_event.pre_update';
     public const PRE_DELETE_EVENT = 'entity_manager_event.pre_delete';
 
-    protected EntityInterface $entity;
-
-    public function __construct(EntityInterface $entity)
+    public function __construct(protected EntityInterface $entity)
     {
-        $this->entity = $entity;
     }
 
     public function getEntity(): EntityInterface

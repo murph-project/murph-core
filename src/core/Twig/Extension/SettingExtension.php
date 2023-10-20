@@ -9,13 +9,10 @@ use Twig\TwigFunction;
 
 class SettingExtension extends AbstractExtension
 {
-    private SettingManager $settingManager;
-    private NavigationSettingManager $navigationSettingManager;
-
-    public function __construct(SettingManager $settingManager, NavigationSettingManager $navigationSettingManager)
-    {
-        $this->settingManager = $settingManager;
-        $this->navigationSettingManager = $navigationSettingManager;
+    public function __construct(
+        protected SettingManager $settingManager,
+        protected NavigationSettingManager $navigationSettingManager
+    ) {
     }
 
     /**

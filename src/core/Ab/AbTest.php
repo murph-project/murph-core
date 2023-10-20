@@ -10,14 +10,12 @@ namespace App\Core\Ab;
 class AbTest implements AbTestInterface
 {
     protected $results;
-    protected string $name;
     protected array $variations = [];
     protected array $probabilities = [];
     protected int $duration = 3600 * 24;
 
-    public function __construct(string $name)
+    public function __construct(protected string $name)
     {
-        $this->name = $name;
     }
 
     public function getName(): string

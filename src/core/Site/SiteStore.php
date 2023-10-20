@@ -13,13 +13,10 @@ use App\Core\Repository\Site\NavigationRepositoryQuery;
  */
 class SiteStore
 {
-    protected NavigationRepositoryQuery $navigationRepositoryQuery;
-    protected SiteRequest $siteRequest;
-
-    public function __construct(NavigationRepositoryQuery $navigationRepositoryQuery, SiteRequest $siteRequest)
-    {
-        $this->navigationRepositoryQuery = $navigationRepositoryQuery;
-        $this->siteRequest = $siteRequest;
+    public function __construct(
+        protected NavigationRepositoryQuery $navigationRepositoryQuery,
+        protected SiteRequest $siteRequest
+    ) {
     }
 
     public function getNavigations(): array
