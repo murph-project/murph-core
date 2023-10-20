@@ -4,6 +4,9 @@
 * allow to define templates show before and after a murph collection item
 * add global batch actions
 * add constraint `Length` in forms
+### Changed
+* refactor services using constructor property promotions
+* remove twig in the mail notifier service
 
 ### Fixed
 * fix regression on crud sorting
