@@ -704,6 +704,16 @@ form {
   }
 }
 
+label.required::after {
+  content: '*';
+  margin-left: 3px;
+  color: #b41215;
+}
+
+.invalid-feedback {
+  margin-top: -3px;
+}
+
 .gjs-editor-cont {
   border-radius: 10px;
   overflow: hidden !important;

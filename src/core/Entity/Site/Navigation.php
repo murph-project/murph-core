@@ -67,7 +67,7 @@ class Navigation implements EntityInterface
         return $this->label;
     }
 
-    public function setLabel(string $label): self
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
 
