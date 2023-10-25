@@ -21,6 +21,7 @@ $nav-tabs-link-active-bg: map-get($theme-colors, 'dark-blue');
 $nav-pills-link-active-bg:  map-get($theme-colors, 'dark-blue');
 $nav-tabs-link-active-color: lighten(map-get($theme-colors, 'dark-blue'), 100%);
 $nav-pills-link-active-color: lighten(map-get($theme-colors, 'dark-blue'), 100%);
+$input-focus-border-color: lighten(map-get($theme-colors, 'dark-blue'), 80%);
 
 @import "~choices.js/src/styles/choices.scss";
 @import "~bootstrap/scss/bootstrap.scss";
