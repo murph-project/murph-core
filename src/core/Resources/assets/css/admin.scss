@@ -12,6 +12,16 @@ $pagination-active-bg: #343a40 !default;
 
 $sidebar-width: 260px !default;
 
+$input-border-color: map-get($theme-colors, 'dark-blue');
+$input-btn-focus-color: $input-border-color;
+
+$component-active-color: map-get($theme-colors, 'dark-blue');
+
+$nav-tabs-link-active-bg: map-get($theme-colors, 'dark-blue');
+$nav-pills-link-active-bg:  map-get($theme-colors, 'dark-blue');
+$nav-tabs-link-active-color: lighten(map-get($theme-colors, 'dark-blue'), 100%);
+$nav-pills-link-active-color: lighten(map-get($theme-colors, 'dark-blue'), 100%);
+
 @import "~choices.js/src/styles/choices.scss";
 @import "~bootstrap/scss/bootstrap.scss";
 @import "~@fortawesome/fontawesome-free/css/all.css";
@@ -19,9 +29,29 @@ $sidebar-width: 260px !default;
 @import '~grapesjs/dist/css/grapes.min.css';
 @import '~grapesjs-component-code-editor/dist/grapesjs-component-code-editor.min.css';
 
-@for $i from 1 through 100 {
-  .miw-#{$i*5} {
-    min-width: $i * 5px;
+@for $i from 1 through 400 {
+  .miw-#{$i}, .min-width-#{$i} {
+    min-width: #{$i}px;
+  }
+
+  .min-width-#{$i}p {
+    min-width: #{$i}#{"%"};
+  }
+
+  .maw-#{$i}, .max-width-#{$i} {
+    max-width: #{$i}px;
+  }
+
+  .max-width-#{$i}p {
+    max-width: #{$i}#{"%"};
+  }
+
+  .width-#{$i} {
+    width: #{$i}px;
+  }
+
+  .width-#{$i}p {
+    width: #{$i}#{"%"};
   }
 }
 
@@ -110,6 +140,7 @@ body {
 .table .thead-light {
   a, th {
     color: map-get($theme-colors, 'dark-blue');
+    background: lighten(map-get($theme-colors, 'dark-blue'), 80%);
   }
 }
 
@@ -629,6 +660,15 @@ form {
 
 .modal {
   z-index: 3000;
+
+  &-header {
+    background: map-get($theme-colors, 'dark-blue');
+    color: lighten(map-get($theme-colors, 'dark-blue'), 100%);
+  }
+
+  .close {
+    color: lighten(map-get($theme-colors, 'dark-blue'), 100%);
+  }
 }
 
 .modal-dialog-large {
