@@ -4,14 +4,19 @@
 * allow to define templates show before and after a murph collection item
 * add global batch actions
 * add constraint `Length` in forms
+* add sass classes to mange with of elements
+* add background in the modal header
 ### Changed
 * refactor services using constructor property promotions
 * remove twig in the mail notifier service
+* change pills colors
+* change border colors of inputs when focused
 
 ### Fixed
 * fix regression on crud sorting
 * fix test in RepositoryQuery::addForcedFilterHandler
 * remove parameter $option on CrudConfiguration::setForm and fix CrudController make template
+* fix the aspect of the actions's column in the crud
 
 ## [v1.22.0] 2023-09-28
 ### Added
