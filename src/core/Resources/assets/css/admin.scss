@@ -82,6 +82,11 @@ body {
   display: block;
 }
 
+.choices__inner, .is-focused .choices__inner, .is-open .choices__inner {
+  border: 1px solid map-get($theme-colors, 'dark-blue');
+  background: #fff;
+}
+
 .dropdown-toggle-hide-after {
   &::after {
     display: none;

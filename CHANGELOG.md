@@ -10,6 +10,7 @@
 * remove twig in the mail notifier service
 * change pills colors
 * change border colors of inputs when focused
+* change colors on js-choices element
 
 ### Fixed
 * fix regression on crud sorting
