@@ -661,15 +661,6 @@ form {
 
 .modal {
   z-index: 3000;
-
-  &-header {
-    background: map-get($theme-colors, 'dark-blue');
-    color: lighten(map-get($theme-colors, 'dark-blue'), 100%);
-  }
-
-  .close {
-    color: lighten(map-get($theme-colors, 'dark-blue'), 100%);
-  }
 }
 
 .modal-dialog-large {

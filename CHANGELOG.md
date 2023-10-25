@@ -5,7 +5,6 @@
 * add global batch actions
 * add constraint `Length` in forms
 * add sass classes to mange with of elements
-* add background in the modal header
 ### Changed
 * refactor services using constructor property promotions
 * remove twig in the mail notifier service
