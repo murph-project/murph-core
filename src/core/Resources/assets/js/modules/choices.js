@@ -1,8 +1,9 @@
 const Choices = require('choices.js')
-const $ = require('jquery')
 
-module.exports = function () {
-  $('*[data-jschoice]').each(function (key, item) {
-    return new Choices(item)
+module.exports = () => {
+  document.querySelectorAll('*[data-jschoice]').forEach((item) => {
+    return new Choices(item, {
+      searchFields: ['label'],
+    })
   })
 }
