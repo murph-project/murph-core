@@ -5,13 +5,13 @@
 * add global batch actions
 * add constraint `Length` in forms
 * add sass classes to mange with of elements
+* set searchFields option on jschoice manager (search on labels)
 ### Changed
 * refactor services using constructor property promotions
 * remove twig in the mail notifier service
 * change pills colors
 * change border colors of inputs when focused
 * change colors on js-choices element
-
 ### Fixed
 * fix regression on crud sorting
 * fix test in RepositoryQuery::addForcedFilterHandler
