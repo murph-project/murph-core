@@ -1,5 +1,6 @@
 ## [Unreleased]
 
+## [v1.23.0] - 2023-11-01
 ### Added
 * allow to define templates show before and after a murph collection item
 * add global batch actions
@@ -18,7 +19,7 @@
 * remove parameter $option on CrudConfiguration::setForm and fix CrudController make template
 * fix the aspect of the actions's column in the crud
 
-## [v1.22.0] 2023-09-28
+## [v1.22.0] - 2023-09-28
 ### Added
 * add new options in BooleanField: `toggle|checkbox_class_when_true` and `toggle|checkbox_class_when_false`
 * add `count` method in repository query
