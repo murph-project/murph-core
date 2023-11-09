@@ -36,8 +36,8 @@ const fileManagerBrowser = function (callback) {
 
   const clickCallback = (e) => {
     callback($(e.target).attr('data-value'), {})
-    $('div[id^="modal-container-"]').modal('hide')
-    container.modal('hide')
+    $('#fm-modal').next('div[id^="modal-container-"]').modal('hide')
+    $('#fm-modal').modal('hide')
 
     $('body').off('click', '#file-manager-insert', clickCallback)
   }
