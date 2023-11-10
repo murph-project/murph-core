@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+### Added
+* add CSS class `no-wrap`
+* copy the pager of the CRUD at the bottom of the list
+### Fixed
+* fix an issue with the file manager when editing an item opened in a modal
+
 ## [v1.23.0] - 2023-11-01
 ### Added
 * allow to define templates show before and after a murph collection item
