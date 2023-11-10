@@ -132,10 +132,13 @@
 
                                                 <a href="{{ url }}">
                                                     {% if icon is defined %}
-                                                        <span class="{{ icon }}"></span>
+                                                        <span class="no-wrap">
+                                                            <span class="{{ icon }}"></span>
+                                                            {{ label|trans }}
+                                                        </span>
+                                                    {% else %}
+                                                        {{ label|trans }}
                                                     {% endif %}
-
-                                                    {{ label|trans }}
                                                 </a>
                                             {% else %}
                                                 {{ label|trans }}
