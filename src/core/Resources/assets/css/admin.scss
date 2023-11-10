@@ -619,7 +619,11 @@ fieldset.form-group {
 
   &-filter {
     padding-right: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
+
+    .pagination {
+      margin-bottom: 0;
+    }
 
     @media screen and (max-width: 769px) {
       padding-right: 10px;
@@ -650,8 +654,20 @@ fieldset.form-group {
   }
 }
 
-.table .crud-batch-column {
-  width: 1%;
+.table {
+  .crud-batch-column {
+    width: 1%;
+  }
+
+  .crud-action-column {
+    text-align: right;
+    white-space: nowrap;
+    width: 1px;
+  }
+}
+
+.no-wrap {
+  white-space: nowrap;
 }
 
 form {
