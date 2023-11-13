@@ -1,7 +1,7 @@
 {% extends '@Core/admin/layout.html.twig' %}
 
 {% set context = context ?? 'index' %}
-{% set pager_render = knp_pagination_render(pager) %}
+{% set pager_render = pager is defined ? knp_pagination_render(pager) : null %}
 
 {% block title %}{{ configuration.pageTitle(context)|trans }} {{ parent() ? ('- ' ~ parent()) : '' }}{% endblock %}
 
