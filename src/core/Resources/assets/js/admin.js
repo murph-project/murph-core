@@ -1,6 +1,7 @@
 import '../../../../../../../../assets/css/admin.scss';
 
 require('../../../../../../../../node_modules/bootstrap/dist/js/bootstrap.min.js')
+require('./modules/sidebar.js')()
 require('./modules/table-fixed.js')()
 require('./modules/form-confirm.js')()
 require('./modules/form-file.js')()
@@ -27,5 +28,4 @@ require('./modules/file-manager.js')()
 require('./modules/file-picker.js')()
 require('./modules/analytics.js')()
 require('./modules/page.js')()
-require('./modules/sidebar.js')()
 require('./modules/node.js')()
