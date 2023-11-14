@@ -24,7 +24,10 @@ const Sidebar = () => {
   })
 
   if (currentItem) {
-    stickyMenu.scroll({top: localStorage.getItem('sidebar-item-top') ?? 0})
+    stickyMenu.scrollTo({
+      top: localStorage.getItem('sidebar-item-top') ?? 0,
+      behavior: 'smooth'
+    })
   }
 }
 
