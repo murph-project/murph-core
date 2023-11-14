@@ -8,14 +8,24 @@ const Sidebar = () => {
   }
 
   const stickyMenu = menu.querySelector('.sidebar-sticky')
+  const items = stickyMenu.querySelectorAll('a.nav-link')
   const currentItem = menu.querySelector('.nav-link.active')
+
+  items.forEach((item) => {
+    item.addEventListener('click', () => {
+      localStorage.setItem('sidebar-item-top', stickyMenu.scrollTop)
+    })
+  })
+
   const toggler = menu.querySelector('.sidebar-toggler .btn')
 
   toggler.addEventListener('click', () => {
     menu.classList.toggle('is-open')
   })
 
-  stickyMenu.scroll({top: currentItem.offsetTop - menu.scrollTop})
+  if (currentItem) {
+    stickyMenu.scroll({top: localStorage.getItem('sidebar-item-top') ?? 0})
+  }
 }
 
 module.exports = Sidebar
