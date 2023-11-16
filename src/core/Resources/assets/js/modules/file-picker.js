@@ -36,6 +36,7 @@ const fileManagerBrowser = function (callback) {
 
   const clickCallback = (e) => {
     callback($(e.target).attr('data-value'), {})
+    $('#fm-modal').next('.modal-backdrop').remove()
     $('#fm-modal').next('div[id^="modal-container-"]').modal('hide')
     $('#fm-modal').modal('hide')
 
