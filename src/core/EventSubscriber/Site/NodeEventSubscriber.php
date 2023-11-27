@@ -49,7 +49,7 @@ class NodeEventSubscriber extends EntityManagerEventSubscriber
 
         $node = $event->getEntity();
 
-        $node->setCode($this->codeSlugify->slugify($node->getCode()));
+        $node->setCode($this->codeSlugify->slugify($node->getCode() ?? ''));
 
         if ($node->getDisableUrl()) {
             $node->setUrl(null);
