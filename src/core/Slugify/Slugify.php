@@ -13,7 +13,7 @@ class Slugify
 {
     public function slugify($data): ?string
     {
-        return $this->create()->slugify($data);
+        return $this->create()->slugify((string) $data);
     }
 
     protected function create(): BaseSlugify
