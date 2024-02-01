@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [v1.24.1] - 2024-02-01
+### Fixed
+* update Murph version constant
+
 ## [v1.24.0] - 2024-01-27
 ### Added
 * add CSS class `no-wrap`
