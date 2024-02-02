@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+### Fixed
+* fix default crud sort
+
 ## [v1.24.1] - 2024-02-01
 ### Fixed
 * update Murph version constant
