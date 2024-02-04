@@ -22,14 +22,12 @@ class <?php echo $class_name; ?> extends CrudController
     protected ?CrudConfiguration $configuration = null;
 
     #[Route(path: '/admin/<?php echo $route; ?>/{page}', name: 'admin_<?php echo $route; ?>_index', methods: ['GET'], requirements: ['page' => '\d+'])]
-    #[IsGranted('index', 'entity')]
     public function index(RepositoryQuery $query, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doIndex($page, $query, $request, $session);
     }
 
     #[Route(path: '/admin/<?php echo $route; ?>/new', name: 'admin_<?php echo $route; ?>_new', methods: ['GET', 'POST'])]
-    #[IsGranted('new', 'entity')]
     public function new(Factory $factory, EntityManager $entityManager, Request $request): Response
     {
         return $this->doNew($factory->create(), $entityManager, $request);
@@ -43,7 +41,6 @@ class <?php echo $class_name; ?> extends CrudController
     }
 
     #[Route(path: '/admin/<?php echo $route; ?>/filter', name: 'admin_<?php echo $route; ?>_filter', methods: ['GET'])]
-    #[IsGranted('filter', 'entity')]
     public function filter(Session $session): Response
     {
         return $this->doFilter($session);
@@ -64,14 +61,12 @@ class <?php echo $class_name; ?> extends CrudController
     }
 
     #[Route(path: '/admin/<?php echo $route; ?>/sort/{page}', name: 'admin_<?php echo $route; ?>_sort', methods: ['POST'], requirements: ['page' => '\d+'])]
-    #[IsGranted('sort', 'entity')]
     public function sort(RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doSort($page, $query, $entityManager, $request, $session);
     }
 
     #[Route(path: '/admin/<?php echo $route; ?>/batch/{page}', name: 'admin_<?php echo $route; ?>_batch', methods: ['POST'], requirements: ['page' => '\d+'])]
-    #[IsGranted('batch', 'entity')]
     public function batch(RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session, int $page = 1): Response
     {
         return $this->doBatch($page, $query, $entityManager, $request, $session);
