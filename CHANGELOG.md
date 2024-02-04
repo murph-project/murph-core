@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+### Added
+* add IsGranted in all methods of the CrudController maker template
 ### Fixed
 * fix default crud sort
 
