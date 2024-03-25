@@ -3,6 +3,7 @@
 ### Fixed
 * fix default crud sort
 * fix hidden save button in file manager
+* fix template of CrudController (maker)
 
 ## [v1.24.1] - 2024-02-01
 ### Fixed
