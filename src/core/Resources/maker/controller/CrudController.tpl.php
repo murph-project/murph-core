@@ -11,11 +11,11 @@ use <?php echo $entity; ?> as Entity;
 use <?php echo $factory; ?> as Factory;
 use <?php echo $form; ?> as Type;
 use <?php echo $repository_query; ?> as RepositoryQuery;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class <?php echo $class_name; ?> extends CrudController
 {
