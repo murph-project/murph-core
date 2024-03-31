@@ -53,7 +53,7 @@ const fileManagerBrowser = function (callback) {
   })
 }
 
-if (typeof window.tinymce !== 'undefined') {
+const createTinymceConfig = function () {
   window.tinymce.murph = window.tinymce.murph || {}
   window.tinymce.murph.selector = window.tinymce.murph.selector || '*[data-tinymce]'
   window.tinymce.murph.configurationBase = window.tinymce.murph.configurationBase || {
@@ -80,6 +80,7 @@ if (typeof window.tinymce !== 'undefined') {
   }
 
   window.tinymce.murph.modes = window.tinymce.murph.modes || {}
+  window.tinymceModes = window.tinymceModes || {}
 
   window.tinymce.murph.modes.default = window.tinymce.murph.modes.default || {
     plugins: 'print preview importcss searchreplace visualblocks visualchars fullscreen template table charmap hr pagebreak nonbreaking toc insertdatetime advlist lists wordcount textpattern noneditable help charmap quickbars link image code autoresize',
@@ -93,6 +94,11 @@ if (typeof window.tinymce !== 'undefined') {
     contextmenu: 'link image imagetools table configurepermanentpen',
     quickbars_selection_toolbar: 'bold italic',
     toolbar: 'undo redo | bold italic underline'
+  }
+
+  window.tinymce.murph.modes = {
+    ...window.tinymce.murph.modes,
+    ...window.tinymceModes
   }
 
   tinymce.addI18n('fr_FR', {
@@ -612,15 +618,12 @@ const doInitEditor = () => {
 }
 
 module.exports = function () {
-  if (typeof tinymce === 'undefined') {
-    return
-  }
-
   const observer = new MutationObserver(doInitEditor)
   const config = { attributes: false, childList: true, subtree: true }
   observer.observe(document.querySelector('body'), config)
 
   $(() => {
+    createTinymceConfig()
     doInitEditor()
 
     $('body').on('hidden.bs.modal', '.modal', (e) => {
