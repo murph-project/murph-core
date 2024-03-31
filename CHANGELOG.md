@@ -2,6 +2,7 @@
 
 ### Added
 * allow to use `window.tinymceModes` to add or override tinymce modes
+* add border color on tinymce editor
 ### Fixed
 * fix default crud sort
 * fix hidden save button in file manager
