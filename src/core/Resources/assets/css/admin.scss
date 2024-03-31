@@ -744,8 +744,15 @@ label.required::after {
   background: map-get($theme-colors, 'dark-blue');
 }
 
-.tox.tox-silver-sink.tox-tinymce-aux {
-  z-index: 3000 !important;
+.tox {
+  &.tox-silver-sink.tox-tinymce-aux {
+    z-index: 3000 !important;
+  }
+
+  &.tox-tinymce {
+    border-color: $input-border-color;
+    border-radius: 5px;
+  }
 }
 
 .field-boolean {
