@@ -618,13 +618,13 @@ const doInitEditor = () => {
 }
 
 module.exports = function () {
-  const observer = new MutationObserver(doInitEditor)
-  const config = { attributes: false, childList: true, subtree: true }
-  observer.observe(document.querySelector('body'), config)
-
   $(() => {
     createTinymceConfig()
     doInitEditor()
+
+    const observer = new MutationObserver(doInitEditor)
+    const config = { attributes: false, childList: true, subtree: true }
+    observer.observe(document.querySelector('body'), config)
 
     $('body').on('hidden.bs.modal', '.modal', (e) => {
       if (!$('.tox-dialog').length) {
