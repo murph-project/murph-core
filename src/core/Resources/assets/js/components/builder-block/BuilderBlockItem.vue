@@ -2,39 +2,51 @@
   <div class="block" v-if="widget" :key="blockKey">
     <div class="block-header">
       <div class="float-right">
+        <span class="block-id">
+          {{ item.id }}
+        </span>
         <div class="block-header-item text-white bg-danger" v-on:click="removeMe(item)">
           <span class="fa fa-trash"></span>
         </div>
       </div>
-      <div class="block-header-item block-label" data-toggle="tooltip" data-placement="top" :title="item.widget">
+      <div
+        class="block-header-item block-label"
+        :title="item.widget"
+      >
         {{ widget.label }}
       </div>
-      <div class="block-header-item block-settings-toggler" v-on:click="toggleSettings" v-if="Object.keys(widget.settings).length">
+      <div
+        class="block-header-item block-settings-inverse"
+        v-on:click="toggleSettings"
+        v-if="Object.keys(widget.settings).length"
+      >
         <span class="fa fa-cog"></span>
       </div>
+
+      <div
+        v-if="!isFirst"
+        v-on:click="moveMeUp"
+        class="block-header-item block-settings-inverse"
+      >
+          <span class="fas fa-arrow-up"></span>
+        </div>
+      <div
+        v-if="!isLast"
+        v-on:click="moveMeDown"
+        class="block-header-item block-settings-inverse"
+      >
+          <span class="fas fa-arrow-down"></span>
+        </div>
     </div>
 
     <div class="block-settings" v-if="Object.keys(widget.settings).length" :class="{'d-none': !showSettings}">
       <div class="row">
-        <div
+        <BuilderBlockSetting
           v-for="(params, setting) in widget.settings"
-          class="col-12 form-group"
-        >
-          <label v-text="params.label"></label>
-
-          <input
-            v-if="params.type == 'input'"
-            v-model="item.settings[setting]"
-            v-bind="params.attr"
-            class="form-control"
-          />
-          <textarea
-            v-if="params.type == 'textarea'"
-            v-model="item.settings[setting]"
-            v-bind="params.attr"
-            class="form-control"
-          ></textarea>
-        </div>
+          :item="item"
+          :params="params"
+          :setting="setting"
+        />
       </div>
     </div>
 
@@ -42,7 +54,11 @@
       <BuilderBlockItem
         :item="child"
         :widgets="widgets"
+        :isFirst="key === 0"
+        :isLast="key == Object.keys(item.children)[Object.keys(item.children).length -1]"
         @remove-item="removeBlock(key)"
+        @move-item-up="moveBlockUp(key)"
+        @move-item-down="moveBlockDown(key)"
       />
     </div>
 
@@ -58,6 +74,7 @@
 
 <script>
 import BuilderBlockCreate from './BuilderBlockCreate'
+import BuilderBlockSetting from './BuilderBlockSetting'
 
 export default {
   name: 'BuilderBlockItem',
@@ -68,6 +85,14 @@ export default {
     },
     item: {
       type: Object,
+      required: true
+    },
+    isFirst: {
+      type: Boolean,
+      required: true
+    },
+    isLast: {
+      type: Boolean,
       required: true
     }
   },
@@ -85,6 +110,28 @@ export default {
     removeMe() {
       this.$emit('remove-item')
     },
+    moveMeUp() {
+      this.$emit('move-item-up')
+    },
+    moveMeDown() {
+      this.$emit('move-item-down')
+    },
+    moveBlockUp(key) {
+      const prev = this.item.children[key-1]
+      const current = this.item.children[key]
+
+      this.item.children[key-1] = current
+      this.item.children[key] = prev
+      ++this.blockKey
+    },
+    moveBlockDown(key) {
+      const next = this.item.children[key+1]
+      const current = this.item.children[key]
+
+      this.item.children[key+1] = current
+      this.item.children[key] = next
+      ++this.blockKey
+    },
     removeBlock(key) {
       let children = []
 
@@ -100,6 +147,7 @@ export default {
   },
   components: {
     BuilderBlockCreate,
+    BuilderBlockSetting,
   },
   mounted() {
     this.widget = this.widgets[this.item.widget]

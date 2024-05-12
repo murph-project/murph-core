@@ -773,10 +773,9 @@ label.required::after {
     .block-header-item {
       font-size: 12px;
       display: inline-block;
-      margin-bottom: 3px;
+      margin-bottom: 10px;
       padding: 2px 6px;
       border-radius: 4px;
-      margin-bottom: 5px;
       margin-right: 2px;
       cursor: pointer;
     }
@@ -788,7 +787,7 @@ label.required::after {
     color: lighten(map-get($theme-colors, 'dark-blue'), 100%);
   }
 
-  .block-settings-toggler {
+  .block-settings-inverse {
     background: none;
     border: 1px solid map-get($theme-colors, 'dark-blue');
     color: map-get($theme-colors, 'dark-blue');
@@ -798,9 +797,13 @@ label.required::after {
     padding: 4px;
   }
 
+  .block-id {
+    font-size: 12px;
+    margin-right: 5px;
+  }
+
   .builder-add {
     text-align: center;
-    margin-bottom: -5px;
 
     .picker {
       text-align: left;
