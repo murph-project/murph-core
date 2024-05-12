@@ -1,5 +1,14 @@
 {% extends 'bootstrap_4_layout.html.twig' %}
 
+{% block builder_widget %}
+    {% set row_attr = row_attr|merge({class: 'builder-widget ' ~ (row_attr.class ?? '')}) %}
+
+    <div {% for attr, value in row_attr %}{{ attr }}="{{ value }}" {% endfor %}>
+        <div class="builder-widget-component" data-value="{{ value is iterable ? value|json_encode : value }}" data-name="{{ full_name }}" data-id="{{ id }}">
+        </div>
+    </div>
+{% endblock %}
+
 {% block grapesjs_widget %}
     <div class="gjs"></div>
     <div class="d-none">

@@ -1,0 +1,5 @@
+<div class="row" id="{{ id }}">
+    {% for item in children %}
+        {{ item|block_to_html }}
+    {% endfor %}
+</div>

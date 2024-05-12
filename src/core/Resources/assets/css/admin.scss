@@ -759,3 +759,46 @@ label.required::after {
   color: #49555b;
   font-size: 20px;
 }
+
+.builder-widget {
+  .block {
+    border: 1px solid rgba(map-get($theme-colors, 'dark-blue'), 0.3);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background: rgba(map-get($theme-colors, 'dark-blue'), 0.02);
+  }
+
+  .block-header {
+    .block-header-item {
+      font-size: 12px;
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-right: 2px;
+      cursor: pointer;
+    }
+  }
+
+  .block-label {
+    background: map-get($theme-colors, 'dark-blue');
+    border: 1px solid map-get($theme-colors, 'dark-blue');
+    color: lighten(map-get($theme-colors, 'dark-blue'), 100%);
+  }
+
+  .block-settings-inverse {
+    background: none;
+    border: 1px solid map-get($theme-colors, 'dark-blue');
+    color: map-get($theme-colors, 'dark-blue');
+  }
+
+  .block-settings {
+    padding: 4px;
+  }
+
+  .block-id {
+    font-size: 12px;
+    margin-right: 5px;
+  }
+}
