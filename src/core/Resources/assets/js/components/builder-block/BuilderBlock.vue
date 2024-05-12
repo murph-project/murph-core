@@ -92,7 +92,7 @@ export default {
 
       this.value = newValue
 
-      ++this.blockKey
+      // ++this.blockKey
     },
   },
   components: {
