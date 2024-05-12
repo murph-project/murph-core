@@ -2,6 +2,7 @@
 
 namespace App\Core\DependencyInjection;
 
+use App\Core\DependencyInjection\Compiler\BuilderBlockPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 

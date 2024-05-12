@@ -1,7 +1,8 @@
 <template>
-  <div class="block" :key="blockKey">
+  <div class="block" :key="blockKey" v-if="Object.keys(widgets).length">
     <BuilderBlockItem
       v-for="(block, key) in value"
+      :key="block.id + '-' + key"
       :item="block"
       :widgets="widgets"
       :isFirst="key === 0"
@@ -24,54 +25,11 @@
 <script>
 import BuilderBlockItem from './BuilderBlockItem'
 import BuilderBlockCreate from './BuilderBlockCreate'
+import Routing from '../../../../../../../../../friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js'
 
-const widgets = {
-  bsContainer: {
-    category: 'Boostrap',
-    label: 'Container',
-    settings: {
-    },
-    isContainer: true,
-    widgets: [],
-  },
-  bsRow: {
-    category: 'Boostrap',
-    label: 'Row',
-    settings: {
-    },
-    isContainer: true,
-    widgets: ['bsColumn'],
-  },
-  bsColumn: {
-    category: 'Boostrap',
-    label: 'Column',
-    settings: {
-      size: {label: 'Size', type: 'input', attr: {type: 'number'}},
-      sizeMd: {label: 'Size MD', type: 'input', attr: {type: 'number'}},
-    },
-    isContainer: true,
-    widgets: [],
-  },
-  tinymce: {
-    category: 'Editor',
-    label: 'TinyMCE',
-    settings: {
-      value: {label: 'Value', type: 'textarea', attr: {'data-tinymce': ''}},
-    },
-    isContainer: false,
-    widgets: [],
-  },
-  select: {
-    category: null,
-    label: 'Item with Select',
-    settings: {
-      value: {label: 'Value', type: 'select', attr: {}, options: [
-        {value: 'a', text: 'A'},
-        {value: 'b', text: 'B'},
-      ]}
-    },
-  }
-}
+const axios = require('axios').default
+const routes = require('../../../../../../../../../../public/js/fos_js_routes.json')
+Routing.setRoutingData(routes)
 
 export default {
   name: 'BuilderBlock',
@@ -92,7 +50,7 @@ export default {
   data() {
     return {
       value: this.initialValue,
-      widgets,
+      widgets: {},
       blockKey: 0
     }
   },
@@ -104,19 +62,23 @@ export default {
       document.querySelector('body').dispatchEvent(new Event('builder_block.update'))
     },
     moveBlockUp(key) {
-      const prev = this.value[key-1]
-      const current = this.value[key]
+      let newValue = this.value.map((x) => x)
 
-      this.value[key-1] = current
-      this.value[key] = prev
+      newValue[key-1] = this.value[key]
+      newValue[key] = this.value[key-1]
+
+      this.value = newValue
+
       ++this.blockKey
     },
     moveBlockDown(key) {
-      const next = this.value[key+1]
-      const current = this.value[key]
+      let newValue = this.value.map((x) => x)
 
-      this.value[key+1] = current
-      this.value[key] = next
+      newValue[key+1] = this.value[key]
+      newValue[key] = this.value[key+1]
+
+      this.value = newValue
+
       ++this.blockKey
     },
     removeBlock(key) {
@@ -129,6 +91,7 @@ export default {
       })
 
       this.value = newValue
+
       ++this.blockKey
     },
   },
@@ -138,6 +101,12 @@ export default {
   },
   mounted() {
     this.triggerBuilderBlockEvent()
+    const that = this
+
+    axios.get(Routing.generate('admin_editor_builder_block_widgets'))
+      .then((response) => {
+        that.widgets = response.data
+      })
   },
   created() {
     this.triggerBuilderBlockEvent()
@@ -146,40 +115,4 @@ export default {
     this.triggerBuilderBlockEvent()
   }
 }
-
-/*
-
-const blocks = [
-  {
-    widget: 'row',
-    settings: {},
-    children: [
-      {
-        widget: 'column',
-        settings: {
-          size: 12,
-          sizeMd: 6,
-        },
-        children: [
-          {
-            widget: 'tinymce',
-            settings: {
-              value: '<p>Hello, world!</p>',
-            },
-            children: null
-          },
-        ],
-      },
-      {
-        widget: 'column',
-        settings: {
-          size: 12,
-          sizeMd: 6,
-        },
-        children: [],
-      },
-    ]
-  }
-]
-*/
 </script>

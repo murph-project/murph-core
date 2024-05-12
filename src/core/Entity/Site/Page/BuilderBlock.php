@@ -12,7 +12,7 @@ class BuilderBlock extends JsonBlock
         $value = parent::getValue();
 
         if (is_string($value)) {
-            return json_decode($value);
+            return json_decode($value, true);
         }
 
         return [];

@@ -15,13 +15,22 @@
 
 .widget {
   display: inline-block;
+}
+
+.widget-content {
   background: #fff;
   padding: 10px;
   text-align: center;
   border-radius: 4px;
   cursor: pointer;
   margin-right: 5px;
+  margin-bottom: 5px;
   border: 1px solid #1e2430;
+}
+
+.widget-icon {
+  margin-top: 5px;
+  font-size: 25px;
 }
 
 .widget:hover {
@@ -30,7 +39,6 @@
 
 .widget-label {
   font-weight: bold;
-  padding: 0 0 10px 0;
 }
 </style>
 
@@ -57,8 +65,13 @@
           v-on:click="add(name, widget)"
           class="widget col-3"
         >
-          <div class="widget-label">
-            {{ widget.label }}
+          <div class="widget-content">
+            <div class="widget-label">
+              {{ widget.label }}
+            </div>
+
+            <div class="widget-icon" v-if="widget.icon" v-html="widget.icon">
+            </div>
           </div>
         </div>
       </div>
@@ -91,10 +104,16 @@ export default {
   },
   methods: {
     add(name, widget) {
+      let settings = {}
+
+      for (let i in widget.settings) {
+        settings[i] = widget.settings[i].default
+      }
+
       this.container.push({
         id: this.makeId(),
         widget: name,
-        settings: {},
+        settings,
         children: [],
       })
 

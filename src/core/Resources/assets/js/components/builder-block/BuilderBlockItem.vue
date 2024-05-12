@@ -43,6 +43,8 @@
       <div class="row">
         <BuilderBlockSetting
           v-for="(params, setting) in widget.settings"
+          :key="item.id + '-' + setting"
+          :class="widget.class"
           :item="item"
           :params="params"
           :setting="setting"
@@ -50,17 +52,18 @@
       </div>
     </div>
 
-    <div v-if="item.children !== null && item.children.length > 0" v-for="(child, key) in item.children">
-      <BuilderBlockItem
-        :item="child"
-        :widgets="widgets"
-        :isFirst="key === 0"
-        :isLast="key == Object.keys(item.children)[Object.keys(item.children).length -1]"
-        @remove-item="removeBlock(key)"
-        @move-item-up="moveBlockUp(key)"
-        @move-item-down="moveBlockDown(key)"
-      />
-    </div>
+    <BuilderBlockItem
+      v-if="item.children !== null && item.children.length > 0"
+      v-for="(child, key) in item.children"
+      :key="child.id"
+      :item="child"
+      :widgets="widgets"
+      :isFirst="key === 0"
+      :isLast="key == Object.keys(item.children)[Object.keys(item.children).length -1]"
+      @remove-item="removeBlock(key)"
+      @move-item-up="moveBlockUp(key)"
+      @move-item-down="moveBlockDown(key)"
+    />
 
     <div v-if="widget.isContainer" class="container">
       <BuilderBlockCreate
@@ -117,19 +120,23 @@ export default {
       this.$emit('move-item-down')
     },
     moveBlockUp(key) {
-      const prev = this.item.children[key-1]
-      const current = this.item.children[key]
+      let newValue = this.item.children.map((x) => x)
 
-      this.item.children[key-1] = current
-      this.item.children[key] = prev
+      newValue[key-1] = this.item.children[key]
+      newValue[key] = this.item.children[key-1]
+
+      this.item.children = newValue
+
       ++this.blockKey
     },
     moveBlockDown(key) {
-      const next = this.item.children[key+1]
-      const current = this.item.children[key]
+      let newValue = this.item.children.map((x) => x)
 
-      this.item.children[key+1] = current
-      this.item.children[key] = next
+      newValue[key+1] = this.item.children[key]
+      newValue[key] = this.item.children[key+1]
+
+      this.item.children = newValue
+
       ++this.blockKey
     },
     removeBlock(key) {
@@ -143,7 +150,7 @@ export default {
 
       this.item.children = children
       ++this.blockKey
-    }
+    },
   },
   components: {
     BuilderBlockCreate,
@@ -151,6 +158,9 @@ export default {
   },
   mounted() {
     this.widget = this.widgets[this.item.widget]
+  },
+  updated() {
+    document.querySelector('body').dispatchEvent(new Event('builder_block.update'))
   }
 }
 </script>
