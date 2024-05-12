@@ -1,6 +1,6 @@
 ## [Unreleased]
 
-# [v1.25.0] - 2024-05-12
+## [v1.25.0] - 2024-05-12
 ### Added
 * add block builder widget
 * allow to use `window.tinymceModes` to add or override tinymce modes
