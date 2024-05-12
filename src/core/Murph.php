@@ -3,7 +3,7 @@
 namespace App\Core;
 
 if (!defined('MURPH_VERSION')) {
-    define('MURPH_VERSION', 'v1.24.1');
+    define('MURPH_VERSION', 'v1.25.0');
 }
 
 /**
