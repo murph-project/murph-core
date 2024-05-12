@@ -201,7 +201,6 @@ import Routing from '../../../../../../../../../friendsofsymfony/jsrouting-bundl
 import FileIcon from './FileIcon'
 
 const axios = require('axios').default
-const $ = require('jquery')
 const routes = require('../../../../../../../../../../public/js/fos_js_routes.json')
 
 Routing.setRoutingData(routes)

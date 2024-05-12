@@ -74,6 +74,8 @@ const createTinymceConfig = function () {
       })
 
       editor.on('Change', () => {
+        editor.save();
+        editor.getElement().dispatchEvent(new Event('input'));
         window.tinymce.triggerSave(false, true)
       })
     }
@@ -618,6 +620,13 @@ const doInitEditor = () => {
 }
 
 module.exports = function () {
+  document.querySelector('body').addEventListener('builder_block.update', () => {
+    window.setTimeout(() => {
+      createTinymceConfig()
+      doInitEditor()
+    }, 500)
+  })
+
   $(() => {
     createTinymceConfig()
     doInitEditor()

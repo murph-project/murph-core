@@ -1,0 +1,13 @@
+{% set sizes = {
+    'col-': settings.size|default(null),
+    'col-xs-': settings.sizeXs|default(null),
+    'col-md-': settings.sizeMd|default(null),
+    'col-lg-': settings.sizeLg|default(null),
+    'col-xl-': settings.sizeXl|default(null),
+} %}
+
+<div class="col {% for i, v in sizes%}{% if v|length %}{{ i }}{{ v }} {% endif %}{% endfor -%}" id="{{ id }}">
+    {% for item in children %}
+        {{ item|block_to_html }}
+    {% endfor %}
+</div>
