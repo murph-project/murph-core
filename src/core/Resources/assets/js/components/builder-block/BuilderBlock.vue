@@ -1,15 +1,25 @@
 <template>
-  <div class="block" :key="blockKey" v-if="Object.keys(widgets).length">
+  <Draggable
+    v-if="Object.keys(widgets).length"
+    v-model="value"
+    :key="blockKey"
+    :animation="200"
+    group="children"
+    ghost-class="ghost"
+    @start="dragStart"
+    @end="dragEnd"
+    handle=".dragger"
+    :class="{'block-show-dropzone': showDragDrop}"
+    class="block"
+  >
     <BuilderBlockItem
       v-for="(block, key) in value"
       :key="block.id + '-' + key"
       :item="block"
       :widgets="widgets"
-      :isFirst="key === 0"
-      :isLast="key == Object.keys(value)[Object.keys(value).length -1]"
       @remove-item="removeBlock(key)"
-      @move-item-up="moveBlockUp(key)"
-      @move-item-down="moveBlockDown(key)"
+      @drag-start="dragStart"
+      @drag-end="dragEnd"
     />
     <div class="container">
       <BuilderBlockCreate
@@ -19,13 +29,14 @@
       />
     </div>
     <textarea :name="name" class="d-none">{{ toJson(value) }}</textarea>
-  </div>
+  </Draggable>
 </template>
 
 <script>
 import BuilderBlockItem from './BuilderBlockItem'
 import BuilderBlockCreate from './BuilderBlockCreate'
 import Routing from '../../../../../../../../../friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js'
+import Draggable from 'vuedraggable'
 
 const axios = require('axios').default
 const routes = require('../../../../../../../../../../public/js/fos_js_routes.json')
@@ -51,7 +62,8 @@ export default {
     return {
       value: this.initialValue,
       widgets: {},
-      blockKey: 0
+      blockKey: 0,
+      showDragDrop: false,
     }
   },
   methods: {
@@ -60,26 +72,6 @@ export default {
     },
     triggerBuilderBlockEvent() {
       document.querySelector('body').dispatchEvent(new Event('builder_block.update'))
-    },
-    moveBlockUp(key) {
-      let newValue = this.value.map((x) => x)
-
-      newValue[key-1] = this.value[key]
-      newValue[key] = this.value[key-1]
-
-      this.value = newValue
-
-      ++this.blockKey
-    },
-    moveBlockDown(key) {
-      let newValue = this.value.map((x) => x)
-
-      newValue[key+1] = this.value[key]
-      newValue[key] = this.value[key+1]
-
-      this.value = newValue
-
-      ++this.blockKey
     },
     removeBlock(key) {
       let newValue = []
@@ -92,12 +84,21 @@ export default {
 
       this.value = newValue
 
-      // ++this.blockKey
+      ++this.blockKey
+    },
+    dragStart() {
+      this.showDragDrop = true
+    },
+    dragEnd() {
+      this.showDragDrop = false
+
+      ++this.blockKey
     },
   },
   components: {
     BuilderBlockItem,
     BuilderBlockCreate,
+    Draggable,
   },
   mounted() {
     this.triggerBuilderBlockEvent()

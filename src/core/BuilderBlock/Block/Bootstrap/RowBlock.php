@@ -6,7 +6,7 @@ use App\Core\BuilderBlock\BuilderBlock;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 #[AutoconfigureTag('builder_block.widget')]
-class RowBuilderBlock extends BootstrapBlock
+class RowBlock extends BootstrapBlock
 {
     public function configure()
     {
@@ -15,6 +15,7 @@ class RowBuilderBlock extends BootstrapBlock
         $this
             ->setName('bsRow')
             ->setLabel('Row')
+            ->setOrder(2)
             ->setIsContainer(true)
             ->setIcon('<i class="fas fa-align-justify"></i>')
             ->setTemplate('@Core/builder_block/bootstrap/row.html.twig')

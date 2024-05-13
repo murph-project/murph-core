@@ -1,10 +1,6 @@
 <template>
-  <div class="form-group">
-    <label
-      v-if="params.label && params.type !== 'checkbox'"
-      v-text="params.label"
-    >
-    </label>
+  <label class="form-group mb-2">
+    <span v-if="params.label && params.type !== 'checkbox'" v-text="params.label"></span>
 
     <input
       v-if="['number', 'checkbox', 'text'].includes(params.type)"
@@ -14,11 +10,7 @@
       :class="{'form-control': params.type !== 'checkbox'}"
     />
 
-    <label
-      v-if="params.label && params.type == 'checkbox'"
-      v-text="params.label"
-    >
-    </label>
+    <span v-if="params.label && params.type == 'checkbox'" v-text="params.label"></span>
 
     <textarea
       v-if="params.type == 'textarea'"
@@ -37,7 +29,7 @@
         {{ v.text }}
       </option>
     </select>
-  </div>
+  </label>
 </template>
 
 <script>
@@ -59,3 +51,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+label > span {
+  margin-bottom: 3px;
+}
+</style>

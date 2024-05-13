@@ -14,7 +14,7 @@
 }
 
 .widget {
-  display: inline-block;
+  min-width: 100px;
 }
 
 .widget-content {
@@ -48,22 +48,22 @@
       <span class="fa fa-plus"></span>
     </span>
 
-    <div class="categories mt-2 list-group" :class="{'d-none': !showPicker}">
+    <div class="categories mt-2" :class="{'d-none': !showPicker}">
       <div
         v-for="category in categories()"
         v-if="Object.keys(category.widgets).length"
-        class="category"
+        class="category row"
       >
         <div
           v-if="category.label != 'none'"
           v-text="category.label"
-          class="category-label row"
+          class="category-label col-12"
         ></div>
 
         <div
           v-for="(widget, name) in category.widgets"
           v-on:click="add(name, widget)"
-          class="widget col-3"
+          class="widget col-auto"
         >
           <div class="widget-content">
             <div class="widget-label">

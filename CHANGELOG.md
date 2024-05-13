@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [v1.25.1] - 2024-05-13
+### Added
+* add drag&drop in the block builder
+
 ## [v1.25.0] - 2024-05-12
 ### Added
 * add block builder widget
