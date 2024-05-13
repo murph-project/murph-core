@@ -6,7 +6,7 @@ abstract class BuilderBlock
 {
     protected string $name;
     protected string $label;
-    protected ?string $class = null;
+    protected ?string $class = 'col-12';
     protected ?string $category = null;
     protected array $settings = [];
     protected array $widgets = [];
