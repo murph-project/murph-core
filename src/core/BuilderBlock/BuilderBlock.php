@@ -14,6 +14,7 @@ abstract class BuilderBlock
     protected string $template = '';
     protected bool $isContainer = false;
     protected ?string $icon = null;
+    protected int $order = 1;
 
     abstract public function configure();
 
@@ -109,7 +110,7 @@ abstract class BuilderBlock
         ];
 
         foreach ($extraOptions as $key => $value) {
-            if (in_array($key, array_keys($this->settings[$name]))) {
+            if (!in_array($key, array_keys($this->settings[$name]))) {
                 $this->settings[$name][$key] = $value;
             }
         }
@@ -169,6 +170,18 @@ abstract class BuilderBlock
     public function getIcon(): ?string
     {
         return $this->icon;
+    }
+
+    public function setOrder(int $order): self
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    public function getOrder(): int
+    {
+        return $this->order;
     }
 
     public function buildVars(array $data)
