@@ -6,19 +6,20 @@ use App\Core\BuilderBlock\BuilderBlock;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 #[AutoconfigureTag('builder_block.widget')]
-class ContainerBuilderBlock extends BootstrapBlock
+class RowBlock extends BootstrapBlock
 {
     public function configure()
     {
         parent::configure();
 
         $this
-            ->setName('bsContainer')
-            ->setLabel('Container')
+            ->setName('bsRow')
+            ->setLabel('Row')
+            ->setOrder(1)
             ->setIsContainer(true)
-            ->setTemplate('@Core/builder_block/bootstrap/container.html.twig')
-            ->setIcon('<i class="fas fa-th"></i>')
-            ->addSetting(name: 'isFluid', label: 'Fluid', type: 'checkbox')
+            ->setIcon('<i class="fas fa-align-justify"></i>')
+            ->setTemplate('@Core/builder_block/bootstrap/row.html.twig')
+            ->addWidget('bsColumn')
         ;
     }
 }

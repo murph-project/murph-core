@@ -6,7 +6,7 @@ use App\Core\BuilderBlock\BuilderBlock;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 #[AutoconfigureTag('builder_block.widget')]
-class ColumnBuilderBlock extends BootstrapBlock
+class ColumnBlock extends BootstrapBlock
 {
     public function configure()
     {
@@ -16,6 +16,7 @@ class ColumnBuilderBlock extends BootstrapBlock
             ->setName('bsColumn')
             ->setLabel('Column')
             ->setIsContainer(true)
+            ->setOrder(3)
             ->setClass('col-12 col-md-2 pr-md-1')
             ->setTemplate('@Core/builder_block/bootstrap/column.html.twig')
             ->setIcon('<i class="fas fa-columns"></i>')
