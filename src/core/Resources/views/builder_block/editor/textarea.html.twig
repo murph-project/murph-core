@@ -1,0 +1,13 @@
+{%- if settings.nl2br|default(null) -%}
+    {% if settings.allowHtml|default(null) %}
+        {{- settings.value|default(null)|raw|nl2br -}}
+    {%- else -%}
+        {{- settings.value|default(null)|nl2br -}}
+    {%- endif -%}
+{%- else -%}
+    {% if settings.allowHtml|default(null) %}
+        {{- settings.value|default(null)|raw -}}
+    {%- else -%}
+        {{- settings.value|default(null) -}}
+    {%- endif -%}
+{% endif %}
