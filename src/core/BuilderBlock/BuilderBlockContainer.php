@@ -15,6 +15,8 @@ class BuilderBlockContainer
 
     public function getWidgets(): array
     {
+        usort($this->widgets, fn(BuilderBlock $a, BuilderBlock $b) => $a->getOrder() <=> $b->getOrder());
+
         return $this->widgets;
     }
 
