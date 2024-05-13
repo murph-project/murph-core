@@ -27,8 +27,6 @@ class BuilderType extends AbstractType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'allow_add' => true,
-            'allow_remove' => true,
             'compound' => false,
         ]);
     }
