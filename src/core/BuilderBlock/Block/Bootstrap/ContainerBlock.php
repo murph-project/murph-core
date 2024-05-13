@@ -16,7 +16,7 @@ class ContainerBlock extends BootstrapBlock
             ->setName('bsContainer')
             ->setLabel('Container')
             ->setIsContainer(true)
-            ->setOrder(2)
+            ->setOrder(1)
             ->setTemplate('@Core/builder_block/bootstrap/container.html.twig')
             ->setIcon('<i class="fas fa-th"></i>')
             ->addSetting(name: 'isFluid', label: 'Fluid', type: 'checkbox')

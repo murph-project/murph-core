@@ -799,10 +799,17 @@ label.required::after {
 
   .block-settings {
     padding: 4px;
+    margin-bottom: 5px;
   }
 
   .block-id {
     font-size: 12px;
     margin-right: 5px;
+  }
+
+  .block-show-dropzone {
+    .block-dropzone {
+      min-height: 40px;
+    }
   }
 }

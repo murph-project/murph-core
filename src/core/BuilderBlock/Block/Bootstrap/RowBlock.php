@@ -15,7 +15,7 @@ class RowBlock extends BootstrapBlock
         $this
             ->setName('bsRow')
             ->setLabel('Row')
-            ->setOrder(1)
+            ->setOrder(2)
             ->setIsContainer(true)
             ->setIcon('<i class="fas fa-align-justify"></i>')
             ->setTemplate('@Core/builder_block/bootstrap/row.html.twig')

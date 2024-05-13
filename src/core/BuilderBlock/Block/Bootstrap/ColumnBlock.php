@@ -17,7 +17,7 @@ class ColumnBlock extends BootstrapBlock
             ->setLabel('Column')
             ->setIsContainer(true)
             ->setOrder(3)
-            ->setClass('col-12 col-md-2 pr-md-1')
+            ->setClass('col-12 col-lg-2 pr-md-1')
             ->setTemplate('@Core/builder_block/bootstrap/column.html.twig')
             ->setIcon('<i class="fas fa-columns"></i>')
             ->addSetting(name: 'size', label: 'Extra small', type: 'number', attributes: ['min' => 0, 'max' => 12])
