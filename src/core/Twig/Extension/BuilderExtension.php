@@ -7,7 +7,7 @@ use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class BuilderBlockExtension extends AbstractExtension
+class BuilderExtension extends AbstractExtension
 {
     public function __construct(protected Environment $twig, protected BuilderBlockContainer $container)
     {
@@ -30,10 +30,14 @@ class BuilderBlockExtension extends AbstractExtension
         }
 
         if (isset($data['widget'])) {
-            return $this->twig->render($this->container->getWidget($data['widget'])->getTemplate(), [
+            $widget = $this->container->getWidget($data['widget']);
+            $widget->buildVars($data);
+
+            return $this->twig->render($widget->getTemplate(), [
                 'id' => $data['id'],
                 'settings' => $data['settings'],
                 'children' => $data['children'],
+                'vars' => $widget->getVars(),
             ]);
         }
 
