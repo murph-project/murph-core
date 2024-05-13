@@ -10,6 +10,7 @@ abstract class BuilderBlock
     protected ?string $category = null;
     protected array $settings = [];
     protected array $widgets = [];
+    protected array $vars = [];
     protected string $template = '';
     protected bool $isContainer = false;
     protected ?string $icon = null;
@@ -168,5 +169,14 @@ abstract class BuilderBlock
     public function getIcon(): ?string
     {
         return $this->icon;
+    }
+
+    public function buildVars(array $data)
+    {
+    }
+
+    public function getVars(): array
+    {
+        return $this->vars;
     }
 }
