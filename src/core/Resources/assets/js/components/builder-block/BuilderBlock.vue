@@ -17,6 +17,8 @@
       :key="block.id + '-' + key"
       :item="block"
       :widgets="widgets"
+      :openedBlocks="openedBlocks"
+      :depth="1"
       @remove-item="removeBlock(key)"
       @drag-start="dragStart"
       @drag-end="dragEnd"
@@ -25,6 +27,7 @@
       <BuilderBlockCreate
         :container="value"
         :widgets="widgets"
+        :openedBlocks="openedBlocks"
         :allowedWidgets="[]"
       />
     </div>
@@ -62,6 +65,7 @@ export default {
     return {
       value: this.initialValue,
       widgets: {},
+      openedBlocks: {},
       blockKey: 0,
       showDragDrop: false,
     }
