@@ -20,6 +20,11 @@ class BuilderBlockContainer
         return $this->widgets;
     }
 
+    public function hasWidget(string $name)
+    {
+        return isset($this->widgets[$name]);
+    }
+
     public function getWidget(string $name): BuilderBlock
     {
         return $this->widgets[$name];
