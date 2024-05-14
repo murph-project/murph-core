@@ -785,10 +785,31 @@ label.required::after {
     }
   }
 
-  .block-label {
-    background: map-get($theme-colors, 'dark-blue');
-    border: 1px solid map-get($theme-colors, 'dark-blue');
-    color: lighten(map-get($theme-colors, 'dark-blue'), 100%);
+  $block-colors: #E183F5 #E3F7C6 #82DDF5 #F5BA82 #A088A6;
+  $block-colors-length: length($block-colors);
+
+  @for $i from 1 through 100 {
+    $block-color-index: ($block-colors-length + $i) % $block-colors-length + 1;
+
+    .block-depth-#{$i} {
+      .block-label {
+        background: nth($block-colors, $block-color-index);
+        border: 1px solid darken(nth($block-colors, $block-color-index), 50%);
+        color: darken(nth($block-colors, $block-color-index), 50%);
+      }
+
+      .builder-add .btn {
+        background: nth($block-colors, $block-color-index);
+        border: 1px solid darken(nth($block-colors, $block-color-index), 50%);
+        color: darken(nth($block-colors, $block-color-index), 50%);
+      }
+    }
+  }
+
+  .builder-add .btn {
+    font-size: 12px;
+    line-height: 14px;
+    padding: 3px 5px;
   }
 
   .block-settings-inverse {

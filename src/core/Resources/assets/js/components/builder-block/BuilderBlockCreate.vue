@@ -44,7 +44,7 @@
 
 <template>
   <div class="builder-add">
-    <span class="btn btn-sm btn-secondary" v-on:click="togglePicker">
+    <span class="btn btn-secondary" v-on:click="togglePicker">
       <span class="fa fa-plus"></span>
     </span>
 
@@ -96,6 +96,10 @@ export default {
       type: Array,
       required: true
     },
+    openedBlocks: {
+      type: Object,
+      required: true
+    }
   },
   data() {
     return {
@@ -110,12 +114,15 @@ export default {
         settings[i] = widget.settings[i].default
       }
 
-      this.container.push({
+      const block = {
         id: this.makeId(),
         widget: name,
         settings,
         children: [],
-      })
+      }
+
+      this.container.push(block)
+      this.openedBlocks[block.id] = true
 
       this.$emit('updateContainer', this.container)
       this.togglePicker()

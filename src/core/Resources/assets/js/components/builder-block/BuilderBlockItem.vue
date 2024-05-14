@@ -1,5 +1,10 @@
 <template>
-  <div class="block" v-if="widget" :key="blockKey">
+  <div
+    class="block"
+    :class="'block-depth-' + depth"
+    v-if="widget"
+    :key="blockKey"
+  >
     <div class="block-header">
       <div class="float-right">
         <span class="block-id">
@@ -60,6 +65,8 @@
         :key="child.id"
         :item="child"
         :widgets="widgets"
+        :openedBlocks="openedBlocks"
+        :depth="depth + 1"
         @remove-item="removeBlock(key)"
         @drag-start="dragStart"
         @drag-end="dragEnd"
@@ -70,6 +77,7 @@
       <BuilderBlockCreate
         :container="item.children"
         :widgets="widgets"
+        :openedBlocks="openedBlocks"
         :allowedWidgets="widget.widgets"
       />
     </div>
@@ -92,16 +100,25 @@ export default {
       type: Object,
       required: true
     },
+    openedBlocks: {
+      type: Object,
+      required: true
+    },
+    depth: {
+      type: Number,
+      required: true
+    }
   },
   data() {
     return {
       widget: null,
-      showSettings: false,
+      showSettings: this.openedBlocks[this.item.id] === true,
       blockKey: 0,
     }
   },
   methods: {
     toggleSettings() {
+      this.openedBlocks[this.item.id] = !this.openedBlocks[this.item.id]
       this.showSettings = !this.showSettings
     },
     removeMe() {
