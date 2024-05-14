@@ -30,6 +30,10 @@ class BuilderExtension extends AbstractExtension
         }
 
         if (isset($data['widget'])) {
+            if (!$this->container->hasWidget($data['widget'])) {
+                return '';
+            }
+
             $widget = $this->container->getWidget($data['widget']);
             $widget->buildVars($data);
 
