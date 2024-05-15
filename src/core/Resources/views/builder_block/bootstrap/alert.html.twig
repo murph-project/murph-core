@@ -1,5 +1,5 @@
 <div class="alert {% if settings.level|default(null) %}alert-{{ settings.level }}{% endif %}" id="{{ id }}">
     {% for item in children %}
-        {{ item|block_to_html }}
+        {{ item|block_to_html(context) }}
     {% endfor %}
 </div>
