@@ -149,6 +149,7 @@ EOF
             'textarea' => null,
             'choice' => 'BlockEntity\\ChoiceBlock::class',
             'collection' => 'BlockEntity\\CollectionBlock::class',
+            'builder' => 'BlockEntity\\BuilderBlock::class',
             'editor_js_textarea' => null,
             'file' => 'BlockEntity\\FileBlock::class',
             'file_picker' => null,
