@@ -1,5 +1,5 @@
 <div class="container{% if settings.isFluid|default(false) %}-fluid{% endif %}" id="{{ id }}">
     {% for item in children %}
-        {{ item|block_to_html }}
+        {{ item|block_to_html(context) }}
     {% endfor %}
 </div>
