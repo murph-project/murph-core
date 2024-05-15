@@ -135,19 +135,6 @@ abstract class BuilderBlock
         return $this->template;
     }
 
-    public function toArray(): array
-    {
-        return [
-            'label' => $this->getLabel(),
-            'category' => $this->getCategory(),
-            'isContainer' => $this->getIsContainer(),
-            'widgets' => $this->getWidgets(),
-            'settings' => $this->getSettings(),
-            'class' => $this->getClass(),
-            'icon' => $this->getIcon(),
-        ];
-    }
-
     public function setClass(?string $class): self
     {
         $this->class = $class;
@@ -184,12 +171,25 @@ abstract class BuilderBlock
         return $this->order;
     }
 
-    public function buildVars(array $data)
+    public function buildVars(array $data, array $context)
     {
     }
 
     public function getVars(): array
     {
         return $this->vars;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'label' => $this->getLabel(),
+            'category' => $this->getCategory(),
+            'isContainer' => $this->getIsContainer(),
+            'widgets' => $this->getWidgets(),
+            'settings' => $this->getSettings(),
+            'class' => $this->getClass(),
+            'icon' => $this->getIcon(),
+        ];
     }
 }

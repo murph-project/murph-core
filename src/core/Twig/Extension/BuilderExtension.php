@@ -23,7 +23,7 @@ class BuilderExtension extends AbstractExtension
         ];
     }
 
-    public function buildHtml($data): string
+    public function buildHtml(?array $data, array $context = []): string
     {
         if (null === $data) {
             return null;
@@ -35,19 +35,20 @@ class BuilderExtension extends AbstractExtension
             }
 
             $widget = $this->container->getWidget($data['widget']);
-            $widget->buildVars($data);
+            $widget->buildVars($data, $context);
 
             return $this->twig->render($widget->getTemplate(), [
                 'id' => $data['id'],
                 'settings' => $data['settings'],
                 'children' => $data['children'],
+                'context' => $context,
                 'vars' => $widget->getVars(),
             ]);
         }
 
         $render = '';
         foreach ($data as $item) {
-            $render .= $this->buildHtml($item);
+            $render .= $this->buildHtml($item, $context);
         }
 
         return $render;
