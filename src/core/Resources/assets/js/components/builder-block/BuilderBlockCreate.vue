@@ -1,44 +1,43 @@
 <style scoped>
-.categories {
-  padding: 10px;
-  text-align: left;
+.builder-block-picker {
+  padding: 8px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background: #fff;
 }
 
-.category {
-  padding: 10px 0;
+.builder-block-picker-menu {
+  width: 150px;
 }
 
-.category-label {
-  font-weight: bold;
-  margin-bottom: 5px;
+.builder-block-picker-widgets {
+  width: calc(100% - 150px - 10px);
+  padding-left: 5px;
+}
+
+.nav-item {
+  cursor: pointer;
+  width: 100%;
+}
+
+.widget-icon {
+  margin-right: 3px;
 }
 
 .widget {
-  min-width: 100px;
-}
-
-.widget-content {
   background: #fff;
   padding: 10px;
-  text-align: center;
   border-radius: 4px;
   cursor: pointer;
   margin-right: 5px;
   margin-bottom: 5px;
   border: 1px solid #1e2430;
-}
-
-.widget-icon {
-  margin-top: 5px;
-  font-size: 25px;
+  font-weight: bold;
 }
 
 .widget:hover {
   background: #eee;
-}
-
-.widget-label {
-  font-weight: bold;
+  border: 1px solid #1e2430;
 }
 </style>
 
@@ -48,30 +47,38 @@
       <span class="fa fa-plus"></span>
     </span>
 
-    <div class="categories mt-2" :class="{'d-none': !showPicker}">
+    <div class="builder-block-picker mt-2 row" :class="{'d-none': !showPicker}">
+      <div class="col-auto builder-block-picker-menu">
+        <ul class="nav nav-pills pl-0">
+          <li
+            v-for="(category, key) in categories()"
+            v-if="Object.keys(category.widgets).length"
+            class="nav-item d-block"
+          >
+            <a
+              class="nav-link d-block mb-1"
+              :class="{'active': activeCategory == key}"
+              v-on:click="activeCategory = key"
+            >
+              {{ category.label }}
+            </a>
+          </li>
+        </ul>
+      </div>
       <div
-        v-for="category in categories()"
+        v-for="(category, key) in categories()"
         v-if="Object.keys(category.widgets).length"
-        class="category row"
+        class="col-auto builder-block-picker-widgets"
+        :class="{'d-none': activeCategory !== key}"
       >
-        <div
-          v-if="category.label != 'none'"
-          v-text="category.label"
-          class="category-label col-12"
-        ></div>
-
-        <div
-          v-for="(widget, name) in category.widgets"
-          v-on:click="add(name, widget)"
-          class="widget col-auto"
-        >
-          <div class="widget-content">
-            <div class="widget-label">
-              {{ widget.label }}
-            </div>
-
-            <div class="widget-icon" v-if="widget.icon" v-html="widget.icon">
-            </div>
+        <div class="row">
+          <div
+            v-for="(widget, name) in category.widgets"
+            v-on:click="add(name, widget)"
+            class="widget col-auto"
+          >
+            <span class="widget-icon" v-if="widget.icon" v-html="widget.icon"></span>
+            {{ widget.label }}
           </div>
         </div>
       </div>
@@ -104,6 +111,7 @@ export default {
   data() {
     return {
       showPicker: false,
+      activeCategory: 'all',
     }
   },
   methods: {
@@ -142,13 +150,15 @@ export default {
       this.showPicker = !this.showPicker
     },
     categories() {
-      let items = {}
+      let items = {
+        all: {label: 'All', widgets: {}},
+      }
 
       for (let widgetName in this.widgets) {
         let value = this.widgets[widgetName]
 
         if (!value.category) {
-          value.category = 'none'
+          value.category = 'all'
         }
 
         if (typeof items[value.category] === 'undefined') {
@@ -160,6 +170,7 @@ export default {
 
         if (!this.allowedWidgets.length || this.allowedWidgets.includes(widgetName)) {
           items[value.category].widgets[widgetName] = value
+          items['all'].widgets[widgetName] = value
         }
       }
 
