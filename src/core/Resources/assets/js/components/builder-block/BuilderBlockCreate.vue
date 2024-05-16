@@ -29,9 +29,9 @@
   padding: 10px;
   border-radius: 4px;
   cursor: pointer;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  border: 1px solid #1e2430;
+  margin-right: 7px;
+  margin-bottom: 9px;
+  border: 1px solid #b4b4b4;
   font-weight: bold;
 }
 
