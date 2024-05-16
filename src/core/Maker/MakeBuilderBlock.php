@@ -71,12 +71,24 @@ class MakeBuilderBlock extends AbstractMaker
 
         if (!$filesystem->exists($templatePath)) {
             $filesystem->mkdir(dirname($realTemplatePath));
-            $filesystem->dumpFile($realTemplatePath, "{% for item in children %}\n\t{{ item|block_to_html(context) }}\n{% endfor %}\n");
+            $filesystem->dumpFile($realTemplatePath, $this->getTemplate());
 
             $io->comment(sprintf('<fg=blue>created</>: %s', $realTemplatePath));
         }
 
         $this->writeSuccessMessage($io);
+    }
+
+    protected function getTemplate(): string
+    {
+        return <<< EOF
+<div id="{{ id }}">
+    {% for item in children %}
+        {{ item|block_to_html(context) }}
+    {% endfor %}
+</div>
+
+EOF;
     }
 
     public function configureDependencies(DependencyBuilder $dependencies)
