@@ -6,11 +6,20 @@ class BuilderBlockContainer
 {
     protected array $widgets = [];
 
-    public function addWidget(BuilderBlock $widget): void
+    public function addWidget(BuilderBlock $widget): self
     {
         $widget->configure();
 
         $this->widgets[$widget->getName()] = $widget;
+
+        return $this;
+    }
+
+    public function removeWidget(string $name)
+    {
+        unset($this->widgets[$name]);
+
+        return $this;
     }
 
     public function getWidgets(): array
