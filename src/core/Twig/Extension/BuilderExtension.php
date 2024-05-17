@@ -23,15 +23,23 @@ class BuilderExtension extends AbstractExtension
         ];
     }
 
-    public function buildHtml(?array $data, array $context = []): string
+    public function buildHtml(null|array|string $data, array $context = []): ?string
     {
         if (null === $data) {
             return null;
         }
 
+        if (is_string($data)) {
+            $data = json_decode($data, true);
+        }
+
+        if (!is_array($data)) {
+            return null;
+        }
+
         if (isset($data['widget'])) {
             if (!$this->container->hasWidget($data['widget'])) {
-                return '';
+                return null;
             }
 
             $widget = $this->container->getWidget($data['widget']);
