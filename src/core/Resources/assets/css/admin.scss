@@ -777,7 +777,6 @@ label.required::after {
     .block-header-item {
       font-size: 12px;
       display: inline-block;
-      margin-bottom: 10px;
       padding: 2px 6px;
       border-radius: 4px;
       margin-right: 2px;
@@ -812,15 +811,18 @@ label.required::after {
     padding: 3px 5px;
   }
 
-  .block-settings-inverse {
-    background: none;
-    border: 1px solid map-get($theme-colors, 'dark-blue');
-    color: map-get($theme-colors, 'dark-blue');
-  }
-
   .block-settings {
     padding: 4px;
+    margin-top: 10px;
     margin-bottom: 5px;
+
+    .form-control {
+      margin-top: 0.5rem !important;
+    }
+  }
+
+  .block[class*="block-depth"] .block {
+    margin-top: 10px;
   }
 
   .block-id {
@@ -832,5 +834,11 @@ label.required::after {
     .block-dropzone {
       min-height: 40px;
     }
+  }
+
+  dialog {
+    border: 0;
+    padding: 0;
+    background: none;
   }
 }

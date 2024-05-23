@@ -5,33 +5,44 @@
     v-if="widget"
     :key="blockKey"
   >
-    <div class="block-header">
-      <div class="float-right">
+    <div class="block-header d-flex justify-content-between">
+      <div>
+        <div
+          class="block-header-item block-label"
+          :title="item.widget"
+        >
+          {{ widget.label }}
+        </div>
+
+        <button
+          type="button"
+          class="block-header-item btn btn-sm btn-outline-secondary"
+          v-on:click="toggleSettings"
+          v-if="Object.keys(widget.settings).length"
+        >
+          <span class="fa fa-cog"></span>
+        </button>
+
+        <button
+          type="button"
+          class="block-header-item btn btn-sm btn-outline-secondary dragger"
+        >
+          <span class="fa fa-arrows-alt"></span>
+        </button>
+      </div>
+
+      <div>
         <span class="block-id">
           {{ item.id }}
         </span>
-        <div class="block-header-item text-white bg-danger" v-on:click="removeMe(item)">
+        <button
+          type="button"
+          class="block-header-item btn btn-sm text-white bg-danger"
+          v-on:click="removeMe(item)"
+        >
           <span class="fa fa-trash"></span>
-        </div>
+        </button>
       </div>
-      <div
-        class="block-header-item block-label"
-        :title="item.widget"
-      >
-        {{ widget.label }}
-      </div>
-      <div
-        class="block-header-item block-settings-inverse"
-        v-on:click="toggleSettings"
-        v-if="Object.keys(widget.settings).length"
-      >
-        <span class="fa fa-cog"></span>
-      </div>
-      <div
-        class="block-header-item block-settings-inverse dragger"
-      >
-          <span class="fa fa-arrows-alt"></span>
-        </div>
     </div>
 
     <div class="block-settings" v-if="Object.keys(widget.settings).length" :class="{'d-none': !showSettings}">
