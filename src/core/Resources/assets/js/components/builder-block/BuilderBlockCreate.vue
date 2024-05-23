@@ -43,9 +43,9 @@
 
 <template>
   <div class="builder-add">
-    <span class="btn btn-secondary" v-on:click="togglePicker">
+    <button type="button" class="btn btn-secondary" v-on:click="togglePicker">
       <span class="fa fa-plus"></span>
-    </span>
+    </button>
 
     <div class="builder-block-picker mt-2 row" :class="{'d-none': !showPicker}">
       <div class="col-auto builder-block-picker-menu">
