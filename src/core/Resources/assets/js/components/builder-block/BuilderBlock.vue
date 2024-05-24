@@ -135,6 +135,7 @@ export default {
       this.$refs.dialog.showModal()
     },
     closeCodeEditor() {
+      this.$refs.codeEditor.classList.toggle('is-invalid', false)
       this.$refs.dialog.close()
     },
     isNextValueItemValueValid(item) {
