@@ -817,6 +817,10 @@ label.required::after {
     }
   }
 
+  .block-root > .container .builder-add {
+    margin-top: 0;
+  }
+
   .block-settings {
     padding: 4px;
     margin-top: 10px;
