@@ -805,10 +805,16 @@ label.required::after {
     }
   }
 
-  .builder-add .btn {
-    font-size: 12px;
-    line-height: 14px;
-    padding: 3px 5px;
+  .builder-add {
+    &-top {
+      margin-top: 7px;
+    }
+
+    .btn {
+      font-size: 12px;
+      line-height: 14px;
+      padding: 3px 5px;
+    }
   }
 
   .block-settings {
@@ -821,7 +827,7 @@ label.required::after {
     }
   }
 
-  .block[class*="block-depth"] .block {
+  .block .block {
     margin-top: 10px;
   }
 
