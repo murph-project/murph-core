@@ -12,6 +12,14 @@
     :class="{'block-show-dropzone': showDragDrop}"
     class="block"
   >
+    <BuilderBlockCreate
+      :container="value"
+      :widgets="widgets"
+      :openedBlocks="openedBlocks"
+      :allowedWidgets="[]"
+      v-if="value.length > 0"
+      position="top"
+    />
     <BuilderBlockItem
       v-for="(block, key) in value"
       :key="block.id + '-' + key"
@@ -30,6 +38,7 @@
           :widgets="widgets"
           :openedBlocks="openedBlocks"
           :allowedWidgets="[]"
+          position="bottom"
         />
         <div>
           <button

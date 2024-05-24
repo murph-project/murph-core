@@ -59,6 +59,17 @@
       </div>
     </div>
 
+    <div v-if="widget.isContainer" class="container">
+      <BuilderBlockCreate
+        :container="item.children"
+        :widgets="widgets"
+        :openedBlocks="openedBlocks"
+        :allowedWidgets="widget.widgets"
+        v-if="item.children.length > 0"
+        position="top"
+      />
+    </div>
+
     <Draggable
       v-if="widget.isContainer"
       v-model="item.children"
@@ -90,6 +101,7 @@
         :widgets="widgets"
         :openedBlocks="openedBlocks"
         :allowedWidgets="widget.widgets"
+        position="bottom"
       />
     </div>
   </div>

@@ -42,7 +42,7 @@
 </style>
 
 <template>
-  <div class="builder-add">
+  <div class="builder-add" :class="{'builder-add-top': position === 'top'}">
     <button type="button" class="btn btn-secondary" v-on:click="togglePicker">
       <span class="fa fa-plus"></span>
     </button>
@@ -106,7 +106,11 @@ export default {
     openedBlocks: {
       type: Object,
       required: true
-    }
+    },
+    position: {
+      type: String,
+      required: true
+    },
   },
   data() {
     return {
@@ -129,10 +133,14 @@ export default {
         children: [],
       }
 
-      this.container.push(block)
-      this.openedBlocks[block.id] = true
+      if (this.position === 'bottom') {
+        this.container.push(block)
+      } else {
+        this.container.unshift(block)
+      }
 
       this.$emit('updateContainer', this.container)
+      this.openedBlocks[block.id] = true
       this.togglePicker()
     },
     makeId() {
