@@ -12,6 +12,7 @@ abstract class BuilderBlock
     protected array $widgets = [];
     protected array $vars = [];
     protected string $template = '';
+    protected ?string $preview = null;
     protected bool $isContainer = false;
     protected ?string $icon = null;
     protected int $order = 1;
@@ -171,6 +172,18 @@ abstract class BuilderBlock
         return $this->order;
     }
 
+    public function setPreview(?string $preview): self
+    {
+        $this->preview = $preview;
+
+        return $this;
+    }
+
+    public function getPreview(): ?string
+    {
+        return $this->preview;
+    }
+
     public function buildVars(array $data, array $context)
     {
     }
@@ -190,6 +203,7 @@ abstract class BuilderBlock
             'settings' => $this->getSettings(),
             'class' => $this->getClass(),
             'icon' => $this->getIcon(),
+            'preview' => $this->getPreview(),
         ];
     }
 }
