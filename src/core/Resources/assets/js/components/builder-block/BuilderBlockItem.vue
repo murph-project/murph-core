@@ -27,7 +27,7 @@
           type="button"
           class="block-header-item btn btn-sm btn-outline-secondary dragger"
         >
-          <span class="fa fa-arrows-alt"></span>
+          <span class="fa fa-arrows-alt dragger"></span>
         </button>
       </div>
 
@@ -40,7 +40,7 @@
           class="block-header-item btn btn-sm text-white bg-danger"
           v-on:click="removeMe(item)"
         >
-          <span class="fa fa-trash"></span>
+          <span class="fa fa-trash dragger"></span>
         </button>
       </div>
     </div>

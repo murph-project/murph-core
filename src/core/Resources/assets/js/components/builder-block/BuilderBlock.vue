@@ -1,99 +1,104 @@
 <template>
-  <Draggable
+  <div
+    class="block block-root"
     v-if="Object.keys(widgets).length && value !== null"
-    v-model="value"
-    :key="blockKey"
-    :animation="200"
-    group="children"
-    ghost-class="ghost"
-    @start="dragStart"
-    @end="dragEnd"
-    handle=".dragger"
-    :class="{'block-show-dropzone': showDragDrop}"
-    class="block"
   >
-    <BuilderBlockCreate
-      :container="value"
-      :widgets="widgets"
-      :openedBlocks="openedBlocks"
-      :allowedWidgets="[]"
-      v-if="value.length > 0"
-      position="top"
-    />
-    <BuilderBlockItem
-      v-for="(block, key) in value"
-      :key="block.id + '-' + key"
-      :item="block"
-      :widgets="widgets"
-      :openedBlocks="openedBlocks"
-      :depth="1"
-      @remove-item="removeBlock(key)"
-      @drag-start="dragStart"
-      @drag-end="dragEnd"
-    />
     <div class="container">
-      <div class="d-flex justify-content-between">
-        <BuilderBlockCreate
-          :container="value"
-          :widgets="widgets"
-          :openedBlocks="openedBlocks"
-          :allowedWidgets="[]"
-          position="bottom"
-        />
-        <div>
-          <button
-            type="button"
-            class="btn btn-sm"
-            v-on:click="openCodeEditor"
-          >
-            <i class="fas fa-code"></i>
-          </button>
-        </div>
-      </div>
+      <BuilderBlockCreate
+        :container="value"
+        :widgets="widgets"
+        :openedBlocks="openedBlocks"
+        :allowedWidgets="[]"
+        v-if="value.length > 0"
+        position="top"
+      />
     </div>
-    <textarea :name="name" class="d-none">{{ toJson(value) }}</textarea>
-    <dialog ref="dialog" class="modal-dialog modal-dialog-large">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Code editor</h5>
-          <button
-            type="button"
-            class="close"
-            v-on:click="closeCodeEditor"
-          >
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <textarea
-              class="form-control"
-              rows="10"
-              ref="codeEditor"
-              v-model="nextValue"
+    <Draggable
+      v-model="value"
+      :key="blockKey"
+      :animation="200"
+      group="children"
+      ghost-class="ghost"
+      @start="dragStart"
+      @end="dragEnd"
+      handle=".dragger"
+      :class="{'block-show-dropzone': showDragDrop}"
+    >
+      <BuilderBlockItem
+        v-for="(block, key) in value"
+        :key="block.id + '-' + key"
+        :item="block"
+        :widgets="widgets"
+        :openedBlocks="openedBlocks"
+        :depth="1"
+        @remove-item="removeBlock(key)"
+        @drag-start="dragStart"
+        @drag-end="dragEnd"
+      />
+      <div class="container">
+        <div class="d-flex justify-content-between">
+          <BuilderBlockCreate
+            :container="value"
+            :widgets="widgets"
+            :openedBlocks="openedBlocks"
+            :allowedWidgets="[]"
+            position="bottom"
+          />
+          <div>
+            <button
+              type="button"
+              class="btn btn-sm"
+              v-on:click="openCodeEditor"
             >
-            </textarea>
+              <i class="fas fa-code"></i>
+            </button>
           </div>
         </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            v-on:click="closeCodeEditor"
-          >
-            Close
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            v-on:click="checkAndSaveNextValue"
-          >
-            Save
-          </button>
-        </div>
       </div>
-    </dialog>
-  </Draggable>
+      <textarea :name="name" class="d-none">{{ toJson(value) }}</textarea>
+      <dialog ref="dialog" class="modal-dialog modal-dialog-large">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Code editor</h5>
+            <button
+              type="button"
+              class="close"
+              v-on:click="closeCodeEditor"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <textarea
+                class="form-control"
+                rows="10"
+                ref="codeEditor"
+                v-model="nextValue"
+              >
+              </textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              v-on:click="closeCodeEditor"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              v-on:click="checkAndSaveNextValue"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </dialog>
+    </Draggable>
+  </div>
 </template>
 
 <script>
@@ -200,7 +205,6 @@ export default {
         }
 
       } catch (e) {
-        console.log(e)
         hasError = true
       }
 
