@@ -846,6 +846,13 @@ label.required::after {
     }
   }
 
+  .block-preview {
+    white-space: nowrap;
+    max-width: 30%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
   dialog {
     border: 0;
     padding: 0;

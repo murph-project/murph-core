@@ -31,6 +31,13 @@
         </button>
       </div>
 
+      <div
+        v-if="widget.preview && typeof item.settings[widget.preview] == 'string'"
+        class="block-preview"
+      >
+        {{ truncate(item.settings[widget.preview]) }}
+      </div>
+
       <div>
         <span class="block-id">
           {{ item.id }}
@@ -143,6 +150,9 @@ export default {
     toggleSettings() {
       this.openedBlocks[this.item.id] = !this.openedBlocks[this.item.id]
       this.showSettings = !this.showSettings
+    },
+    truncate(value) {
+      return value.replace(/(<([^>]+)>)/ig, '')
     },
     removeMe() {
       this.$emit('remove-item')

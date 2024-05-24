@@ -21,6 +21,7 @@ class TextareaBlock extends EditorBlock
             ->addSetting(name: 'nl2br', label: 'Insert line breaks', type: 'checkbox', default: true)
             ->addSetting(name: 'allowHtml', label: 'Allow HTML', type: 'checkbox', default: false)
             ->addSetting(name: 'value', type: 'textarea')
+            ->setPreview('value')
         ;
     }
 }
