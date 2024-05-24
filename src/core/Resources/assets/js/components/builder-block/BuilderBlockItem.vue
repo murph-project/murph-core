@@ -152,7 +152,7 @@ export default {
       this.showSettings = !this.showSettings
     },
     truncate(value) {
-      return value.replace(/(<([^>]+)>)/ig, '')
+      return value.replace(/(<([^>]+)>)/ig, '').trim()
     },
     removeMe() {
       this.$emit('remove-item')
