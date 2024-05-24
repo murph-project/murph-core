@@ -19,6 +19,7 @@ class TinymceBlock extends EditorBlock
             ->setIcon('<i class="fas fa-pencil-alt"></i>')
             ->setTemplate('@Core/builder_block/editor/tinymce.html.twig')
             ->addSetting(name: 'value', type: 'textarea', attributes: ['data-tinymce' => ''])
+            ->setPreview('value')
         ;
     }
 }
