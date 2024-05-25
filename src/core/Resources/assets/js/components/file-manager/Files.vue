@@ -202,6 +202,7 @@ import FileIcon from './FileIcon'
 
 const axios = require('axios').default
 const routes = require('../../../../../../../../../../public/js/fos_js_routes.json')
+const $ = require('jquery')
 
 Routing.setRoutingData(routes)
 
