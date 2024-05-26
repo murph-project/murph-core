@@ -787,6 +787,13 @@ label.required::after {
   $block-colors: #E183F5 #E3F7C6 #82DDF5 #F5BA82 #A088A6;
   $block-colors-length: length($block-colors);
 
+  .block .block-icon {
+    > * {
+      display: inline-block;
+      margin-right: 3px;
+    }
+  }
+
   @for $i from 1 through 100 {
     $block-color-index: ($block-colors-length + $i) % $block-colors-length + 1;
 

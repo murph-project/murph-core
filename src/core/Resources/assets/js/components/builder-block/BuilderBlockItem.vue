@@ -11,6 +11,13 @@
           class="block-header-item block-label"
           :title="item.widget"
         >
+          <span
+            class="block-icon"
+            v-if="widget.icon"
+            v-html="widget.icon"
+          >
+          </span>
+
           {{ widget.label }}
         </div>
 
