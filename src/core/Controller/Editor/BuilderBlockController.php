@@ -30,6 +30,7 @@ class BuilderBlockController extends AbstractController
     protected function translate(array $data)
     {
         $data['label'] = $this->translator->trans($data['label']);
+        $data['category'] = $this->translator->trans($data['category']);
 
         foreach ($data['settings'] as $key => $value) {
             $data['settings'][$key]['label'] = $this->translator->trans($data['settings'][$key]['label']);
