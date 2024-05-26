@@ -9,6 +9,6 @@ class EditorBlock extends BuilderBlock
 {
     public function configure()
     {
-        $this->setCategory('Editor');
+        $this->setCategory('Editors');
     }
 }
