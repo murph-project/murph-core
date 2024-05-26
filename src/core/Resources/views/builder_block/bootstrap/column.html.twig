@@ -6,7 +6,7 @@
     'col-xl-': settings.sizeXl|default(null),
 } %}
 
-<div class="col {% for i, v in sizes%}{% if v|length %}{{ i }}{{ v }} {% endif %}{% endfor -%}" id="{{ id }}">
+<div class="col {% for i, v in sizes%}{% if v|length %}{{ i }}{{ v }} {% endif %}{% endfor -%} {{ settings.customClass|default(null) }}" id="{{ id }}">
     {% for item in children %}
         {{ item|block_to_html(context) }}
     {% endfor %}
