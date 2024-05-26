@@ -39,6 +39,10 @@
   background: #eee;
   border: 1px solid #1e2430;
 }
+
+.search {
+  max-width: 300px;
+}
 </style>
 
 <template>
@@ -72,9 +76,13 @@
         :class="{'d-none': activeCategory !== key}"
       >
         <div class="row">
+          <div class="col-12 mb-4">
+            <input v-model="search" placeholder="Type to search..." class="form-control search">
+          </div>
           <div
             v-for="(widget, name) in category.widgets"
             v-on:click="add(name, widget)"
+            v-if="matchSearch(name)"
             class="widget col-auto"
           >
             <span class="widget-icon" v-if="widget.icon" v-html="widget.icon"></span>
@@ -116,6 +124,7 @@ export default {
     return {
       showPicker: false,
       activeCategory: 'all',
+      search: '',
     }
   },
   methods: {
@@ -153,6 +162,13 @@ export default {
       }
 
       return `block-${result}`
+    },
+    matchSearch(name) {
+      if (!this.search.trim().length) {
+        return true
+      }
+
+      return name.toLowerCase().includes(this.search.toLowerCase())
     },
     togglePicker() {
       this.showPicker = !this.showPicker
