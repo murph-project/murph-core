@@ -20,6 +20,7 @@ class ContainerBlock extends BootstrapBlock
             ->setTemplate('@Core/builder_block/bootstrap/container.html.twig')
             ->setIcon('<i class="fas fa-th"></i>')
             ->addSetting(name: 'isFluid', label: 'Fluid', type: 'checkbox')
+            ->addSetting(name: 'customClass', label: 'Custom class', type: 'text')
         ;
     }
 }

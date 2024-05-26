@@ -1,4 +1,4 @@
-<div class="row" id="{{ id }}">
+<div class="row  {{ settings.customClass|default(null) }}" id="{{ id }}">
     {% for item in children %}
         {{ item|block_to_html(context) }}
     {% endfor %}

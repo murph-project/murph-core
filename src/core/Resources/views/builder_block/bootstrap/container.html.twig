@@ -1,4 +1,4 @@
-<div class="container{% if settings.isFluid|default(false) %}-fluid{% endif %}" id="{{ id }}">
+<div class="container{% if settings.isFluid|default(false) %}-fluid{% endif %}  {{ settings.customClass|default(null) }}" id="{{ id }}">
     {% for item in children %}
         {{ item|block_to_html(context) }}
     {% endfor %}

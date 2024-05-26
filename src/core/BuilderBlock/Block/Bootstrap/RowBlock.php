@@ -20,6 +20,7 @@ class RowBlock extends BootstrapBlock
             ->setIcon('<i class="fas fa-align-justify"></i>')
             ->setTemplate('@Core/builder_block/bootstrap/row.html.twig')
             ->addWidget('bsColumn')
+            ->addSetting(name: 'customClass', label: 'Custom class', type: 'text')
         ;
     }
 }
