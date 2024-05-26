@@ -82,7 +82,7 @@
           <div
             v-for="(widget, name) in category.widgets"
             v-on:click="add(name, widget)"
-            v-if="matchSearch(name)"
+            v-if="matchSearch(label) || matchSearch(name)"
             class="widget col-auto"
           >
             <span class="widget-icon" v-if="widget.icon" v-html="widget.icon"></span>
