@@ -862,9 +862,16 @@ label.required::after {
     overflow: hidden;
   }
 
-  dialog {
+  .builder-code-editor {
     border: 0;
     padding: 0;
     background: none;
+    position: fixed;
+    top: 15px;
+
+    textarea {
+      font-family: Monospace;
+      min-height: 50vh;
+    }
   }
 }

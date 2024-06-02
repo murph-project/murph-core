@@ -110,24 +110,39 @@
     </Draggable>
 
     <div v-if="widget.isContainer" class="container">
-      <BuilderBlockCreate
-        :container="item.children"
-        :widgets="widgets"
-        :openedBlocks="openedBlocks"
-        :allowedWidgets="widget.widgets"
-        position="bottom"
-      />
+      <div class="d-flex justify-content-between">
+        <BuilderBlockCreate
+          :container="item.children"
+          :widgets="widgets"
+          :openedBlocks="openedBlocks"
+          :allowedWidgets="widget.widgets"
+          position="bottom"
+        />
+        <BuilderBlockCodeEditor
+          ref="dialog"
+          :value="item.children"
+          :widgets="widgets"
+          @update="codeUpdate"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import BuilderBlockCreate from './BuilderBlockCreate'
+import BuilderBlockCodeEditor from './BuilderBlockCodeEditor'
 import BuilderBlockSetting from './BuilderBlockSetting'
 import Draggable from 'vuedraggable'
 
 export default {
   name: 'BuilderBlockItem',
+  components: {
+    BuilderBlockCreate,
+    BuilderBlockSetting,
+    BuilderBlockCodeEditor,
+    Draggable,
+  },
   props: {
     widgets: {
       type: Object,
@@ -164,6 +179,9 @@ export default {
     removeMe() {
       this.$emit('remove-item')
     },
+    codeUpdate(nextValue) {
+      this.item.children = nextValue
+    },
     removeBlock(key) {
       let children = []
 
@@ -183,11 +201,6 @@ export default {
       this.$emit('drag-end')
       ++this.blockKey
     },
-  },
-  components: {
-    BuilderBlockCreate,
-    BuilderBlockSetting,
-    Draggable,
   },
   mounted() {
     this.widget = this.widgets[this.item.widget]
