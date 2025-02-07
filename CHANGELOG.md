@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [v1.25.2] - 2025-02-07
+### Added
+* allow to set `data-*` attributes on modal
+
 ## [v1.25.1] - 2024-05-13
 ### Added
 * add drag&drop in the block builder
