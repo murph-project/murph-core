@@ -104,8 +104,6 @@ module.exports = function () {
         }
       }
 
-      console.log(dataAttributes)
-
       openModal(url, createModal, dataAttributes)
     }, 250)
   })
