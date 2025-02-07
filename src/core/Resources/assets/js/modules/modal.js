@@ -1,11 +1,13 @@
 const $ = require('jquery')
 
-const openModal = function (url, createModal) {
+const openModal = function (url, createModal, dataAttributes) {
   if (createModal) {
     var id = 'modal-container-' + parseInt(Math.floor(Math.random() * 1000))
   } else {
     var id = 'modal-container'
   }
+
+  dataAttributes = dataAttributes ?? []
 
   let container = $(`#${id}`)
   const body = $('body')
@@ -14,6 +16,10 @@ const openModal = function (url, createModal) {
   if (!container.length) {
     const doTrigger = false
     container = $(`<div id="${id}" class="modal">`)
+
+    dataAttributes.forEach((attribute) => {
+      container.attr(attribute.name, attribute.value)
+    })
 
     body.append(container)
   }
@@ -87,8 +93,20 @@ module.exports = function () {
       const element = $(e.target).is('[data-modal]') ? $(e.target) : $(e.target).parents('*[data-modal]').first()
       const url = element.attr('data-modal')
       const createModal = element.is('[data-modal-create]')
+      const attributes = element[0].attributes
+      const dataAttributes = []
 
-      openModal(url, createModal)
+      for (let i = 0, len = attributes.length; i < len; i++) {
+        let item = attributes.item(i)
+
+        if (item.name.startsWith('data-') && !['data-modal', 'data-modal-create'].includes(item.name)) {
+          dataAttributes.push(item)
+        }
+      }
+
+      console.log(dataAttributes)
+
+      openModal(url, createModal, dataAttributes)
     }, 250)
   })
 
