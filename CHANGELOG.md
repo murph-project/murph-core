@@ -2,6 +2,7 @@
 
 ### Added
 * FileUploadHandler: allow to upload multiple files
+* CrudController: allow to add callables after creation, update and delation
 
 ## [v1.25.2] - 2025-02-07
 ### Added
