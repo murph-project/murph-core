@@ -20,27 +20,53 @@ class FileUploadHandler
         return $this;
     }
 
-    public function handleForm(?UploadedFile $uploadedFile, string $path, ?callable $afterUploadCallback = null, bool $keepOriginalFilename = false): void
+    public function handleForm(
+        null|array|UploadedFile $uploadedFile,
+        string $path,
+        ?callable $afterUploadCallback = null,
+        ?callable $afterUploadsCallback = null,
+        bool $keepOriginalFilename = false
+    ): null|array|string
     {
         if (null === $uploadedFile) {
-            return;
+            return null;
         }
 
-        $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+        if (is_array($uploadedFile)) {
+            $filenames = [];
 
-        if ($keepOriginalFilename) {
-            $filename = $originalFilename.'.'.$uploadedFile->guessExtension();
-        } elseif (!is_callable($this->filenameGenerator)) {
-            $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-            $filename = date('Ymd-his').$safeFilename.'.'.$uploadedFile->guessExtension();
+            foreach ($uploadedFile as $file) {
+                $filename = $this->handleForm($file, $path, $afterUploadCallback, null, $keepOriginalFilename);
+
+                if ($filename !== null) {
+                    $filenames[] = $filename;
+                }
+            }
+
+            if (!empty($filenames) && $afterUploadsCallback) {
+                $afterUploadsCallback($filenames);
+            }
+
+            return $filenames;
         } else {
-            $filename = call_user_func($this->filenameGenerator, $uploadedFile);
-        }
+            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
 
-        $uploadedFile->move($path, $filename);
+            if ($keepOriginalFilename) {
+                $filename = $originalFilename.'.'.$uploadedFile->guessExtension();
+            } elseif (!is_callable($this->filenameGenerator)) {
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $filename = date('Ymd-his').$safeFilename.'.'.$uploadedFile->guessExtension();
+            } else {
+                $filename = call_user_func($this->filenameGenerator, $uploadedFile);
+            }
 
-        if ($afterUploadCallback) {
-            $afterUploadCallback($filename);
+            $uploadedFile->move($path, $filename);
+
+            if ($afterUploadCallback) {
+                $afterUploadCallback($filename);
+            }
+
+            return $filename;
         }
     }
 }

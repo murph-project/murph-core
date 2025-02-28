@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+### Added
+* FileUploadHandler: allow to upload multiple files
+
 ## [v1.25.2] - 2025-02-07
 ### Added
 * allow to set `data-*` attributes on modal
