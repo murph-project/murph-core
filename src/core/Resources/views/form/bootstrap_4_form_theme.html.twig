@@ -33,7 +33,7 @@
 {% block file_widget -%}
     <div class="row">
         <div class="col-12">
-            {% set value = form.vars.data %}
+            {% set data = form.vars.data %}
 
             {% if form.parent.vars.file_type is defined %}
                 {% set fileType = form.parent.vars.file_type %}
@@ -41,39 +41,33 @@
                 {% set fileType = 'auto' %}
             {% endif %}
 
-            {% if value %}
-                {% if not value is iterable %}
-                    {% set value = [value] %}
+            {% if data and form.vars.errors|length == 0 %}
+                {% if not data is iterable %}
+                    {% set data = [data] %}
                 {% endif %}
 
-                {% for item in value %}
-                    {% set padding = value|length > 0 and not loop.last ? 'pt-2' : '' %}
-
-                    {% if fileType in ['auto', 'image'] and item.extension in ['jpeg', 'jpg', 'gif', 'png', 'svg', 'webp'] %}
-                        <div class="card {{ padding }}">
+                <div class="card">
+                    {% for item in data %}
+                        {% if fileType in ['auto', 'image'] and item.extension in ['jpeg', 'jpg', 'gif', 'png', 'svg', 'webp'] %}
                             <div class="card-img-top bg-tiles text-center">
                                 <a href="{{ asset(item.pathname) }}" target="_blank">
                                     <img src="{{ asset(item.pathname) }}" class="img-fluid">
                                 </a>
                             </div>
+                        {% else %}
                             <div class="card-body">
-                                {{- parent() -}}
-                            </div>
-                        </div>
-                    {% else %}
-                        <div class="card">
-                            <div class="card-body">
-                                {{- parent() -}}
-
                                 <div class="p-2 text-center">
                                     <a class="btn btn-primary" href="{{ asset(item.pathname) }}" target="_blank">
                                         {{ 'Download'|trans }}
                                     </a>
                                 </div>
                             </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                    <div class="card-body">
+                        {{- parent() -}}
+                    </div>
+                </div>
             {% else %}
                 {{- parent() -}}
             {% endif %}
