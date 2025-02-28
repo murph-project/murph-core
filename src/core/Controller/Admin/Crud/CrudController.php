@@ -26,7 +26,13 @@ abstract class CrudController extends AdminController
 
     abstract protected function getConfiguration(): CrudConfiguration;
 
-    protected function doIndex(int $page, RepositoryQuery $query, Request $request, Session $session, string $context = 'index'): Response
+    protected function doIndex(
+        int $page,
+        RepositoryQuery $query,
+        Request $request,
+        Session $session,
+        string $context = 'index'
+    ): Response
     {
         $configuration = $this->getConfiguration();
 
@@ -50,7 +56,14 @@ abstract class CrudController extends AdminController
         ]);
     }
 
-    protected function doNew(EntityInterface $entity, EntityManager $entityManager, Request $request, callable $beforeCreate = null, string $context = 'new'): Response
+    protected function doNew(
+        EntityInterface $entity,
+        EntityManager $entityManager,
+        Request $request,
+        callable $beforeCreate = null,
+        callable $afterCreate = null,
+        string $context = 'new'
+    ): Response
     {
         $configuration = $this->getConfiguration();
 
@@ -67,6 +80,11 @@ abstract class CrudController extends AdminController
                 }
 
                 $entityManager->create($entity);
+
+                if (null !== $afterCreate) {
+                    call_user_func_array($afterCreate, [$entity, $form, $request]);
+                }
+
                 $this->addFlash('success', 'The data has been saved.');
 
                 return $this->redirectToRoute($configuration->getPageRoute('edit'), array_merge(
@@ -96,7 +114,14 @@ abstract class CrudController extends AdminController
         ]);
     }
 
-    protected function doEdit(EntityInterface $entity, EntityManager $entityManager, Request $request, callable $beforeUpdate = null, string $context = 'edit'): Response
+    protected function doEdit(
+        EntityInterface $entity,
+        EntityManager $entityManager,
+        Request $request,
+        callable $beforeUpdate = null,
+        callable $afterUpdate = null,
+        string $context = 'edit'
+    ): Response
     {
         $configuration = $this->getConfiguration();
 
@@ -113,6 +138,11 @@ abstract class CrudController extends AdminController
                 }
 
                 $entityManager->update($entity);
+
+                if (null !== $afterUpdate) {
+                    call_user_func_array($afterUpdate, [$entity, $form, $request]);
+                }
+
                 $this->addFlash('success', 'The data has been saved.');
 
                 return $this->redirectToRoute($configuration->getPageRoute($context), array_merge(
@@ -131,7 +161,15 @@ abstract class CrudController extends AdminController
         ]);
     }
 
-    protected function doInlineEdit(string $context, string $label, EntityInterface $entity, EntityManager $entityManager, Request $request, callable $beforeUpdate = null): Response
+    protected function doInlineEdit(
+        string $context,
+        string $label,
+        EntityInterface $entity,
+        EntityManager $entityManager,
+        Request $request,
+        callable $beforeUpdate = null,
+        callable $afterUpdate = null
+    ): Response
     {
         $configuration = $this->getConfiguration();
 
@@ -192,6 +230,11 @@ abstract class CrudController extends AdminController
 
                 $session->remove($lastRequestId);
                 $entityManager->update($entity);
+
+                if (null !== $afterUpdate) {
+                    call_user_func_array($afterUpdate, [$entity, $form, $request]);
+                }
+
                 $this->addFlash('success', 'The data has been saved.');
 
                 return $this->redirect($redirectTo);
@@ -217,7 +260,13 @@ abstract class CrudController extends AdminController
         ]);
     }
 
-    protected function doSort(int $page, RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session): Response
+    protected function doSort(
+        int $page,
+        RepositoryQuery $query,
+        EntityManager $entityManager,
+        Request $request,
+        Session $session
+    ): Response
     {
         $configuration = $this->getConfiguration();
         $context = $request->query->get('context', 'index');
@@ -255,7 +304,13 @@ abstract class CrudController extends AdminController
         return $this->json([]);
     }
 
-    protected function doBatch(int $page, RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session): Response
+    protected function doBatch(
+        int $page,
+        RepositoryQuery $query,
+        EntityManager $entityManager,
+        Request $request,
+        Session $session
+    ): Response
     {
         $configuration = $this->getConfiguration();
         $datas = $request->request->get('batch', []);
@@ -326,7 +381,14 @@ abstract class CrudController extends AdminController
         return $this->json([]);
     }
 
-    protected function doDelete(EntityInterface $entity, EntityManager $entityManager, Request $request, callable $beforeDelete = null, string $route = 'index'): Response
+    protected function doDelete(
+        EntityInterface $entity,
+        EntityManager $entityManager,
+        Request $request,
+        callable $beforeDelete = null,
+        callable $afterDelete = null,
+        string $route = 'index'
+    ): Response
     {
         $configuration = $this->getConfiguration();
 
@@ -336,6 +398,10 @@ abstract class CrudController extends AdminController
             }
 
             $entityManager->delete($entity);
+
+            if (null !== $afterDelete) {
+                call_user_func($afterDelete, $entity);
+            }
 
             $this->addFlash('success', 'The data has been removed.');
         }
