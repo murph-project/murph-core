@@ -69,7 +69,7 @@ abstract class CrudController extends AdminController
 
         $this->prepareEntity($entity);
 
-        $form = $this->createForm($configuration->getForm('new'), $entity, $configuration->getFormOptions($context));
+        $form = $this->createForm($configuration->getForm($context), $entity, $configuration->getFormOptions($context));
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -127,7 +127,7 @@ abstract class CrudController extends AdminController
 
         $this->prepareEntity($entity);
 
-        $form = $this->createForm($configuration->getForm('edit'), $entity, $configuration->getFormOptions($context));
+        $form = $this->createForm($configuration->getForm($context), $entity, $configuration->getFormOptions($context));
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -412,13 +412,13 @@ abstract class CrudController extends AdminController
     protected function doFilter(Session $session, string $context = 'filter'): Response
     {
         $configuration = $this->getConfiguration();
-        $type = $configuration->getForm('filter');
+        $type = $configuration->getForm($context);
 
         if (null === $type) {
             throw $this->createNotFoundException();
         }
 
-        $form = $this->createForm($type, null, $configuration->getFormOptions('filter'));
+        $form = $this->createForm($type, null, $configuration->getFormOptions($context));
         $form->submit($session->get($form->getName(), []));
 
         return $this->render($configuration->getView($context), [
