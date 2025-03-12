@@ -18,7 +18,7 @@ class NodeRepository extends NestedTreeRepository
         $query = $this->createQueryBuilder('n')
             ->join('n.menu', 'm')
             ->where('n.url = :url')
-            ->andWhere('n.disableUrl = 0')
+            ->andWhere('n.disableUrl = false')
             ->andWhere('n.aliasNode is null')
             ->andWhere('m.navigation = :navigation')
             ->setParameter(':url', $url)

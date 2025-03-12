@@ -233,7 +233,7 @@ class FsFileManager
                 $directory .= '/'.trim(dirname($fullPaths[$key]), '/');
             }
 
-            $this->uploadHandler->handleForm($file, $directory, null, true);
+            $this->uploadHandler->handleForm($file, $directory, keepOriginalFilename: true);
         }
     }
 
