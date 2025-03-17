@@ -183,15 +183,15 @@
                             {% endif %}
 
                             {% block list_item %}
-                                {%- set dbClick %}
-                                    {% if configuration.doubleClick(context) %}
-                                        {% if configuration.action(context, 'show', true, [item]) %}
-                                            {{ path(configuration.pageRoute('show'), {entity: item.id}|merge(configuration.pageRouteParams('show'))) }}
-                                        {% elseif configuration.action(context, 'edit', true, [item]) %}
-                                            {{ path(configuration.pageRoute('edit'), {entity: item.id}|merge(configuration.pageRouteParams('show'))) }}
-                                        {% endif %}
-                                    {% endif %}
-                                {% endset -%}
+                                {%- set dbClick -%}
+                                    {%- if configuration.doubleClick(context) -%}
+                                        {%- if configuration.action(context, 'show', true, [item]) -%}
+                                            {{- path(configuration.pageRoute('show'), {entity: item.id}|merge(configuration.pageRouteParams('show'))) -}}
+                                        {%- elseif configuration.action(context, 'edit', true, [item]) -%}
+                                            {{- path(configuration.pageRoute('edit'), {entity: item.id}|merge(configuration.pageRouteParams('show'))) -}}
+                                        {%- endif -%}
+                                    {%- endif -%}
+                                {%- endset -%}
 
                                 <tr {{ dataSortableItem|raw }} {% if configuration.doubleClick(context) %}data-dblclick="{{- dbClick -}}"{% endif %} class="{{ loop.index is odd ? 'is-odd' : 'is-even' }}">
                                     {% if configuration.hasBatchAction(context) %}
