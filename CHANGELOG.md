@@ -1,11 +1,14 @@
 ## [Unreleased]
 
+## [v1.26.0] - 2025-03-17
 ### Added
 * FileUploadHandler: allow to upload multiple files
 * CrudController: allow to add callables after creation, update and delation
 ### Fixed
 * fix(crud): use context variable to retrieve the form and the form options
 * fix(node): use `false` instead of `O` in query
+### Changed
+* CrudConfiguration::setShowActions: add context when setting this parameter
 
 ## [v1.25.2] - 2025-02-07
 ### Added

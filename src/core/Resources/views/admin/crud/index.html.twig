@@ -149,7 +149,7 @@
                                     </th>
                                 {% endblock %}
                             {% endfor %}
-                            {% if configuration.showActions %}
+                            {% if configuration.showActions(context) %}
                                 <th class="crud-action-column">
                                     {{ 'Actions'|trans }}
                                 </th>
@@ -184,14 +184,16 @@
 
                             {% block list_item %}
                                 {%- set dbClick %}
-                                    {% if configuration.action(context, 'show', true, [item]) %}
-                                        {{ path(configuration.pageRoute('show'), {entity: item.id}|merge(configuration.pageRouteParams('show'))) }}
-                                    {% elseif configuration.action(context, 'edit', true, [item]) %}
-                                        {{ path(configuration.pageRoute('edit'), {entity: item.id}|merge(configuration.pageRouteParams('show'))) }}
+                                    {% if configuration.doubleClick(context) %}
+                                        {% if configuration.action(context, 'show', true, [item]) %}
+                                            {{ path(configuration.pageRoute('show'), {entity: item.id}|merge(configuration.pageRouteParams('show'))) }}
+                                        {% elseif configuration.action(context, 'edit', true, [item]) %}
+                                            {{ path(configuration.pageRoute('edit'), {entity: item.id}|merge(configuration.pageRouteParams('show'))) }}
+                                        {% endif %}
                                     {% endif %}
                                 {% endset -%}
 
-                                <tr {{ dataSortableItem|raw }} {% if configuration.doubleClick(context) %}data-dblclick="{{ dbClick }}"{% endif %} class="{{ loop.index is odd ? 'is-odd' : 'is-even' }}">
+                                <tr {{ dataSortableItem|raw }} {% if configuration.doubleClick(context) %}data-dblclick="{{- dbClick -}}"{% endif %} class="{{ loop.index is odd ? 'is-odd' : 'is-even' }}">
                                     {% if configuration.hasBatchAction(context) %}
                                         <td class="crud-batch-column">
                                             <input type="checkbox" class="batch_form" name="batch[items][{{ loop.index }}]" form="form-batch" value="{{ loop.index }}">
@@ -228,7 +230,7 @@
                                         </td>
                                     {% endfor %}
 
-                                    {% if configuration.showActions %}
+                                    {% if configuration.showActions(context) %}
                                         <td class="crud-action-column">
                                             {% block list_item_actions %}
                                                 {% block list_item_actions_before %}{% endblock %}
