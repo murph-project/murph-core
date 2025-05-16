@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+### Added
+* add option `removeItemButton: true` when applying choices.js
+
 ## [v1.26.0] - 2025-03-17
 ### Added
 * FileUploadHandler: allow to upload multiple files
