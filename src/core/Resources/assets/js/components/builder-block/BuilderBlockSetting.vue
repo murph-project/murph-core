@@ -3,7 +3,7 @@
     <span v-if="params.label && params.type !== 'checkbox'" v-text="params.label"></span>
 
     <input
-      v-if="['number', 'checkbox', 'text'].includes(params.type)"
+      v-if="['number', 'checkbox', 'text', 'color', 'range'].includes(params.type)"
       v-model="item.settings[setting]"
       v-bind="params.attr"
       :type="params.type"
