@@ -89,7 +89,7 @@
                 {% endfor %}
 
                 {% if allow_delete %}
-                    <div {% for k, v in delete_attr %}{{ k }}="{{ v }}">
+                    <div {% for k, v in delete_attr %}{{ k }}="{{ v }}"{% endfor %}>
                         <span data-collection-delete-container class="btn btn-sm btn-danger">
                             <span data-collection-delete="{{ loop.index }}">
                                 <span data-collection-delete="{{ loop.index }}" class="fa fa-trash"></span>
@@ -103,7 +103,7 @@
     </div>
 
     {% if allow_add %}
-        <div data-collection-add="collection-{{ collection_name }}" {% for k, v in add_attr %}{{ k }}="{{ v }}">
+        <div data-collection-add="collection-{{ collection_name }}" {% for k, v in add_attr %}{{ k }}="{{ v }}"{% endfor %}>
             <span class="btn btn-sm btn-primary" data-collection-add="collection-{{ collection_name }}">
                 <span data-collection-add="collection-{{ collection_name }}" class="fa fa-plus"></span>
                 {{ label_add|trans }}
