@@ -78,6 +78,8 @@
 {% block collection_block_widget %}
     {% set allow_delete = allow_delete|default(false) %}
     {% set allow_add = allow_add|default(false) %}
+    {% set add_attr = allow_add|default({}) %}
+    {% set delete_attr = allow_add|default({}) %}
 
     <div data-collection="collection-{{ collection_name }}">
         {% for item in form.value %}
@@ -87,7 +89,7 @@
                 {% endfor %}
 
                 {% if allow_delete %}
-                    <div class="text-right">
+                    <div {% for k, v in delete_attr %}{{ k }}="{{ v }}">
                         <span data-collection-delete-container class="btn btn-sm btn-danger">
                             <span data-collection-delete="{{ loop.index }}">
                                 <span data-collection-delete="{{ loop.index }}" class="fa fa-trash"></span>
@@ -101,7 +103,7 @@
     </div>
 
     {% if allow_add %}
-        <div data-collection-add="collection-{{ collection_name }}" class="collection-add">
+        <div data-collection-add="collection-{{ collection_name }}" {% for k, v in add_attr %}{{ k }}="{{ v }}">
             <span class="btn btn-sm btn-primary" data-collection-add="collection-{{ collection_name }}">
                 <span data-collection-add="collection-{{ collection_name }}" class="fa fa-plus"></span>
                 {{ label_add|trans }}
