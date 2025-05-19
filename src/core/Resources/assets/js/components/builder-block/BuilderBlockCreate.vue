@@ -116,7 +116,7 @@ export default {
       required: true
     },
     position: {
-      type: String,
+      type: [String, Number],
       required: true
     },
   },
@@ -142,10 +142,14 @@ export default {
         children: [],
       }
 
+
       if (this.position === 'bottom') {
         this.container.push(block)
-      } else {
+        this.$emit('updateContainer', this.container)
+      } else if (this.position === 'top') {
         this.container.unshift(block)
+      } else {
+        this.container.splice(this.position+1, 0, block)
       }
 
       this.$emit('updateContainer', this.container)

@@ -761,11 +761,15 @@ label.required::after {
 }
 
 .builder-widget {
+  .container {
+    max-width: 100%;
+  }
+
   .block {
     border: 1px solid rgba(map-get($theme-colors, 'dark-blue'), 0.3);
     padding: 10px;
     border-radius: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     background: rgba(map-get($theme-colors, 'dark-blue'), 0.02);
   }
 
@@ -873,5 +877,13 @@ label.required::after {
       font-family: Monospace;
       min-height: 50vh;
     }
+  }
+
+  .dragger {
+    cursor: pointer;
+    color: #6c757d;
+    border-color: #6c757d;
+    text-align: center;
+    vertical-align: middle;
   }
 }
