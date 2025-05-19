@@ -78,8 +78,8 @@
 {% block collection_block_widget %}
     {% set allow_delete = allow_delete|default(false) %}
     {% set allow_add = allow_add|default(false) %}
-    {% set add_attr = allow_add|default({}) %}
-    {% set delete_attr = allow_add|default({}) %}
+    {% set add_attr = add_attr|default({}) %}
+    {% set delete_attr = delete_attr|default({}) %}
 
     <div data-collection="collection-{{ collection_name }}">
         {% for item in form.value %}
@@ -130,6 +130,8 @@
     {% set attrs = attr|merge({class: 'mb-1 ' ~ (attr.class ?? '')}) %}
     {% set allow_delete = allow_delete|default(false) %}
     {% set allow_add = allow_add|default(false) %}
+    {% set add_attr = add_attr|default({}) %}
+    {% set delete_attr = delete_attr|default({}) %}
 
     <div data-collection="collection-{{ collection_name }}" {% for attr, value in row_attr %}{{ attr }}="{{ value }}"{% endfor %}>
         {% for item in form %}
