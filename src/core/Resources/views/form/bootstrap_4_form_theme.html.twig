@@ -115,7 +115,7 @@
                 {{ form_rest(form.value.vars.prototype) }}
 
                 {% if allow_delete %}
-                    <div class="text-right">
+                    <div {% for k, v in delete_attr %}{{ k }}="{{ v }}"{% endfor %}>
                         <span data-collection-delete-container class="btn btn-sm btn-danger">
                             {{ label_delete|trans }}
                         </span>
@@ -175,7 +175,7 @@
                 {{ form_rest(form.vars.prototype) }}
 
                 {% if allow_delete %}
-                    <div class="text-right">
+                    <div {% for k, v in delete_attr %}{{ k }}="{{ v }}"{% endfor %}>
                         <span data-collection-delete-container class="btn btn-sm btn-danger">
                             {{ label_delete|trans }}
                         </span>
