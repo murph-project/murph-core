@@ -1,131 +1,140 @@
 <template>
-  <div
-    class="block"
-    :class="'block-depth-' + depth"
-    v-if="widget"
-    :key="blockKey"
-  >
-    <div class="block-header d-flex justify-content-between">
-      <div>
-        <div
-          class="block-header-item block-label"
-          :title="item.widget"
-        >
-          <span
-            class="block-icon"
-            v-if="widget.icon"
-            v-html="widget.icon"
+  <div>
+    <div
+      class="block"
+      :class="'block-depth-' + depth"
+      v-if="widget"
+      :key="blockKey"
+    >
+      <div class="block-header d-flex justify-content-between">
+        <div>
+          <div
+            class="block-header-item block-label"
+            :title="item.widget"
           >
-          </span>
+            <span
+              class="block-icon"
+              v-if="widget.icon"
+              v-html="widget.icon"
+            >
+            </span>
 
-          {{ widget.label }}
+            {{ widget.label }}
+          </div>
+
+          <button
+            type="button"
+            class="block-header-item btn btn-sm btn-outline-secondary"
+            v-on:click="toggleSettings"
+            v-if="Object.keys(widget.settings).length"
+          >
+            <span class="fa fa-cog"></span>
+          </button>
+
+          <span class="fa fa-arrows-alt dragger"></span>
         </div>
 
-        <button
-          type="button"
-          class="block-header-item btn btn-sm btn-outline-secondary"
-          v-on:click="toggleSettings"
-          v-if="Object.keys(widget.settings).length"
+        <div
+          v-if="widget.preview && typeof item.settings[widget.preview] == 'string'"
+          class="block-preview"
         >
-          <span class="fa fa-cog"></span>
-        </button>
+          {{ truncate(item.settings[widget.preview]) }}
+        </div>
 
-        <button
-          type="button"
-          class="block-header-item btn btn-sm btn-outline-secondary dragger"
-        >
-          <span class="fa fa-arrows-alt dragger"></span>
-        </button>
+        <div>
+          <span class="block-id">
+            {{ item.id }}
+          </span>
+          <button
+            type="button"
+            class="block-header-item btn btn-sm text-white bg-danger"
+            v-on:click="removeMe(item)"
+          >
+            <span class="fa fa-trash"></span>
+          </button>
+        </div>
       </div>
 
-      <div
-        v-if="widget.preview && typeof item.settings[widget.preview] == 'string'"
-        class="block-preview"
-      >
-        {{ truncate(item.settings[widget.preview]) }}
+      <div class="block-settings" v-if="Object.keys(widget.settings).length" :class="{'d-none': !showSettings}">
+        <div class="row">
+          <BuilderBlockSetting
+            class="mb-0"
+            v-for="(params, setting) in widget.settings"
+            :key="item.id + '-' + setting"
+            :class="widget.class"
+            :item="item"
+            :params="params"
+            :setting="setting"
+          />
+        </div>
       </div>
 
-      <div>
-        <span class="block-id">
-          {{ item.id }}
-        </span>
-        <button
-          type="button"
-          class="block-header-item btn btn-sm text-white bg-danger"
-          v-on:click="removeMe(item)"
-        >
-          <span class="fa fa-trash dragger"></span>
-        </button>
-      </div>
-    </div>
-
-    <div class="block-settings" v-if="Object.keys(widget.settings).length" :class="{'d-none': !showSettings}">
-      <div class="row">
-        <BuilderBlockSetting
-          class="mb-0"
-          v-for="(params, setting) in widget.settings"
-          :key="item.id + '-' + setting"
-          :class="widget.class"
-          :item="item"
-          :params="params"
-          :setting="setting"
-        />
-      </div>
-    </div>
-
-    <div v-if="widget.isContainer" class="container">
-      <BuilderBlockCreate
-        :container="item.children"
-        :widgets="widgets"
-        :openedBlocks="openedBlocks"
-        :allowedWidgets="widget.widgets"
-        v-if="item.children.length > 0"
-        position="top"
-      />
-    </div>
-
-    <Draggable
-      v-if="widget.isContainer"
-      v-model="item.children"
-      ghost-class="ghost"
-      group="children"
-      @start="dragStart"
-      @end="dragEnd"
-      :animation="200"
-      handle=".dragger"
-      class="block-dropzone"
-    >
-      <BuilderBlockItem
-        v-if="item.children !== null && item.children.length > 0"
-        v-for="(child, key) in item.children"
-        :key="child.id"
-        :item="child"
-        :widgets="widgets"
-        :openedBlocks="openedBlocks"
-        :depth="depth + 1"
-        @remove-item="removeBlock(key)"
-        @drag-start="dragStart"
-        @drag-end="dragEnd"
-      />
-    </Draggable>
-
-    <div v-if="widget.isContainer" class="container">
-      <div class="d-flex justify-content-between">
+      <div v-if="widget.isContainer" class="container">
         <BuilderBlockCreate
           :container="item.children"
           :widgets="widgets"
           :openedBlocks="openedBlocks"
           :allowedWidgets="widget.widgets"
-          position="bottom"
-        />
-        <BuilderBlockCodeEditor
-          ref="dialog"
-          :value="item.children"
-          :widgets="widgets"
-          @update="codeUpdate"
+          v-if="item.children.length > 0"
+          position="top"
         />
       </div>
+
+      <Draggable
+        v-if="widget.isContainer"
+        v-model="item.children"
+        ghost-class="ghost"
+        group="children"
+        @start="dragStart"
+        @end="dragEnd"
+        :animation="200"
+        handle=".dragger"
+        class="block-dropzone"
+      >
+        <template v-if="item.children !== null && item.children.length > 0">
+          <BuilderBlockItem
+            v-for="(child, key) in item.children"
+            :key="child.id"
+            :item="child"
+            :widgets="widgets"
+            :openedBlocks="openedBlocks"
+            :depth="depth + 1"
+            @remove-item="removeBlock(key)"
+            @drag-start="dragStart"
+            @drag-end="dragEnd"
+          >
+            <template #action v-if="(key+1) !== item.children.length">
+              <BuilderBlockCreate
+                :container="item.children"
+                :widgets="widgets"
+                :position="key"
+                :openedBlocks="openedBlocks"
+                :allowedWidgets="widget.widgets"
+              />
+            </template>
+          </BuilderBlockItem>
+        </template>
+      </Draggable>
+
+      <div v-if="widget.isContainer" class="container">
+        <div class="d-flex justify-content-between">
+          <BuilderBlockCreate
+            :container="item.children"
+            :widgets="widgets"
+            :openedBlocks="openedBlocks"
+            :allowedWidgets="widget.widgets"
+            position="bottom"
+          />
+          <BuilderBlockCodeEditor
+            ref="dialog"
+            :value="item.children"
+            :widgets="widgets"
+            @update="codeUpdate"
+          />
+        </div>
+      </div>
     </div>
+    <slot name="action"></slot>
   </div>
 </template>
 
@@ -159,7 +168,7 @@ export default {
     depth: {
       type: Number,
       required: true
-    }
+    },
   },
   data() {
     return {

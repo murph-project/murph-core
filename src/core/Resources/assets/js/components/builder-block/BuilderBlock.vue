@@ -34,7 +34,17 @@
         @remove-item="removeBlock(key)"
         @drag-start="dragStart"
         @drag-end="dragEnd"
-      />
+      >
+        <template #action v-if="(key+1) !== value.length">
+          <BuilderBlockCreate
+            :container="value"
+            :widgets="widgets"
+            :openedBlocks="openedBlocks"
+            :allowedWidgets="[]"
+            :position="key"
+          />
+        </template>
+      </BuilderBlockItem>
       <div class="container">
         <div class="d-flex justify-content-between">
           <BuilderBlockCreate

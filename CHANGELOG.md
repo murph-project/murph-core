@@ -3,6 +3,7 @@
 ### Added
 * add option `removeItemButton: true` when applying choices.js
 * feat(collection): add delete_attr, add_attr options
+* feat(builder): allow to add block between children
 
 ## [v1.26.0] - 2025-03-17
 ### Added
