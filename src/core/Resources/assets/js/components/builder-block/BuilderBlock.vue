@@ -46,14 +46,14 @@
         </template>
       </BuilderBlockItem>
       <div class="container">
-        <div class="d-flex justify-content-between">
-          <BuilderBlockCreate
-            :container="value"
-            :widgets="widgets"
-            :openedBlocks="openedBlocks"
-            :allowedWidgets="[]"
-            position="bottom"
-          />
+        <BuilderBlockCreate
+          :container="value"
+          :widgets="widgets"
+          :openedBlocks="openedBlocks"
+          :allowedWidgets="[]"
+          position="bottom"
+        />
+        <div class="text-right">
           <div>
             <BuilderBlockCodeEditor
               ref="dialog"

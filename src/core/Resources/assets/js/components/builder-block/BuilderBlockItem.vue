@@ -117,14 +117,14 @@
       </Draggable>
 
       <div v-if="widget.isContainer" class="container">
-        <div class="d-flex justify-content-between">
-          <BuilderBlockCreate
-            :container="item.children"
-            :widgets="widgets"
-            :openedBlocks="openedBlocks"
-            :allowedWidgets="widget.widgets"
-            position="bottom"
-          />
+        <BuilderBlockCreate
+          :container="item.children"
+          :widgets="widgets"
+          :openedBlocks="openedBlocks"
+          :allowedWidgets="widget.widgets"
+          position="bottom"
+        />
+        <div class="text-right">
           <BuilderBlockCodeEditor
             ref="dialog"
             :value="item.children"
