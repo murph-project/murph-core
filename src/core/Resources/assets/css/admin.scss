@@ -766,15 +766,14 @@ label.required::after {
   }
 
   .block {
-    border: 1px solid rgba(map-get($theme-colors, 'dark-blue'), 0.3);
-    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 15px;
     border-radius: 4px;
-    margin-bottom: 5px;
     background: rgba(map-get($theme-colors, 'dark-blue'), 0.02);
   }
 
   > .block {
-    border: 1px solid map-get($theme-colors, 'dark-blue');
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   }
 
   .block-header {
@@ -788,9 +787,6 @@ label.required::after {
     }
   }
 
-  $block-colors: #E183F5 #E3F7C6 #82DDF5 #F5BA82 #A088A6;
-  $block-colors-length: length($block-colors);
-
   .block .block-icon {
     > * {
       display: inline-block;
@@ -798,36 +794,34 @@ label.required::after {
     }
   }
 
-  @for $i from 1 through 100 {
-    $block-color-index: ($block-colors-length + $i) % $block-colors-length + 1;
-
-    .block-depth-#{$i} {
-      .block-label {
-        background: nth($block-colors, $block-color-index);
-        border: 1px solid darken(nth($block-colors, $block-color-index), 50%);
-        color: darken(nth($block-colors, $block-color-index), 50%);
-      }
-
-      .builder-add .btn {
-        background: nth($block-colors, $block-color-index);
-        border: 1px solid darken(nth($block-colors, $block-color-index), 50%);
-        color: darken(nth($block-colors, $block-color-index), 50%);
-      }
-    }
-  }
-
   .builder-add {
-    width: 100%;
-
     &-top {
       margin-top: 7px;
     }
 
-    .btn {
-      font-size: 12px;
-      line-height: 14px;
-      padding: 3px 5px;
+    &-button {
+      cursor: pointer;
+      background: rgba(map-get($theme-colors, 'dark-blue'), 0.1);
+      text-align: center;
+      padding-bottom: 5px;
+      margin: 8px 0;
+      border-radius: 4px;
+
+      &:hover {
+        background: rgba(map-get($theme-colors, 'dark-blue'), 0.2);
+      }
+
+      .btn {
+        font-size: 12px;
+        line-height: 14px;
+        padding: 3px 5px;
+      }
     }
+  }
+
+  .block-root {
+      border: 1px solid map-get($theme-colors, 'dark-blue');
+      box-shadow: none;
   }
 
   .block-root > .container .builder-add {
@@ -842,10 +836,6 @@ label.required::after {
     .form-control {
       margin-top: 0.5rem !important;
     }
-  }
-
-  .block .block {
-    margin-top: 10px;
   }
 
   .block-id {
@@ -885,5 +875,25 @@ label.required::after {
     border-color: #6c757d;
     text-align: center;
     vertical-align: middle;
+  }
+
+  $block-colors: #E183F5 #E3F7C6 #82DDF5 #F5BA82 #A088A6;
+  $block-colors-length: length($block-colors);
+
+  @for $i from 1 through 100 {
+    $block-color-index: ($block-colors-length + $i) % $block-colors-length + 1;
+
+    .block-depth-#{$i} {
+      .block-label {
+        background: nth($block-colors, $block-color-index);
+        border: 1px solid darken(nth($block-colors, $block-color-index), 50%);
+        color: darken(nth($block-colors, $block-color-index), 50%);
+      }
+
+      .builder-add-button:hover {
+        background: nth($block-colors, $block-color-index);
+        color: darken(nth($block-colors, $block-color-index), 50%);
+      }
+    }
   }
 }
