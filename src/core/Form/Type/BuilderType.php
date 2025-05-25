@@ -19,6 +19,7 @@ class BuilderType extends AbstractType
         parent::buildView($view, $form, $options);
 
         $view->vars = array_replace($view->vars, [
+            'allowed_widgets' => $options['allowed_widgets'],
         ]);
     }
 
@@ -28,7 +29,10 @@ class BuilderType extends AbstractType
 
         $resolver->setDefaults([
             'compound' => false,
+            'allowed_widgets' => [],
         ]);
+
+        $resolver->setAllowedTypes('allowed_widgets', 'array');
     }
 
     public function getBlockPrefix()

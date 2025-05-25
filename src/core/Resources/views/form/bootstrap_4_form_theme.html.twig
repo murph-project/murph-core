@@ -3,13 +3,14 @@
 {% block builder_widget %}
     {% set row_attr = row_attr|merge({class: 'builder-widget ' ~ (row_attr.class ?? '')}) %}
     {% set value = value is iterable ? value|json_encode : value %}
+    {% set allowed_widgets = allowed_widgets is iterable ? allowed_widgets|json_encode : allowed_widgets %}
 
     {% if value == '' %}
         {% set value = '[]' %}
     {% endif %}
 
     <div {% for attr, value in row_attr %}{{ attr }}="{{ value }}" {% endfor %}>
-        <div class="builder-widget-component" data-value="{{ value }}" data-name="{{ full_name }}" data-id="{{ id }}">
+        <div class="builder-widget-component" data-value="{{ value }}" data-name="{{ full_name }}" data-id="{{ id }}" data-allowedwidgets="{{ allowed_widgets }}">
         </div>
     </div>
 {% endblock %}
