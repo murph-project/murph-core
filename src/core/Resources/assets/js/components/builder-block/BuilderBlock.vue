@@ -8,7 +8,7 @@
         :container="value"
         :widgets="widgets"
         :openedBlocks="openedBlocks"
-        :allowedWidgets="[]"
+        :allowedWidgets="allowedWidgets"
         v-if="value.length > 0"
         position="top"
       />
@@ -40,7 +40,7 @@
             :container="value"
             :widgets="widgets"
             :openedBlocks="openedBlocks"
-            :allowedWidgets="[]"
+            :allowedWidgets="allowedWidgets"
             :position="key"
           />
         </template>
@@ -50,7 +50,7 @@
           :container="value"
           :widgets="widgets"
           :openedBlocks="openedBlocks"
-          :allowedWidgets="[]"
+          :allowedWidgets="allowedWidgets"
           position="bottom"
         />
         <div class="text-right">
@@ -100,6 +100,11 @@ export default {
     initialValue: {
       type: Array,
       required: false,
+    },
+    allowedWidgets: {
+      type: Array,
+      required: false,
+      default: [],
     }
   },
   data() {

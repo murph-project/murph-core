@@ -2,6 +2,7 @@
 
 ### Added
 * add option `removeItemButton: true` when applying choices.js
+* feat(builder): allow to define `allowed_widgets` in form options
 * feat(collection): add delete_attr, add_attr options
 * feat(builder): allow to add block between children
 * feat(builder): improve UI to add new block
