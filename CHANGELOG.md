@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Fixed
+
+* fix(crud): use route params to redirect after a delation
+
 ### Added
 * add option `removeItemButton: true` when applying choices.js
 * feat(builder): allow to define `allowed_widgets` in form options

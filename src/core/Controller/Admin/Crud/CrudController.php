@@ -406,7 +406,7 @@ abstract class CrudController extends AdminController
             $this->addFlash('success', 'The data has been removed.');
         }
 
-        return $this->redirectToRoute($configuration->getPageRoute($route));
+        return $this->redirectToRoute($configuration->getPageRoute($route), $configuration->getPageRouteParams($route));
     }
 
     protected function doFilter(Session $session, string $context = 'filter'): Response
