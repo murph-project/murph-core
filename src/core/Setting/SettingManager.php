@@ -21,7 +21,13 @@ class SettingManager
     ) {
     }
 
-    public function init(string $code, string $section, string $label, $value = null)
+    public function init(
+        string $code,
+        string $section,
+        string $label,
+        $value = null,
+        array $options = [],
+    )
     {
         $entity = $this->get($code);
         $isNew = null === $entity;
@@ -34,6 +40,7 @@ class SettingManager
         $entity
             ->setSection($section)
             ->setLabel($label)
+            ->setOptions($options)
         ;
 
         if ($isNew) {

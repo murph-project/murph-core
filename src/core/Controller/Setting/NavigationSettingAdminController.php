@@ -35,6 +35,8 @@ class NavigationSettingAdminController extends AdminController
         $session = $request->getSession();
         $lastRequestId = sprintf('setting_request_%s_%s', get_class($entity), $entity->getId());
         $lastRequest = $session->get($lastRequestId);
+        $options = $entity->getOptions();
+        $optionView = $options['view'] ?? 'modal';
 
         if (null !== $lastRequest && !$request->isMethod('POST')) {
             $fakeRequest = Request::create(
@@ -64,17 +66,19 @@ class NavigationSettingAdminController extends AdminController
             $session->set($lastRequestId, $request->request->get('form'));
             $this->addFlash('warning', 'The form is not valid.');
 
-            return $this->redirect(sprintf(
-                '%s?data-modal=%s',
-                $redirectTo,
-                urlencode($request->getUri())
-            ));
+            if ($optionView === 'modal') {
+                return $this->redirect(sprintf(
+                    '%s?data-modal=%s',
+                    $redirectTo,
+                    urlencode($request->getUri())
+                ));
+            }
         }
 
         return $this->render('@Core/setting/navigation_setting_admin/edit.html.twig', [
             'form' => $form->createView(),
             'entity' => $entity,
-            'options' => $event->getData()['options'],
+            'options' => $options,
             'redirectTo' => $redirectTo,
         ]);
     }

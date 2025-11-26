@@ -26,6 +26,9 @@ class NavigationSetting implements EntityInterface
     #[ORM\Column(type: 'text', nullable: true)]
     protected $value;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    protected $options;
+
     #[ORM\ManyToOne(targetEntity: Navigation::class, inversedBy: 'navigationSettings')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     protected $navigation;
@@ -91,6 +94,18 @@ class NavigationSetting implements EntityInterface
     public function setNavigation(?Navigation $navigation): self
     {
         $this->navigation = $navigation;
+
+        return $this;
+    }
+
+    public function getOptions()
+    {
+        return json_decode($this->options, true) ?? [];
+    }
+
+    public function setOptions(?array $options): self
+    {
+        $this->options = json_encode($options ?? []);
 
         return $this;
     }

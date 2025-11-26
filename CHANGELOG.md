@@ -10,6 +10,7 @@
 * feat(collection): add delete_attr, add_attr options
 * feat(builder): allow to add block between children
 * feat(builder): improve UI to add new block
+* feat(settings): allow to edit a setting in plain page
 
 ## [v1.26.0] - 2025-03-17
 ### Added

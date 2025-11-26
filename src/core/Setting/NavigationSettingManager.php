@@ -24,7 +24,14 @@ class NavigationSettingManager
     ) {
     }
 
-    public function init($navigation, string $code, string $section, string $label, $value = null)
+    public function init(
+        $navigation,
+        string $code,
+        string $section,
+        string $label,
+        $value = null,
+        array $options = [],
+    )
     {
         $entity = $this->get($this->getNavigation($navigation), $code);
         $isNew = null === $entity;
@@ -37,6 +44,7 @@ class NavigationSettingManager
         $entity
             ->setSection($section)
             ->setLabel($label)
+            ->setOptions($options)
         ;
 
         if ($isNew) {
