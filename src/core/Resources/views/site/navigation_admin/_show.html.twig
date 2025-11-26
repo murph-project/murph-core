@@ -54,21 +54,36 @@
             </thead>
             <tbody>
                 {% for item in datas.settings %}
+                    {% set view = item.options['view']|default('modal') %}
+
                     {% set edit = path('admin_navigation_setting_edit', {entity: item.id, redirectTo: app.request.pathInfo}) %}
 
                     <tr data-dblclick="{{ edit }}">
                         <td class="col-5">
-                            <a href="#" data-modal="{{ edit }}" class="font-weight-bold text-body d-block">
-                                {{ item.label|trans }}
-                            </a>
+                            {% if view == 'modal' %}
+                                <a href="#" data-modal="{{ edit }}" data-modal-create class="font-weight-bold text-body d-block">
+                                    {{ item.label }}
+                                </a>
+                            {% else %}
+                                <a href="{{ edit }}" class="font-weight-bold text-body d-block">
+                                    {{ item.label }}
+                                </a>
+                            {% endif %}
                         </td>
                         <td class="col-5">
                             <span class="btn btn-light">{{ item.section|trans }}</span>
                         </td>
                         <td class="col-2 miw-100 text-right">
-                            <span data-modal="{{ edit }}" class="btn btn-sm btn-primary mr-1">
-                                <span data-modal="{{ edit }}" class="fa fa-edit"></span>
-                            </span>
+                            {% if view == 'modal' %}
+                                <span data-modal="{{ edit }}" data-modal-create class="btn btn-sm btn-primary mr-1">
+                                    <span data-modal="{{ edit }}" class="fa fa-edit"></span>
+                                </span>
+                            {% else %}
+                                <a href="{{ edit }}" class="btn btn-sm btn-primary mr-1">
+                                    <span class="fa fa-edit"></span>
+                                </a>
+                            {% endif %}
+
                             <button type="submit" form="form-delete-{{ item.id }}" class="btn btn-sm btn-danger">
                                 <span class="fa fa-trash"></span>
                             </button>

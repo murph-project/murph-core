@@ -1,20 +1,77 @@
-<div class="modal-dialog {% if options['view']|default('') == 'large' %}modal-dialog-large{% endif %}">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">{{ entity.section|trans }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form action="{{ path('admin_navigation_setting_edit', {entity: entity.id, redirectTo: redirectTo}) }}" id="form-entity-edit" method="POST">
-                {{ include('@Core/setting/navigation_setting_admin/_form.html.twig') }}
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'Cancel'|trans }}</button>
-            <button type="submit" form="form-entity-edit" class="btn btn-primary">{{ 'Save'|trans }}</button>
-        </div>
-    </div>
-</div>
+{% extends '@Core/admin/layout.html.twig' %}
 
+{% set view = entity.options['view']|default('modal') %}
+
+{% block html %}
+    {% if view == 'modal' %}
+        <div class="modal-dialog {% if options['view']|default('') == 'large' %}modal-dialog-large{% endif %}">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ entity.section|trans }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('admin_setting_edit', {entity: entity.id, redirectTo: redirectTo}) }}" id="form-entity-edit" method="POST">
+                        {{ include('@Core/setting/navigation_setting_admin/_form.html.twig') }}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'Cancel'|trans }}</button>
+                    <button type="submit" form="form-entity-edit" class="btn btn-primary">{{ 'Save'|trans }}</button>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block body_class %}has-form{% endblock %}
+
+{% block title %}{{ entity.label }}{% endblock %}
+
+{% block body %}
+    {% block header %}
+        <div class="bg-light">
+            <div class="crud-header">
+                {% block header_title %}
+                    <h1 class="crud-header-title">{{ entity.label }}</h1>
+                {% endblock %}
+
+                {% block header_actions %}
+                    <div class="crud-header-actions">
+                        <div class="btn-group">
+                            <a href="{{ path('admin_setting_index') }}" class="btn btn-light">
+                                <span class="fa fa-list pr-1"></span>
+                                <span class="d-none d-md-inline">
+                                    {{ 'Back to the list'|trans }}
+                                </span>
+                            </a>
+
+                            <button type="submit" form="form-main" class="btn btn-primary">
+                                <span class="fa fa-save pr-1"></span>
+                                <span class="d-none d-md-inline">
+                                    {{ 'Save'|trans|build_string(entity) }}
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block form %}
+        <form action="{{ app.request.uri }}" method="post" id="form-main" enctype="multipart/form-data">
+            <div class="tab-content">
+                <div class="tab-pane active">
+                    <div class="tab-form">
+                        {{ include('@Core/setting/navigation_setting_admin/_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </form>
+    {% endblock %}
+{% endblock %}

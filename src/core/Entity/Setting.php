@@ -25,6 +25,9 @@ class Setting implements EntityInterface
     #[ORM\Column(type: 'text', nullable: true)]
     protected $value;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    protected $options;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Setting implements EntityInterface
     public function setValue($value): self
     {
         $this->value = json_encode($value);
+
+        return $this;
+    }
+
+    public function getOptions()
+    {
+        return json_decode($this->options, true) ?? [];
+    }
+
+    public function setOptions(?array $options): self
+    {
+        $this->options = json_encode($options ?? []);
 
         return $this;
     }
