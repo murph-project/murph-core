@@ -90,7 +90,7 @@ abstract class RepositoryQuery
                 $this->setParameter(':'.$name, $value);
             } elseif (is_string($value)) {
                 if (in_array($name, $this->caseInsensitiveFilters)) {
-                    $this->andWhere(sprintf('LOWER (.%1$s) LIKE LOWER(:%1$d)', $name));
+                    $this->andWhere(sprintf('LOWER ( .%1$s) LIKE LOWER(:%1$d)', $name));
                 } else {
                     $this->andWhere('.'.$name.' LIKE :'.$name);
                 }
