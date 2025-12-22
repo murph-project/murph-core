@@ -2,6 +2,8 @@
 
 namespace App\Core\Crud;
 
+use App\Core\Entity\EntityInterface;
+
 /**
  * class CrudConfiguration.
  *
@@ -28,6 +30,7 @@ class CrudConfiguration
     protected string $sortableCollectionProperty = 'sortOrder';
     protected ?string $defaultLocale = null;
     protected array $showActions = [];
+    protected array $listRowAttributes = [];
 
     protected static $self;
 
@@ -245,6 +248,26 @@ class CrudConfiguration
     public function getViewData(string $context, string $name, $defaultValue = null)
     {
         return $this->viewDatas[$context][$name] ?? $defaultValue;
+    }
+
+    public function setListRowAttributes(string $context, array $attributes): self
+    {
+        $this->listRowAttributes[$context] = $attributes;
+
+        return $this;
+    }
+
+    public function getListRowAttributes(string $context, EntityInterface $entity): array
+    {
+        $attributes = $this->listRowAttributes[$context] ?? [];
+
+        foreach ($attributes as $key => $attribute) {
+            if (is_callable($attribute)) {
+                $attributes[$key] = $attribute($entity);
+            }
+        }
+
+        return $attributes;
     }
 
     // --
