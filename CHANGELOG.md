@@ -1,7 +1,7 @@
 ## [Unreleased]
 
+## [v1.27.0] - 2025-12-22
 ### Fixed
-
 * fix(crud): use route params to redirect after a delation
 
 ### Added
