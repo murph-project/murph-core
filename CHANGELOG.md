@@ -11,6 +11,7 @@
 * feat(builder): allow to add block between children
 * feat(builder): improve UI to add new block
 * feat(settings): allow to edit a setting in plain page
+* feat(crud/index): allow to define row attributes
 
 ## [v1.26.0] - 2025-03-17
 ### Added
