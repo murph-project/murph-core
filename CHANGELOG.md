@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Added
+* feat(repository): add RepositoryQuery::addCaseInsensitiveFilters()
+* feat(repository): add RepositoryQuery::addForcedFilterHandler()
+
 ## [v1.27.0] - 2025-12-22
 ### Fixed
 * fix(crud): use route params to redirect after a delation
