@@ -18,6 +18,7 @@ abstract class RepositoryQuery
     protected PaginatorInterface $paginator;
     protected string $id;
     protected array $forcedFilterHandlers = [];
+    protected array $caseInsensitiveFilters = [];
 
     public function __construct(ServiceEntityRepository $repository, string $id, PaginatorInterface $paginator = null)
     {
@@ -88,7 +89,11 @@ abstract class RepositoryQuery
                 $this->andWhere('.'.$name.' = :'.$name);
                 $this->setParameter(':'.$name, $value);
             } elseif (is_string($value)) {
-                $this->andWhere('.'.$name.' LIKE :'.$name);
+                if (in_array($name, $this->caseInsensitiveFilters)) {
+                    $this->andWhere(sprintf('LOWER (.%1$s) LIKE LOWER(:%1$d)', $name));
+                } else {
+                    $this->andWhere('.'.$name.' LIKE :'.$name);
+                }
                 $this->setParameter(':'.$name, '%'.$value.'%');
             } else {
                 $this->filterHandler($name, $value);
@@ -141,5 +146,19 @@ abstract class RepositoryQuery
 
     protected function filterHandler(string $name, $value)
     {
+    }
+
+    protected function addCaseInsensitiveFilters(string $name): self
+    {
+        $this->caseInsensitiveFilters[] = $name;
+
+        return $this;
+    }
+
+    protected function addForcedFilterHandlers(string $name): self
+    {
+        $this->forcedFilterHandlers[] = $name;
+
+        return $this;
     }
 }
