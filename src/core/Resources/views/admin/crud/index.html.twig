@@ -196,7 +196,7 @@
                                 {% set rowAttributes = configuration.listRowAttributes(context, item) %}
                                 {% set rowClasses = rowAttributes['class']|default('') %}
 
-                                <tr {{ dataSortableItem|raw }} {% if configuration.doubleClick(context) %}data-dblclick="{{- dbClick -}}"{% endif %} class="{{ loop.index is odd ? 'is-odd' : 'is-even' }} {{ rowClasses }}" {% for attr, attrValue in rowAttributes %}{% if attr != 'class' %}{{ attr }}={{ attrValue }} {% endif %}{% endfor %}>
+                                <tr {{ dataSortableItem|raw }} {% if configuration.doubleClick(context) %}data-dblclick="{{- dbClick -}}"{% endif %} class="{{ loop.index is odd ? 'is-odd' : 'is-even' }} {{ rowClasses }}" {% for attr, attrValue in rowAttributes %}{% if attr != 'class' %}{{ attr }}="{{ attrValue }}" {% endif %}{% endfor %}>
                                     {% if configuration.hasBatchAction(context) %}
                                         <td class="crud-batch-column">
                                             <input type="checkbox" class="batch_form" name="batch[items][{{ loop.index }}]" form="form-batch" value="{{ loop.index }}">
