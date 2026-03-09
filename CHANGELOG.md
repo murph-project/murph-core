@@ -7,6 +7,7 @@
 ### Fixed
 * fix(crud/index): fix row attribute value render
 * fix(crud/navigation_setting): fix form action
+* fix(crud/template): use default route params
 
 ## [v1.27.0] - 2025-12-22
 ### Fixed
