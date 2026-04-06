@@ -4,6 +4,7 @@ namespace App\Core\Entity\Analytic;
 
 use App\Core\Entity\EntityInterface;
 use App\Core\Entity\Site\Node;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'analytic_referer')]
@@ -12,21 +13,21 @@ class Referer implements EntityInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    protected $id;
+    #[ORM\Column]
+    protected ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Node::class, inversedBy: 'analyticReferers')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    protected $node;
+    protected ?Node $node = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $uri;
+    #[ORM\Column(length: 255)]
+    protected ?string $uri = null;
 
-    #[ORM\Column(type: 'integer', options: ['default' => 0])]
-    protected $views = 0;
+    #[ORM\Column(options: ['default' => 0])]
+    protected int $views = 0;
 
-    #[ORM\Column(type: 'date')]
-    protected $date;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    protected ?\DateTimeInterface $date = null;
 
     public function getId(): ?int
     {

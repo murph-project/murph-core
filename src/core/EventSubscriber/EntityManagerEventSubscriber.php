@@ -14,7 +14,7 @@ abstract class EntityManagerEventSubscriber implements EventSubscriberInterface
 {
     protected static int $priority = 0;
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             EntityManagerEvent::CREATE_EVENT => ['onCreate', self::$priority],

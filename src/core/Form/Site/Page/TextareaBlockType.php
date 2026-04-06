@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class TextareaBlockType extends TextBlockType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
             'value',

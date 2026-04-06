@@ -2,15 +2,16 @@
 
 namespace App\Core\Doctrine;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 trait Timestampable
 {
-    #[ORM\Column(name: 'created_at', type: 'datetime')]
-    protected $createdAt;
+    #[ORM\Column(name: 'created_at', type: Types::DATETIME_MUTABLE)]
+    protected ?\DateTime $createdAt = null;
 
-    #[ORM\Column(name: 'updated_at', type: 'datetime')]
-    protected $updatedAt;
+    #[ORM\Column(name: 'updated_at', type: Types::DATETIME_MUTABLE)]
+    protected ?\DateTime $updatedAt = null;
 
     #[ORM\PrePersist]
     public function onPrePersist(): void

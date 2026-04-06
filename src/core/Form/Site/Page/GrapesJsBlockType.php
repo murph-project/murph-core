@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class GrapesJsBlockType extends TextareaBlockType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
             'value',

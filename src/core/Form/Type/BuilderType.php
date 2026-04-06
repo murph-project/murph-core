@@ -14,7 +14,7 @@ class BuilderType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         parent::buildView($view, $form, $options);
 
@@ -23,7 +23,7 @@ class BuilderType extends AbstractType
         ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
 
@@ -35,7 +35,7 @@ class BuilderType extends AbstractType
         $resolver->setAllowedTypes('allowed_widgets', 'array');
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'builder';
     }

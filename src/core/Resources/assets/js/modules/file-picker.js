@@ -1,5 +1,5 @@
 const $ = require('jquery')
-const Vue = require('vue').default
+const { createApp } = require('vue')
 const FileManager = require('../components/file-manager/FileManager').default
 
 const createModal = function () {
@@ -45,13 +45,12 @@ const fileManagerBrowser = function (callback) {
 
   $('body').on('click', '#file-manager-insert', clickCallback)
 
-  return new Vue({
-    el: '#fm-modal-content',
+  return createApp({
     template: '<FileManager context="tinymce" />',
     components: {
       FileManager
     }
-  })
+  }).mount('#fm-modal-content')
 }
 
 module.exports = function () {

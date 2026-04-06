@@ -14,7 +14,7 @@ abstract class SettingEventSubscriber implements EventSubscriberInterface
 {
     protected static int $priority = 0;
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SettingEvent::INIT_EVENT => ['onInit', self::$priority],

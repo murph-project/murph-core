@@ -2,7 +2,7 @@
 
 namespace App\Core\Maker;
 
-use Doctrine\Common\Annotations\Annotation;
+use Doctrine\ORM\Mapping\Column;
 use Symfony\Bundle\MakerBundle\ConsoleStyle;
 use Symfony\Bundle\MakerBundle\DependencyBuilder;
 use Symfony\Bundle\MakerBundle\Generator;
@@ -24,7 +24,7 @@ class MakeFactory extends AbstractMaker
         return 'Creates a factory';
     }
 
-    public function configureCommand(Command $command, InputConfiguration $inputConf)
+    public function configureCommand(Command $command, InputConfiguration $inputConf): void
     {
         $command
             ->addArgument(
@@ -41,7 +41,7 @@ class MakeFactory extends AbstractMaker
         ;
     }
 
-    public function generate(InputInterface $input, ConsoleStyle $io, Generator $generator)
+    public function generate(InputInterface $input, ConsoleStyle $io, Generator $generator): void
     {
         $entityDetails = $generator->createClassNameDetails(
             $input->getArgument('entity-class'),
@@ -71,11 +71,11 @@ class MakeFactory extends AbstractMaker
         $io->text('Next: Open your new factory class and configure it!');
     }
 
-    public function configureDependencies(DependencyBuilder $dependencies)
+    public function configureDependencies(DependencyBuilder $dependencies): void
     {
         $dependencies->addClassDependency(
-            Annotation::class,
-            'doctrine/annotations'
+            Column::class,
+            'doctrine/orm'
         );
     }
 }

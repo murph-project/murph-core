@@ -2,7 +2,7 @@
 
 namespace App\Core\Maker;
 
-use Doctrine\Common\Annotations\Annotation;
+use Doctrine\ORM\Mapping\Column;
 use Symfony\Bundle\MakerBundle\ConsoleStyle;
 use Symfony\Bundle\MakerBundle\DependencyBuilder;
 use Symfony\Bundle\MakerBundle\Generator;
@@ -25,7 +25,7 @@ class MakeRepositoryQuery extends AbstractMaker
         return 'Creates a repository query';
     }
 
-    public function configureCommand(Command $command, InputConfiguration $inputConf)
+    public function configureCommand(Command $command, InputConfiguration $inputConf): void
     {
         $command
             ->addArgument(
@@ -37,7 +37,7 @@ class MakeRepositoryQuery extends AbstractMaker
         ;
     }
 
-    public function generate(InputInterface $input, ConsoleStyle $io, Generator $generator)
+    public function generate(InputInterface $input, ConsoleStyle $io, Generator $generator): void
     {
         $repositoryClass = $input->getArgument('repository-class');
 
@@ -75,11 +75,11 @@ class MakeRepositoryQuery extends AbstractMaker
         $io->text('Next: Open your new repository query class and configure it!');
     }
 
-    public function configureDependencies(DependencyBuilder $dependencies)
+    public function configureDependencies(DependencyBuilder $dependencies): void
     {
         $dependencies->addClassDependency(
-            Annotation::class,
-            'doctrine/annotations'
+            Column::class,
+            'doctrine/orm'
         );
     }
 }

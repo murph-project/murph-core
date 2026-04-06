@@ -48,7 +48,7 @@ class EditorJsExtension extends AbstractExtension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('editorjs_to_html', [$this, 'buildHtml']),

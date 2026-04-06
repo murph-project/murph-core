@@ -1,4 +1,4 @@
-const Vue = require('vue').default
+const { createApp } = require('vue')
 
 const BuilderBlock = require('../components/builder-block/BuilderBlock').default
 
@@ -8,8 +8,7 @@ module.exports = () => {
   wrappers.forEach((wrapper) => {
     const component = wrapper.querySelector('.builder-widget-component')
 
-    return new Vue({
-      el: component,
+    createApp({
       template: `<BuilderBlock
         :initialValue="value"
         :allowedWidgets="allowedWidgets"
@@ -25,6 +24,6 @@ module.exports = () => {
       components: {
         BuilderBlock
       }
-    })
+    }).mount(component)
   })
 }

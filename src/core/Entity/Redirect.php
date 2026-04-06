@@ -10,41 +10,41 @@ class Redirect implements EntityInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    protected $id;
+    #[ORM\Column]
+    protected ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 5)]
-    protected $scheme;
+    #[ORM\Column(length: 5)]
+    protected ?string $scheme = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $domain;
+    #[ORM\Column(length: 255)]
+    protected ?string $domain = null;
 
-    #[ORM\Column(type: 'string', length: 6)]
-    protected $domainType;
+    #[ORM\Column(length: 6)]
+    protected ?string $domainType = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $rule;
+    #[ORM\Column(length: 255)]
+    protected ?string $rule = null;
 
-    #[ORM\Column(type: 'string', length: 6)]
-    protected $ruleType;
+    #[ORM\Column(length: 6)]
+    protected ?string $ruleType = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $location;
+    #[ORM\Column(length: 255)]
+    protected ?string $location = null;
 
-    #[ORM\Column(type: 'integer')]
-    protected $redirectCode;
+    #[ORM\Column]
+    protected ?int $redirectCode = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $label;
+    #[ORM\Column(length: 255)]
+    protected ?string $label = null;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    protected $sortOrder;
+    #[ORM\Column(nullable: true)]
+    protected ?int $sortOrder = null;
 
-    #[ORM\Column(type: 'boolean')]
-    protected $isEnabled;
+    #[ORM\Column]
+    protected ?bool $isEnabled = null;
 
-    #[ORM\Column(type: 'boolean')]
-    protected $reuseQueryString;
+    #[ORM\Column]
+    protected ?bool $reuseQueryString = null;
 
     public function getId(): ?int
     {

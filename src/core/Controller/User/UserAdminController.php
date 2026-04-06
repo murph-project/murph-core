@@ -16,15 +16,13 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
-
 class UserAdminController extends CrudController
 {
     protected ?CrudConfiguration $configuration = null;
 
-    public function index(RepositoryQuery $query, Request $request, Session $session, int $page = 1): Response
+    public function index(RepositoryQuery $query, Request $request, int $page = 1): Response
     {
-        return $this->doIndex($page, $query, $request, $session);
+        return $this->doIndex($page, $query, $request);
     }
 
     public function new(Factory $factory, EntityManager $entityManager, Request $request, TokenGenerator $tokenGenerator): Response
@@ -37,9 +35,9 @@ class UserAdminController extends CrudController
         return $this->doShow($entity);
     }
 
-    public function filter(Session $session): Response
+    public function filter(Request $request): Response
     {
-        return $this->doFilter($session);
+        return $this->doFilter($request);
     }
 
     public function edit(Entity $entity, EntityManager $entityManager, Request $request): Response

@@ -10,7 +10,7 @@ class GrapesJsExtension extends AbstractExtension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('grapesjs_html', [$this, 'getHtml']),

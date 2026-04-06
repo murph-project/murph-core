@@ -16,7 +16,7 @@ class BuilderExtension extends AbstractExtension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('block_to_html', [$this, 'buildHtml'], ['is_safe' => ['html']]),

@@ -17,12 +17,13 @@ class SiteRouteLoader extends Loader
 {
     protected $isLoaded = false;
 
-    public function __construct(protected NavigationRepositoryQuery $navigationQuery)
+    public function __construct(protected NavigationRepositoryQuery $navigationQuery, ?string $env = null)
     {
+        parent::__construct($env);
         $this->navigationQuery = $navigationQuery;
     }
 
-    public function load($resource, ?string $type = null)
+    public function load(mixed $resource, ?string $type = null): mixed
     {
         if (true === $this->isLoaded) {
             throw new \RuntimeException('Do not add the "extra" loader twice');
@@ -129,7 +130,7 @@ class SiteRouteLoader extends Loader
         return $routes;
     }
 
-    public function supports($resource, string $type = null)
+    public function supports(mixed $resource, ?string $type = null): bool
     {
         return 'extra' === $type;
     }

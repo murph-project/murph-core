@@ -9,7 +9,6 @@ use App\Core\Manager\EntityManager;
 use App\Core\Repository\RepositoryQuery;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * class CrudController.
@@ -30,14 +29,13 @@ abstract class CrudController extends AdminController
         int $page,
         RepositoryQuery $query,
         Request $request,
-        Session $session,
         string $context = 'index'
     ): Response
     {
         $configuration = $this->getConfiguration();
 
         $this->applySort('index', $query, $request);
-        $this->updateFilters($request, $session);
+        $this->updateFilters($request);
 
         $pager = $query
             ->usefilters($this->filters)
@@ -264,8 +262,7 @@ abstract class CrudController extends AdminController
         int $page,
         RepositoryQuery $query,
         EntityManager $entityManager,
-        Request $request,
-        Session $session
+        Request $request
     ): Response
     {
         $configuration = $this->getConfiguration();
@@ -276,7 +273,7 @@ abstract class CrudController extends AdminController
         }
 
         $this->applySort($context, $query, $request);
-        $this->updateFilters($request, $session);
+        $this->updateFilters($request);
 
         $pager = $query
             ->useFilters($this->filters)
@@ -308,8 +305,7 @@ abstract class CrudController extends AdminController
         int $page,
         RepositoryQuery $query,
         EntityManager $entityManager,
-        Request $request,
-        Session $session
+        Request $request
     ): Response
     {
         $configuration = $this->getConfiguration();
@@ -335,7 +331,7 @@ abstract class CrudController extends AdminController
         $callback = $batchAction['callback'];
 
         $this->applySort($context, $query, $request);
-        $this->updateFilters($request, $session);
+        $this->updateFilters($request);
 
         $query->useFilters($this->filters);
 
@@ -409,7 +405,7 @@ abstract class CrudController extends AdminController
         return $this->redirectToRoute($configuration->getPageRoute($route), $configuration->getPageRouteParams($route));
     }
 
-    protected function doFilter(Session $session, string $context = 'filter'): Response
+    protected function doFilter(Request $request, string $context = 'filter'): Response
     {
         $configuration = $this->getConfiguration();
         $type = $configuration->getForm($context);
@@ -419,7 +415,7 @@ abstract class CrudController extends AdminController
         }
 
         $form = $this->createForm($type, null, $configuration->getFormOptions($context));
-        $form->submit($session->get($form->getName(), []));
+        $form->submit($request->getSession()->get($form->getName(), []));
 
         return $this->render($configuration->getView($context), [
             'form' => $form->createView(),
@@ -428,7 +424,7 @@ abstract class CrudController extends AdminController
         ]);
     }
 
-    protected function updateFilters(Request $request, Session $session)
+    protected function updateFilters(Request $request)
     {
         $configuration = $this->getConfiguration();
         $type = $configuration->getForm('filter');
@@ -437,6 +433,7 @@ abstract class CrudController extends AdminController
             return;
         }
 
+        $session = $request->getSession();
         $form = $this->createForm($type, null, $configuration->getFormOptions('filter'));
 
         if ($request->query->has($form->getName())) {

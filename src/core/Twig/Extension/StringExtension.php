@@ -15,7 +15,7 @@ class StringExtension extends AbstractExtension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('build_string', [$this, 'buildString']),

@@ -1,4 +1,4 @@
-const Vue = require('vue').default
+const { createApp } = require('vue')
 
 const FileManager = require('../components/file-manager/FileManager').default
 
@@ -7,11 +7,10 @@ module.exports = () => {
     return
   }
 
-  return new Vue({
-    el: '#file-manager',
+  return createApp({
     template: '<FileManager context="crud" />',
     components: {
       FileManager
     }
-  })
+  }).mount('#file-manager')
 }

@@ -16,15 +16,14 @@ use App\Core\Site\PageLocator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class PageAdminController extends CrudController
 {
     #[Route(path: '/admin/site/page/{page}', name: 'admin_site_page_index', methods: ['GET'], requirements: ['page' => '\d+'])]
-    public function index(RepositoryQuery $query, Request $request, Session $session, int $page = 1): Response
+    public function index(RepositoryQuery $query, Request $request, int $page = 1): Response
     {
-        return $this->doIndex($page, $query, $request, $session);
+        return $this->doIndex($page, $query, $request);
     }
 
     #[Route(path: '/admin/site/page/show/{entity}', name: 'admin_site_page_show', methods: ['GET'])]
@@ -34,9 +33,9 @@ class PageAdminController extends CrudController
     }
 
     #[Route(path: '/admin/site/page/filter', name: 'admin_site_page_filter', methods: ['GET'])]
-    public function filter(Session $session): Response
+    public function filter(Request $request): Response
     {
-        return $this->doFilter($session);
+        return $this->doFilter($request);
     }
 
     #[Route(path: '/admin/site/page/edit/{entity}', name: 'admin_site_page_edit', methods: ['GET', 'POST'])]
@@ -68,9 +67,9 @@ class PageAdminController extends CrudController
     }
 
     #[Route(path: '/admin/site/page/batch/{page}', name: 'admin_site_page_batch', methods: ['POST'], requirements: ['page' => '\d+'])]
-    public function batch(RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session, int $page = 1): Response
+    public function batch(RepositoryQuery $query, EntityManager $entityManager, Request $request, int $page = 1): Response
     {
-        return $this->doBatch($page, $query, $entityManager, $request, $session);
+        return $this->doBatch($page, $query, $entityManager, $request);
     }
 
     protected function getConfiguration(): CrudConfiguration

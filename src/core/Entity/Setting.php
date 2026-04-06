@@ -3,6 +3,7 @@
 namespace App\Core\Entity;
 
 use App\Core\Repository\SettingRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SettingRepository::class)]
@@ -10,23 +11,23 @@ class Setting implements EntityInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    protected $id;
+    #[ORM\Column]
+    protected ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $section;
+    #[ORM\Column(length: 255)]
+    protected ?string $section = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $label;
+    #[ORM\Column(length: 255)]
+    protected ?string $label = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $code;
+    #[ORM\Column(length: 255)]
+    protected ?string $code = null;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    protected $value;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    protected ?string $value = null;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    protected $options;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    protected ?string $options = null;
 
     public function getId(): ?int
     {

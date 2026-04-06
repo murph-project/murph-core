@@ -12,7 +12,7 @@ class FilePickerType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['pattern'] = null;
         unset($view->vars['attr']['pattern']);
@@ -21,7 +21,7 @@ class FilePickerType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): ?string
     {
         return TextType::class;
     }
@@ -29,7 +29,7 @@ class FilePickerType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'file_picker';
     }

@@ -2,7 +2,7 @@
 
 namespace App\Core\Maker;
 
-use Doctrine\Common\Annotations\Annotation;
+use Doctrine\ORM\Mapping\Column;
 use Symfony\Bundle\MakerBundle\ConsoleStyle;
 use Symfony\Bundle\MakerBundle\DependencyBuilder;
 use Symfony\Bundle\MakerBundle\Generator;
@@ -27,7 +27,7 @@ class MakePage extends AbstractMaker
         return 'Creates a new page class';
     }
 
-    public function configureCommand(Command $command, InputConfiguration $inputConf)
+    public function configureCommand(Command $command, InputConfiguration $inputConf): void
     {
         $command
             ->addArgument(
@@ -39,7 +39,7 @@ class MakePage extends AbstractMaker
         ;
     }
 
-    public function generate(InputInterface $input, ConsoleStyle $io, Generator $generator)
+    public function generate(InputInterface $input, ConsoleStyle $io, Generator $generator): void
     {
         $pageClassNameDetails = $generator->createClassNameDetails(
             $input->getArgument('page-class'),
@@ -107,11 +107,11 @@ EOF
         );
     }
 
-    public function configureDependencies(DependencyBuilder $dependencies)
+    public function configureDependencies(DependencyBuilder $dependencies): void
     {
         $dependencies->addClassDependency(
-            Annotation::class,
-            'doctrine/annotations'
+            Column::class,
+            'doctrine/orm'
         );
     }
 

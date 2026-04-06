@@ -3,10 +3,9 @@
 namespace App\Core\EventSubscriber;
 
 use App\Core\Repository\Site\NodeRepository;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -16,13 +15,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class RequestSecurityEventSubscriber implements EventSubscriberInterface
 {
-    protected AuthorizationChecker $authorizationChecker;
-
     public function __construct(
         protected NodeRepository $nodeRepository,
-        ContainerInterface $container
+        protected AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->authorizationChecker = $container->get('security.authorization_checker');
     }
 
     public function onKernelRequest(RequestEvent $event)

@@ -21,7 +21,7 @@ class FileInformationExtension extends AbstractExtension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('file_attribute', [$this, 'fileAttribute']),

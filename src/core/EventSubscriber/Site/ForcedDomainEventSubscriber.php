@@ -42,7 +42,7 @@ class ForcedDomainEventSubscriber implements EventSubscriberInterface
         $event->getResponse()->setStatusCode(Response::HTTP_MOVED_PERMANENTLY);
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::RESPONSE => [['onKernelResponse', 20]],

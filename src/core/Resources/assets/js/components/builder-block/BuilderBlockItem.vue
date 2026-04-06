@@ -90,24 +90,24 @@
         :animation="200"
         handle=".dragger"
         class="block-dropzone"
+        :item-key="(el) => el.id"
       >
-        <template v-if="item.children !== null && item.children.length > 0">
+        <template #item="{ element, index }">
           <BuilderBlockItem
-            v-for="(child, key) in item.children"
-            :key="child.id"
-            :item="child"
+            :key="element.id"
+            :item="element"
             :widgets="widgets"
             :openedBlocks="openedBlocks"
             :depth="depth + 1"
-            @remove-item="removeBlock(key)"
+            @remove-item="removeBlock(index)"
             @drag-start="dragStart"
             @drag-end="dragEnd"
           >
-            <template #action v-if="(key+1) !== item.children.length">
+            <template #action v-if="(index+1) !== item.children.length">
               <BuilderBlockCreate
                 :container="item.children"
                 :widgets="widgets"
-                :position="key"
+                :position="index"
                 :openedBlocks="openedBlocks"
                 :allowedWidgets="widget.widgets"
               />
