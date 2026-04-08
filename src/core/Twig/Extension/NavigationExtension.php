@@ -11,7 +11,7 @@ class NavigationExtension extends AbstractExtension
     /**
      * {@inheritdoc}
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('navigation_color_badge', [$this, 'navigationColorBadge'], ['is_safe' => ['html']]),

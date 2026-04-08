@@ -3,8 +3,7 @@
 namespace App\Core\Factory;
 
 use App\Entity\User;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * class UserFactory.
@@ -13,12 +12,11 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
  */
 class UserFactory implements FactoryInterface
 {
-    protected TokenGeneratorInterface $tokenGenerator;
-    protected UserPasswordEncoderInterface $encoder;
+    protected UserPasswordHasherInterface $hasher;
 
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(UserPasswordHasherInterface $hasher)
     {
-        $this->encoder = $encoder;
+        $this->hasher = $hasher;
     }
 
     public function create(?string $email = null, ?string $password = null): User
@@ -30,7 +28,7 @@ class UserFactory implements FactoryInterface
         }
 
         if (null !== $password) {
-            $entity->setPassword($this->encoder->encodePassword($entity, $password));
+            $entity->setPassword($this->hasher->hashPassword($entity, $password));
         }
 
         return $entity;

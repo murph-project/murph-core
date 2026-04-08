@@ -2,7 +2,6 @@
 
 namespace App\Core\Maker;
 
-use Doctrine\Common\Annotations\Annotation;
 use Symfony\Bundle\MakerBundle\ConsoleStyle;
 use Symfony\Bundle\MakerBundle\DependencyBuilder;
 use Symfony\Bundle\MakerBundle\Generator;
@@ -27,7 +26,7 @@ class MakeBuilderBlock extends AbstractMaker
         return 'Creates a new builder block class';
     }
 
-    public function configureCommand(Command $command, InputConfiguration $inputConf)
+    public function configureCommand(Command $command, InputConfiguration $inputConf): void
     {
         $command
             ->addArgument(
@@ -39,7 +38,7 @@ class MakeBuilderBlock extends AbstractMaker
         ;
     }
 
-    public function generate(InputInterface $input, ConsoleStyle $io, Generator $generator)
+    public function generate(InputInterface $input, ConsoleStyle $io, Generator $generator): void
     {
         $blockClassNameDetails = $generator->createClassNameDetails(
             $input->getArgument('builder-block-class'),
@@ -91,7 +90,7 @@ class MakeBuilderBlock extends AbstractMaker
 EOF;
     }
 
-    public function configureDependencies(DependencyBuilder $dependencies)
+    public function configureDependencies(DependencyBuilder $dependencies): void
     {
     }
 }

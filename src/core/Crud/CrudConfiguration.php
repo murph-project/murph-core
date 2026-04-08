@@ -31,6 +31,7 @@ class CrudConfiguration
     protected ?string $defaultLocale = null;
     protected array $showActions = [];
     protected array $listRowAttributes = [];
+    protected array $doubleClick = [];
 
     protected static $self;
 

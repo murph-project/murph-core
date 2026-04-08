@@ -6,7 +6,7 @@ use App\Core\Analytic\DateRangeAnalytic;
 use App\Core\Entity\Site\Node;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/admin/analytic')]
 class AnalyticController extends AbstractController

@@ -14,7 +14,7 @@ abstract class NavigationSettingEventSubscriber implements EventSubscriberInterf
 {
     protected static int $priority = 0;
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             NavigationSettingEvent::INIT_EVENT => ['onInit', self::$priority],

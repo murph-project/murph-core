@@ -4,6 +4,7 @@ namespace App\Core\Command;
 
 use App\Core\Factory\UserFactory;
 use App\Core\Manager\EntityManager;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,10 +15,9 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
+#[AsCommand(name: 'murph:user:create', description: 'Creates a user')]
 class UserCreateCommand extends Command
 {
-    protected static $defaultName = 'murph:user:create';
-    protected static $defaultDescription = 'Creates a user';
 
     public function __construct(
         protected UserFactory $userFactory,
@@ -27,10 +27,9 @@ class UserCreateCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
-            ->setDescription(self::$defaultDescription)
             ->addArgument('email', InputArgument::OPTIONAL, 'E-mail')
             ->addOption('is-admin', null, InputOption::VALUE_NONE, 'Add the admin role')
             ->addOption('is-writer', null, InputOption::VALUE_NONE, 'Add the write role')

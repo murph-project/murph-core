@@ -23,48 +23,52 @@
       @end="dragEnd"
       handle=".dragger"
       :class="{'block-show-dropzone': showDragDrop}"
+      :item-key="(el) => el.id"
     >
-      <BuilderBlockItem
-        v-for="(block, key) in value"
-        :key="block.id + '-' + key"
-        :item="block"
-        :widgets="widgets"
-        :openedBlocks="openedBlocks"
-        :depth="1"
-        @remove-item="removeBlock(key)"
-        @drag-start="dragStart"
-        @drag-end="dragEnd"
-      >
-        <template #action v-if="(key+1) !== value.length">
+      <template #item="{ element, index }">
+        <BuilderBlockItem
+          :key="element.id + '-' + index"
+          :item="element"
+          :widgets="widgets"
+          :openedBlocks="openedBlocks"
+          :depth="1"
+          @remove-item="removeBlock(index)"
+          @drag-start="dragStart"
+          @drag-end="dragEnd"
+        >
+          <template #action v-if="(index+1) !== value.length">
+            <BuilderBlockCreate
+              :container="value"
+              :widgets="widgets"
+              :openedBlocks="openedBlocks"
+              :allowedWidgets="allowedWidgets"
+              :position="index"
+            />
+          </template>
+        </BuilderBlockItem>
+      </template>
+      <template #footer>
+        <div class="container">
           <BuilderBlockCreate
             :container="value"
             :widgets="widgets"
             :openedBlocks="openedBlocks"
             :allowedWidgets="allowedWidgets"
-            :position="key"
+            position="bottom"
           />
-        </template>
-      </BuilderBlockItem>
-      <div class="container">
-        <BuilderBlockCreate
-          :container="value"
-          :widgets="widgets"
-          :openedBlocks="openedBlocks"
-          :allowedWidgets="allowedWidgets"
-          position="bottom"
-        />
-        <div class="text-right">
-          <div>
-            <BuilderBlockCodeEditor
-              ref="dialog"
-              :value="value"
-              :widgets="widgets"
-              @update="codeUpdate"
-            />
+          <div class="text-right">
+            <div>
+              <BuilderBlockCodeEditor
+                ref="dialog"
+                :value="value"
+                :widgets="widgets"
+                @update="codeUpdate"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <textarea :name="name" class="d-none">{{ toJson(value) }}</textarea>
+        <textarea :name="name" class="d-none">{{ toJson(value) }}</textarea>
+      </template>
     </Draggable>
   </div>
 </template>

@@ -4,6 +4,7 @@ namespace App\Core\Entity\Site\Page;
 
 use App\Core\Doctrine\Timestampable;
 use App\Core\Repository\Site\Page\BlockRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BlockRepository::class)]
@@ -16,18 +17,18 @@ class Block
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    protected $id;
+    #[ORM\Column]
+    protected ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $name;
+    #[ORM\Column(length: 255)]
+    protected ?string $name = null;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    protected $value;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    protected ?string $value = null;
 
     #[ORM\ManyToOne(targetEntity: Page::class, inversedBy: 'blocks')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    protected $page;
+    protected ?Page $page = null;
 
     public function getId(): ?int
     {

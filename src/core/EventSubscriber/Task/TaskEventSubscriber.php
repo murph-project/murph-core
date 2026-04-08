@@ -15,7 +15,7 @@ abstract class TaskEventSubscriber implements EventSubscriberInterface
 {
     protected static int $priority = 0;
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             TaskInitEvent::INIT_EVENT => ['onInit', self::$priority],

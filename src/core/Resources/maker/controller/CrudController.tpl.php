@@ -11,20 +11,19 @@ use <?php echo $entity; ?> as Entity;
 use <?php echo $factory; ?> as Factory;
 use <?php echo $form; ?> as Type;
 use <?php echo $repository_query; ?> as RepositoryQuery;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class <?php echo $class_name; ?> extends CrudController
 {
     protected ?CrudConfiguration $configuration = null;
 
     #[Route(path: '/admin/<?php echo $route; ?>/{page}', name: 'admin_<?php echo $route; ?>_index', methods: ['GET'], requirements: ['page' => '\d+'])]
-    public function index(RepositoryQuery $query, Request $request, Session $session, int $page = 1): Response
+    public function index(RepositoryQuery $query, Request $request, int $page = 1): Response
     {
-        return $this->doIndex($page, $query, $request, $session);
+        return $this->doIndex($page, $query, $request);
     }
 
     #[Route(path: '/admin/<?php echo $route; ?>/new', name: 'admin_<?php echo $route; ?>_new', methods: ['GET', 'POST'])]
@@ -41,9 +40,9 @@ class <?php echo $class_name; ?> extends CrudController
     }
 
     #[Route(path: '/admin/<?php echo $route; ?>/filter', name: 'admin_<?php echo $route; ?>_filter', methods: ['GET'])]
-    public function filter(Session $session): Response
+    public function filter(Request $request): Response
     {
-        return $this->doFilter($session);
+        return $this->doFilter($request);
     }
 
     #[Route(path: '/admin/<?php echo $route; ?>/edit/{entity}', name: 'admin_<?php echo $route; ?>_edit', methods: ['GET', 'POST'])]
@@ -61,15 +60,15 @@ class <?php echo $class_name; ?> extends CrudController
     }
 
     #[Route(path: '/admin/<?php echo $route; ?>/sort/{page}', name: 'admin_<?php echo $route; ?>_sort', methods: ['POST'], requirements: ['page' => '\d+'])]
-    public function sort(RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session, int $page = 1): Response
+    public function sort(RepositoryQuery $query, EntityManager $entityManager, Request $request, int $page = 1): Response
     {
-        return $this->doSort($page, $query, $entityManager, $request, $session);
+        return $this->doSort($page, $query, $entityManager, $request);
     }
 
     #[Route(path: '/admin/<?php echo $route; ?>/batch/{page}', name: 'admin_<?php echo $route; ?>_batch', methods: ['POST'], requirements: ['page' => '\d+'])]
-    public function batch(RepositoryQuery $query, EntityManager $entityManager, Request $request, Session $session, int $page = 1): Response
+    public function batch(RepositoryQuery $query, EntityManager $entityManager, Request $request, int $page = 1): Response
     {
-        return $this->doBatch($page, $query, $entityManager, $request, $session);
+        return $this->doBatch($page, $query, $entityManager, $request);
     }
 
     #[Route(path: '/admin/<?php echo $route; ?>/delete/{entity}', name: 'admin_<?php echo $route; ?>_delete', methods: ['DELETE', 'POST'])]

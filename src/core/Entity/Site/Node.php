@@ -10,13 +10,12 @@ use App\Core\Entity\Site\Page\Page;
 use App\Core\Repository\Site\NodeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use function Symfony\Component\String\u;
 
-/**
- * @Gedmo\Tree(type="nested")
- */
+#[Gedmo\Tree(type: 'nested')]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: NodeRepository::class)]
 class Node implements EntityInterface
@@ -25,110 +24,100 @@ class Node implements EntityInterface
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    protected $id;
+    #[ORM\Column]
+    protected ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Menu::class, inversedBy: 'nodes', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    protected $menu;
+    protected ?Menu $menu = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    protected $label;
+    #[ORM\Column(length: 255, nullable: true)]
+    protected ?string $label = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    protected $url;
+    #[ORM\Column(length: 255, nullable: true)]
+    protected ?string $url = null;
 
-    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
-    protected $disableUrl = false;
+    #[ORM\Column(options: ['default' => 0])]
+    protected bool $disableUrl = false;
 
-    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
-    protected $isVisible = false;
+    #[ORM\Column(options: ['default' => 0])]
+    protected bool $isVisible = false;
 
-    /**
-     * @Gedmo\TreeLeft
-     */
-    #[ORM\Column(type: 'integer')]
-    protected $treeLeft;
+    #[Gedmo\TreeLeft]
+    #[ORM\Column]
+    protected ?int $treeLeft = null;
 
-    /**
-     * @Gedmo\TreeLevel
-     */
-    #[ORM\Column(type: 'integer')]
-    protected $treeLevel;
+    #[Gedmo\TreeLevel]
+    #[ORM\Column]
+    protected ?int $treeLevel = null;
 
-    /**
-     * @Gedmo\TreeRight
-     */
-    #[ORM\Column(type: 'integer')]
-    protected $treeRight;
+    #[Gedmo\TreeRight]
+    #[ORM\Column]
+    protected ?int $treeRight = null;
 
-    /**
-     * @Gedmo\TreeRoot
-     */
+    #[Gedmo\TreeRoot]
     #[ORM\ManyToOne(targetEntity: 'Node')]
     #[ORM\JoinColumn(referencedColumnName: 'id', onDelete: 'CASCADE')]
-    protected $treeRoot;
+    protected ?Node $treeRoot = null;
 
-    /**
-     * @Gedmo\TreeParent
-     */
+    #[Gedmo\TreeParent]
     #[ORM\ManyToOne(targetEntity: 'Node', inversedBy: 'children')]
     #[ORM\JoinColumn(referencedColumnName: 'id', onDelete: 'CASCADE')]
-    protected $parent;
+    protected ?Node $parent = null;
 
     #[ORM\OneToMany(targetEntity: 'Node', mappedBy: 'parent')]
     #[ORM\OrderBy(['treeLeft' => 'ASC'])]
-    protected $children;
+    protected Collection $children;
 
     #[ORM\ManyToOne(targetEntity: Page::class, inversedBy: 'nodes', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    protected $page;
+    protected ?Page $page = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    protected $code;
+    #[ORM\Column(length: 255, nullable: true)]
+    protected ?string $code = null;
 
-    #[ORM\Column(type: 'array', nullable: true)]
-    protected $parameters = [];
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    protected ?array $parameters = [];
 
-    #[ORM\Column(type: 'array', nullable: true)]
-    protected $attributes = [];
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    protected ?array $attributes = [];
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    protected $controller;
+    #[ORM\Column(length: 255, nullable: true)]
+    protected ?string $controller = null;
 
-    #[ORM\Column(type: 'array', nullable: true)]
-    protected $sitemapParameters = [];
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    protected ?array $sitemapParameters = [];
 
     #[ORM\ManyToOne(targetEntity: Node::class, inversedBy: 'aliasNodes')]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    protected $aliasNode;
+    protected ?Node $aliasNode = null;
 
     #[ORM\OneToMany(targetEntity: Node::class, mappedBy: 'aliasNode')]
-    protected $aliasNodes;
+    protected Collection $aliasNodes;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    protected $contentType;
+    #[ORM\Column(length: 255, nullable: true)]
+    protected ?string $contentType = null;
 
-    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
-    protected $enableAnalytics = false;
+    #[ORM\Column(options: ['default' => 0])]
+    protected bool $enableAnalytics = false;
 
     #[ORM\OneToMany(targetEntity: View::class, mappedBy: 'node')]
-    protected $analyticViews;
+    protected Collection $analyticViews;
 
     #[ORM\OneToMany(targetEntity: Referer::class, mappedBy: 'node')]
-    protected $analyticReferers;
+    protected Collection $analyticReferers;
 
-    #[ORM\Column(type: 'array', nullable: true)]
-    private $securityRoles = [];
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $securityRoles = [];
 
-    #[ORM\Column(type: 'string', length: 3, nullable: true)]
-    private $securityOperator = 'or';
+    #[ORM\Column(length: 3, nullable: true)]
+    private ?string $securityOperator = 'or';
 
-    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
-    private $hasAbTest = false;
+    #[ORM\Column(options: ['default' => 0])]
+    private bool $hasAbTest = false;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $abTestCode;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $abTestCode = null;
 
     public function __construct()
     {

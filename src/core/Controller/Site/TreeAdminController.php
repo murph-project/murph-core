@@ -7,17 +7,18 @@ use App\Core\Entity\Site\Navigation;
 use App\Core\Factory\Site\MenuFactory;
 use App\Core\Form\Site\MenuType;
 use App\Core\Repository\Site\NavigationRepositoryQuery;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(path: '/admin/site/tree')]
 class TreeAdminController extends AdminController
 {
     #[Route(path: '/', name: 'admin_site_tree_index')]
-    public function index(NavigationRepositoryQuery $navigationQuery, Session $session): Response
+    public function index(NavigationRepositoryQuery $navigationQuery, Request $request): Response
     {
         $navigation = null;
+        $session = $request->getSession();
 
         if ($session->has('site_tree_last_navigation')) {
             $navigation = $navigationQuery->create()
@@ -49,14 +50,14 @@ class TreeAdminController extends AdminController
         Navigation $navigation,
         NavigationRepositoryQuery $navigationQuery,
         MenuFactory $menuFactory,
-        Session $session
+        Request $request
     ): Response {
         $navigations = $navigationQuery->create()
             ->orderBy('.sortOrder')
             ->find()
         ;
 
-        $session->set('site_tree_last_navigation', $navigation->getId());
+        $request->getSession()->set('site_tree_last_navigation', $navigation->getId());
 
         $forms = [
             'menu' => $this->createForm(MenuType::class, $menuFactory->create())->createView(),

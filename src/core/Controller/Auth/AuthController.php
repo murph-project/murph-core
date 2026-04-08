@@ -10,8 +10,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use ZxcvbnPhp\Zxcvbn;
@@ -87,7 +87,7 @@ class AuthController extends AbstractController
         Request $request,
         UserRepository $repository,
         TokenGeneratorInterface $tokenGenerator,
-        UserPasswordEncoderInterface $encoder,
+        UserPasswordHasherInterface $hasher,
         EntityManager $entityManager
     ): Response {
         if ($this->getUser()) {
@@ -115,7 +115,7 @@ class AuthController extends AbstractController
 
                 if (4 === $strength['score'] && $password === $password2) {
                     $account
-                        ->setPassword($encoder->encodePassword(
+                        ->setPassword($hasher->hashPassword(
                             $account,
                             $password
                         ))

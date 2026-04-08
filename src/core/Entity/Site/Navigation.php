@@ -8,6 +8,7 @@ use App\Core\Entity\NavigationSetting;
 use App\Core\Repository\Site\NavigationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NavigationRepository::class)]
@@ -18,38 +19,38 @@ class Navigation implements EntityInterface
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    protected $id;
+    #[ORM\Column]
+    protected ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $label;
+    #[ORM\Column(length: 255)]
+    protected ?string $label = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $code;
+    #[ORM\Column(length: 255)]
+    protected ?string $code = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $domain;
+    #[ORM\Column(length: 255)]
+    protected ?string $domain = null;
 
-    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
-    protected $forceDomain = false;
+    #[ORM\Column(options: ['default' => 0])]
+    protected bool $forceDomain = false;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    protected $additionalDomains = '[]';
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    protected ?string $additionalDomains = '[]';
 
     #[ORM\OneToMany(targetEntity: Menu::class, mappedBy: 'navigation')]
-    protected $menus;
+    protected Collection $menus;
 
-    #[ORM\Column(type: 'string', length: 10)]
-    protected $locale = 'en';
+    #[ORM\Column(length: 10)]
+    protected string $locale = 'en';
 
-    #[ORM\Column(type: 'string', length: 7, nullable: true)]
-    protected $color;
+    #[ORM\Column(length: 7, nullable: true)]
+    protected ?string $color = null;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    protected $sortOrder;
+    #[ORM\Column(nullable: true)]
+    protected ?int $sortOrder = null;
 
     #[ORM\OneToMany(targetEntity: NavigationSetting::class, mappedBy: 'navigation', orphanRemoval: true)]
-    protected $navigationSettings;
+    protected Collection $navigationSettings;
 
     public function __construct()
     {

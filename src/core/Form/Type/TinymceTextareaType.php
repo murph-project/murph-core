@@ -11,12 +11,12 @@ class TinymceTextareaType extends TextareaType
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         if (!isset($view->vars['attr']['data-tinymce'])) {
             $view->vars['attr']['data-tinymce'] = '';
         }
 
-        return parent::buildView($view, $form, $options);
+        parent::buildView($view, $form, $options);
     }
 }

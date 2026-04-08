@@ -23,7 +23,7 @@ class CrudExtension extends AbstractExtension
     /**
      * {@inheritdoc}
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('render_field', [$this, 'renderField'], ['is_safe' => ['html']]),

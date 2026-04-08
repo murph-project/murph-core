@@ -9,8 +9,8 @@ use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticator
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface as TotpAuthenticatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use ZxcvbnPhp\Zxcvbn;
 
@@ -92,7 +92,7 @@ class AccountAdminController extends AdminController
         Request $request,
         UserRepository $repository,
         TokenGeneratorInterface $tokenGenerator,
-        UserPasswordEncoderInterface $encoder,
+        UserPasswordHasherInterface $hasher,
         EntityManager $entityManager
     ): Response {
         $account = $this->getUser();
@@ -101,7 +101,7 @@ class AccountAdminController extends AdminController
         if ($this->isCsrfTokenValid('password', $csrfToken)) {
             $password = $request->request->get('password');
 
-            if (!$encoder->isPasswordValid($account, $password)) {
+            if (!$hasher->isPasswordValid($account, $password)) {
                 $this->addFlash('error', 'The form is not valid.');
 
                 return $this->redirectToRoute('admin_account');
@@ -115,7 +115,7 @@ class AccountAdminController extends AdminController
 
             if (4 === $strength['score'] && $password1 === $password2) {
                 $account
-                    ->setPassword($encoder->encodePassword($account, $password1))
+                    ->setPassword($hasher->hashPassword($account, $password1))
                     ->setConfirmationToken($tokenGenerator->generateToken())
                 ;
 

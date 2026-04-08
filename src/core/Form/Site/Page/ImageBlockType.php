@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints\Image;
 
 class ImageBlockType extends FileBlockType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
             'value',
@@ -24,7 +24,7 @@ class ImageBlockType extends FileBlockType
         );
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
 

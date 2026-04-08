@@ -17,25 +17,25 @@ class Menu implements EntityInterface
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    protected $id;
+    #[ORM\Column]
+    protected ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $label;
+    #[ORM\Column(length: 255)]
+    protected ?string $label = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $code;
+    #[ORM\Column(length: 255)]
+    protected ?string $code = null;
 
     #[ORM\ManyToOne(targetEntity: Navigation::class, inversedBy: 'menus')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    protected $navigation;
+    protected ?Navigation $navigation = null;
 
     #[ORM\OneToMany(targetEntity: Node::class, mappedBy: 'menu', orphanRemoval: true, cascade: ['remove', 'persist'])]
-    protected $nodes;
+    protected Collection $nodes;
 
     #[ORM\OneToOne(targetEntity: Node::class, cascade: ['persist'])]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    protected $rootNode;
+    protected ?Node $rootNode = null;
 
     public function __construct()
     {

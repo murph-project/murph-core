@@ -15,7 +15,7 @@ class UrlExtension extends AbstractExtension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('murph_url', [$this, 'replaceUrl']),

@@ -5,7 +5,6 @@ namespace App\Core\Sitemap;
 use App\Core\Annotation\UrlGenerator;
 use App\Core\Entity\Site\Navigation;
 use App\Core\Entity\Site\Node;
-use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -18,7 +17,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class SitemapBuilder
 {
     public function __construct(
-        protected Reader $annotationReader,
         protected ContainerInterface $container,
         protected UrlGeneratorInterface $urlGenerator
     ) {

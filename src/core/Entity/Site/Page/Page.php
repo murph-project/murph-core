@@ -22,35 +22,35 @@ class Page implements EntityInterface
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    protected $id;
+    #[ORM\Column]
+    protected ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    protected $name;
+    #[ORM\Column(length: 255)]
+    protected ?string $name = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    protected $template;
+    #[ORM\Column(length: 255, nullable: true)]
+    protected ?string $template = null;
 
     #[ORM\OneToMany(targetEntity: Block::class, mappedBy: 'page', cascade: ['persist'])]
-    protected $blocks;
+    protected Collection $blocks;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    protected $metaTitle;
+    #[ORM\Column(length: 255, nullable: true)]
+    protected ?string $metaTitle = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    protected $metaDescription;
+    #[ORM\Column(length: 255, nullable: true)]
+    protected ?string $metaDescription = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    protected $ogTitle;
+    #[ORM\Column(length: 255, nullable: true)]
+    protected ?string $ogTitle = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    protected $ogDescription;
+    #[ORM\Column(length: 255, nullable: true)]
+    protected ?string $ogDescription = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    protected $ogImage;
+    #[ORM\Column(length: 255, nullable: true)]
+    protected ?string $ogImage = null;
 
     #[ORM\OneToMany(targetEntity: Node::class, mappedBy: 'page')]
-    protected $nodes;
+    protected Collection $nodes;
 
     public function __construct()
     {
@@ -117,7 +117,7 @@ class Page implements EntityInterface
         return $this;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
     }
 
